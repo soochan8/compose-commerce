@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.chan.feature.ui.test.TestScreen
+import com.chan.feature.ui.home.composables.HomeTopTab
+import com.chan.feature.ui.main.MainScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,7 +14,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            TestScreen()
+//            TestScreen()
+//            HomeTopTab()
+            MainScreen()
         }
     }
 }

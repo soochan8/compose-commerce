@@ -48,7 +48,7 @@ android {
         correctErrorTypes = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.13" // compose bom 기준
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
     }
 }
 
