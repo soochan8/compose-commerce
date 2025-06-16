@@ -12,7 +12,7 @@ fun BottomNavigationBar(
     onNavigate: (String) -> Unit
 ) {
     NavigationBar {
-        BottomScreen.bottomNavItems.forEach { screen ->
+        BottomNavItem.bottomNavItems.forEach { screen ->
             NavigationBarItem(
                 selected = screen.route == currentRoute,
                 onClick = { onNavigate(screen.route) },

@@ -17,6 +17,7 @@ fun HomeBanner(
     bannerList: List<HomeBannerModel>,
     modifier: Modifier = Modifier
 ) {
+
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = { bannerList.size }

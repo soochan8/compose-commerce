@@ -1,6 +1,6 @@
-package com.chan.feature.ui.home.model
+package com.chan.feature.domain.vo
 
-data class HomeBannerModel(
+data class HomeBannerVO(
     val id: Int,
     val imageUrl: String,
     val title: String
