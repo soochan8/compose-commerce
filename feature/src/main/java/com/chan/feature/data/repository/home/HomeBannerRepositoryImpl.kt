@@ -2,7 +2,7 @@ package com.chan.feature.data.repository.home
 
 import com.chan.feature.data.dao.HomeBannerDao
 import com.chan.feature.data.datasource.home.HomeBannerDataSource
-import com.chan.feature.data.entity.toDomain
+import com.chan.feature.data.entity.home.toDomain
 import com.chan.feature.domain.repository.HomeBannerRepository
 import com.chan.feature.domain.vo.HomeBannerVO
 import javax.inject.Inject

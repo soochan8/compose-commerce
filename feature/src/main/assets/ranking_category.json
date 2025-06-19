@@ -1,0 +1,334 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "스킨케어",
+      "rankingCategoryItems": [
+        {
+          "imageUrl": "https://example.com/images/skincare1.jpg",
+          "productName": "스킨케어 상품 1",
+          "price": {
+            "discountPercent": 10,
+            "discountedPrice": 27000,
+            "originalPrice": 30000
+          },
+          "tags": ["인기"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/skincare2.jpg",
+          "productName": "스킨케어 상품 2",
+          "price": {
+            "discountPercent": 15,
+            "discountedPrice": 25500,
+            "originalPrice": 30000
+          },
+          "tags": ["추천"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/skincare3.jpg",
+          "productName": "스킨케어 상품 3",
+          "price": {
+            "discountPercent": 0,
+            "discountedPrice": 30000,
+            "originalPrice": 30000
+          },
+          "tags": [],
+          "isLiked": false,
+          "isInCart": true
+        },
+        {
+          "imageUrl": "https://example.com/images/skincare4.jpg",
+          "productName": "스킨케어 상품 4",
+          "price": {
+            "discountPercent": 20,
+            "discountedPrice": 24000,
+            "originalPrice": 30000
+          },
+          "tags": ["세일"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/skincare5.jpg",
+          "productName": "스킨케어 상품 5",
+          "price": {
+            "discountPercent": 5,
+            "discountedPrice": 28500,
+            "originalPrice": 30000
+          },
+          "tags": ["신상품"],
+          "isLiked": true,
+          "isInCart": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "마스크팩",
+      "rankingCategoryItems": [
+        {
+          "imageUrl": "https://example.com/images/maskpack1.jpg",
+          "productName": "마스크팩 상품 1",
+          "price": {
+            "discountPercent": 0,
+            "discountedPrice": 10000,
+            "originalPrice": 10000
+          },
+          "tags": [],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/maskpack2.jpg",
+          "productName": "마스크팩 상품 2",
+          "price": {
+            "discountPercent": 10,
+            "discountedPrice": 9000,
+            "originalPrice": 10000
+          },
+          "tags": ["인기"],
+          "isLiked": false,
+          "isInCart": true
+        },
+        {
+          "imageUrl": "https://example.com/images/maskpack3.jpg",
+          "productName": "마스크팩 상품 3",
+          "price": {
+            "discountPercent": 20,
+            "discountedPrice": 8000,
+            "originalPrice": 10000
+          },
+          "tags": ["할인"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/maskpack4.jpg",
+          "productName": "마스크팩 상품 4",
+          "price": {
+            "discountPercent": 5,
+            "discountedPrice": 9500,
+            "originalPrice": 10000
+          },
+          "tags": ["추천"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/maskpack5.jpg",
+          "productName": "마스크팩 상품 5",
+          "price": {
+            "discountPercent": 15,
+            "discountedPrice": 8500,
+            "originalPrice": 10000
+          },
+          "tags": ["신상품"],
+          "isLiked": true,
+          "isInCart": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "클렌징",
+      "rankingCategoryItems": [
+        {
+          "imageUrl": "https://example.com/images/cleansing1.jpg",
+          "productName": "클렌징 상품 1",
+          "price": {
+            "discountPercent": 0,
+            "discountedPrice": 15000,
+            "originalPrice": 15000
+          },
+          "tags": [],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/cleansing2.jpg",
+          "productName": "클렌징 상품 2",
+          "price": {
+            "discountPercent": 10,
+            "discountedPrice": 13500,
+            "originalPrice": 15000
+          },
+          "tags": ["인기"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/cleansing3.jpg",
+          "productName": "클렌징 상품 3",
+          "price": {
+            "discountPercent": 20,
+            "discountedPrice": 12000,
+            "originalPrice": 15000
+          },
+          "tags": ["할인"],
+          "isLiked": false,
+          "isInCart": true
+        },
+        {
+          "imageUrl": "https://example.com/images/cleansing4.jpg",
+          "productName": "클렌징 상품 4",
+          "price": {
+            "discountPercent": 5,
+            "discountedPrice": 14250,
+            "originalPrice": 15000
+          },
+          "tags": ["추천"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/cleansing5.jpg",
+          "productName": "클렌징 상품 5",
+          "price": {
+            "discountPercent": 25,
+            "discountedPrice": 11250,
+            "originalPrice": 15000
+          },
+          "tags": ["세일"],
+          "isLiked": true,
+          "isInCart": true
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "선케어",
+      "rankingCategoryItems": [
+        {
+          "imageUrl": "https://example.com/images/suncare1.jpg",
+          "productName": "선케어 상품 1",
+          "price": {
+            "discountPercent": 15,
+            "discountedPrice": 17000,
+            "originalPrice": 20000
+          },
+          "tags": ["인기"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/suncare2.jpg",
+          "productName": "선케어 상품 2",
+          "price": {
+            "discountPercent": 0,
+            "discountedPrice": 20000,
+            "originalPrice": 20000
+          },
+          "tags": [],
+          "isLiked": false,
+          "isInCart": true
+        },
+        {
+          "imageUrl": "https://example.com/images/suncare3.jpg",
+          "productName": "선케어 상품 3",
+          "price": {
+            "discountPercent": 10,
+            "discountedPrice": 18000,
+            "originalPrice": 20000
+          },
+          "tags": ["추천"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/suncare4.jpg",
+          "productName": "선케어 상품 4",
+          "price": {
+            "discountPercent": 20,
+            "discountedPrice": 16000,
+            "originalPrice": 20000
+          },
+          "tags": ["세일"],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/suncare5.jpg",
+          "productName": "선케어 상품 5",
+          "price": {
+            "discountPercent": 5,
+            "discountedPrice": 19000,
+            "originalPrice": 20000
+          },
+          "tags": ["신상품"],
+          "isLiked": true,
+          "isInCart": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "메이크업",
+      "rankingCategoryItems": [
+        {
+          "imageUrl": "https://example.com/images/makeup1.jpg",
+          "productName": "메이크업 상품 1",
+          "price": {
+            "discountPercent": 0,
+            "discountedPrice": 25000,
+            "originalPrice": 25000
+          },
+          "tags": [],
+          "isLiked": false,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/makeup2.jpg",
+          "productName": "메이크업 상품 2",
+          "price": {
+            "discountPercent": 10,
+            "discountedPrice": 22500,
+            "originalPrice": 25000
+          },
+          "tags": ["인기"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/makeup3.jpg",
+          "productName": "메이크업 상품 3",
+          "price": {
+            "discountPercent": 15,
+            "discountedPrice": 21250,
+            "originalPrice": 25000
+          },
+          "tags": ["추천"],
+          "isLiked": false,
+          "isInCart": true
+        },
+        {
+          "imageUrl": "https://example.com/images/makeup4.jpg",
+          "productName": "메이크업 상품 4",
+          "price": {
+            "discountPercent": 5,
+            "discountedPrice": 23750,
+            "originalPrice": 25000
+          },
+          "tags": ["신상품"],
+          "isLiked": true,
+          "isInCart": false
+        },
+        {
+          "imageUrl": "https://example.com/images/makeup5.jpg",
+          "productName": "메이크업 상품 5",
+          "price": {
+            "discountPercent": 20,
+            "discountedPrice": 20000,
+            "originalPrice": 25000
+          },
+          "tags": ["세일"],
+          "isLiked": false,
+          "isInCart": true
+        }
+      ]
+    }
+  ]
+}

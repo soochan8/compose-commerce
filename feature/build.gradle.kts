@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.storage)
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)
@@ -73,6 +74,7 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
     implementation(libs.hilt.core)
+    implementation("com.google.code.gson:gson:2.10.1")
 
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.room.compiler)

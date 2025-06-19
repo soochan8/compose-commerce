@@ -38,6 +38,9 @@ android {
             excludes += "META-INF/androidx/room/room-compiler-processing/LICENSE.txt"
         }
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
+    }
 }
 
 dependencies {
@@ -50,4 +53,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.retrofit.convert.gson)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
 }

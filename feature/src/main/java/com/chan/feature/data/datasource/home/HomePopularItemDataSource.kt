@@ -1,7 +1,7 @@
 package com.chan.feature.data.datasource.home
 
 import android.content.Context
-import com.chan.feature.data.entity.HomePopularItemEntity
+import com.chan.feature.data.entity.home.HomePopularItemEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext

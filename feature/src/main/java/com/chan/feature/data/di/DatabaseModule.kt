@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.chan.feature.data.AppDatabase
 import com.chan.feature.data.dao.HomeBannerDao
 import com.chan.feature.data.dao.HomePopularItemDao
+import com.chan.feature.data.dao.RankingCategoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +30,8 @@ object DatabaseModule {
 
     @Provides
     fun provideHomeBannerDao(db: AppDatabase): HomeBannerDao = db.homeBannerDao()
-
     @Provides
     fun provideHomePopularItemDao(db: AppDatabase): HomePopularItemDao = db.homePopularItemDao()
+    @Provides
+    fun provideRankingCategoryDao(db: AppDatabase): RankingCategoryDao = db.rankingCategoryDao()
 }
