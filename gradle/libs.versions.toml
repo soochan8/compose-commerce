@@ -22,6 +22,7 @@ coil = "2.4.0"
 room = "2.6.1"
 datastore = "1.1.7"
 storage = "1.5.0"
+jetbrainsKotlinJvm = "1.9.23"
 
 
 [libraries]
@@ -69,4 +70,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 

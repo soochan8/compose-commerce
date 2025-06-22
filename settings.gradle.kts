@@ -22,5 +22,16 @@ dependencyResolutionManagement {
 
 rootProject.name = "commerce"
 include(":app")
-include(":core")
+
+include(":data:home")
+
+include(":domain:home")
+
 include(":feature")
+include(":feature:home")
+
+include(":core:android")
+
+
+include(":feature1")
+
