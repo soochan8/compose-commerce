@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -32,8 +33,8 @@ fun HomeScreen(
         initialPage = 0,
         pageCount = { tabList.size }
     )
-    var selectedCategoryTabIndex by remember { mutableIntStateOf(0) }
 
+    val homeCategoryRankingPagerState = rememberPagerState { state.rankingCategories.size }
 
     LaunchedEffect(Unit) {
         homeViewModel.setEvent(HomeContract.Event.BannerLoad)
@@ -45,42 +46,31 @@ fun HomeScreen(
         topBar = { HomeTopTab(tabList = tabList, pagerState = pagerState) },
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            item {
-                if (tabList[pagerState.currentPage] == HomeTabItem.Home) {
-                    HomeBanner(bannerList = state.bannerList)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    HomePopularItemList(popularItem = state.popularItemList)
-
-                    CategoryTab(
-                        categories = state.rankingCategories,
-                        selectedCategoryTabIndex = selectedCategoryTabIndex,
-                        onSelectedChanged = { selectedCategoryTabIndex = it },
-                    )
-
-                    val cards = state.rankingCategories
-                        .getOrNull(selectedCategoryTabIndex)
-                        ?.rankingCategoryItems
-                        .orEmpty()
-
-                    cards.forEach {
-                        RankingCard(it)
-
-                    }
-
-                }
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier.fillMaxSize()
-                ) { page ->
-                    when (tabList[page]) {
-                        HomeTabItem.RecommendToday -> RecommendScreen()
-                        // 나머지 탭 추후 구현
-                        else -> {}
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding())
+        ) { page ->
+            when (tabList[page]) {
+                HomeTabItem.Home -> {
+                    LazyColumn {
+                        item {
+                            HomeBanner(bannerList = state.bannerList)
+                            Spacer(modifier = Modifier.height(12.dp))
+                            HomePopularItemList(popularItem = state.popularItemList)
+                            Spacer(modifier = Modifier.height(12.dp))
+                            HomeCategoryRanking(
+                                categories = state.rankingCategories,
+                                pagerState = homeCategoryRankingPagerState
+                            )
+                        }
                     }
                 }
+
+                HomeTabItem.RecommendToday -> RecommendScreen()
+                // 나머지 탭 추후 구현
+                else -> {}
             }
         }
     }
