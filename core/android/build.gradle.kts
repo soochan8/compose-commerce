@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.chan.android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 33

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
@@ -29,9 +30,7 @@ include(":domain:home")
 
 include(":feature")
 include(":feature:home")
+include(":feature:category")
 
 include(":core:android")
-
-
-include(":feature1")
 

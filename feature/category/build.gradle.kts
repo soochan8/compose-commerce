@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    kotlin("kapt")
 }
 
 android {
-    namespace = "com.chan.home"
+    namespace = "com.chan.category"
     compileSdk = 35
 
     defaultConfig {
@@ -32,16 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    packaging {
-        resources {
-            excludes += "META-INF/gradle/incremental.annotation.processors"
-            excludes += "META-INF/androidx/room/room-compiler-processing/LICENSE.txt"
-        }
-    }
-    kapt {
-        correctErrorTypes = true
-    }
     buildFeatures {
         compose = true
     }
@@ -52,15 +40,14 @@ android {
 }
 
 dependencies {
-//    implementation(project(":app"))
-    implementation(project(":core:android"))
-    implementation(project(":domain:home"))
-    implementation(project(":data:home"))
-    implementation(project(":feature:category"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -72,26 +59,4 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.hilt.android)
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.hilt.core)
-
-    kapt(libs.hilt.compiler)
-    kapt(libs.androidx.room.compiler)
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.convert.gson)
-    implementation(libs.retrofit.convert.moshi)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-
-    implementation(libs.coil)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.datastore)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

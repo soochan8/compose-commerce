@@ -1,11 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.chan.home"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 33
@@ -24,15 +26,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
+    implementation(project(":domain:home"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -40,4 +43,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.core)
+    implementation(libs.google.gson)
+
+    kapt(libs.hilt.compiler)
+    kapt(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
 }

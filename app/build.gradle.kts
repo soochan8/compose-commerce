@@ -61,8 +61,8 @@ android {
 
 dependencies {
 
-    implementation(project(":feature1"))
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation(project(":feature:home"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

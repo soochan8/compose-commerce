@@ -8,6 +8,8 @@
       <module name="commerce.core1.main" target="11" />
       <module name="commerce.core1.test" target="11" />
       <module name="commerce.core1.ui" target="21" />
+      <module name="commerce.data.main" target="11" />
+      <module name="commerce.data.test" target="11" />
       <module name="commerce.domain.main" target="11" />
       <module name="commerce.domain.test" target="11" />
       <module name="commerce.feature.main" target="11" />
