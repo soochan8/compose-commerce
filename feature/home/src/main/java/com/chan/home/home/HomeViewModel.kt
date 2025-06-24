@@ -5,6 +5,7 @@ import com.chan.android.BaseViewModel
 import com.chan.home.mapper.toPresentation
 import com.chan.home.repository.HomeBannerRepository
 import com.chan.home.repository.HomePopularItemRepository
+import com.chan.home.repository.HomeSaleProductRepository
 import com.chan.home.repository.RankingCategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,12 +15,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val homeBannerRepository: HomeBannerRepository,
     private val homePopularItemRepository: HomePopularItemRepository,
-    private val rankingCategoryRepository: RankingCategoryRepository
+    private val rankingCategoryRepository: RankingCategoryRepository,
+    private val saleProductRepository: HomeSaleProductRepository
 ) : BaseViewModel<HomeContract.Event, HomeContract.State, HomeContract.Effect>() {
-
-    init {
-
-    }
 
     override fun setInitialState() = HomeContract.State(
 
@@ -31,6 +29,7 @@ class HomeViewModel @Inject constructor(
             HomeContract.Event.Retry -> getBanners()
             HomeContract.Event.PopularItemLoad -> getPopularItems()
             HomeContract.Event.RankingCategoriesLoad -> getRankingCategories()
+            HomeContract.Event.SaleProducts -> getSaleProducts()
         }
     }
 
@@ -51,7 +50,6 @@ class HomeViewModel @Inject constructor(
             val popularItemList =
                 homePopularItemRepository.getPopularItemAll().map { it.toPresentation() }
             setState { copy(popularItemList = popularItemList, isLoading = false) }
-            setEffect { HomeContract.Effect.ShowToast("배너 로딩") }
         }
     }
 
@@ -62,8 +60,16 @@ class HomeViewModel @Inject constructor(
             val rankingCategoryList =
                 rankingCategoryRepository.getRankingCategories().map { it.toPresentation() }
             setState { copy(rankingCategories = rankingCategoryList, isLoading = false) }
-//            setEffect { HomeContract.Effect.ShowToast("배너 로딩") }
         }
     }
 
+    fun getSaleProducts() {
+        viewModelScope.launch {
+            setState { copy(isLoading = true, isError = false) }
+
+            val saleProductList =
+                saleProductRepository.getSaleProducts().map { it.toPresentation() }
+            setState { copy(saleProductList = saleProductList, isLoading = false) }
+        }
+    }
 }

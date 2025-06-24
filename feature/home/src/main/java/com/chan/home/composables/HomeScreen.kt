@@ -10,11 +10,9 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,7 +25,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val state by homeViewModel.viewState
+    val state by homeViewModel.viewState.collectAsState()
     val tabList = remember { HomeTabItem.tabList() }
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -40,6 +38,7 @@ fun HomeScreen(
         homeViewModel.setEvent(HomeContract.Event.BannerLoad)
         homeViewModel.setEvent(HomeContract.Event.PopularItemLoad)
         homeViewModel.setEvent(HomeContract.Event.RankingCategoriesLoad)
+        homeViewModel.setEvent(HomeContract.Event.SaleProducts)
     }
 
     Scaffold(
@@ -58,12 +57,17 @@ fun HomeScreen(
                         item {
                             HomeBanner(bannerList = state.bannerList)
                             Spacer(modifier = Modifier.height(12.dp))
+
                             HomePopularItemList(popularItem = state.popularItemList)
                             Spacer(modifier = Modifier.height(12.dp))
+
                             HomeCategoryRanking(
                                 categories = state.rankingCategories,
                                 pagerState = homeCategoryRankingPagerState
                             )
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            HomeSaleProduct(saleProduct = state.saleProductList)
                         }
                     }
                 }

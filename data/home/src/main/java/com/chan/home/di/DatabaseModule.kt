@@ -5,6 +5,7 @@ import androidx.room.Room.databaseBuilder
 import com.chan.home.AppDatabase
 import com.chan.home.dao.HomeBannerDao
 import com.chan.home.dao.HomePopularItemDao
+import com.chan.home.dao.HomeSaleProductDao
 import com.chan.home.dao.RankingCategoryDao
 import dagger.Module
 import dagger.Provides
@@ -37,4 +38,7 @@ object DatabaseModule {
 
     @Provides
     fun provideRankingCategoryDao(db: AppDatabase): RankingCategoryDao = db.rankingCategoryDao()
+
+    @Provides
+    fun provideHomeSaleProductDao(db: AppDatabase): HomeSaleProductDao = db.homeSaleProductDao()
 }
