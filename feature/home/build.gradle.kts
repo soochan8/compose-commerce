@@ -54,7 +54,6 @@ android {
 dependencies {
 //    implementation(project(":app"))
     implementation(project(":core:android"))
-    implementation(project(":data:home"))
     implementation(project(":feature:category"))
 
     implementation(libs.androidx.core.ktx)
@@ -89,6 +88,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.datastore)
+    implementation(libs.google.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
