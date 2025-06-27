@@ -1,8 +1,8 @@
 package com.chan.home.data.repository
 
-import com.chan.home.data.dao.RankingCategoryDao
+import com.chan.database.dao.RankingCategoryDao
 import com.chan.home.data.datasource.RankingCategoryDataSource
-import com.chan.home.data.entity.ranking.toDomain
+import com.chan.home.data.mapper.toDomain
 import com.chan.home.domain.repository.RankingCategoryRepository
 import com.chan.home.domain.vo.RankingCategoryVO
 import javax.inject.Inject

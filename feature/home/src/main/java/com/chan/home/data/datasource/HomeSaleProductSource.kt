@@ -1,7 +1,7 @@
 package com.chan.home.data.datasource
 
 import android.content.Context
-import com.chan.home.data.entity.home.HomeSaleProductEntity
+import com.chan.database.entity.home.HomeSaleProductEntity
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken

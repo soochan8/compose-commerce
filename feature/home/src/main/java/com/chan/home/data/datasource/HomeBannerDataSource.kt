@@ -1,7 +1,7 @@
 package com.chan.home.data.datasource
 
 import android.content.Context
-import com.chan.home.data.entity.home.HomeBannerEntity
+import com.chan.database.entity.home.HomeBannerEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext

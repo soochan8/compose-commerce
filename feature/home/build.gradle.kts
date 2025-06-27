@@ -54,6 +54,7 @@ android {
 dependencies {
 //    implementation(project(":app"))
     implementation(project(":core:android"))
+    implementation(project(":core:database"))
     implementation(project(":feature:category"))
 
     implementation(libs.androidx.core.ktx)
