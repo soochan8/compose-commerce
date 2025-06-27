@@ -2,8 +2,10 @@ package com.chan.feature.data.di
 
 import com.chan.feature.data.repository.home.HomeBannerRepositoryImpl
 import com.chan.feature.data.repository.home.HomePopularItemRepositoryImpl
+import com.chan.feature.data.repository.home.RankingCategoryRepositoryImpl
 import com.chan.feature.domain.repository.HomeBannerRepository
 import com.chan.feature.domain.repository.HomePopularItemRepository
+import com.chan.feature.domain.repository.RankingCategoryRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -24,5 +26,11 @@ abstract class RepositoryModule {
     abstract fun bindHomePopularItemRepository(
         bannerPopularItemRepositoryImpl: HomePopularItemRepositoryImpl
     ) : HomePopularItemRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRankingCategoryRepository(
+        rankingCategoryRepositoryImpl: RankingCategoryRepositoryImpl
+    ) : RankingCategoryRepository
 }
 

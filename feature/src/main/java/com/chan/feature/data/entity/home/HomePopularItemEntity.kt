@@ -1,4 +1,4 @@
-package com.chan.feature.data.entity
+package com.chan.feature.data.entity.home
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
