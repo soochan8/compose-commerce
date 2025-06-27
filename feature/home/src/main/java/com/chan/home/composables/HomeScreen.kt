@@ -10,10 +10,9 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,61 +25,56 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val state by homeViewModel.viewState
+    val state by homeViewModel.viewState.collectAsState()
     val tabList = remember { HomeTabItem.tabList() }
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = { tabList.size }
     )
-    var selectedCategoryTabIndex by remember { mutableIntStateOf(0) }
 
+    val homeCategoryRankingPagerState = rememberPagerState { state.rankingCategories.size }
 
     LaunchedEffect(Unit) {
         homeViewModel.setEvent(HomeContract.Event.BannerLoad)
         homeViewModel.setEvent(HomeContract.Event.PopularItemLoad)
         homeViewModel.setEvent(HomeContract.Event.RankingCategoriesLoad)
+        homeViewModel.setEvent(HomeContract.Event.SaleProducts)
     }
 
     Scaffold(
         topBar = { HomeTopTab(tabList = tabList, pagerState = pagerState) },
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            item {
-                if (tabList[pagerState.currentPage] == HomeTabItem.Home) {
-                    HomeBanner(bannerList = state.bannerList)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    HomePopularItemList(popularItem = state.popularItemList)
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding())
+        ) { page ->
+            when (tabList[page]) {
+                HomeTabItem.Home -> {
+                    LazyColumn {
+                        item {
+                            HomeBanner(bannerList = state.bannerList)
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                    CategoryTab(
-                        categories = state.rankingCategories,
-                        selectedCategoryTabIndex = selectedCategoryTabIndex,
-                        onSelectedChanged = { selectedCategoryTabIndex = it },
-                    )
+                            HomePopularItemList(popularItem = state.popularItemList)
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                    val cards = state.rankingCategories
-                        .getOrNull(selectedCategoryTabIndex)
-                        ?.rankingCategoryItems
-                        .orEmpty()
+                            HomeCategoryRanking(
+                                categories = state.rankingCategories,
+                                pagerState = homeCategoryRankingPagerState
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
 
-                    cards.forEach {
-                        RankingCard(it)
-
-                    }
-
-                }
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier.fillMaxSize()
-                ) { page ->
-                    when (tabList[page]) {
-                        HomeTabItem.RecommendToday -> RecommendScreen()
-                        // 나머지 탭 추후 구현
-                        else -> {}
+                            HomeSaleProduct(saleProduct = state.saleProductList)
+                        }
                     }
                 }
+
+                HomeTabItem.RecommendToday -> RecommendScreen()
+                // 나머지 탭 추후 구현
+                else -> {}
             }
         }
     }

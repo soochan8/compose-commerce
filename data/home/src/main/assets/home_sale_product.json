@@ -1,0 +1,267 @@
+{
+  "saleProducts": [
+    {
+      "id": 1,
+      "imageUrl": "https://picsum.photos/id/101/300/300",
+      "productName": "세일 상품 1",
+      "price": {
+        "discountPercent": 20,
+        "discountedPrice": 8000,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "인기"
+      ]
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://picsum.photos/id/102/300/300",
+      "productName": "세일 상품 2",
+      "price": {
+        "discountPercent": 25,
+        "discountedPrice": 7500,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "추천"
+      ]
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://picsum.photos/id/103/300/300",
+      "productName": "세일 상품 3",
+      "price": {
+        "discountPercent": 15,
+        "discountedPrice": 8500,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일"
+      ]
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://picsum.photos/id/104/300/300",
+      "productName": "세일 상품 4",
+      "price": {
+        "discountPercent": 30,
+        "discountedPrice": 7000,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "신상품"
+      ]
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://picsum.photos/id/105/300/300",
+      "productName": "세일 상품 5",
+      "price": {
+        "discountPercent": 10,
+        "discountedPrice": 9000,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일"
+      ]
+    },
+    {
+      "id": 6,
+      "imageUrl": "https://picsum.photos/id/106/300/300",
+      "productName": "세일 상품 6",
+      "price": {
+        "discountPercent": 40,
+        "discountedPrice": 6000,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "베스트"
+      ]
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://picsum.photos/id/107/300/300",
+      "productName": "세일 상품 7",
+      "price": {
+        "discountPercent": 5,
+        "discountedPrice": 9500,
+        "originalPrice": 10000
+      },
+      "tags": []
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://picsum.photos/id/108/300/300",
+      "productName": "세일 상품 8",
+      "price": {
+        "discountPercent": 50,
+        "discountedPrice": 5000,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "한정"
+      ]
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://picsum.photos/id/109/300/300",
+      "productName": "세일 상품 9",
+      "price": {
+        "discountPercent": 18,
+        "discountedPrice": 8200,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일"
+      ]
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://picsum.photos/id/110/300/300",
+      "productName": "세일 상품 10",
+      "price": {
+        "discountPercent": 22,
+        "discountedPrice": 7800,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "인기"
+      ]
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://picsum.photos/id/111/300/300",
+      "productName": "세일 상품 11",
+      "price": {
+        "discountPercent": 12,
+        "discountedPrice": 8800,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "추천"
+      ]
+    },
+    {
+      "id": 12,
+      "imageUrl": "https://picsum.photos/id/112/300/300",
+      "productName": "세일 상품 12",
+      "price": {
+        "discountPercent": 35,
+        "discountedPrice": 6500,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "베스트"
+      ]
+    },
+    {
+      "id": 13,
+      "imageUrl": "https://picsum.photos/id/113/300/300",
+      "productName": "세일 상품 13",
+      "price": {
+        "discountPercent": 8,
+        "discountedPrice": 9200,
+        "originalPrice": 10000
+      },
+      "tags": []
+    },
+    {
+      "id": 14,
+      "imageUrl": "https://picsum.photos/id/114/300/300",
+      "productName": "세일 상품 14",
+      "price": {
+        "discountPercent": 28,
+        "discountedPrice": 7200,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "한정"
+      ]
+    },
+    {
+      "id": 15,
+      "imageUrl": "https://picsum.photos/id/115/300/300",
+      "productName": "세일 상품 15",
+      "price": {
+        "discountPercent": 16,
+        "discountedPrice": 8400,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일"
+      ]
+    },
+    {
+      "id": 16,
+      "imageUrl": "https://picsum.photos/id/116/300/300",
+      "productName": "세일 상품 16",
+      "price": {
+        "discountPercent": 45,
+        "discountedPrice": 5500,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "베스트"
+      ]
+    },
+    {
+      "id": 17,
+      "imageUrl": "https://picsum.photos/id/117/300/300",
+      "productName": "세일 상품 17",
+      "price": {
+        "discountPercent": 3,
+        "discountedPrice": 9700,
+        "originalPrice": 10000
+      },
+      "tags": []
+    },
+    {
+      "id": 18,
+      "imageUrl": "https://picsum.photos/id/118/300/300",
+      "productName": "세일 상품 18",
+      "price": {
+        "discountPercent": 55,
+        "discountedPrice": 4500,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일",
+        "신상품"
+      ]
+    },
+    {
+      "id": 19,
+      "imageUrl": "https://picsum.photos/id/119/300/300",
+      "productName": "세일 상품 19",
+      "price": {
+        "discountPercent": 14,
+        "discountedPrice": 8600,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "인기"
+      ]
+    },
+    {
+      "id": 20,
+      "imageUrl": "https://picsum.photos/id/120/300/300",
+      "productName": "세일 상품 20",
+      "price": {
+        "discountPercent": 32,
+        "discountedPrice": 6800,
+        "originalPrice": 10000
+      },
+      "tags": [
+        "세일"
+      ]
+    }
+  ]
+}

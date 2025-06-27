@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,8 +35,17 @@ fun HomePopularItemList(
     popularItem: List<HomePopularItemModel>
 ) {
 
+    Text(
+        text = "인기 상품",
+        modifier = Modifier.fillMaxSize()
+            .padding(start = 8.dp, bottom = 8.dp),
+        style = MaterialTheme.typography.bodyLarge,
+        color = Color.Black,
+        fontWeight = FontWeight.Bold,
+    )
+
     LazyRow(
-        contentPadding = PaddingValues(horizontal = 16.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp)
     ) {
         items(popularItem) { item ->
             HomePopularItem(popularItem = item)
