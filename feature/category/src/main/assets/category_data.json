@@ -4,7 +4,7 @@
       "id": 1,
       "name": "스킨케어",
       "order": 1,
-      "subCategoryGroups": [
+      "subCategoryItems": [
         {
           "id": 101,
           "name": "기초 스킨케어",
@@ -75,7 +75,7 @@
       "id": 2,
       "name": "마스크팩",
       "order": 2,
-      "subCategoryGroups": [
+      "subCategoryItems": [
         {
           "id": 201,
           "name": "시트 마스크",
@@ -146,7 +146,7 @@
       "id": 3,
       "name": "클렌징",
       "order": 3,
-      "subCategoryGroups": [
+      "subCategoryItems": [
         {
           "id": 301,
           "name": "워터/오일 타입",
@@ -217,7 +217,7 @@
       "id": 4,
       "name": "선케어",
       "order": 4,
-      "subCategoryGroups": [
+      "subCategoryItems": [
         {
           "id": 401,
           "name": "선크림/로션",
@@ -288,7 +288,7 @@
       "id": 5,
       "name": "메이크업",
       "order": 5,
-      "subCategoryGroups": [
+      "subCategoryItems": [
         {
           "id": 501,
           "name": "베이스 메이크업",
