@@ -1,6 +1,6 @@
-package com.chan.home.vo
+package com.chan.home.domain.vo
 
-import com.chan.home.vo.common.PriceVO
+import com.chan.home.domain.vo.common.PriceVO
 
 
 data class HomeSaleProductVO(

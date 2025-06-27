@@ -54,7 +54,6 @@ android {
 dependencies {
 //    implementation(project(":app"))
     implementation(project(":core:android"))
-    implementation(project(":domain:home"))
     implementation(project(":data:home"))
     implementation(project(":feature:category"))
 

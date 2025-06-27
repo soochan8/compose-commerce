@@ -1,6 +1,6 @@
 package com.chan.home.entity.home
 
-import com.chan.home.vo.HomeBannerVO
+import com.chan.home.domain.vo.HomeBannerVO
 
 @androidx.room.Entity(tableName = "homeBanner")
 data class HomeBannerEntity(
@@ -9,9 +9,9 @@ data class HomeBannerEntity(
     val title: String
 )
 
-fun HomeBannerEntity.toDomain(): HomeBannerVO {
-    return HomeBannerVO(
-        id = id,
+fun HomeBannerEntity.toDomain(): com.chan.home.domain.vo.HomeBannerVO {
+    return com.chan.home.domain.vo.HomeBannerVO(
+        com.chan.home.domain.vo.HomeBannerVO.id = id,
         imageUrl = imageUrl,
         title = title
     )

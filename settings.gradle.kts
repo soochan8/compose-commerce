@@ -26,8 +26,6 @@ include(":app")
 
 include(":data:home")
 
-include(":domain:home")
-
 include(":feature")
 include(":feature:home")
 include(":feature:category")

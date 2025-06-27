@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:home"))
+    implementation(project(":feature:home"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

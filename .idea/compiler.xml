@@ -10,6 +10,9 @@
       <module name="commerce.core1.ui" target="21" />
       <module name="commerce.data.main" target="11" />
       <module name="commerce.data.test" target="11" />
+      <module name="commerce.domain.home" target="21" />
+      <module name="commerce.domain.home.main" target="21" />
+      <module name="commerce.domain.home.test" target="21" />
       <module name="commerce.domain.main" target="11" />
       <module name="commerce.domain.test" target="11" />
       <module name="commerce.feature.main" target="11" />

@@ -1,4 +1,4 @@
-package com.chan.home.vo.common
+package com.chan.home.domain.vo.common
 
 data class PriceVO(
     val discountPercent: Int?,
