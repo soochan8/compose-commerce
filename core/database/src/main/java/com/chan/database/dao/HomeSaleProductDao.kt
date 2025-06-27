@@ -1,10 +1,10 @@
-package com.chan.home.data.dao
+package com.chan.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.chan.home.data.entity.home.HomeSaleProductEntity
+import com.chan.database.entity.home.HomeSaleProductEntity
 
 @Dao
 interface HomeSaleProductDao {

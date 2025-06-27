@@ -1,4 +1,4 @@
-package com.chan.home.data.entity
+package com.chan.database.entity
 
 data class PriceEntity(
     val discountPercent: Int?,

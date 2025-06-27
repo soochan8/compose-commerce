@@ -1,8 +1,8 @@
 package com.chan.home.data.repository
 
-import com.chan.home.data.dao.HomeBannerDao
+import com.chan.database.dao.HomeBannerDao
 import com.chan.home.data.datasource.HomeBannerDataSource
-import com.chan.home.data.entity.home.toDomain
+import com.chan.home.data.mapper.toDomain
 import com.chan.home.domain.repository.HomeBannerRepository
 import com.chan.home.domain.vo.HomeBannerVO
 import javax.inject.Inject
