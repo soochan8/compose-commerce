@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="commerce.core.domian" target="21" />
+      <module name="commerce.core.main" target="11" />
+      <module name="commerce.core.test" target="11" />
+      <module name="commerce.core1.main" target="11" />
+      <module name="commerce.core1.test" target="11" />
+      <module name="commerce.core1.ui" target="21" />
+      <module name="commerce.data.main" target="11" />
+      <module name="commerce.data.test" target="11" />
+      <module name="commerce.domain.main" target="11" />
+      <module name="commerce.domain.test" target="11" />
+      <module name="commerce.feature.main" target="11" />
+      <module name="commerce.feature.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

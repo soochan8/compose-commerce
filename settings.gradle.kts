@@ -17,10 +17,20 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
 rootProject.name = "commerce"
 include(":app")
-include(":core")
+
+include(":data:home")
+
+include(":domain:home")
+
 include(":feature")
+include(":feature:home")
+include(":feature:category")
+
+include(":core:android")
+
