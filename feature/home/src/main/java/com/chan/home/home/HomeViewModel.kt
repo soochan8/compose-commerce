@@ -2,11 +2,11 @@ package com.chan.home.home
 
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
+import com.chan.home.domain.repository.HomeBannerRepository
+import com.chan.home.domain.repository.HomePopularItemRepository
+import com.chan.home.domain.repository.HomeSaleProductRepository
+import com.chan.home.domain.repository.RankingCategoryRepository
 import com.chan.home.mapper.toPresentation
-import com.chan.home.repository.HomeBannerRepository
-import com.chan.home.repository.HomePopularItemRepository
-import com.chan.home.repository.HomeSaleProductRepository
-import com.chan.home.repository.RankingCategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

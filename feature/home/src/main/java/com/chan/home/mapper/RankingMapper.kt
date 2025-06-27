@@ -1,9 +1,10 @@
 package com.chan.home.mapper
 
+import com.chan.home.domain.vo.RankingCategoryVO
+import com.chan.home.domain.vo.common.PriceVO
 import com.chan.home.model.PriceModel
 import com.chan.home.model.RankingCardModel
 import com.chan.home.model.RankingCategoryModel
-import com.chan.home.vo.RankingCategoryVO
 
 fun RankingCategoryVO.toPresentation(): RankingCategoryModel {
     return RankingCategoryModel(
@@ -24,7 +25,7 @@ fun RankingCategoryVO.RankingCategoryItemsVO.toPresentation(): RankingCardModel 
     )
 }
 
-fun RankingCategoryVO.RankingCategoryItemsVO.PriceVO.toPresentation(): PriceModel {
+fun PriceVO.toPresentation(): PriceModel {
     return PriceModel(
         discountPercent = discountPercent,
         discountedPrice = discountedPrice,

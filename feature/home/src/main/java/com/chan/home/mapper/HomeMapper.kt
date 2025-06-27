@@ -1,13 +1,13 @@
 package com.chan.home.mapper
 
+import com.chan.home.domain.vo.HomeBannerVO
+import com.chan.home.domain.vo.HomePopularItemVO
+import com.chan.home.domain.vo.HomeSaleProductVO
+import com.chan.home.domain.vo.RankingCategoryVO.RankingCategoryItemsVO.PriceVO
 import com.chan.home.model.HomeBannerModel
 import com.chan.home.model.HomePopularItemModel
 import com.chan.home.model.HomeSaleProductModel
 import com.chan.home.model.PriceModel
-import com.chan.home.vo.HomeBannerVO
-import com.chan.home.vo.HomePopularItemVO
-import com.chan.home.vo.HomeSaleProductVO
-import com.chan.home.vo.common.PriceVO
 
 fun HomeBannerVO.toPresentation(): HomeBannerModel {
     return HomeBannerModel(
