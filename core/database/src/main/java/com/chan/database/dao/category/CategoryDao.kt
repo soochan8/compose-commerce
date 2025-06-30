@@ -10,7 +10,7 @@ import com.chan.database.entity.category.CategoryEntity
 interface CategoryDao {
 
     @Query("SELECT * FROM categoryTable")
-    suspend fun getBannerAll(): List<CategoryEntity>
+    suspend fun getCategoryAll(): List<CategoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertAll(categories: List<CategoryEntity>)
