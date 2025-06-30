@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.chan.home.model.HomeTabItem
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ fun HomeTopTab(tabList: List<HomeTabItem>, pagerState: PagerState) {
                     },
                     text = {
                         Text(
-                            text = tabItem.title,
+                            text = stringResource(id = tabItem.titleResId),
                             modifier = Modifier
                                 .clickable(
                                     interactionSource = remember { noRipple },
