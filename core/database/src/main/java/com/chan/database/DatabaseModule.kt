@@ -6,15 +6,17 @@ import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.HomePopularItemDao
 import com.chan.database.dao.HomeSaleProductDao
 import com.chan.database.dao.RankingCategoryDao
+import com.chan.database.dao.category.CategoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import kotlin.jvm.java
 
 @Module
-@InstallIn(dagger.hilt.components.SingletonComponent::class)
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Singleton
@@ -28,19 +30,23 @@ object DatabaseModule {
             .build()
     }
 
-    @dagger.Provides
+    @Provides
     fun provideHomeBannerDao(db: AppDatabase): HomeBannerDao =
         db.homeBannerDao()
 
-    @dagger.Provides
+    @Provides
     fun provideHomePopularItemDao(db: AppDatabase): HomePopularItemDao =
         db.homePopularItemDao()
 
-    @dagger.Provides
+    @Provides
     fun provideRankingCategoryDao(db: AppDatabase): RankingCategoryDao =
         db.rankingCategoryDao()
 
-    @dagger.Provides
+    @Provides
     fun provideHomeSaleProductDao(db: AppDatabase): HomeSaleProductDao =
         db.homeSaleProductDao()
+
+    @Provides
+    fun provideCategoryDao(db: AppDatabase): CategoryDao =
+        db.categoryDao()
 }
