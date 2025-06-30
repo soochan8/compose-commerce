@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.chan.category.ui.CategoryScreen
+import com.chan.category.ui.composables.CategoryScreen
 import com.chan.home.common.BottomNavItem
 import com.chan.home.common.BottomNavigationBar
 import com.chan.home.composables.HomeScreen
