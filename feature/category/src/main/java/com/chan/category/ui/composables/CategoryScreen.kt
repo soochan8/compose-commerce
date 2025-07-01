@@ -1,15 +1,16 @@
 package com.chan.category.ui.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,42 +40,75 @@ fun CategoryScreen(
     Row(
         modifier = Modifier.fillMaxSize()
     ) {
+        //대분류 카테고리
         LazyColumn(
             modifier = Modifier
-                .width(100.dp)
+                .fillMaxWidth(0.33f)
                 .fillMaxHeight()
-                .background(color = Color(0xFFF5F5F5))
+                .background(color = Color(0xFFF6F7F9))
         ) {
             items(items = state.categoryList, key = { it.id }) { category ->
-                Text(
-                    text = category.name,
+                val selected = category.id == state.selectedCategoryId
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(
+                            color = if (selected) Color.White else Color.Transparent,
+                        )
+                        .clickable {
+                            categoryViewModel.setEvent(
+                                CategoryContract.Event.SelectCategory(
+                                    category.id
+                                )
+                            )
+                        }
                         .padding(vertical = 12.dp, horizontal = 8.dp)
-                )
+                ) {
+                    Text(
+                        text = category.name,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 12.dp, horizontal = 8.dp),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+                        ),
+                        color = if (selected) Color.Black else Color.Gray
+                    )
+                }
             }
         }
-
-
-
+        //대분류 카테고리에 따른 리스트
         LazyColumn(
             modifier = Modifier
                 .fillMaxHeight()
-                .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .fillMaxWidth()
+                .background(color = Color.White)
+                .padding(start = 20.dp)
         ) {
             state.categoryList.forEach { category ->
-                item(key = "header-${category.id}") {
-                    Text(
-                        text = category.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                }
                 category.subCategoryItems.forEach { subCategory ->
-
+                    item(key = subCategory.id) {
+                        Text(
+                            text = subCategory.name,
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier.padding(top = 25.dp)
+                        )
+                    }
+                    items(
+                        items = subCategory.items,
+                        key = { it.id }
+                    ) { subItem ->
+                        Text(
+                            text = subItem.name,
+                            style = MaterialTheme.typography.titleSmall,
+                            color = Color.DarkGray,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 20.dp)
+                        )
+                    }
                 }
             }
         }
