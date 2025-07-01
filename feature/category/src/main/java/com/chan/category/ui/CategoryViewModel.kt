@@ -26,14 +26,19 @@ class CategoryViewModel @Inject constructor(
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
-            val categoryList = categoryRepository.getCategories().map { it.toPresentation() }
-            val firstId = categoryList.firstOrNull()?.id
-            setState {
-                copy(
-                    categoryList = categoryList,
-                    selectedCategoryId = firstId,
-                    isLoading = false
-                )
+            try {
+                val categoryList = categoryRepository.getCategories().map { it.toPresentation() }
+                val firstId = categoryList.firstOrNull()?.id
+                setState {
+                    copy(
+                        categoryList = categoryList,
+                        selectedCategoryId = firstId,
+                        isLoading = false
+                    )
+                }
+            } catch(e: Exception) {
+                setState { copy(isLoading = false, isError = true) }
+                setEffect { CategoryContract.Effect.ShowError(e.message.toString()) }
             }
         }
     }

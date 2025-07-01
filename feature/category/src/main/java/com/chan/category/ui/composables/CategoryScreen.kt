@@ -1,5 +1,6 @@
 package com.chan.category.ui.composables
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,9 +32,17 @@ fun CategoryScreen(
 ) {
 
     val state by categoryViewModel.viewState.collectAsState()
+    val effects = categoryViewModel.effect
 
     LaunchedEffect(Unit) {
         categoryViewModel.setEvent(CategoryContract.Event.CategoriesLoad)
+    }
+    LaunchedEffect(effects) {
+        effects.collect { effect ->
+            when(effect) {
+                is CategoryContract.Effect.ShowError -> Log.d("CategoryScreen", " Error : ${effect.errorMessage}")
+            }
+        }
     }
 
     Row(

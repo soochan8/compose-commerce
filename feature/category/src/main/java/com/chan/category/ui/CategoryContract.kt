@@ -19,6 +19,6 @@ class CategoryContract {
     ) : ViewState
 
     sealed class Effect : ViewEffect {
-        //추후 네비게이션 추가 예정
+        data class ShowError(val errorMessage: String) : Effect()
     }
 }
