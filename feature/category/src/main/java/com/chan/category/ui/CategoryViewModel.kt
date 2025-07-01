@@ -18,6 +18,7 @@ class CategoryViewModel @Inject constructor(
     override fun handleEvent(event: CategoryContract.Event) {
         when (event) {
             CategoryContract.Event.CategoriesLoad -> getCategories()
+            is CategoryContract.Event.SelectCategory -> updateSelectedCategoryId(event.categoryId)
         }
     }
 
@@ -26,7 +27,18 @@ class CategoryViewModel @Inject constructor(
             setState { copy(isLoading = true, isError = false) }
 
             val categoryList = categoryRepository.getCategories().map { it.toPresentation() }
-            setState { copy(categoryList = categoryList, isLoading = false) }
+            val firstId = categoryList.firstOrNull()?.id
+            setState {
+                copy(
+                    categoryList = categoryList,
+                    selectedCategoryId = firstId,
+                    isLoading = false
+                )
+            }
         }
+    }
+
+    private fun updateSelectedCategoryId(categoryId: Int) {
+        setState { copy(selectedCategoryId = categoryId) }
     }
 }

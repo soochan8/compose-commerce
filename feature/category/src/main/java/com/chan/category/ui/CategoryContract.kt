@@ -8,6 +8,7 @@ import com.chan.category.ui.model.CategoryModel
 class CategoryContract {
     sealed class Event : ViewEvent {
         object CategoriesLoad : Event()
+        data class SelectCategory(val categoryId: Int): Event()
     }
 
     data class State(
