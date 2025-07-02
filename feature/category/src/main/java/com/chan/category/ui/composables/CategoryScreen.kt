@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.chan.category.ui.CategoryContract
 import com.chan.category.ui.CategoryViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 
 @Composable
@@ -33,22 +41,56 @@ fun CategoryScreen(
 
     val state by categoryViewModel.viewState.collectAsState()
     val effects = categoryViewModel.effect
+    val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
 
     LaunchedEffect(Unit) {
         categoryViewModel.setEvent(CategoryContract.Event.CategoriesLoad)
     }
     LaunchedEffect(effects) {
         effects.collect { effect ->
-            when(effect) {
-                is CategoryContract.Effect.ShowError -> Log.d("CategoryScreen", " Error : ${effect.errorMessage}")
+            when (effect) {
+                is CategoryContract.Effect.ShowError -> Log.d(
+                    "CategoryScreen",
+                    " Error : ${effect.errorMessage}"
+                )
             }
         }
+    }
+
+    LaunchedEffect(listState) {
+        snapshotFlow { listState.layoutInfo.visibleItemsInfo }
+            .map { visibleItems ->
+                //중앙에 가까운 Items
+                val start = listState.layoutInfo.viewportStartOffset
+                val end = listState.layoutInfo.viewportEndOffset
+                val centerY = (start + end) / 2
+
+                visibleItems.minByOrNull { info ->
+                    val itemCenter = info.offset + info.size / 2
+                    abs(itemCenter - centerY)
+                }?.index
+            }
+            .mapNotNull { itemIndex ->
+                // 헤더의 CategoryIndex 구함
+                itemIndex?.let {
+                    state.headerPositions
+                        .filter { it.first <= itemIndex }
+                        .maxByOrNull { it.first }
+                        ?.second
+                }
+            }
+            .distinctUntilChanged()
+            .collect { newCatId ->
+                categoryViewModel.setEvent(
+                    CategoryContract.Event.SelectCategory(newCatId)
+                )
+            }
     }
 
     Row(
         modifier = Modifier.fillMaxSize()
     ) {
-        //대분류 카테고리
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(0.33f)
@@ -64,6 +106,16 @@ fun CategoryScreen(
                             color = if (selected) Color.White else Color.Transparent,
                         )
                         .clickable {
+                            val targetIndex = state.headerPositions
+                                .first { it.second == category.id }
+                                .first
+
+                            scope.launch {
+                                listState.scrollToItem(
+                                    index = targetIndex,
+                                    scrollOffset = 0
+                                )
+                            }
                             categoryViewModel.setEvent(
                                 CategoryContract.Event.SelectCategory(
                                     category.id
@@ -85,8 +137,8 @@ fun CategoryScreen(
                 }
             }
         }
-        //대분류 카테고리에 따른 리스트
         LazyColumn(
+            state = listState,
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
@@ -95,7 +147,7 @@ fun CategoryScreen(
         ) {
             state.categoryList.forEach { category ->
                 category.subCategoryItems.forEach { subCategory ->
-                    item(key = subCategory.id) {
+                    item(key = "header-${subCategory.id}") {
                         Text(
                             text = subCategory.name,
                             style = MaterialTheme.typography.titleMedium,
