@@ -56,7 +56,6 @@ dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
     implementation(project(":feature:category"))
-    implementation(project(":core:navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
