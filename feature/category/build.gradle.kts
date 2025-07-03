@@ -44,6 +44,7 @@ android {
 dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
+    implementation(project(":core:navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
