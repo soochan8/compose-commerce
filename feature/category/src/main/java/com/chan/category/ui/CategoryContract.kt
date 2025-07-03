@@ -8,16 +8,19 @@ import com.chan.category.ui.model.CategoryModel
 class CategoryContract {
     sealed class Event : ViewEvent {
         object CategoriesLoad : Event()
+        data class SelectCategory(val categoryId: Int): Event()
+        data class CategoryScrolledIndex (val firstVisibleItemIndex: Int): Event()
     }
 
     data class State(
         val categoryList: List<CategoryModel> = emptyList(),
-        var selectedCategoryId: Int? = null,
+        val selectedCategoryId: Int? = null,
+        val headerPositions : List<Pair<Int, Int>> = emptyList(),
         val isLoading: Boolean = false,
         val isError: Boolean = false
     ) : ViewState
 
     sealed class Effect : ViewEffect {
-        //추후 네비게이션 추가 예정
+        data class ShowError(val errorMessage: String) : Effect()
     }
 }
