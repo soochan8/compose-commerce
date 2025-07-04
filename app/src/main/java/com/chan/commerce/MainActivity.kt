@@ -6,21 +6,29 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.chan.category.ui.composables.CategoryScreen
-import com.chan.home.composables.HomeScreen
-import com.chan.home.history.HistoryScreen
-import com.chan.home.mypage.MyPageScreen
+import com.chan.home.navigation.HomeDestination
 import com.chan.navigation.BottomNavigationBar
-import com.chan.navigation.NavDestination
+import com.chan.navigation.NavDestinationProvider
+import com.chan.navigation.NavGraphProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navGraphProviders: Set<@JvmSuppressWildcards NavGraphProvider>
+    @Inject
+    lateinit var navDestinationProviders: Set<@JvmSuppressWildcards NavDestinationProvider>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +37,12 @@ class MainActivity : ComponentActivity() {
             val currentDestination = navController.currentBackStackEntryAsState().value
             val currentRoute = currentDestination?.destination?.route
 
+            val allNavDestinations = remember(navDestinationProviders) {
+                navDestinationProviders.flatMap {
+                    it.getDestination()
+                }
+            }
+
             Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
@@ -36,23 +50,36 @@ class MainActivity : ComponentActivity() {
                         onNavigate = { route ->
                             navController.navigate(route) {
                                 launchSingleTop = true
-                                if (route == NavDestination.Home.route) popUpTo(0)
+                                if (route == HomeDestination.route) popUpTo(0)
                             }
-                        }
+                        },
+                        navDestinations = allNavDestinations
                     )
                 }
             ) { padding ->
-                NavHost(
+                AppNavHost(
                     navController = navController,
-                    startDestination = NavDestination.Home.route,
+                    navGraphProviders = navGraphProviders,
                     modifier = Modifier.padding(padding)
-                ) {
-                    composable(NavDestination.Home.route) { HomeScreen() }
-                    composable(NavDestination.Category.route) { CategoryScreen() }
-                    composable(NavDestination.History.route) { HistoryScreen() }
-                    composable(NavDestination.MyPage.route) { MyPageScreen() }
-                }
+                )
             }
+        }
+    }
+}
+
+@Composable
+fun AppNavHost(
+    navController: NavHostController,
+    navGraphProviders: Set<@JvmSuppressWildcards NavGraphProvider>,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = HomeDestination.route,
+        modifier = modifier
+    ) {
+        navGraphProviders.forEach { provider ->
+            provider.addGraph(this, navController)
         }
     }
 }
