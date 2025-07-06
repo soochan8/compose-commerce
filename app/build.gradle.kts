@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     kotlin("kapt")
 }
@@ -60,8 +59,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:android"))
+    implementation(project(":core:database"))
+    implementation(project(":core:navigation"))
 
     implementation(project(":feature:home"))
+    implementation(project(":feature:category"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
