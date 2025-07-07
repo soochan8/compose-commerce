@@ -17,6 +17,7 @@ import com.chan.home.navigation.HomeDestination
 import com.chan.navigation.BottomNavigationBar
 import com.chan.navigation.NavDestinationProvider
 import com.chan.navigation.NavGraphProvider
+import com.chan.navigation.Routes
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,8 +27,14 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var navGraphProviders: Set<@JvmSuppressWildcards NavGraphProvider>
+
     @Inject
     lateinit var navDestinationProviders: Set<@JvmSuppressWildcards NavDestinationProvider>
+
+    private val bottomTabOrder = listOf(
+        Routes.CATEGORY.route,
+        Routes.HOME.route
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +50,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            val bottomNavItems = remember(allNavDestinations) {
+                bottomTabOrder.mapNotNull { route ->
+                    allNavDestinations.firstOrNull { it.route == route }
+                }
+            }
+
             Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
@@ -53,7 +66,7 @@ class MainActivity : ComponentActivity() {
                                 if (route == HomeDestination.route) popUpTo(0)
                             }
                         },
-                        navDestinations = allNavDestinations
+                        navDestinations = bottomNavItems
                     )
                 }
             ) { padding ->
