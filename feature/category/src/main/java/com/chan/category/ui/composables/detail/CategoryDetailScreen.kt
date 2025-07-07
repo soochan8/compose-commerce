@@ -62,7 +62,7 @@ fun CategoryDetailScreen(
     ) { padding ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(padding),
+            modifier = Modifier.padding(top = padding.calculateTopPadding()),
             contentPadding = PaddingValues(8.dp)
         ) {
             items(
@@ -71,7 +71,9 @@ fun CategoryDetailScreen(
             ) { product ->
                 ProductCard(
                     product = product,
-                    onClick = {}
+                    onClick = {},
+                    onLikeClick = {},
+                    onCartClick = {}
                 )
             }
         }
