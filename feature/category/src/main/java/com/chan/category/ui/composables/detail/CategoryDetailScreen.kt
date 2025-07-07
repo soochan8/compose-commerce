@@ -35,6 +35,7 @@ import com.chan.category.ui.model.detail.CategoryNamesModel
 
 @Composable
 fun CategoryDetailScreen(
+    categoryId: String,
     viewModel: CategoryDetailViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
