@@ -1,0 +1,30 @@
+[
+  {
+    "productId": "p1001",
+    "productName": "수분 가득 스킨 토너",
+    "imageUrl": "https://dummyimage.com/140x140/ffe0b2/000000&text=클렌징폼",
+    "price": {
+      "originPrice": 20000,
+      "discountedPrice": 15000,
+      "discountPercent": 25
+    },
+    "review": {
+      "rating": 4.5,
+      "reviewCount": 234
+    }
+  },
+  {
+    "productId": "p1002",
+    "productName": "진정 촉촉 스킨 토너",
+    "imageUrl": "https://dummyimage.com/140x140/ffe0b2/000000&text=클렌징폼",
+    "price": {
+      "originPrice": 18000,
+      "discountedPrice": 18000,
+      "discountPercent": 0
+    },
+    "review": {
+      "rating": 4.2,
+      "reviewCount": 112
+    }
+  }
+]

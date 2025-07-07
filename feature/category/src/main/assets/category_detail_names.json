@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "스킨/토너",
+    "sortOrder": 1
+  },
+  {
+    "id": 2,
+    "name": "에센스/세럼/앰플",
+    "sortOrder": 2
+  },
+  {
+    "id": 3,
+    "name": "크림",
+    "sortOrder": 3
+  },
+  {
+    "id": 4,
+    "name": "로션",
+    "sortOrder": 3
+  },
+  {
+    "id": 5,
+    "name": "미스트/오일",
+    "sortOrder": 3
+  },
+  {
+    "id": 6,
+    "name": "스킨케어세트",
+    "sortOrder": 6
+  },
+  {
+    "id": 7,
+    "name": "스킨케어 디바이스",
+    "sortOrder": 7
+  }
+]
