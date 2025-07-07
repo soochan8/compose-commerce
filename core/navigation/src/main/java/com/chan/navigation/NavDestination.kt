@@ -8,14 +8,17 @@ import androidx.navigation.NavHostController
 
 interface NavDestination {
     val route: String
+    val arguments: List<NamedNavArgument>
+}
+
+interface BottomNavDestination : NavDestination {
     @get:StringRes val title: Int
     val icon: ImageVector
-    val arguments: List<NamedNavArgument>
 }
 
 //공통 NavDestination 관리
 interface NavDestinationProvider {
-    fun getDestination(): List<NavDestination>
+    fun getDestination(): List<BottomNavDestination>
 }
 
 interface NavGraphProvider {
