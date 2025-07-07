@@ -2,18 +2,15 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.kapt)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.chan.category"
+    namespace = "com.chan.navigation"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 33
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -29,30 +26,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
+    }
+    kapt {
+        correctErrorTypes = true
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
-    }
 }
 
 dependencies {
-    implementation(project(":core:android"))
-    implementation(project(":core:database"))
-    implementation(project(":core:navigation"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -65,12 +53,12 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.hilt.core)
 
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.room.compiler)
 
-    implementation(libs.google.gson)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 }
