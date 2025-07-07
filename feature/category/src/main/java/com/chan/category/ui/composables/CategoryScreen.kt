@@ -25,8 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.chan.category.ui.CategoryContract
 import com.chan.category.ui.CategoryViewModel
+import com.chan.navigation.Routes
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
@@ -36,6 +38,7 @@ import kotlin.math.abs
 
 @Composable
 fun CategoryScreen(
+    navController: NavHostController,
     categoryViewModel: CategoryViewModel = hiltViewModel()
 ) {
 
@@ -167,6 +170,11 @@ fun CategoryScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 20.dp)
+                                .clickable {
+                                    navController.navigate(
+                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(subItem.id.toString())
+                                    )
+                                }
                         )
                     }
                 }
