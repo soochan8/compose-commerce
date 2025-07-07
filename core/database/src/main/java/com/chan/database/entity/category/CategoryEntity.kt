@@ -11,19 +11,17 @@ data class CategoryEntity(
     @PrimaryKey
     val id: Int,
     val name: String,
-    val order: Int,
-    val subCategoryItems: List<SubCategoryEntity>
+    val subCategories: List<SubCategoryEntity>
 ) {
     data class SubCategoryEntity(
         val id: Int,
         val name: String,
-        val order: Int,
-        val items: List<SubCategoryItems>
+        val itemGroups: List<SubCategoryItems>
     ) {
         data class SubCategoryItems(
             val id: Int,
             val name: String,
-            val order: Int
+            val sortOrder: Int
         )
     }
 }

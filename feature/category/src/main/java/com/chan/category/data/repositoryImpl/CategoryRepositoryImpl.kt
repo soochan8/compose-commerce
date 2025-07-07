@@ -13,8 +13,6 @@ class CategoryRepositoryImpl @Inject constructor(
 ) : CategoryRepository {
     override suspend fun getCategories(): List<CategoryVO> {
         if (localDataSource.getCategoryAll().isEmpty()) {
-            //categoryDataSource 생성할 것
-            //dataSource에서 json data가져와서 insert
             val categories = remoteDataSource.getRankingCategories()
             localDataSource.insertAll(categories)
         }
