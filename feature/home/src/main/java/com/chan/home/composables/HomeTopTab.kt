@@ -1,70 +1,46 @@
 package com.chan.home.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.chan.home.model.HomeTabItem
-import kotlinx.coroutines.launch
 
 @Composable
-fun HomeTopTab(tabList: List<HomeTabItem>, pagerState: PagerState) {
-    val scope = rememberCoroutineScope()
-    val noRipple = remember { MutableInteractionSource() }
+fun HomeTopTab(
+    tabs: List<String>,
+    selectedTabIndex: Int,
+    onTabClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val lazyListState = rememberLazyListState()
 
-    Column {
-        ScrollableTabRow(
-            selectedTabIndex = pagerState.currentPage,
-            edgePadding = 16.dp,
-            containerColor = Color.White,
-            indicator = { tabPositions ->
-                Box(
-                    Modifier
-                        .tabIndicatorOffset(tabPositions[pagerState.currentPage])
-                        .height(2.dp)
-                        .background(Color.Black)
-                )
-            },
+    LaunchedEffect(selectedTabIndex) {
+        lazyListState.animateScrollToItem(selectedTabIndex)
+    }
+
+    Column(modifier = modifier.background(Color.White)) {
+        LazyRow(
+            state = lazyListState,
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            tabList.forEachIndexed { index, tabItem ->
-                Tab(
-                    selected = pagerState.currentPage == index,
-                    onClick = {
-                        scope.launch {
-                            pagerState.animateScrollToPage(index)
-                        }
-                    },
-                    text = {
-                        Text(
-                            text = stringResource(id = tabItem.titleResId),
-                            modifier = Modifier
-                                .clickable(
-                                    interactionSource = remember { noRipple },
-                                    indication = null
-                                ) {
-                                    scope.launch {
-                                        pagerState.animateScrollToPage(index)
-                                    }
-                                },
-                            color = if (pagerState.currentPage == index) Color.Black else Color.Gray
-                        )
-                    }
+            itemsIndexed(items = tabs, key = { index, _ -> index }) { index, title ->
+                CustomTab(
+                    title = title,
+                    isSelected = index == selectedTabIndex,
+                    onClick = { onTabClick(index) }
                 )
             }
         }
+        HorizontalDivider(color = Color(0xFF_D9_DC_E3), thickness = 1.dp)
     }
 }
