@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

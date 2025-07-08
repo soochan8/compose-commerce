@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

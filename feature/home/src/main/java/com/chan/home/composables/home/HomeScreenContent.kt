@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.chan.home.composables.RecommendScreen
 import com.chan.home.home.HomeContract
 import com.chan.home.model.HomeTabItem
 

@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
