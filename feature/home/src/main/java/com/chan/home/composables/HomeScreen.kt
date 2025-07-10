@@ -1,13 +1,13 @@
 package com.chan.home.composables
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -41,19 +41,19 @@ fun HomeScreen(
         homeViewModel.setEvent(HomeContract.Event.SaleProducts)
     }
 
-    Scaffold(
-        topBar = { HomeTopTab(tabList = tabList, pagerState = pagerState) },
-        modifier = Modifier.fillMaxSize()
-    ) { innerPadding ->
+    Column(modifier = Modifier.fillMaxSize()) {
+        HomeTopTab(tabList = tabList, pagerState = pagerState)
         HorizontalPager(
             state = pagerState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding())
         ) { page ->
             when (tabList[page]) {
                 HomeTabItem.Home -> {
-                    LazyColumn {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
                         item {
                             HomeBanner(bannerList = state.bannerList)
                             Spacer(modifier = Modifier.height(12.dp))
