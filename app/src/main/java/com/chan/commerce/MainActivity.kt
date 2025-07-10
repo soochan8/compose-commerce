@@ -3,12 +3,26 @@ package com.chan.commerce
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -26,16 +40,44 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var navGraphProviders: Set<@JvmSuppressWildcards NavGraphProvider>
+
     @Inject
     lateinit var navDestinationProviders: Set<@JvmSuppressWildcards NavDestinationProvider>
 
+    companion object {
+        private val HIDE_BOTTOM_BAR_HEIGHT = 72.dp
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
             val currentDestination = navController.currentBackStackEntryAsState().value
             val currentRoute = currentDestination?.destination?.route
+            val isBottomBarVisible = remember { mutableStateOf(true) }
+            val nestedScrollConnection = remember {
+                object : NestedScrollConnection {
+                    override fun onPreScroll(
+                        available: Offset,
+                        source: NestedScrollSource
+                    ): Offset {
+                        if (available.y < -1) {
+                            isBottomBarVisible.value = false
+                        }
+
+                        if (available.y > 1) {
+                            isBottomBarVisible.value = true
+                        }
+                        return Offset.Zero
+                    }
+                }
+            }
+
+            val bottomBarOffset by animateDpAsState(
+                targetValue = if (isBottomBarVisible.value) 0.dp else HIDE_BOTTOM_BAR_HEIGHT,
+                animationSpec = tween(durationMillis = 300),
+                label = "bottomBarOffset"
+            )
 
             val allNavDestinations = remember(navDestinationProviders) {
                 navDestinationProviders.flatMap {
@@ -43,24 +85,31 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            Scaffold(
-                bottomBar = {
-                    BottomNavigationBar(
-                        currentRoute = currentRoute,
-                        onNavigate = { route ->
-                            navController.navigate(route) {
-                                launchSingleTop = true
-                                if (route == HomeDestination.route) popUpTo(0)
-                            }
-                        },
-                        navDestinations = allNavDestinations
-                    )
-                }
-            ) { padding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .nestedScroll(nestedScrollConnection)
+            ) {
                 AppNavHost(
                     navController = navController,
                     navGraphProviders = navGraphProviders,
-                    modifier = Modifier.padding(padding)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(WindowInsets.statusBars.asPaddingValues())
+                )
+
+                BottomNavigationBar(
+                    currentRoute = currentRoute,
+                    onNavigate = { route ->
+                        navController.navigate(route) {
+                            launchSingleTop = true
+                            if (route == HomeDestination.route) popUpTo(0)
+                        }
+                    },
+                    navDestinations = allNavDestinations,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .offset(y = bottomBarOffset)
                 )
             }
         }
