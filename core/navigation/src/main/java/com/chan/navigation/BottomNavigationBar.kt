@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 fun BottomNavigationBar(
     currentRoute: String?,
     onNavigate: (String) -> Unit,
-    navDestinations: List<NavDestination>
+    navDestinations: List<BottomNavDestination>
 ) {
     NavigationBar {
         navDestinations.forEach { screen ->

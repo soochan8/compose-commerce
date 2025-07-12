@@ -13,7 +13,7 @@ class CategoryNavGraph @Inject constructor() : NavGraphProvider {
         navController: NavHostController
     ) {
         navGraphBuilder.composable(CategoryDestination.route) {
-            CategoryScreen()
+            CategoryScreen(navController)
         }
     }
 }

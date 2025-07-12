@@ -1,0 +1,124 @@
+[
+  {
+    "id": 1,
+    "name": "스킨케어",
+    "subCategories": [
+      {
+        "id": 1,
+        "name": "스킨케어",
+        "sortOrder": 1,
+        "itemGroups": [
+          {
+            "id": 1,
+            "name": "스킨/토너",
+            "sortOrder": 1,
+            "products": [
+              {
+                "productId": "p1001",
+                "productName": "수분 가득 스킨 토너",
+                "imageUrl": "https://example.com/images/p1001.jpg",
+                "price": {
+                  "salesStatus": "ON_SALE",
+                  "originPrice": 20000,
+                  "discountedPrice": 15000,
+                  "discountPercent": 25
+                },
+                "review": {
+                  "rating": 4.5,
+                  "reviewCount": 234
+                }
+              },
+              {
+                "productId": "p1002",
+                "productName": "진정 촉촉 스킨 토너",
+                "imageUrl": "https://example.com/images/p1002.jpg",
+                "price": {
+                  "salesStatus": "NOT_ON_SALE",
+                  "originPrice": 18000,
+                  "discountedPrice": 18000,
+                  "discountPercent": 0
+                },
+                "review": {
+                  "rating": 4.2,
+                  "reviewCount": 112
+                }
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "에센스/세럼/앰플",
+            "sortOrder": 2,
+            "products": [
+              {
+                "productId": "p2001",
+                "productName": "히알루론산 앰플",
+                "imageUrl": "https://example.com/images/p2001.jpg",
+                "price": {
+                  "salesStatus": "ON_SALE",
+                  "originPrice": 25000,
+                  "discountedPrice": 20000,
+                  "discountPercent": 20
+                },
+                "review": {
+                  "rating": 4.8,
+                  "reviewCount": 678
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "메이크업/네일",
+    "subCategories": [
+      {
+        "id": 5,
+        "name": "메이크업",
+        "sortOrder": 5,
+        "itemGroups": [
+          {
+            "id": 25,
+            "name": "립메이크업",
+            "sortOrder": 25,
+            "products": [
+              {
+                "productId": "p3001",
+                "productName": "매트 립스틱",
+                "imageUrl": "https://example.com/images/p3001.jpg",
+                "price": {
+                  "salesStatus": "NOT_ON_SALE",
+                  "originPrice": 15000,
+                  "discountedPrice": 15000,
+                  "discountPercent": 0
+                },
+                "review": {
+                  "rating": 4.3,
+                  "reviewCount": 98
+                }
+              },
+              {
+                "productId": "p3002",
+                "productName": "글로시 립글로스",
+                "imageUrl": "https://example.com/images/p3002.jpg",
+                "price": {
+                  "salesStatus": "ON_SALE",
+                  "originPrice": 12000,
+                  "discountedPrice": 9000,
+                  "discountPercent": 25
+                },
+                "review": {
+                  "rating": 4.6,
+                  "reviewCount": 157
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
