@@ -45,6 +45,7 @@ fun HomeScreenContent(
                 HomeTabItem.Home -> {
                     HomePage(homeState = homeState)
                 }
+
                 HomeTabItem.RecommendToday -> RecommendScreen()
                 else -> {}
             }
@@ -61,19 +62,26 @@ private fun HomePage(
 
     LazyColumn(modifier = modifier) {
         item {
-            HomeBanner(bannerList = homeState.bannerList)
-            Spacer(modifier = Modifier.height(12.dp))
+            if (homeState.bannerList.isNotEmpty()) {
+                HomeBanner(bannerList = homeState.bannerList)
+                Spacer(modifier = Modifier.height(12.dp))
+            }
 
-            HomePopularItemList(popularItem = homeState.popularItemList)
-            Spacer(modifier = Modifier.height(12.dp))
+            if (homeState.popularItemList.isNotEmpty()) {
+                HomePopularItemList(popularItem = homeState.popularItemList)
+                Spacer(modifier = Modifier.height(12.dp))
+            }
 
-            HomeCategoryRanking(
-                categories = homeState.rankingCategories,
-                pagerState = homeCategoryRankingPagerState
-            )
-            Spacer(modifier = Modifier.height(12.dp))
+            if (homeState.rankingCategories.isNotEmpty()) {
+                HomeCategoryRanking(
+                    categories = homeState.rankingCategories,
+                    pagerState = homeCategoryRankingPagerState
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+            }
 
-            HomeSaleProduct(saleProduct = homeState.saleProductList)
+            if (homeState.saleProductList.isNotEmpty())
+                HomeSaleProduct(saleProduct = homeState.saleProductList)
         }
     }
 } 
