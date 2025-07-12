@@ -1,4 +1,4 @@
-package com.chan.category.domian.vo
+package com.chan.category.domain.vo
 
 
 data class CategoryVO(

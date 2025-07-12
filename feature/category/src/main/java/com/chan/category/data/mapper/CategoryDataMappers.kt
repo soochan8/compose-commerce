@@ -1,6 +1,6 @@
 package com.chan.category.data.mapper
 
-import com.chan.category.domian.vo.CategoryVO
+import com.chan.category.domain.vo.CategoryVO
 import com.chan.database.entity.category.CategoryEntity
 
 fun CategoryEntity.toDomain(): CategoryVO {

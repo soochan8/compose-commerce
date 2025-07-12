@@ -3,8 +3,8 @@ package com.chan.category.data.repositoryImpl
 import com.chan.category.data.datasource.LocalDataSource
 import com.chan.category.data.datasource.RemoteDataSource
 import com.chan.category.data.mapper.toDomain
-import com.chan.category.domian.CategoryRepository
-import com.chan.category.domian.vo.CategoryVO
+import com.chan.category.domain.CategoryRepository
+import com.chan.category.domain.vo.CategoryVO
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(

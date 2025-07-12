@@ -3,7 +3,7 @@ package com.chan.category.ui
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
-import com.chan.category.domian.CategoryDetailRepository
+import com.chan.category.domain.CategoryDetailRepository
 import com.chan.category.ui.mapper.toPresentation
 import com.chan.category.ui.mapper.toPresentationModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,7 +1,7 @@
-package com.chan.category.domian
+package com.chan.category.domain
 
-import com.chan.category.domian.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domian.vo.detail.CategoryDetailVO
+import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
+import com.chan.category.domain.vo.detail.CategoryDetailVO
 
 interface CategoryDetailRepository {
     suspend fun getCategoryNames(): List<CategoryDetailNamesVO>

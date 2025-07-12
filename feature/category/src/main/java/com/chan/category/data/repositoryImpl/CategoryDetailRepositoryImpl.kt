@@ -2,9 +2,9 @@ package com.chan.category.data.repositoryImpl
 
 import com.chan.category.data.datasource.CategoryDetailRemoteSource
 import com.chan.category.data.mapper.toDomain
-import com.chan.category.domian.CategoryDetailRepository
-import com.chan.category.domian.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domian.vo.detail.CategoryDetailVO
+import com.chan.category.domain.CategoryDetailRepository
+import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
+import com.chan.category.domain.vo.detail.CategoryDetailVO
 import javax.inject.Inject
 
 class CategoryDetailRepositoryImpl @Inject constructor(
