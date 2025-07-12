@@ -1,6 +1,8 @@
 package com.chan.category.di
 
+import com.chan.category.data.repositoryImpl.CategoryDetailRepositoryImpl
 import com.chan.category.data.repositoryImpl.CategoryRepositoryImpl
+import com.chan.category.domian.CategoryDetailRepository
 import com.chan.category.domian.CategoryRepository
 import dagger.Binds
 import dagger.Module
@@ -14,7 +16,13 @@ abstract class CategoryRepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindCategoryRepository (
+    abstract fun bindCategoryRepository(
         categoryRepositoryImpl: CategoryRepositoryImpl
-    ) : CategoryRepository
+    ): CategoryRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCategoryDetailRepository(
+        categoryDetailRepositoryImpl: CategoryDetailRepositoryImpl
+    ): CategoryDetailRepository
 }

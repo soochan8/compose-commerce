@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,12 +24,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.chan.android.ui.util.horizontalNestedScrollConnection
+import com.chan.home.R
 import com.chan.home.model.HomeSaleProductModel
 
 
@@ -40,26 +44,29 @@ fun HomeSaleProduct(
     saleProduct: List<HomeSaleProductModel>
 ) {
 
+    val nestedScrollConnection = horizontalNestedScrollConnection()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 8.dp, vertical = 10.dp)
     ) {
         Text(
-            text = "세일 상품",
+            text = stringResource(R.string.home_sale_product),
             modifier = Modifier
                 .fillMaxWidth(),
             style = MaterialTheme.typography.bodyLarge,
             color = Color.Black,
             fontWeight = FontWeight.Bold,
         )
-
+        Spacer(Modifier.height(4.dp))
 
         LazyHorizontalGrid(
             rows = GridCells.Fixed(GRID_CELL_ROW),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp),
+                .height(500.dp)
+                .nestedScroll(nestedScrollConnection),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
