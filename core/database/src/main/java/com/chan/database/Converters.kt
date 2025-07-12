@@ -1,6 +1,7 @@
 package com.chan.database
 
 import androidx.room.TypeConverter
+import com.chan.database.entity.ProductEntity
 import com.chan.database.entity.ranking.RankingCategoryEntity.RankingCategoryItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -8,6 +9,18 @@ import kotlin.text.isNullOrEmpty
 
 class Converters {
     private val gson = Gson()
+
+    @TypeConverter
+    fun productsToJson(products: List<ProductEntity.Products>): String =
+        gson.toJson(products)
+
+    @TypeConverter
+    fun jsonToProducts(json: String): List<ProductEntity.Products> =
+        gson.fromJson(
+            json,
+            object :
+                TypeToken<List<ProductEntity.Products>>() {}.type
+        )
 
     @TypeConverter
     fun itemsToJson(items: List<RankingCategoryItems>): String =
