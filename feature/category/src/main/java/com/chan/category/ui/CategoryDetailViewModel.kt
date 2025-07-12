@@ -2,6 +2,7 @@ package com.chan.category.ui
 
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
+import com.chan.android.LoadingState
 import com.chan.category.domian.CategoryDetailRepository
 import com.chan.category.ui.mapper.toPresentation
 import com.chan.category.ui.mapper.toPresentationModel
@@ -44,12 +45,12 @@ class CategoryDetailViewModel @Inject constructor(
         onSuccess: CategoryDetailContract.State.(T) -> CategoryDetailContract.State
     ) {
         viewModelScope.launch {
-            setState { copy(isLoading = true, isError = false) }
+            setState { copy(loadingState = LoadingState.Loading) }
             try {
                 val result = call()
-                setState { onSuccess(result) }
+                setState { onSuccess(result).copy(loadingState = LoadingState.Success) }
             } catch (e: Exception) {
-                setState { copy(isLoading = false, isError = true) }
+                setState { copy(loadingState = LoadingState.Error) }
                 setEffect { CategoryDetailContract.Effect.ShowError(e.message.toString()) }
             }
         }
