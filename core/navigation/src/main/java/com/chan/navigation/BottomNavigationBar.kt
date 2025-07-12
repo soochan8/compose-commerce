@@ -15,7 +15,8 @@ import androidx.compose.ui.res.stringResource
 fun BottomNavigationBar(
     currentRoute: String?,
     onNavigate: (String) -> Unit,
-    navDestinations: List<BottomNavDestination>
+    navDestinations: List<BottomNavDestination>,
+    modifier: Modifier = Modifier
 ) {
     NavigationBar(
         modifier = modifier.wrapContentHeight(),
