@@ -1,4 +1,4 @@
-package com.chan.home.composables
+package com.chan.home.composables.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,10 +18,16 @@ fun HomeBanner(
     modifier: Modifier = Modifier
 ) {
 
+    if (bannerList.isEmpty()) {
+        return
+    }
+
+    val initialPage = Int.MAX_VALUE / 2
     val pagerState = rememberPagerState(
-        initialPage = 0,
-        pageCount = { bannerList.size }
+        initialPage = initialPage,
+        pageCount = { Int.MAX_VALUE }
     )
+
 
     Box(modifier = modifier.fillMaxWidth()) {
         HorizontalPager(
@@ -30,8 +36,8 @@ fun HomeBanner(
                 .fillMaxWidth()
                 .aspectRatio(1.5f)
         ) { page ->
-            val banner = bannerList[page]
-            //coil
+            val index = (page - initialPage).mod(bannerList.size)
+            val banner = bannerList[index]
             AsyncImage(
                 model = banner.imageUrl,
                 contentDescription = "Banner Image",

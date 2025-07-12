@@ -9,4 +9,8 @@
     <string name="home_tab_ranking">랭킹</string>
     <string name="home_tab_sale">세일</string>
     <string name="home_tab_luxe_edit">LUXE EDIT</string>
+
+    <string name="home_popular_product">인기 상품</string>
+    <string name="home_sale_product">세일 상품</string>
+    <string name="home_category_ranking">카테고리 랭킹</string>
 </resources>
