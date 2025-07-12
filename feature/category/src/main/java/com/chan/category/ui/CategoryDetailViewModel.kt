@@ -24,28 +24,30 @@ class CategoryDetailViewModel @Inject constructor(
     }
 
     fun getCategoryDetailNames() {
-        viewModelScope.launch {
-            setState { copy(isLoading = true, isError = false) }
-
-            try {
-                val categoryNames =
-                    categoryDetailRepository.getCategoryNames().map { it.toPresentation() }
-                setState { copy(categoryNames = categoryNames) }
-            } catch (e: Exception) {
-                setState { copy(isLoading = false, isError = true) }
-                setEffect { CategoryDetailContract.Effect.ShowError(e.message.toString()) }
-            }
-        }
+        handleRepositoryCall(
+            call = { categoryDetailRepository.getCategoryNames().map { it.toPresentation() } },
+            onSuccess = { detailNames -> copy(categoryNames = detailNames) }
+        )
     }
 
     fun getCategoryDetailList() {
+        handleRepositoryCall(
+            call = {
+                categoryDetailRepository.getCategoryDetails().map { it.toPresentationModel() }
+            },
+            onSuccess = { detailLists -> copy(categoryDetailList = detailLists) }
+        )
+    }
+
+    private fun <T> handleRepositoryCall(
+        call: suspend () -> T,
+        onSuccess: CategoryDetailContract.State.(T) -> CategoryDetailContract.State
+    ) {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
-
             try {
-                val categoryDetails =
-                    categoryDetailRepository.getCategoryDetails().map { it.toPresentationModel() }
-                setState { copy(categoryDetailList = categoryDetails) }
+                val result = call()
+                setState { onSuccess(result) }
             } catch (e: Exception) {
                 setState { copy(isLoading = false, isError = true) }
                 setEffect { CategoryDetailContract.Effect.ShowError(e.message.toString()) }
