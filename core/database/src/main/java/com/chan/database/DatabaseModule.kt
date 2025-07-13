@@ -5,7 +5,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.chan.database.dao.HomeBannerDao
-import com.chan.database.dao.HomePopularItemDao
 import com.chan.database.dao.HomeSaleProductDao
 import com.chan.database.dao.ProductDao
 import com.chan.database.dao.RankingCategoryDao
@@ -67,10 +66,6 @@ object DatabaseModule {
     @Provides
     fun provideHomeBannerDao(db: AppDatabase): HomeBannerDao =
         db.homeBannerDao()
-
-    @Provides
-    fun provideHomePopularItemDao(db: AppDatabase): HomePopularItemDao =
-        db.homePopularItemDao()
 
     @Provides
     fun provideRankingCategoryDao(db: AppDatabase): RankingCategoryDao =
