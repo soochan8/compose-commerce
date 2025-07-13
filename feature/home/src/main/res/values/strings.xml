@@ -13,4 +13,6 @@
     <string name="home_popular_product">인기 상품</string>
     <string name="home_sale_product">세일 상품</string>
     <string name="home_category_ranking">카테고리 랭킹</string>
+
+    <string name="today_delivery_label">오늘드림</string>
 </resources>
