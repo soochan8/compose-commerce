@@ -7,6 +7,7 @@ import com.chan.home.domain.repository.HomePopularItemRepository
 import com.chan.home.domain.repository.HomeSaleProductRepository
 import com.chan.home.domain.repository.RankingCategoryRepository
 import com.chan.home.mapper.toPresentation
+import com.chan.home.mapper.toPopularItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +34,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getBanners() {
+    private fun getBanners() {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
@@ -43,17 +44,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getPopularItems() {
+    private fun getPopularItems() {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
             val popularItemList =
-                homePopularItemRepository.getPopularItemAll().map { it.toPresentation() }
+                homePopularItemRepository.getPopularProducts(20).map { it.toPopularItemModel() }
             setState { copy(popularItemList = popularItemList, isLoading = false) }
         }
     }
 
-    fun getRankingCategories() {
+    private fun getRankingCategories() {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
@@ -63,7 +64,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getSaleProducts() {
+    private fun getSaleProducts() {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
