@@ -18,7 +18,7 @@ import com.chan.database.entity.ranking.RankingCategoryEntity
 
 @Database(
     entities = [HomeBannerEntity::class, HomePopularItemEntity::class, RankingCategoryEntity::class, HomeSaleProductEntity::class, CategoryEntity::class, ProductEntity::class],
-    version = 7
+    version = 8
 )
 
 @TypeConverters(Converters::class)
