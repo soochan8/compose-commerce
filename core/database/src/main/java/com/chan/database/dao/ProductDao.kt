@@ -17,8 +17,9 @@ interface ProductDao {
     suspend fun insertAll(products: List<ProductEntity>)
 
     //인기 상품 가져오기
-    suspend fun getPopularProducts(limit: Int): List<ProductEntity.Products> {
+    suspend fun getPopularProducts(limit: Int): List<ProductEntity.SubCategories.Products> {
         return getAll()
+            .flatMap { it.subCategories }
             .flatMap { it.products }
             .shuffled()
             .take(limit)

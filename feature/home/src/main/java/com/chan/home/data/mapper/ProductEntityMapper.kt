@@ -37,7 +37,7 @@ fun PriceEntity.toDomain(): PriceVO {
     )
 }
 
-fun ProductEntity.Products.toDomain(): ProductVO {
+fun ProductEntity.SubCategories.Products.toDomain(): ProductVO {
     return ProductVO(
         productId = productId,
         productName = productName,
