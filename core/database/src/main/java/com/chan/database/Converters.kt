@@ -11,15 +11,15 @@ class Converters {
     private val gson = Gson()
 
     @TypeConverter
-    fun productsToJson(products: List<ProductEntity.Products>): String =
+    fun subCategoriesToJson(products: List<ProductEntity.SubCategories>): String =
         gson.toJson(products)
 
     @TypeConverter
-    fun jsonToProducts(json: String): List<ProductEntity.Products> =
+    fun jsonToSubCategories(json: String): List<ProductEntity.SubCategories> =
         gson.fromJson(
             json,
             object :
-                TypeToken<List<ProductEntity.Products>>() {}.type
+                TypeToken<List<ProductEntity.SubCategories>>() {}.type
         )
 
     @TypeConverter

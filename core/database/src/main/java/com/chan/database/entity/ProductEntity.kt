@@ -9,20 +9,26 @@ import com.chan.database.Converters
 @TypeConverters(Converters::class)
 data class ProductEntity(
     @PrimaryKey
-    val categoryId: String,
-    val categoryName: String,
-    val products: List<Products>
+    val id: String,
+    val name: String,
+    val subCategories: List<SubCategories>
 ) {
-    data class Products(
-        val productId: String,
-        val productName: String,
-        val brandName: String,
-        val imageUrl: String,
-        val originalPrice: Int,
-        val discountPercent: Int,
-        val discountPrice: Int,
-        val tags: List<String>,
-        val reviewRating: Float,
-        val reviewCount: Int
-    )
+    data class SubCategories(
+        val categoryId: String,
+        val categoryName: String,
+        val products: List<Products>
+    ) {
+        data class Products(
+            val productId: String,
+            val productName: String,
+            val brandName: String,
+            val imageUrl: String,
+            val originalPrice: Int,
+            val discountPercent: Int,
+            val discountPrice: Int,
+            val tags: List<String>,
+            val reviewRating: Float,
+            val reviewCount: Int
+        )
+    }
 }
