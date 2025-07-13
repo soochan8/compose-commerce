@@ -1,13 +1,13 @@
 package com.chan.home.data.mapper
 
 import com.chan.database.entity.PriceEntity
+import com.chan.database.entity.ProductEntity
 import com.chan.database.entity.home.HomeBannerEntity
-import com.chan.database.entity.home.HomePopularItemEntity
 import com.chan.database.entity.home.HomeSaleProductEntity
 import com.chan.database.entity.ranking.RankingCategoryEntity
 import com.chan.home.domain.vo.HomeBannerVO
-import com.chan.home.domain.vo.HomePopularItemVO
 import com.chan.home.domain.vo.HomeSaleProductVO
+import com.chan.home.domain.vo.ProductVO
 import com.chan.home.domain.vo.RankingCategoryVO
 import com.chan.home.domain.vo.common.PriceVO
 
@@ -16,18 +16,6 @@ fun HomeBannerEntity.toDomain(): HomeBannerVO {
         id = id,
         imageUrl = imageUrl,
         title = title
-    )
-}
-
-fun HomePopularItemEntity.toDomain(): HomePopularItemVO {
-    return HomePopularItemVO(
-        id = id,
-        imageUrl = imageUrl,
-        name = name,
-        originPrice = originPrice,
-        discountedPrice = discountedPrice,
-        discountPercent = discountPercent,
-        rating = rating
     )
 }
 
@@ -46,6 +34,21 @@ fun PriceEntity.toDomain(): PriceVO {
         discountPercent = discountPercent,
         discountedPrice = discountedPrice,
         originalPrice = originalPrice
+    )
+}
+
+fun ProductEntity.Products.toDomain(): ProductVO {
+    return ProductVO(
+        productId = productId,
+        productName = productName,
+        brandName = brandName,
+        imageUrl = imageUrl,
+        originalPrice = originalPrice,
+        discountPercent = discountPercent,
+        discountPrice = discountPrice,
+        tags = tags,
+        reviewRating = reviewRating,
+        reviewCount = reviewCount
     )
 }
 
