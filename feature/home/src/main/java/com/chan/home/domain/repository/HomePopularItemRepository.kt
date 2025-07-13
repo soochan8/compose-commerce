@@ -1,7 +1,7 @@
 package com.chan.home.domain.repository
 
-import com.chan.home.domain.vo.HomePopularItemVO
+import com.chan.home.domain.vo.ProductVO
 
 interface HomePopularItemRepository {
-    suspend fun getPopularItemAll(): List<HomePopularItemVO>
+    suspend fun getPopularProducts(limit: Int): List<ProductVO>
 }
