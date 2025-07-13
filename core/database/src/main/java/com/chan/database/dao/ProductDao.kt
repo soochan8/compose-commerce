@@ -11,9 +11,17 @@ import kotlinx.coroutines.flow.Flow
 interface ProductDao {
 
     @Query("SELECT * FROM product")
-    fun getAll(): Flow<List<ProductEntity>>
+    suspend fun getAll(): List<ProductEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(products: List<ProductEntity>)
+
+    //인기 상품 가져오기
+    suspend fun getPopularProducts(limit: Int): List<ProductEntity.Products> {
+        return getAll()
+            .flatMap { it.products }
+            .shuffled()
+            .take(limit)
+    }
 
 }
