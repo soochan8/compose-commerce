@@ -31,11 +31,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.chan.home.model.RankingCardModel
+import com.chan.home.model.HomeRankingCategoryProductModel
 
 @Composable
 fun RankingCard(
-    data: RankingCardModel
+    categoryProducts: HomeRankingCategoryProductModel
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -49,8 +49,8 @@ fun RankingCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = "https://dummyimage.com/140x140/ffe0b2/000000&text=클렌징폼",
-                contentDescription = data.productName,
+                model = categoryProducts.imageUrl,
+                contentDescription = categoryProducts.productName,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(100.dp)
@@ -62,7 +62,7 @@ fun RankingCard(
             Column(modifier = Modifier.weight(1f)) {
                 // 상품명
                 Text(
-                    text = data.productName,
+                    text = categoryProducts.productName,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -73,40 +73,23 @@ fun RankingCard(
                 // 할인 및 가격 정보
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "${data.price.discountPercent}%",
+                        text = categoryProducts.discountPercent,
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.Red,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "${data.price.discountedPrice}원",
+                        text = categoryProducts.discountPrice,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "${data.price.originalPrice}원",
+                        text = categoryProducts.originalPrice,
                         style = MaterialTheme.typography.bodySmall,
                         textDecoration = TextDecoration.LineThrough,
                         color = Color.Gray
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                // 오늘배송 및 장바구니 버튼
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = if (data.tags.isNotEmpty()) {
-                            data.tags.joinToString(", ")
-                        } else "",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Color(0xFF00AA00)
                     )
                 }
             }
