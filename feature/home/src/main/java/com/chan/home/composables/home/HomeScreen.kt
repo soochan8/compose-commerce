@@ -29,7 +29,7 @@ fun HomeScreen(
     LaunchedEffect(Unit) {
         homeViewModel.setEvent(HomeContract.Event.BannerLoad)
         homeViewModel.setEvent(HomeContract.Event.PopularItemLoad)
-        homeViewModel.setEvent(HomeContract.Event.RankingCategoriesLoad)
+        homeViewModel.setEvent(HomeContract.Event.RankingCategoryTabsLoad)
         homeViewModel.setEvent(HomeContract.Event.SaleProducts)
     }
 
@@ -41,6 +41,9 @@ fun HomeScreen(
             scope.launch {
                 pagerState.scrollToPage(index)
             }
+        },
+        onRankingTabSelected = { categoryId ->
+            homeViewModel.handleEvent(HomeContract.Event.RankingTabSelected(categoryId = categoryId))
         }
     )
 }
