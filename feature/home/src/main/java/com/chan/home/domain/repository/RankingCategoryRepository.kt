@@ -1,7 +1,9 @@
 package com.chan.home.domain.repository
 
-import com.chan.home.domain.vo.RankingCategoryVO
+import com.chan.home.domain.vo.ProductVO
+import com.chan.home.domain.vo.RankingCategoryTabVO
 
 interface RankingCategoryRepository {
-    suspend fun getRankingCategories(): List<RankingCategoryVO>
+    suspend fun getCategoryTabs(): List<RankingCategoryTabVO>
+    suspend fun getRankingProductsByCategoryId(categoryId: String): List<ProductVO>
 }
