@@ -6,8 +6,11 @@ import com.chan.home.domain.repository.HomeBannerRepository
 import com.chan.home.domain.repository.HomePopularItemRepository
 import com.chan.home.domain.repository.HomeSaleProductRepository
 import com.chan.home.domain.repository.RankingCategoryRepository
-import com.chan.home.mapper.toPresentation
 import com.chan.home.mapper.toPopularItemModel
+import com.chan.home.mapper.toPresentation
+import com.chan.home.mapper.toRankingCategoryProductModel
+import com.chan.home.mapper.toRankingCategoryTabsModel
+import com.chan.home.mapper.toSaleProductModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,48 +32,77 @@ class HomeViewModel @Inject constructor(
             HomeContract.Event.BannerLoad -> getBanners()
             HomeContract.Event.Retry -> getBanners()
             HomeContract.Event.PopularItemLoad -> getPopularItems()
-            HomeContract.Event.RankingCategoriesLoad -> getRankingCategories()
+            HomeContract.Event.RankingCategoryTabsLoad -> getRankingCategoryTabs()
+            is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
         }
     }
 
     private fun getBanners() {
-        viewModelScope.launch {
-            setState { copy(isLoading = true, isError = false) }
-
-            val bannerList = homeBannerRepository.getBanners().map { it.toPresentation() }
-            setState { copy(bannerList = bannerList, isLoading = false) }
-            setEffect { HomeContract.Effect.ShowToast("배너 로딩") }
-        }
+        handleRepositoryCall(
+            call = {
+                homeBannerRepository.getBanners().map { it.toPresentation() }
+            },
+            onSuccess = { bannerList -> copy(bannerList = bannerList) }
+        )
     }
 
     private fun getPopularItems() {
-        viewModelScope.launch {
-            setState { copy(isLoading = true, isError = false) }
-
-            val popularItemList =
+        handleRepositoryCall(
+            call = {
                 homePopularItemRepository.getPopularProducts(20).map { it.toPopularItemModel() }
-            setState { copy(popularItemList = popularItemList, isLoading = false) }
-        }
+            },
+            onSuccess = { popularProducts -> copy(popularItemList = popularProducts) }
+        )
     }
 
-    private fun getRankingCategories() {
-        viewModelScope.launch {
-            setState { copy(isLoading = true, isError = false) }
+    private fun getRankingCategoryTabs() {
+        handleRepositoryCall(
+            call = {
+                rankingCategoryRepository.getCategoryTabs().map { it.toRankingCategoryTabsModel() }
+            },
+            onSuccess = { rankingCategoryTabs -> copy(rankingCategoryTabs = rankingCategoryTabs) },
+            onFinally = { tabs ->
+                if (tabs.isNotEmpty())
+                    getRankingCategories(tabs.first().id)
+            }
+        )
+    }
 
-            val rankingCategoryList =
-                rankingCategoryRepository.getRankingCategories().map { it.toPresentation() }
-            setState { copy(rankingCategories = rankingCategoryList, isLoading = false) }
-        }
+    private fun getRankingCategories(categoryId: String) {
+        handleRepositoryCall(
+            call = {
+                rankingCategoryRepository.getRankingProductsByCategoryId(categoryId)
+                    .map { it.toRankingCategoryProductModel() }
+            },
+            onSuccess = { rankingCategoryProducts -> copy(rankingCategories = rankingCategoryProducts) }
+        )
     }
 
     private fun getSaleProducts() {
+        handleRepositoryCall(
+            call = { saleProductRepository.getSaleProducts(20).map { it.toSaleProductModel() } },
+            onSuccess = { saleProducts -> copy(saleProductList = saleProducts) }
+        )
+    }
+
+    private fun <T> handleRepositoryCall(
+        call: suspend () -> T,
+        onSuccess: HomeContract.State.(T) -> HomeContract.State,
+        onFinally: suspend (T) -> Unit = {}
+    ) {
         viewModelScope.launch {
             setState { copy(isLoading = true, isError = false) }
 
-            val saleProductList =
-                saleProductRepository.getSaleProducts().map { it.toPresentation() }
-            setState { copy(saleProductList = saleProductList, isLoading = false) }
+            try {
+                val result = call()
+                setState { onSuccess(result) }
+                onFinally(result)
+
+            } catch (e: Exception) {
+                setState { copy(isLoading = false, isError = true) }
+                setEffect { HomeContract.Effect.ShowError(e.message.toString()) }
+            }
         }
     }
 }
