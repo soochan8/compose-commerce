@@ -1,19 +1,19 @@
 package com.chan.category.ui.model
 
+
 data class CategoryModel(
-    val id: Int,
+    val id: String,
     val name: String,
-    val subCategoryItems: List<SubCategoryModel>
+    val categories: List<Categories>
 ) {
-    data class SubCategoryModel(
-        val id: Int,
+    data class Categories(
+        val id: String,
         val name: String,
-        val items: List<SubCategoryItems>
+        val subCategories: List<SubCategories>
     ) {
-        data class SubCategoryItems(
-            val id: Int,
-            val name: String,
-            val order: Int
+        data class SubCategories(
+            val categoryId: String,
+            val categoryName: String,
         )
     }
 }
