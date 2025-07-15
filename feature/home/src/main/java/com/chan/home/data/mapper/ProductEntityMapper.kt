@@ -15,7 +15,7 @@ fun HomeBannerEntity.toDomain(): HomeBannerVO {
     )
 }
 
-fun ProductEntity.SubCategories.Products.toDomain(): ProductVO {
+fun ProductEntity.Categories.SubCategories.Products.toDomain(): ProductVO {
     return ProductVO(
         productId = productId,
         productName = productName,

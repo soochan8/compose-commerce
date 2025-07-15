@@ -17,8 +17,9 @@ interface ProductDao {
     suspend fun insertAll(products: List<ProductEntity>)
 
     //인기 상품 가져오기
-    suspend fun getPopularProducts(limit: Int): List<ProductEntity.SubCategories.Products> {
+    suspend fun getPopularProducts(limit: Int): List<ProductEntity.Categories.SubCategories.Products> {
         return getAll()
+            .flatMap { it.categories }
             .flatMap { it.subCategories }
             .flatMap { it.products }
             .shuffled()
@@ -31,17 +32,19 @@ interface ProductDao {
 
     @Query("SELECT * FROM product WHERE id = :categoryId")
     suspend fun getProductByCategoryId(categoryId: String): ProductEntity?
-    suspend fun getProductsByCategoryId(categoryId: String): List<ProductEntity.SubCategories.Products> {
+    suspend fun getProductsByCategoryId(categoryId: String): List<ProductEntity.Categories.SubCategories.Products> {
         return getProductByCategoryId(categoryId)
-            ?.subCategories
+            ?.categories
+            ?.flatMap { it.subCategories }
             ?.flatMap { it.products }
             ?.take(5)
             ?: emptyList()
     }
 
     //세일 상품 가져오기
-    suspend fun getSaleProducts(limit : Int): List<ProductEntity.SubCategories.Products> {
+    suspend fun getSaleProducts(limit : Int): List<ProductEntity.Categories.SubCategories.Products> {
         return getAll()
+            .flatMap { it.categories }
             .flatMap { it.subCategories }
             .flatMap { it.products }
             .filter { it.discountPercent > 0 }
