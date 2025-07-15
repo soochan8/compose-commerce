@@ -2,20 +2,18 @@ package com.chan.category.data.repositoryImpl
 
 import com.chan.category.data.datasource.LocalDataSource
 import com.chan.category.data.datasource.RemoteDataSource
+import com.chan.category.data.mapper.toCategoriesDto
 import com.chan.category.data.mapper.toDomain
 import com.chan.category.domain.CategoryRepository
+import com.chan.category.domain.dto.CategoriesDto
 import com.chan.category.domain.vo.CategoryVO
+import com.chan.database.dao.ProductDao
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val productDao: ProductDao
 ) : CategoryRepository {
-    override suspend fun getCategories(): List<CategoryVO> {
-        if (localDataSource.getCategoryAll().isEmpty()) {
-            val categories = remoteDataSource.getRankingCategories()
-            localDataSource.insertAll(categories)
-        }
-        return localDataSource.getCategoryAll().map { it.toDomain() }
+    override suspend fun getCategories(): List<CategoriesDto> {
+        return productDao.getAll().map { it.toCategoriesDto() }
     }
 }
