@@ -14,5 +14,5 @@ data class Price(
 
     val discountedPriceLabel = NumberFormat
         .getNumberInstance(Locale.getDefault())
-        .format(originPrice)
+        .format(discountedPrice)
 }
