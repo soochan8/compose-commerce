@@ -3,69 +3,148 @@
     {
       "id": 1,
       "name": "스킨케어",
-      "order": 1,
-      "subCategoryItems": [
+      "subCategories": [
         {
-          "id": 101,
-          "name": "기초 스킨케어",
-          "order": 1,
-          "items": [
+          "id": 1,
+          "name": "스킨케어",
+          "itemGroups": [
             {
-              "id": 1011,
-              "name": "토너",
-              "order": 1
+              "id": 1,
+              "name": "스킨/토너",
+              "sortOrder": 1
             },
             {
-              "id": 1012,
-              "name": "에센스",
-              "order": 2
+              "id": 2,
+              "name": "에센스/세럼/앰플",
+              "sortOrder": 2
             },
             {
-              "id": 1013,
-              "name": "로션",
-              "order": 3
-            },
-            {
-              "id": 1014,
+              "id": 3,
               "name": "크림",
-              "order": 4
+              "sortOrder": 3
             },
             {
-              "id": 1015,
-              "name": "미스트",
-              "order": 5
+              "id": 4,
+              "name": "로션",
+              "sortOrder": 4
+            },
+            {
+              "id": 5,
+              "name": "미스트/오일",
+              "sortOrder": 5
+            },
+            {
+              "id": 6,
+              "name": "스킨케어세트",
+              "sortOrder": 6
+            },
+            {
+              "id": 7,
+              "name": "스킨케어 디바이스",
+              "sortOrder": 7
             }
           ]
         },
         {
-          "id": 102,
-          "name": "스페셜 케어",
-          "order": 2,
-          "items": [
+          "id": 2,
+          "name": "마스크팩",
+          "itemGroups": [
             {
-              "id": 1021,
+              "id": 8,
               "name": "시트팩",
-              "order": 1
+              "sortOrder": 8
             },
             {
-              "id": 1022,
-              "name": "슬리핑팩",
-              "order": 2
+              "id": 9,
+              "name": "패드",
+              "sortOrder": 9
             },
             {
-              "id": 1023,
-              "name": "워시오프 팩",
-              "order": 3
+              "id": 10,
+              "name": "페이셜팩",
+              "sortOrder": 10
             },
             {
-              "id": 1024,
-              "name": "필 오프 팩",
-              "order": 4
+              "id": 11,
+              "name": "코팩",
+              "sortOrder": 11
             },
             {
-              "id": 1025,
-              "name": "수면 안대팩",
-              "order": 5
+              "id": 12,
+              "name": "패치",
+              "sortOrder": 12
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "클렌징",
+          "itemGroups": [
+            {
+              "id": 13,
+              "name": "클렌징폼/젤",
+              "sortOrder": 13
+            },
+            {
+              "id": 14,
+              "name": "오일/밤",
+              "sortOrder": 14
+            },
+            {
+              "id": 15,
+              "name": "워터/밀크",
+              "sortOrder": 15
+            },
+            {
+              "id": 16,
+              "name": "필링&스크럽",
+              "sortOrder": 16
+            },
+            {
+              "id": 17,
+              "name": "티슈/패드",
+              "sortOrder": 17
+            },
+            {
+              "id": 18,
+              "name": "립&아이리무버",
+              "sortOrder": 18
+            },
+            {
+              "id": 19,
+              "name": "클렌징 디바이스",
+              "sortOrder": 19
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "선케어",
+          "itemGroups": [
+            {
+              "id": 20,
+              "name": "선크림",
+              "sortOrder": 20
+            },
+            {
+              "id": 21,
+              "name": "선스틱",
+              "sortOrder": 21
+            },
+            {
+              "id": 22,
+              "name": "선쿠션",
+              "sortOrder": 22
+            },
+            {
+              "id": 23,
+              "name": "선스프레이/선패치",
+              "sortOrder": 23
+            },
+            {
+              "id": 24,
+              "name": "태닝/애프터선",
+              "sortOrder": 24
             }
           ]
         }
@@ -73,70 +152,52 @@
     },
     {
       "id": 2,
-      "name": "마스크팩",
-      "order": 2,
-      "subCategoryItems": [
+      "name": "메이크업/네일",
+      "subCategories": [
         {
-          "id": 201,
-          "name": "시트 마스크",
-          "order": 1,
-          "items": [
+          "id": 2,
+          "name": "메이크업",
+          "itemGroups": [
             {
-              "id": 2011,
-              "name": "보습 시트팩",
-              "order": 1
+              "id": 25,
+              "name": "립메이크업",
+              "sortOrder": 25
             },
             {
-              "id": 2012,
-              "name": "진정 시트팩",
-              "order": 2
+              "id": 26,
+              "name": "베이스메이크업",
+              "sortOrder": 26
             },
             {
-              "id": 2013,
-              "name": "미백 시트팩",
-              "order": 3
-            },
-            {
-              "id": 2014,
-              "name": "탄력 시트팩",
-              "order": 4
-            },
-            {
-              "id": 2015,
-              "name": "차콜 시트팩",
-              "order": 5
+              "id": 27,
+              "name": "아이메이크업",
+              "sortOrder": 27
             }
           ]
         },
         {
-          "id": 202,
-          "name": "클레이/모델링 팩",
-          "order": 2,
-          "items": [
+          "id": 6,
+          "name": "네일",
+          "itemGroups": [
             {
-              "id": 2021,
-              "name": "클레이 팩",
-              "order": 1
+              "id": 28,
+              "name": "일반네일",
+              "sortOrder": 28
             },
             {
-              "id": 2022,
-              "name": "모델링 팩",
-              "order": 2
+              "id": 29,
+              "name": "젤네일",
+              "sortOrder": 29
             },
             {
-              "id": 2023,
-              "name": "차콜 팩",
-              "order": 3
+              "id": 30,
+              "name": "네일팁/스티커",
+              "sortOrder": 30
             },
             {
-              "id": 2024,
-              "name": "머드 팩",
-              "order": 4
-            },
-            {
-              "id": 2025,
-              "name": "버블 팩",
-              "order": 5
+              "id": 31,
+              "name": "네일케어/리무버",
+              "sortOrder": 31
             }
           ]
         }
@@ -144,70 +205,41 @@
     },
     {
       "id": 3,
-      "name": "클렌징",
-      "order": 3,
-      "subCategoryItems": [
+      "name": "뷰티소품",
+      "subCategories": [
         {
-          "id": 301,
-          "name": "워터/오일 타입",
-          "order": 1,
-          "items": [
+          "id": 3,
+          "name": "뷰티소품",
+          "itemGroups": [
             {
-              "id": 3011,
-              "name": "클렌징 워터",
-              "order": 1
+              "id": 32,
+              "name": "메이크업소품",
+              "sortOrder": 32
             },
             {
-              "id": 3012,
-              "name": "클렌징 오일",
-              "order": 2
+              "id": 33,
+              "name": "아이소품",
+              "sortOrder": 33
             },
             {
-              "id": 3013,
-              "name": "딥 클렌저",
-              "order": 3
+              "id": 34,
+              "name": "스킨케어소품",
+              "sortOrder": 34
             },
             {
-              "id": 3014,
-              "name": "아쿠아 클렌저",
-              "order": 4
+              "id": 35,
+              "name": "헤어소품",
+              "sortOrder": 35
             },
             {
-              "id": 3015,
-              "name": "이드라 클렌저",
-              "order": 5
-            }
-          ]
-        },
-        {
-          "id": 302,
-          "name": "폼/밤 타입",
-          "order": 2,
-          "items": [
-            {
-              "id": 3021,
-              "name": "폼 클렌저",
-              "order": 1
+              "id": 36,
+              "name": "네일/바디소품",
+              "sortOrder": 36
             },
             {
-              "id": 3022,
-              "name": "클렌징 밤",
-              "order": 2
-            },
-            {
-              "id": 3023,
-              "name": "클렌징 티슈",
-              "order": 3
-            },
-            {
-              "id": 3024,
-              "name": "바블 클렌징 밤",
-              "order": 4
-            },
-            {
-              "id": 3025,
-              "name": "마이크로 비드 밤",
-              "order": 5
+              "id": 37,
+              "name": "뷰티잡화",
+              "sortOrder": 37
             }
           ]
         }
@@ -215,70 +247,36 @@
     },
     {
       "id": 4,
-      "name": "선케어",
-      "order": 4,
-      "subCategoryItems": [
+      "name": "더모코스메틱",
+      "subCategories": [
         {
-          "id": 401,
-          "name": "선크림/로션",
-          "order": 1,
-          "items": [
+          "id": 4,
+          "name": "더모코스메틱",
+          "itemGroups": [
             {
-              "id": 4011,
-              "name": "선크림",
-              "order": 1
+              "id": 38,
+              "name": "스킨케어",
+              "sortOrder": 38
             },
             {
-              "id": 4012,
-              "name": "선로션",
-              "order": 2
+              "id": 39,
+              "name": "바디케어",
+              "sortOrder": 39
             },
             {
-              "id": 4013,
-              "name": "선젤",
-              "order": 3
+              "id": 40,
+              "name": "클렌징",
+              "sortOrder": 40
             },
             {
-              "id": 4014,
-              "name": "선 워터",
-              "order": 4
+              "id": 41,
+              "name": "선케어",
+              "sortOrder": 41
             },
             {
-              "id": 4015,
-              "name": "선밀크",
-              "order": 5
-            }
-          ]
-        },
-        {
-          "id": 402,
-          "name": "스틱/쿠션 타입",
-          "order": 2,
-          "items": [
-            {
-              "id": 4021,
-              "name": "선스틱",
-              "order": 1
-            },
-            {
-              "id": 4022,
-              "name": "선쿠션",
-              "order": 2
-            },
-            {
-              "id": 4023,
-              "name": "선밤",
-              "order": 3
-            },
-            {
-              "id": 4024,
-              "name": "선파우더",
-              "order": 4
-            },
-            {
-              "id": 4025,
-              "name": "선프라이머",
-              "order": 5
+              "id": 42,
+              "name": "마스크팩",
+              "sortOrder": 42
             }
           ]
         }
@@ -286,70 +284,420 @@
     },
     {
       "id": 5,
-      "name": "메이크업",
-      "order": 5,
-      "subCategoryItems": [
+      "name": "맨즈케어",
+      "subCategories": [
         {
-          "id": 501,
-          "name": "베이스 메이크업",
-          "order": 1,
-          "items": [
+          "id": 5,
+          "name": "맨즈케어",
+          "itemGroups": [
             {
-              "id": 5011,
-              "name": "파운데이션",
-              "order": 1
+              "id": 43,
+              "name": "스킨케어",
+              "sortOrder": 43
             },
             {
-              "id": 5012,
-              "name": "쿠션",
-              "order": 2
+              "id": 44,
+              "name": "메이크업",
+              "sortOrder": 44
             },
             {
-              "id": 5013,
-              "name": "컨실러",
-              "order": 3
+              "id": 45,
+              "name": "쉐이빙/왁싱",
+              "sortOrder": 45
             },
             {
-              "id": 5014,
-              "name": "프라이머",
-              "order": 4
+              "id": 46,
+              "name": "바디케어",
+              "sortOrder": 46
             },
             {
-              "id": 5015,
-              "name": "팩트",
-              "order": 5
+              "id": 47,
+              "name": "헤어케어",
+              "sortOrder": 47
+            },
+            {
+              "id": 48,
+              "name": "프래그런스",
+              "sortOrder": 48
+            },
+            {
+              "id": 49,
+              "name": "패션/취미",
+              "sortOrder": 49
+            },
+            {
+              "id": 50,
+              "name": "헬스용품/식품",
+              "sortOrder": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "향수/디퓨저",
+      "subCategories": [
+        {
+          "id": 6,
+          "name": "향수/디퓨저",
+          "itemGroups": [
+            {
+              "id": 51,
+              "name": "향수",
+              "sortOrder": 51
+            },
+            {
+              "id": 52,
+              "name": "미니/고체향수",
+              "sortOrder": 52
+            },
+            {
+              "id": 53,
+              "name": "홈프래그런스",
+              "sortOrder": 53
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "헤어케어",
+      "subCategories": [
+        {
+          "id": 7,
+          "name": "헤어케어",
+          "itemGroups": [
+            {
+              "id": 54,
+              "name": "샴푸/린스",
+              "sortOrder": 54
+            },
+            {
+              "id": 55,
+              "name": "트리트먼트/팩",
+              "sortOrder": 55
+            },
+            {
+              "id": 56,
+              "name": "두피앰플/토닉",
+              "sortOrder": 56
+            },
+            {
+              "id": 57,
+              "name": "헤어에센스",
+              "sortOrder": 57
+            },
+            {
+              "id": 58,
+              "name": "염색약/펌",
+              "sortOrder": 58
+            },
+            {
+              "id": 59,
+              "name": "헤어기기/브러시",
+              "sortOrder": 59
+            },
+            {
+              "id": 60,
+              "name": "스타일링",
+              "sortOrder": 60
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "바디케어",
+      "subCategories": [
+        {
+          "id": 8,
+          "name": "바디케어",
+          "itemGroups": [
+            {
+              "id": 61,
+              "name": "샤워/입욕",
+              "sortOrder": 61
+            },
+            {
+              "id": 62,
+              "name": "로션/오일/미스트",
+              "sortOrder": 62
+            },
+            {
+              "id": 63,
+              "name": "핸드케어",
+              "sortOrder": 63
+            },
+            {
+              "id": 64,
+              "name": "풋케어",
+              "sortOrder": 64
+            },
+            {
+              "id": 65,
+              "name": "제모/왁싱",
+              "sortOrder": 65
+            },
+            {
+              "id": 66,
+              "name": "데오드란트",
+              "sortOrder": 66
+            },
+            {
+              "id": 67,
+              "name": "선물세트",
+              "sortOrder": 67
+            },
+            {
+              "id": 68,
+              "name": "베이비",
+              "sortOrder": 68
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "건강식품",
+      "subCategories": [
+        {
+          "id": 9,
+          "name": "건강식품",
+          "itemGroups": [
+            {
+              "id": 69,
+              "name": "비타민",
+              "sortOrder": 69
+            },
+            {
+              "id": 70,
+              "name": "영양제",
+              "sortOrder": 70
+            },
+            {
+              "id": 71,
+              "name": "유산균",
+              "sortOrder": 71
+            },
+            {
+              "id": 72,
+              "name": "슬리밍/이너뷰티",
+              "sortOrder": 72
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "푸드",
+      "subCategories": [
+        {
+          "id": 10,
+          "name": "푸드",
+          "itemGroups": [
+            {
+              "id": 73,
+              "name": "식단관리",
+              "sortOrder": 73
+            },
+            {
+              "id": 74,
+              "name": "디저트",
+              "sortOrder": 74
+            },
+            {
+              "id": 75,
+              "name": "생수",
+              "sortOrder": 75
+            },
+            {
+              "id": 76,
+              "name": "간편식/요리",
+              "sortOrder": 76
+            },
+            {
+              "id": 77,
+              "name": "베이비푸드",
+              "sortOrder": 77
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "구강/건강용품",
+      "subCategories": [
+        {
+          "id": 11,
+          "name": "구강용품",
+          "itemGroups": [
+            {
+              "id": 78,
+              "name": "칫솔",
+              "sortOrder": 78
+            },
+            {
+              "id": 79,
+              "name": "치약",
+              "sortOrder": 79
+            },
+            {
+              "id": 80,
+              "name": "애프터구강케어",
+              "sortOrder": 80
+            },
+            {
+              "id": 81,
+              "name": "휴대용세트",
+              "sortOrder": 81
+            },
+            {
+              "id": 82,
+              "name": "구강가전",
+              "sortOrder": 82
             }
           ]
         },
         {
-          "id": 502,
-          "name": "포인트 메이크업",
-          "order": 2,
-          "items": [
+          "id": 12,
+          "name": "헬스/건강용품",
+          "itemGroups": [
             {
-              "id": 5021,
-              "name": "아이섀도우",
-              "order": 1
+              "id": 83,
+              "name": "패치/국소케어",
+              "sortOrder": 83
             },
             {
-              "id": 5022,
-              "name": "마스카라",
-              "order": 2
+              "id": 84,
+              "name": "릴랙스 용품",
+              "sortOrder": 84
             },
             {
-              "id": 5023,
-              "name": "립스틱",
-              "order": 3
+              "id": 85,
+              "name": "생활/의료",
+              "sortOrder": 85
             },
             {
-              "id": 5024,
-              "name": "블러셔",
-              "order": 4
+              "id": 86,
+              "name": "마사지/보호대",
+              "sortOrder": 86
             },
             {
-              "id": 5025,
-              "name": "하이라이터",
-              "order": 5
+              "id": 87,
+              "name": "운동용품",
+              "sortOrder": 87
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "여성/위생용품",
+      "subCategories": [
+        {
+          "id": 12,
+          "name": "위생용품",
+          "itemGroups": [
+            {
+              "id": 88,
+              "name": "마사지젤/오일",
+              "sortOrder": 88
+            },
+            {
+              "id": 89,
+              "name": "테스트기",
+              "sortOrder": 89
+            },
+            {
+              "id": 90,
+              "name": "화장지",
+              "sortOrder": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "라이프/케이팝",
+      "subCategories": [
+        {
+          "id": 13,
+          "name": "패션",
+          "itemGroups": [
+            {
+              "id": 91,
+              "name": "언더웨어",
+              "sortOrder": 91
+            },
+            {
+              "id": 92,
+              "name": "홈웨어",
+              "sortOrder": 92
+            },
+            {
+              "id": 93,
+              "name": "액티브웨어",
+              "sortOrder": 93
+            },
+            {
+              "id": 94,
+              "name": "패션잡화",
+              "sortOrder": 94
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "리빙/가전",
+          "itemGroups": [
+            {
+              "id": 95,
+              "name": "가전",
+              "sortOrder": 95
+            },
+            {
+              "id": 96,
+              "name": "주방",
+              "sortOrder": 96
+            },
+            {
+              "id": 97,
+              "name": "세제/청소",
+              "sortOrder": 97
+            },
+            {
+              "id": 98,
+              "name": "인테리어/욕실",
+              "sortOrder": 98
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "취미/팬시",
+          "itemGroups": [
+            {
+              "id": 99,
+              "name": "팬시/캐릭터",
+              "sortOrder": 99
+            },
+            {
+              "id": 100,
+              "name": "문구",
+              "sortOrder": 100
+            },
+            {
+              "id": 101,
+              "name": "디지털/기기",
+              "sortOrder": 101
             }
           ]
         }

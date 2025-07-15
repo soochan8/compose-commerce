@@ -1,22 +1,24 @@
 package com.chan.android
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,12 +39,14 @@ import com.chan.android.model.Review
 @Composable
 fun ProductCard(
     product: ProductModel,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onLikeClick: (productId: String) -> Unit,
+    onCartClick: (productId: String) -> Unit,
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(280.dp),
+            .fillMaxHeight(),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
@@ -64,7 +68,8 @@ fun ProductCard(
 
             Text(
                 text = product.productName,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Medium,
+                color = Color.DarkGray,
                 fontSize = 14.sp,
                 maxLines = 3
             )
@@ -76,6 +81,29 @@ fun ProductCard(
             product.review?.let { review ->
                 Review(review)
             }
+
+            Row(verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 10.dp)) {
+                Icon(
+                    imageVector = Icons.Default.FavoriteBorder,
+                    contentDescription = "like",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clickable {
+                            onLikeClick(product.productId)
+                        }
+                )
+                Spacer(modifier = Modifier.width(20.dp))
+                Icon(
+                    imageVector = Icons.Default.ShoppingCart,
+                    contentDescription = "cart",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clickable {
+                            onCartClick(product.productId)
+                        }
+                )
+            }
         }
     }
 }
@@ -85,20 +113,21 @@ fun Price(price: Price) {
     Row {
         Text(
             text = "${price.discountPercent}%",
-            fontSize = 18.sp,
+            fontSize = 12.sp,
             color = Color.Red,
             fontWeight = FontWeight.Bold
         )
+        Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = "${price.discountedPrice}원",
-            fontSize = 18.sp,
+            text = "${price.discountedPriceLabel}원",
+            fontSize = 12.sp,
             color = Color.Black,
             fontWeight = FontWeight.Bold
         )
     }
     Text(
-        text = "${price.originPrice}원",
-        fontSize = 14.sp,
+        text = "${price.originPriceLabel}원",
+        fontSize = 10.sp,
         color = Color.LightGray,
         fontWeight = FontWeight.Medium,
         style = TextStyle(textDecoration = TextDecoration.LineThrough)
@@ -107,14 +136,19 @@ fun Price(price: Price) {
 
 @Composable
 fun Review(reviews: Review) {
-    Row {
-        Image(
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
             imageVector = Icons.Default.Star,
-            contentDescription = "star"
+            contentDescription = "star",
+            tint = Color.Gray,
+            modifier = Modifier.size(10.dp)
         )
+        Spacer(modifier = Modifier.width(4.dp))
         Text(
             text = reviews.reviewLabel,
-            fontSize = 14.sp,
+            fontSize = 10.sp,
             color = Color.LightGray,
             fontWeight = FontWeight.Medium
         )

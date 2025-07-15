@@ -2,7 +2,7 @@ package com.chan.category.ui
 
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
-import com.chan.category.domian.CategoryRepository
+import com.chan.category.domain.CategoryRepository
 import com.chan.category.ui.mapper.toPresentation
 import com.chan.category.ui.model.CategoryModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.chan.category.domian.vo.detail
+package com.chan.category.domain.vo.detail
 
 data class ReviewVO(
     val rating: Float,

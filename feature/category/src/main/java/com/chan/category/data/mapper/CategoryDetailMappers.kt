@@ -2,10 +2,10 @@ package com.chan.category.data.mapper
 
 import com.chan.category.data.dto.CategoryDetailDto
 import com.chan.category.data.dto.CategoryDetailNamesDto
-import com.chan.category.domian.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domian.vo.detail.CategoryDetailVO
-import com.chan.category.domian.vo.detail.PriceVO
-import com.chan.category.domian.vo.detail.ReviewVO
+import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
+import com.chan.category.domain.vo.detail.CategoryDetailVO
+import com.chan.category.domain.vo.detail.PriceVO
+import com.chan.category.domain.vo.detail.ReviewVO
 
 //카테고리명
 fun CategoryDetailNamesDto.toDomain(): CategoryDetailNamesVO {

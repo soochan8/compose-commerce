@@ -1,5 +1,6 @@
 package com.chan.category.ui
 
+import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
@@ -16,8 +17,7 @@ class CategoryDetailContract {
     data class State(
         val categoryNames: List<CategoryNamesModel> = emptyList(),
         val categoryDetailList: List<ProductModel> = emptyList(),
-        val isLoading: Boolean = false,
-        val isError: Boolean = false
+        val loadingState: LoadingState = LoadingState.Idle
     ) : ViewState
 
     sealed class Effect : ViewEffect {

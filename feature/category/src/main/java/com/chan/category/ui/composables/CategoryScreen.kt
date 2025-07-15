@@ -125,7 +125,7 @@ fun CategoryScreen(
                                 )
                             )
                         }
-                        .padding(vertical = 12.dp, horizontal = 8.dp)
+                        .padding(vertical = 2.dp, horizontal = 8.dp)
                 ) {
                     Text(
                         text = category.name,
@@ -150,7 +150,7 @@ fun CategoryScreen(
         ) {
             state.categoryList.forEach { category ->
                 category.subCategoryItems.forEach { subCategory ->
-                    item(key = "header-${subCategory.id}") {
+                    item(key = "header-${category.id}-${subCategory.id}") {
                         Text(
                             text = subCategory.name,
                             style = MaterialTheme.typography.titleMedium,
@@ -161,7 +161,7 @@ fun CategoryScreen(
                     }
                     items(
                         items = subCategory.items,
-                        key = { it.id }
+                        key = { "${category.id}-${subCategory.id}-${it.id}" }
                     ) { subItem ->
                         Text(
                             text = subItem.name,

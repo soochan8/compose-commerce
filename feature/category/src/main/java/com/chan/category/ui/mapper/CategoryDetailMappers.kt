@@ -3,10 +3,10 @@ package com.chan.category.ui.mapper
 import com.chan.android.model.Price
 import com.chan.android.model.ProductModel
 import com.chan.android.model.Review
-import com.chan.category.domian.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domian.vo.detail.CategoryDetailVO
-import com.chan.category.domian.vo.detail.PriceVO
-import com.chan.category.domian.vo.detail.ReviewVO
+import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
+import com.chan.category.domain.vo.detail.CategoryDetailVO
+import com.chan.category.domain.vo.detail.PriceVO
+import com.chan.category.domain.vo.detail.ReviewVO
 import com.chan.category.ui.model.detail.CategoryNamesModel
 
 //카테고리명
