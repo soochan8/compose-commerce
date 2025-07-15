@@ -149,7 +149,7 @@ fun CategoryScreen(
                 .padding(start = 20.dp)
         ) {
             state.categoryList.forEach { category ->
-                category.subCategoryItems.forEach { subCategory ->
+                category.categories.forEach { subCategory ->
                     item(key = "header-${category.id}-${subCategory.id}") {
                         Text(
                             text = subCategory.name,
@@ -160,11 +160,11 @@ fun CategoryScreen(
                         )
                     }
                     items(
-                        items = subCategory.items,
-                        key = { "${category.id}-${subCategory.id}-${it.id}" }
+                        items = subCategory.subCategories,
+                        key = { "${category.id}-${subCategory.id}-${it.categoryId}" }
                     ) { subItem ->
                         Text(
-                            text = subItem.name,
+                            text = subItem.categoryName,
                             style = MaterialTheme.typography.titleSmall,
                             color = Color.DarkGray,
                             modifier = Modifier
@@ -172,7 +172,7 @@ fun CategoryScreen(
                                 .padding(top = 20.dp)
                                 .clickable {
                                     navController.navigate(
-                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(subItem.id.toString())
+                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(subItem.categoryId)
                                     )
                                 }
                         )
