@@ -10,7 +10,6 @@ class CategoryContract {
     sealed class Event : ViewEvent {
         object CategoriesLoad : Event()
         data class SelectCategory(val categoryId: String) : Event()
-        data class CategoryScrolledIndex(val firstVisibleItemIndex: Int) : Event()
     }
 
     data class State(
