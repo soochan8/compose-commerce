@@ -1,5 +1,6 @@
 package com.chan.home.composables.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -17,13 +18,15 @@ import com.chan.home.composables.RecommendScreen
 import com.chan.home.home.HomeContract
 import com.chan.home.model.HomeTabItem
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenContent(
+    modifier: Modifier = Modifier,
     homeState: HomeContract.State,
     tabs: List<HomeTabItem>,
     pagerState: PagerState,
     onTabClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
+    onRankingTabSelected: (String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -43,7 +46,7 @@ fun HomeScreenContent(
         ) { page ->
             when (tabs[page]) {
                 HomeTabItem.Home -> {
-                    HomePage(homeState = homeState)
+                    HomePage(homeState = homeState, onRankingTabSelected = onRankingTabSelected)
                 }
 
                 HomeTabItem.RecommendToday -> RecommendScreen()
@@ -56,9 +59,10 @@ fun HomeScreenContent(
 @Composable
 private fun HomePage(
     homeState: HomeContract.State,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRankingTabSelected: (String) -> Unit
 ) {
-    val homeCategoryRankingPagerState = rememberPagerState { homeState.rankingCategories.size }
+    val homeCategoryRankingPagerState = rememberPagerState { homeState.rankingCategoryTabs.size }
 
     LazyColumn(modifier = modifier) {
         item {
@@ -74,14 +78,16 @@ private fun HomePage(
 
             if (homeState.rankingCategories.isNotEmpty()) {
                 HomeCategoryRanking(
+                    categoryTabs = homeState.rankingCategoryTabs,
                     categories = homeState.rankingCategories,
-                    pagerState = homeCategoryRankingPagerState
+                    pagerState = homeCategoryRankingPagerState,
+                    onTabSelected = onRankingTabSelected
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
             if (homeState.saleProductList.isNotEmpty())
-                HomeSaleProduct(saleProduct = homeState.saleProductList)
+                HomeSaleProduct(saleProducts = homeState.saleProductList)
         }
     }
 } 

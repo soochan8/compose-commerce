@@ -15,11 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.chan.home.model.RankingCategoryModel
+import com.chan.home.model.HomeRankingCategoryTabModel
 
 @Composable
 fun CategoryTab(
-    categories: List<RankingCategoryModel>,
+    categoryTabs: List<HomeRankingCategoryTabModel>,
     selectedCategoryTabIndex: Int,
     onSelectedChanged: (Int) -> Unit
 ) {
@@ -31,7 +31,7 @@ fun CategoryTab(
             .padding(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        categories.forEachIndexed { index, category ->
+        categoryTabs.forEachIndexed { index, category ->
             val isSelected = index == selectedCategoryTabIndex
             Surface(
                 modifier = Modifier.clickable {
@@ -45,7 +45,7 @@ fun CategoryTab(
                 ),
             ) {
                 Text(
-                    text = category.rankingCategoryName,
+                    text = category.name,
                     style = MaterialTheme.typography.bodySmall,
                     color = if (isSelected) Color.White else Color.Black,
                     modifier = Modifier

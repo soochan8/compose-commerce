@@ -13,6 +13,7 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,19 +23,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.chan.android.ui.util.horizontalNestedScrollConnection
 import com.chan.home.R
-import com.chan.home.model.RankingCategoryModel
+import com.chan.home.model.HomeRankingCategoryProductModel
+import com.chan.home.model.HomeRankingCategoryTabModel
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeCategoryRanking(
-    categories: List<RankingCategoryModel>,
-    pagerState: PagerState
+    categoryTabs: List<HomeRankingCategoryTabModel>,
+    categories: List<HomeRankingCategoryProductModel>,
+    pagerState: PagerState,
+    onTabSelected: (String) -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
     val nestedScrollConnection = horizontalNestedScrollConnection()
+
+    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress && categoryTabs.isNotEmpty()) {
+            onTabSelected(categoryTabs[pagerState.currentPage].id)
+        }
+    }
 
     Text(
         text = stringResource(R.string.home_category_ranking),
@@ -49,11 +59,12 @@ fun HomeCategoryRanking(
     Column {
         // 카테고리 랭킹 탭
         CategoryTab(
-            categories = categories,
+            categoryTabs = categoryTabs,
             selectedCategoryTabIndex = pagerState.currentPage,
             onSelectedChanged = { idx ->
                 scope.launch {
-                    pagerState.animateScrollToPage(idx)
+                    onTabSelected(categoryTabs[idx].id)
+                    pagerState.scrollToPage(idx)
                 }
             }
         )
@@ -65,16 +76,14 @@ fun HomeCategoryRanking(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .nestedScroll(nestedScrollConnection)
-        ) { catPage ->
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),
             ) {
-                categories[catPage]
-                    .rankingCategoryItems
-                    .forEach { item ->
-                        RankingCard(item)
-                    }
+                categories.forEach {
+                    RankingCard(it)
+                }
             }
         }
     }

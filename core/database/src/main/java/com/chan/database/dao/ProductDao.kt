@@ -4,16 +4,48 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.chan.database.dto.CategoryTabDto
 import com.chan.database.entity.ProductEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
 
     @Query("SELECT * FROM product")
-    fun getAll(): Flow<List<ProductEntity>>
+    suspend fun getAll(): List<ProductEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(products: List<ProductEntity>)
 
+    //인기 상품 가져오기
+    suspend fun getPopularProducts(limit: Int): List<ProductEntity.SubCategories.Products> {
+        return getAll()
+            .flatMap { it.subCategories }
+            .flatMap { it.products }
+            .shuffled()
+            .take(limit)
+    }
+
+    //카테고리 랭킹
+    @Query("SELECT id, name FROM product")
+    suspend fun getCategoryTabs(): List<CategoryTabDto>
+
+    @Query("SELECT * FROM product WHERE id = :categoryId")
+    suspend fun getProductByCategoryId(categoryId: String): ProductEntity?
+    suspend fun getProductsByCategoryId(categoryId: String): List<ProductEntity.SubCategories.Products> {
+        return getProductByCategoryId(categoryId)
+            ?.subCategories
+            ?.flatMap { it.products }
+            ?.take(5)
+            ?: emptyList()
+    }
+
+    //세일 상품 가져오기
+    suspend fun getSaleProducts(limit : Int): List<ProductEntity.SubCategories.Products> {
+        return getAll()
+            .flatMap { it.subCategories }
+            .flatMap { it.products }
+            .filter { it.discountPercent > 0 }
+            .shuffled()
+            .take(limit)
+    }
 }

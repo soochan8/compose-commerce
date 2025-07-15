@@ -1,9 +1,6 @@
 package com.chan.home.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
-data class HomeSaleProductModel(
+data class HomeRankingCategoryProductModel(
     val productId: String,
     val productName: String,
     val brandName: String,

@@ -1,23 +1,16 @@
 package com.chan.home.data.repository
 
-import com.chan.database.dao.HomeSaleProductDao
-import com.chan.home.data.datasource.HomeSaleProductSource
+import com.chan.database.dao.ProductDao
 import com.chan.home.data.mapper.toDomain
 import com.chan.home.domain.repository.HomeSaleProductRepository
-import com.chan.home.domain.vo.HomeSaleProductVO
+import com.chan.home.domain.vo.ProductVO
 import javax.inject.Inject
 
 class HomeSaleProductRepositoryImpl @Inject constructor(
-    private val homeSaleProductDao: HomeSaleProductDao,
-    private val dataSource: HomeSaleProductSource
+    private val productDao: ProductDao
 ) : HomeSaleProductRepository {
 
-    override suspend fun getSaleProducts(): List<HomeSaleProductVO> {
-        homeSaleProductDao.deleteAll()
-        if (homeSaleProductDao.getSaleProductAll().isEmpty()) {
-            val dummySaleProducts = dataSource.getHomeSaleProducts()
-            homeSaleProductDao.insertAll(dummySaleProducts)
-        }
-        return homeSaleProductDao.getSaleProductAll().map { it.toDomain() }
+    override suspend fun getSaleProducts(limit: Int): List<ProductVO> {
+        return productDao.getSaleProducts(limit).map { it.toDomain() }
     }
 }

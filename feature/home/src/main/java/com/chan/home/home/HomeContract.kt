@@ -5,29 +5,32 @@ import com.chan.android.ViewEvent
 import com.chan.android.ViewState
 import com.chan.home.model.HomeBannerModel
 import com.chan.home.model.HomePopularItemModel
+import com.chan.home.model.HomeRankingCategoryProductModel
+import com.chan.home.model.HomeRankingCategoryTabModel
 import com.chan.home.model.HomeSaleProductModel
-import com.chan.home.model.RankingCategoryModel
 
 class HomeContract {
     sealed class Event : ViewEvent {
         object BannerLoad : Event()
         object PopularItemLoad : Event()
-        object RankingCategoriesLoad : Event()
+        object RankingCategoryTabsLoad : Event()
         object SaleProducts : Event()
-
         object Retry : Event()
+
+        data class RankingTabSelected(val categoryId: String) : Event()
     }
 
     data class State(
         val bannerList: List<HomeBannerModel> = emptyList(),
         val popularItemList: List<HomePopularItemModel> = emptyList(),
-        val rankingCategories: List<RankingCategoryModel> = emptyList(),
+        val rankingCategoryTabs: List<HomeRankingCategoryTabModel> = emptyList(),
+        val rankingCategories: List<HomeRankingCategoryProductModel> = emptyList(),
         val saleProductList: List<HomeSaleProductModel> = emptyList(),
         val isLoading: Boolean = false,
         val isError: Boolean = false
     ) : ViewState
 
     sealed class Effect : ViewEffect {
-        data class ShowToast(val message: String) : Effect()
+        data class ShowError(val message: String) : Effect()
     }
 }

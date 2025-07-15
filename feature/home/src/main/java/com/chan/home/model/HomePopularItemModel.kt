@@ -1,11 +1,14 @@
 package com.chan.home.model
 
 data class HomePopularItemModel(
-    val id: Int,
+    val productId: String,
+    val productName: String,
+    val brandName: String,
     val imageUrl: String,
-    val name: String,
-    val originPrice: String,
-    val discountedPrice: String,
+    val originalPrice: String,
     val discountPercent: String,
-    val rating: String
+    val discountPrice: String,
+    val tags: List<String>,
+    val reviewRating: String,
+    val reviewCount: String
 )

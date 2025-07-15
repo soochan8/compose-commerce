@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.chan.android.ui.util.horizontalNestedScrollConnection
 import com.chan.home.R
@@ -41,7 +43,7 @@ private const val GRID_CELL_ROW = 2
 
 @Composable
 fun HomeSaleProduct(
-    saleProduct: List<HomeSaleProductModel>
+    saleProducts: List<HomeSaleProductModel>
 ) {
 
     val nestedScrollConnection = horizontalNestedScrollConnection()
@@ -49,7 +51,7 @@ fun HomeSaleProduct(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 8.dp, vertical = 10.dp)
+            .padding(horizontal = 8.dp)
     ) {
         Text(
             text = stringResource(R.string.home_sale_product),
@@ -65,14 +67,14 @@ fun HomeSaleProduct(
             rows = GridCells.Fixed(GRID_CELL_ROW),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp)
+                .height(550.dp)
                 .nestedScroll(nestedScrollConnection),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(
-                items = saleProduct,
-                key = { product -> product.id },
+                items = saleProducts,
+                key = { product -> product.productId },
                 contentType = { "SaleProduct" }) { product ->
                 SaleProductCard(product)
             }
@@ -85,8 +87,8 @@ fun SaleProductCard(product: HomeSaleProductModel) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentWidth(),
+            .width(160.dp)
+            .wrapContentHeight(),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Column {
@@ -102,28 +104,34 @@ fun SaleProductCard(product: HomeSaleProductModel) {
 
             Text(
                 text = product.productName,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    lineHeight = 14.sp,
+                    fontSize = 12.sp,
+                    color = Color.Black,
+                ),
+                minLines = 2,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
+
             )
 
             //가격
             Text(
-                text = "${product.price.originalPrice}원",
+                text = product.originalPrice,
                 style = MaterialTheme.typography.bodySmall,
                 textDecoration = TextDecoration.LineThrough,
                 color = Color.Gray
             )
             Row {
                 Text(
-                    text = "${product.price.discountPercent}%",
+                    text = product.discountPercent,
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.Red,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "${product.price.discountedPrice}원",
+                    text = product.discountPrice,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -135,7 +143,7 @@ fun SaleProductCard(product: HomeSaleProductModel) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                product.tags?.let {
+                product.tags.let {
                     Text(
                         text = if (it.isNotEmpty()) {
                             it.joinToString(", ")
