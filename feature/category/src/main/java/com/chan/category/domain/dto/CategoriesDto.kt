@@ -1,7 +1,9 @@
-package com.chan.category.ui.model
+package com.chan.category.domain.dto
 
+import kotlinx.serialization.Serializable
 
-data class CategoryModel(
+@Serializable
+data class CategoriesDto(
     val id: String,
     val name: String,
     val categories: List<Categories>

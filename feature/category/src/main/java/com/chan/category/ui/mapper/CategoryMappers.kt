@@ -1,28 +1,27 @@
 package com.chan.category.ui.mapper
 
-import com.chan.category.domain.vo.CategoryVO
+import com.chan.category.domain.dto.CategoriesDto
 import com.chan.category.ui.model.CategoryModel
 
-fun CategoryVO.toPresentation(): CategoryModel {
+fun CategoriesDto.toCategoryModel(): CategoryModel {
     return CategoryModel(
         id = id,
         name = name,
-        subCategoryItems = subCategoryItems.map { it.toPresentation() }
+        categories = categories.map { it.toCategoryModel() }
     )
 }
 
-fun CategoryVO.SubCategoryVO.toPresentation(): CategoryModel.SubCategoryModel {
-    return CategoryModel.SubCategoryModel(
+fun CategoriesDto.Categories.toCategoryModel(): CategoryModel.Categories {
+    return CategoryModel.Categories(
         id = id,
         name = name,
-        items = items.map { it.toPresentation() }
+        subCategories = subCategories.map { it.toCategoryModel() }
     )
 }
 
-fun CategoryVO.SubCategoryVO.SubCategoryItems.toPresentation(): CategoryModel.SubCategoryModel.SubCategoryItems {
-    return CategoryModel.SubCategoryModel.SubCategoryItems(
-        id = id,
-        name = name,
-        order = order
+fun CategoriesDto.Categories.SubCategories.toCategoryModel(): CategoryModel.Categories.SubCategories {
+    return CategoryModel.Categories.SubCategories(
+        categoryId = categoryId,
+        categoryName = categoryName
     )
 }
