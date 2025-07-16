@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.category.domain.CategoryDetailRepository
-import com.chan.category.ui.mapper.toPresentation
-import com.chan.category.ui.mapper.toPresentationModel
+import com.chan.category.ui.mapper.toProductsModel
+import com.chan.category.ui.mapper.toTabsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,22 +19,27 @@ class CategoryDetailViewModel @Inject constructor(
 
     override fun handleEvent(event: CategoryDetailContract.Event) {
         when (event) {
-            CategoryDetailContract.Event.CategoryDetailListLoad -> getCategoryDetailList()
-            CategoryDetailContract.Event.CategoryDetailNamesLoad -> getCategoryDetailNames()
+            is CategoryDetailContract.Event.CategoryDetailLoad -> {
+                getSiblingSubCategories(event.categoryId)
+                getCategoryDetailList(event.categoryId)
+            }
         }
     }
 
-    fun getCategoryDetailNames() {
+    private fun getSiblingSubCategories(categoryId: String) {
         handleRepositoryCall(
-            call = { categoryDetailRepository.getCategoryNames().map { it.toPresentation() } },
-            onSuccess = { detailNames -> copy(categoryNames = detailNames) }
+            call = {
+                categoryDetailRepository.getCategoryDetailTabs(categoryId).map { it.toTabsModel() }
+            },
+            onSuccess = { categories -> copy(categoryNames = categories) }
         )
     }
 
-    fun getCategoryDetailList() {
+    private fun getCategoryDetailList(categoryId: String) {
         handleRepositoryCall(
             call = {
-                categoryDetailRepository.getCategoryDetails().map { it.toPresentationModel() }
+                categoryDetailRepository.getCategoryDetailProducts(categoryId)
+                    .map { it.toProductsModel() }
             },
             onSuccess = { detailLists -> copy(categoryDetailList = detailLists) }
         )
