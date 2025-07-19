@@ -1,0 +1,85 @@
+{
+  "productId": "P001001",
+  "productInfo": {
+    "name": "[대용량] 라운드랩 1025 독도 토너 500ml",
+    "images": [
+      "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0013/A00000013718037ko.jpg?l=ko",
+      "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0013/A00000013718038ko.jpg?l=ko",
+      "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0013/A00000013718039ko.jpg?l=ko",
+      "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0013/A00000013718036ko.jpg?l=ko"
+    ],
+    "brandInfo": {
+      "id": "B00123",
+      "name": "라운드랩",
+      "logoImageUrl": "https://image.oliveyoung.co.kr/uploads/images/brand/20230904135503893.png"
+    },
+    "price": {
+      "originalPrice": 30000,
+      "discountPercent": 34,
+      "discountPrice": 19800
+    },
+    "tags": [
+      "BEST",
+      "오늘드림",
+      "대용량"
+    ],
+    "reviewSummary": {
+      "rating": 4.8,
+      "count": 78512,
+      "scorePercent": {
+        "1": 2,
+        "2": 3,
+        "3": 10,
+        "4": 25,
+        "5": 60
+      }
+    }
+  },
+  "deliveryOptions": {
+    "standard": {
+      "isAvailable": true,
+      "fee": 2500,
+      "freeShippingThreshold": 20000,
+      "estimatedDeliveryDays": 4,
+      "description": "평균 4일 이내 도착"
+    },
+    "todayDelivery": {
+      "isAvailable": true,
+      "fee": 5000,
+      "freeShippingThreshold": 30000,
+      "description": "지금 주문하면 오늘 받을 수 있어요!",
+      "unavailableReason": null
+    },
+    "pickup": {
+      "isAvailable": true,
+      "fee": 0,
+      "description": "픽업"
+    }
+  },
+  "purchaseOptions": [
+    {
+      "optionId": "O001",
+      "productId": "P001001",
+      "image": "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0012/A00000012975313ko.jpg",
+      "optionName": "500ml",
+      "discountPercent": 34,
+      "discountPrice": 19800,
+      "tags": [
+        "오늘드림"
+      ],
+      "soldOut": false,
+      "stock": 120
+    },
+    {
+      "optionId": "O002",
+      "productId": "P001002",
+      "image": "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0012/A00000012975313ko_2.jpg",
+      "optionName": "200ml",
+      "discountPercent": 20,
+      "discountPrice": 12000,
+      "tags": [],
+      "soldOut": true,
+      "stock": 0
+    }
+  ]
+}
