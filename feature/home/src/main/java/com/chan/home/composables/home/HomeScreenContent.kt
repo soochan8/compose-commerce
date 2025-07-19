@@ -26,7 +26,8 @@ fun HomeScreenContent(
     tabs: List<HomeTabItem>,
     pagerState: PagerState,
     onTabClick: (Int) -> Unit,
-    onRankingTabSelected: (String) -> Unit
+    onRankingTabSelected: (String) -> Unit,
+    onItemClick: (productId: String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -46,7 +47,11 @@ fun HomeScreenContent(
         ) { page ->
             when (tabs[page]) {
                 HomeTabItem.Home -> {
-                    HomePage(homeState = homeState, onRankingTabSelected = onRankingTabSelected)
+                    HomePage(
+                        homeState = homeState,
+                        onRankingTabSelected = onRankingTabSelected,
+                        onItemClick = onItemClick
+                    )
                 }
 
                 HomeTabItem.RecommendToday -> RecommendScreen()
@@ -60,7 +65,8 @@ fun HomeScreenContent(
 private fun HomePage(
     homeState: HomeContract.State,
     modifier: Modifier = Modifier,
-    onRankingTabSelected: (String) -> Unit
+    onRankingTabSelected: (String) -> Unit,
+    onItemClick: (productId: String) -> Unit
 ) {
     val homeCategoryRankingPagerState = rememberPagerState { homeState.rankingCategoryTabs.size }
 
@@ -72,7 +78,10 @@ private fun HomePage(
             }
 
             if (homeState.popularItemList.isNotEmpty()) {
-                HomePopularItemList(popularItem = homeState.popularItemList)
+                HomePopularItemList(
+                    popularItem = homeState.popularItemList,
+                    onItemClick = onItemClick
+                )
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
