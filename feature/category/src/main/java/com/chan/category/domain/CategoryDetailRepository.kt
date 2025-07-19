@@ -1,10 +1,9 @@
 package com.chan.category.domain
 
-import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domain.vo.detail.CategoryDetailVO
+import com.chan.category.domain.vo.ProductVO
+import com.chan.category.domain.vo.detail.CategoryDetailTabsVO
 
 interface CategoryDetailRepository {
-    suspend fun getCategoryNames(): List<CategoryDetailNamesVO>
-    suspend fun getCategoryDetails(): List<CategoryDetailVO>
-
+    suspend fun getCategoryDetailTabs(subCategoryId: String): List<CategoryDetailTabsVO>
+    suspend fun getCategoryDetailProducts(subCategoryId: String): List<ProductVO>
 }

@@ -1,6 +1,9 @@
 package com.chan.android
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +22,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,15 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.chan.android.model.Price
 import com.chan.android.model.ProductModel
-import com.chan.android.model.Review
+import com.chan.android.R
 
 @Composable
 fun ProductCard(
@@ -75,15 +79,22 @@ fun ProductCard(
             )
             Spacer(modifier = Modifier.height(10.dp))
 
-            Price(product.price)
+            Price(product)
             Spacer(modifier = Modifier.height(10.dp))
 
-            product.review?.let { review ->
-                Review(review)
+            if (product.tags.isNotEmpty()) {
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    product.tags.forEach { tag ->
+                        TagChip(tagLabel = tag)
+                    }
+                }
             }
+            Spacer(modifier = Modifier.height(10.dp))
 
-            Row(verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(top = 10.dp)) {
+            Review(product)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
                     contentDescription = "like",
@@ -109,33 +120,59 @@ fun ProductCard(
 }
 
 @Composable
-fun Price(price: Price) {
+fun Price(price: ProductModel) {
+    Text(
+        text = price.originalPrice,
+        fontSize = 10.sp,
+        color = Color.LightGray,
+        fontWeight = FontWeight.Medium,
+        style = TextStyle(textDecoration = TextDecoration.LineThrough)
+    )
     Row {
         Text(
-            text = "${price.discountPercent}%",
+            text = price.discountPercent,
             fontSize = 12.sp,
             color = Color.Red,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = "${price.discountedPriceLabel}원",
+            text = price.discountPrice,
             fontSize = 12.sp,
             color = Color.Black,
             fontWeight = FontWeight.Bold
         )
     }
-    Text(
-        text = "${price.originPriceLabel}원",
-        fontSize = 10.sp,
-        color = Color.LightGray,
-        fontWeight = FontWeight.Medium,
-        style = TextStyle(textDecoration = TextDecoration.LineThrough)
-    )
 }
 
 @Composable
-fun Review(reviews: Review) {
+private fun TagChip(tagLabel: String) {
+    val textColor = when (tagLabel) {
+        "오늘드림" -> Color(0xFFDD5993)
+        else -> Color(0xFF666666)
+    }
+
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(4.dp))
+            .background(Color(0xFFF1F1F1))
+            .padding(horizontal = 6.dp)
+    ) {
+        Text(
+            text = tagLabel,
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = textColor,
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Normal
+            ),
+            maxLines = 1
+
+        )
+    }
+}
+
+@Composable
+fun Review(reviews: ProductModel) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -147,7 +184,7 @@ fun Review(reviews: Review) {
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = reviews.reviewLabel,
+            text = reviews.reviewCount,
             fontSize = 10.sp,
             color = Color.LightGray,
             fontWeight = FontWeight.Medium

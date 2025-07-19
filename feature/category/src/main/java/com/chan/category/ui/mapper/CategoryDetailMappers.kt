@@ -1,45 +1,32 @@
 package com.chan.category.ui.mapper
 
-import com.chan.android.model.Price
 import com.chan.android.model.ProductModel
-import com.chan.android.model.Review
-import com.chan.category.domain.vo.detail.CategoryDetailNamesVO
-import com.chan.category.domain.vo.detail.CategoryDetailVO
-import com.chan.category.domain.vo.detail.PriceVO
-import com.chan.category.domain.vo.detail.ReviewVO
-import com.chan.category.ui.model.detail.CategoryNamesModel
+import com.chan.category.domain.vo.ProductVO
+import com.chan.category.domain.vo.detail.CategoryDetailTabsVO
+import com.chan.category.ui.model.detail.CategoryDetailTabsModel
+import java.text.NumberFormat
+import java.util.Locale
 
 //카테고리명
-fun CategoryDetailNamesVO.toPresentation(): CategoryNamesModel {
-    return CategoryNamesModel(
-        id = id,
-        name = name,
-        sortOrder = sortOrder,
+fun CategoryDetailTabsVO.toTabsModel(): CategoryDetailTabsModel {
+    return CategoryDetailTabsModel(
+        categoryId = categoryId,
+        categoryName = categoryName
     )
 }
 
-//리스트
-fun CategoryDetailVO.toPresentationModel(): ProductModel {
+fun ProductVO.toProductsModel(): ProductModel {
     return ProductModel(
         productId = productId,
         productName = productName,
-        imageUrl = imageUrl,
-        price = priceVO.toPresentationModel(),
-        review = reviewVO?.toPresentation()
+        brandName = brandName,
+        imageUrl = "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0016/A00000016559829ko.jpg?l=ko",
+        originalPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(originalPrice) + "원",
+        discountPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(discountPrice) + "원",
+        discountPercent = "${discountPercent}%",
+        tags = tags,
+        reviewRating = reviewRating,
+        reviewCount = "(${NumberFormat.getNumberInstance(Locale.KOREA).format(reviewCount)})"
     )
 }
 
-fun PriceVO.toPresentationModel(): Price {
-    return Price(
-        originPrice = originPrice,
-        discountedPrice = discountedPrice,
-        discountPercent = discountPercent
-    )
-}
-
-fun ReviewVO.toPresentation(): Review {
-    return Review(
-        rating = rating,
-        reviewCount = reviewCount
-    )
-}

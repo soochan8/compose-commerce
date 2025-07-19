@@ -21,7 +21,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,21 +30,28 @@ import com.chan.android.NoRippleTheme
 import com.chan.android.ProductCard
 import com.chan.category.ui.CategoryDetailContract
 import com.chan.category.ui.CategoryDetailViewModel
-import com.chan.category.ui.model.detail.CategoryNamesModel
+import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 
 @Composable
 fun CategoryDetailScreen(
     categoryId: String,
     viewModel: CategoryDetailViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.setEvent(CategoryDetailContract.Event.CategoryDetailNamesLoad)
-        viewModel.setEvent(CategoryDetailContract.Event.CategoryDetailListLoad)
-    }
-    val scope = rememberCoroutineScope()
+
     val state by viewModel.viewState.collectAsState()
     var selectedTab by remember { mutableStateOf(0) }
 
+    LaunchedEffect(categoryId) {
+        viewModel.setEvent(CategoryDetailContract.Event.CategoryDetailLoad(categoryId))
+    }
+    LaunchedEffect(state.categoryNames) {
+        if (state.categoryNames.isNotEmpty()) {
+            val initialIndex = state.categoryNames.indexOfFirst { it.categoryId == categoryId }
+            if (initialIndex != -1) {
+                selectedTab = initialIndex
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -82,7 +88,7 @@ fun CategoryDetailScreen(
 
 @Composable
 fun CategoryDetailTopBar(
-    tabs: List<CategoryNamesModel>,
+    tabs: List<CategoryDetailTabsModel>,
     selectedIndex: Int,
     onTabSelected: (Int) -> Unit
 ) {
@@ -105,7 +111,7 @@ fun CategoryDetailTopBar(
                     onClick = { onTabSelected(index) },
                     text = {
                         Text(
-                            text = title.name,
+                            text = title.categoryName,
                             color = if (index == selectedIndex) Color.Black else Color.Gray
                         )
                     }

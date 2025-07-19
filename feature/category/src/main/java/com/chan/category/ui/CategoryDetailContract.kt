@@ -5,22 +5,21 @@ import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
 import com.chan.android.model.ProductModel
-import com.chan.category.ui.model.detail.CategoryNamesModel
+import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 
 class CategoryDetailContract {
 
-    sealed class Event : ViewEvent {
-        object CategoryDetailNamesLoad : Event()
-        object CategoryDetailListLoad : Event()
+    sealed interface Event : ViewEvent {
+        data class CategoryDetailLoad(val categoryId: String) : Event
     }
 
     data class State(
-        val categoryNames: List<CategoryNamesModel> = emptyList(),
-        val categoryDetailList: List<ProductModel> = emptyList(),
-        val loadingState: LoadingState = LoadingState.Idle
+        val loadingState: LoadingState = LoadingState.Idle,
+        val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
+        val categoryDetailList: List<ProductModel> = emptyList()
     ) : ViewState
 
-    sealed class Effect : ViewEffect {
-        data class ShowError(val errorMessage: String) : Effect()
+    sealed interface Effect : ViewEffect {
+        data class ShowError(val errorMessage: String) : Effect
     }
 }
