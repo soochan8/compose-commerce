@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
     implementation(libs.hilt.core)
+    implementation(libs.coil)
 
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.room.compiler)
