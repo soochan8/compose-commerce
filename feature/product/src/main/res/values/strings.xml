@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_bar_today_delivery_label">오늘드림으로 받아 보시겠어요?</string>
+    <string name="cart">장바구니</string>
+    <string name="buy_now">바로구매</string>
+    <string name="purchase_quantity_label">구매수량 %d개</string>
+    <string name="total_price_label">총 %s원</string>
+</resources>
