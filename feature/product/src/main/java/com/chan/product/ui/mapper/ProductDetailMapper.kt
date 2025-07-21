@@ -4,6 +4,8 @@ import com.chan.product.domain.vo.ProductDetailVO
 import com.chan.product.domain.vo.ProductDetailVO.DeliveryOptionsVO
 import com.chan.product.domain.vo.ProductDetailVO.ProductInfoVO
 import com.chan.product.ui.model.ProductDetailModel
+import java.text.NumberFormat
+import java.util.Locale
 
 fun ProductDetailVO.toProductDetailModel(): ProductDetailModel {
     return ProductDetailModel(
@@ -35,16 +37,17 @@ fun ProductInfoVO.BrandInfoVO.toPresentationModel(): ProductDetailModel.ProductI
 
 fun ProductInfoVO.PriceVO.toPresentationModel(): ProductDetailModel.ProductInfoModel.PriceModel {
     return ProductDetailModel.ProductInfoModel.PriceModel(
-        originalPrice = originalPrice,
-        discountPercent = discountPercent,
-        discountPrice = discountPrice
+        originalPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(originalPrice) + "원",
+        discountPrice = discountPrice,
+        discountPercent = "${discountPercent}%",
+        discountPriceLabel = NumberFormat.getNumberInstance(Locale.KOREA).format(discountPrice) + "원"
     )
 }
 
 fun ProductInfoVO.ReviewSummaryVO.toPresentationModel(): ProductDetailModel.ProductInfoModel.ReviewSummaryModel {
     return ProductDetailModel.ProductInfoModel.ReviewSummaryModel(
-        rating = rating,
-        count = count,
+        rating = rating.toString(),
+        count = "리뷰 ${NumberFormat.getNumberInstance(Locale.KOREA).format(count)} 건",
         scorePercent = scorePercent
     )
 }

@@ -21,14 +21,15 @@ data class ProductDetailModel(
         )
 
         data class PriceModel(
-            val originalPrice: Int,
-            val discountPercent: Int,
-            val discountPrice: Int
+            val originalPrice: String,
+            val discountPercent: String,
+            val discountPrice: Int,
+            val discountPriceLabel: String
         )
 
         data class ReviewSummaryModel(
-            val rating: Float,
-            val count: Int,
+            val rating: String,
+            val count: String,
             val scorePercent: Map<String, Int>
         )
     }
