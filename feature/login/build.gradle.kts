@@ -1,9 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.kapt)
 }
+
+val localProperties = Properties()
+val localPropertiesFile = project.rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
+val kakaoNativeKey = localProperties.getProperty("KAKAO_NATIVE_APP_KEY", "")
 
 android {
     namespace = "com.chan.login"
@@ -14,6 +24,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        resValue("string", "kakao_native_app_key", kakaoNativeKey)
+        manifestPlaceholders["kakao_native_app_key"] = kakaoNativeKey
     }
 
     buildTypes {
