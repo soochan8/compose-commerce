@@ -17,6 +17,12 @@ val MaterialTheme.appTypography: AppTypography
     get() = LocalAppTypography.current
 
 data class AppTypography(
+    val appTitle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = FontSize.appTitle,
+        color = Black
+    ),
     val title: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
@@ -59,5 +65,11 @@ data class AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = FontSize.review,
         color = Gray
+    ),
+    val loginTextFieldStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.loginField,
+        color = LightGray
     )
 )
