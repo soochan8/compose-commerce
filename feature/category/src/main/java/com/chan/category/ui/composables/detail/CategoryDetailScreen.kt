@@ -33,7 +33,8 @@ import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 @Composable
 fun CategoryDetailScreen(
     categoryId: String,
-    viewModel: CategoryDetailViewModel = hiltViewModel()
+    viewModel: CategoryDetailViewModel = hiltViewModel(),
+    onProductClick: (String) -> Unit
 ) {
 
     val state by viewModel.viewState.collectAsState()
@@ -75,7 +76,7 @@ fun CategoryDetailScreen(
             ) { product ->
                 ProductCard(
                     product = product,
-                    onClick = {},
+                    onClick = { onProductClick(it) },
                     onLikeClick = {},
                     onCartClick = {}
                 )
