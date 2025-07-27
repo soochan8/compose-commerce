@@ -6,7 +6,8 @@ enum class Routes(val route: String) {
     CATEGORY_DETAIL("categoryDetail/{categoryId}"),
     PRODUCT_DETAIL("productDetail/{productId}"),
     HISTORY("history"),
-    MYPAGE("mypage");
+    MYPAGE("mypage"),
+    SEARCH("search");
 
     fun categoryDetailRoute(categoryId: String) =
         "categoryDetail/$categoryId"
