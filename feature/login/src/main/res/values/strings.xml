@@ -19,4 +19,6 @@
 
     <string name="success_register">회원가입에 성공했습니다.</string>
 
+    <string name="my_page">마이</string>
+
 </resources>
