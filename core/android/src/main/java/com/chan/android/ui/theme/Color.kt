@@ -2,6 +2,9 @@ package com.chan.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val MainColor = Color(0xFF81DC27)
+val dividerColor = Color(0xFFD9DCE3)
+
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
 val LightGray = Color(0xFFCCCCCC)
