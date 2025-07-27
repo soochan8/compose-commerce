@@ -6,6 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
+import com.chan.database.dao.UserDao
 import com.chan.database.dao.ProductDetailDao
 import com.chan.database.entity.ProductEntity
 import com.google.gson.Gson
@@ -70,6 +71,10 @@ object DatabaseModule {
         db.productDao()
 
     @Provides
+    fun provideUserDao(db: AppDatabase): UserDao =
+        db.userDao()
+
+    @Provides    
     fun provideProductDetailDao(db: AppDatabase): ProductDetailDao =
         db.productDetailDao()
 }

@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object FontSize {
+    val appTitle = 30.sp
     val title = 18.sp
     val productTitle = 12.sp
     val originPrice = 10.sp
@@ -12,6 +13,8 @@ object FontSize {
     val tag = 9.sp
     val review = 10.sp
 
+    val loginField = 14.sp
+  
     val productDetailName = 16.sp
     val productDetailBrandName = 14.sp
     val productDetailOriginPrice = 14.sp
