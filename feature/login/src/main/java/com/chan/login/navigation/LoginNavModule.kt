@@ -18,9 +18,9 @@ class LoginNavModuleProvider @Inject constructor() : NavDestinationProvider {
 abstract class LoginNavModule {
     @Binds
     @IntoSet
-    abstract fun bindHomeNavGraph(graph: LoginNavGraph): NavGraphProvider
+    abstract fun bindLoginNavGraph(graph: LoginNavGraph): NavGraphProvider
 
     @Binds
     @IntoSet
-    abstract fun bindHomeDestinationProvider(provider: LoginNavModuleProvider): NavDestinationProvider
+    abstract fun bindLoginDestinationProvider(provider: LoginNavModuleProvider): NavDestinationProvider
 }
