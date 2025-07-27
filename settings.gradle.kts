@@ -29,6 +29,7 @@ include(":feature:home")
 include(":feature:category")
 include(":feature:login")
 include(":feature:product")
+include(":feature:search")
 
 include(":core:android")
 include(":core:database")
