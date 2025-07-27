@@ -17,7 +17,7 @@ class CategoryDetailContract {
 
     data class State(
         val loadingState: LoadingState = LoadingState.Idle,
-        val selectedCategoryId: String? = null,
+        val selectedCategoryTabId: String? = null,
         val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
         val categoryDetailList: List<ProductModel> = emptyList()
     ) : ViewState

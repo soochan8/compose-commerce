@@ -39,7 +39,7 @@ fun CategoryDetailScreen(
 
     val state by viewModel.viewState.collectAsState()
     val selectedIndex =
-        state.categoryNames.indexOfFirst { it.categoryId == state.selectedCategoryId }
+        state.categoryNames.indexOfFirst { it.categoryId == state.selectedCategoryTabId }
             .coerceAtLeast(0)
 
 

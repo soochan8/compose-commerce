@@ -40,7 +40,7 @@ class CategoryDetailViewModel @Inject constructor(
     }
 
     private fun getCategoryDetailList(categoryId: String) {
-        setState { copy(selectedCategoryId = categoryId) }
+        setState { copy(selectedCategoryTabId = categoryId) }
 
         handleRepositoryCall(
             call = {
