@@ -15,7 +15,7 @@ class LoginNavModuleProvider @Inject constructor() : NavDestinationProvider {
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class HomeNavModule {
+abstract class LoginNavModule {
     @Binds
     @IntoSet
     abstract fun bindHomeNavGraph(graph: LoginNavGraph): NavGraphProvider
