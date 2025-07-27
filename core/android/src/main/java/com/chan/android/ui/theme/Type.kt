@@ -131,6 +131,45 @@ data class AppTypography(
         fontWeight = FontWeight.Bold,
         fontSize = FontSize.purchaseTotalPrice,
         color = Black
+    ),
+
+    //Search
+    val searchHintTextStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchHint,
+        color = Gray
+    ),
+
+    val searchTitle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = FontSize.searchTitle,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val searchAllDelete: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchAllDelete,
+        color = LightGray,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val searchChip: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchChipText,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val searchResultText: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchResultText,
+        color = Black,
     )
 
 )

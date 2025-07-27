@@ -26,6 +26,12 @@ object FontSize {
     val purchasePriceLabel = 16.sp
     val purchaseQuantityLabel = 14.sp
     val purchaseTotalPrice = 16.sp
+
+    val searchHint = 14.sp
+    val searchTitle = 16.sp
+    val searchAllDelete = 12.sp
+    val searchChipText = 12.sp
+    val searchResultText = 16.sp
 }
 
 object LineHeight {
