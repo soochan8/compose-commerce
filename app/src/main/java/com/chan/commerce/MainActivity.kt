@@ -34,6 +34,7 @@ import com.chan.home.navigation.HomeDestination
 import com.chan.navigation.BottomNavigationBar
 import com.chan.navigation.NavDestinationProvider
 import com.chan.navigation.NavGraphProvider
+import com.chan.product.navigation.ProductDetailDestination
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -100,26 +101,34 @@ class MainActivity : ComponentActivity() {
                         .padding(WindowInsets.statusBars.asPaddingValues())
                 )
 
-                BottomNavigationBar(
-                    currentRoute = currentRoute,
-                    onNavigate = { route ->
-                        navController.navigate(route) {
-                            launchSingleTop = true
-                            if (route == HomeDestination.route) popUpTo(0)
-                        }
-                    },
-                    navDestinations = allNavDestinations,
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .offset(y = bottomBarOffset)
-                        .onGloballyPositioned {
-                            if (bottomBarHeight == 0.dp) {
-                                bottomBarHeight = with(density) {
-                                    it.size.height.toDp()
+                //화면에 따라 BottomNavigationBar visibility 결정
+                val isShowBottomBar = when (currentRoute) {
+                    ProductDetailDestination.route -> false
+                    else -> true
+                }
+
+                if (isShowBottomBar) {
+                    BottomNavigationBar(
+                        currentRoute = currentRoute,
+                        onNavigate = { route ->
+                            navController.navigate(route) {
+                                launchSingleTop = true
+                                if (route == HomeDestination.route) popUpTo(0)
+                            }
+                        },
+                        navDestinations = allNavDestinations,
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .offset(y = bottomBarOffset)
+                            .onGloballyPositioned {
+                                if (bottomBarHeight == 0.dp) {
+                                    bottomBarHeight = with(density) {
+                                        it.size.height.toDp()
+                                    }
                                 }
                             }
-                        }
-                )
+                    )
+                }
             }
         }
     }

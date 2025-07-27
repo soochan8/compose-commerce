@@ -1,6 +1,7 @@
 package com.chan.home.composables.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,7 +41,8 @@ import com.chan.home.model.HomePopularItemModel
 
 @Composable
 fun HomePopularItemList(
-    popularItem: List<HomePopularItemModel>
+    popularItem: List<HomePopularItemModel>,
+    onItemClick: (productId: String) -> Unit
 ) {
     val nestedScrollConnection = horizontalNestedScrollConnection()
 
@@ -64,18 +66,25 @@ fun HomePopularItemList(
             items = popularItem,
             key = { it.productId }
         ) { item ->
-            HomePopularItem(popularItem = item)
+            HomePopularItem(
+                popularItem = item,
+                onClick = { onItemClick(item.productId) }
+            )
         }
     }
 
 }
 
 @Composable
-fun HomePopularItem(popularItem: HomePopularItemModel) {
+fun HomePopularItem(
+    popularItem: HomePopularItemModel,
+    onClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .width(160.dp)
             .padding(end = 12.dp)
+            .clickable(onClick = onClick)
     ) {
         AsyncImage(
             model = popularItem.imageUrl,

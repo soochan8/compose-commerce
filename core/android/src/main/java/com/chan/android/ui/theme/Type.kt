@@ -41,13 +41,13 @@ data class AppTypography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = FontSize.discountPrice,
-        color = Red,
+        color = Black,
     ),
     val discountPercent: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = FontSize.discountPercent,
-        color = Black
+        color = Red
     ),
     val tagLabel: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
@@ -59,5 +59,64 @@ data class AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = FontSize.review,
         color = Gray
+    ),
+
+    //상품 상세
+    val productDetailBrandName: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.productDetailBrandName,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val productDetailName: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.productDetailName,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val bottomBarTodayDelivery: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.bottomBarTodayDelivery,
+        color = Black
+    ),
+
+    val bottomBarButton: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = FontSize.bottomBarButton
+    ),
+
+    val purchaseQuantity: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.purchaseQuantity,
+        color = Black
+    ),
+
+    val purchasePriceLabel: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = FontSize.purchasePriceLabel,
+        color = Black
+    ),
+
+    val purchaseQuantityLabel: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.purchaseQuantityLabel,
+        color = Black
+    ),
+
+    val purchaseTotalPrice: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = FontSize.purchaseTotalPrice,
+        color = Black
     )
+
 )
