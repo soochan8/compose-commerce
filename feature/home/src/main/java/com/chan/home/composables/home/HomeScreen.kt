@@ -8,13 +8,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.chan.home.home.HomeContract
 import com.chan.home.home.HomeViewModel
 import com.chan.home.model.HomeTabItem
+import com.chan.navigation.Routes
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
@@ -44,6 +47,11 @@ fun HomeScreen(
         },
         onRankingTabSelected = { categoryId ->
             homeViewModel.handleEvent(HomeContract.Event.RankingTabSelected(categoryId = categoryId))
+        },
+        onItemClick ={ productId ->
+            navController.navigate(
+                Routes.PRODUCT_DETAIL.productDetailRoute(productId)
+            )
         }
     )
 }

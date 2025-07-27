@@ -13,7 +13,7 @@ class HomeNavGraph @Inject constructor() : NavGraphProvider {
         navController: NavHostController
     ) {
         navGraphBuilder.composable(HomeDestination.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
     }
 
