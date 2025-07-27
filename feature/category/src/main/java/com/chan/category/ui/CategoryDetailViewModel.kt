@@ -20,13 +20,17 @@ class CategoryDetailViewModel @Inject constructor(
     override fun handleEvent(event: CategoryDetailContract.Event) {
         when (event) {
             is CategoryDetailContract.Event.CategoryDetailLoad -> {
-                getSiblingSubCategories(event.categoryId)
+                getCategoryTobList(event.categoryId)
                 getCategoryDetailList(event.categoryId)
+            }
+
+            is CategoryDetailContract.Event.CategoryTabSelected -> {
+                getCategoryDetailList(categoryId = event.categoryId)
             }
         }
     }
 
-    private fun getSiblingSubCategories(categoryId: String) {
+    private fun getCategoryTobList(categoryId: String) {
         handleRepositoryCall(
             call = {
                 categoryDetailRepository.getCategoryDetailTabs(categoryId).map { it.toTabsModel() }
@@ -36,6 +40,8 @@ class CategoryDetailViewModel @Inject constructor(
     }
 
     private fun getCategoryDetailList(categoryId: String) {
+        setState { copy(selectedCategoryId = categoryId) }
+
         handleRepositoryCall(
             call = {
                 categoryDetailRepository.getCategoryDetailProducts(categoryId)

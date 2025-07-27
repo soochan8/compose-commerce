@@ -3,6 +3,7 @@ package com.chan.category.ui.composables.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -19,9 +20,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -39,18 +37,13 @@ fun CategoryDetailScreen(
 ) {
 
     val state by viewModel.viewState.collectAsState()
-    var selectedTab by remember { mutableStateOf(0) }
+    val selectedIndex =
+        state.categoryNames.indexOfFirst { it.categoryId == state.selectedCategoryId }
+            .coerceAtLeast(0)
+
 
     LaunchedEffect(categoryId) {
         viewModel.setEvent(CategoryDetailContract.Event.CategoryDetailLoad(categoryId))
-    }
-    LaunchedEffect(state.categoryNames) {
-        if (state.categoryNames.isNotEmpty()) {
-            val initialIndex = state.categoryNames.indexOfFirst { it.categoryId == categoryId }
-            if (initialIndex != -1) {
-                selectedTab = initialIndex
-            }
-        }
     }
 
     Scaffold(
@@ -58,9 +51,14 @@ fun CategoryDetailScreen(
             if (state.categoryNames.isNotEmpty()) {
                 CategoryDetailTopBar(
                     tabs = state.categoryNames,
-                    selectedIndex = selectedTab,
+                    selectedIndex = selectedIndex,
                     onTabSelected = { index ->
-                        selectedTab = index
+                        val selectedCategoryIndex = state.categoryNames[index].categoryId
+                        viewModel.setEvent(
+                            CategoryDetailContract.Event.CategoryTabSelected(
+                                selectedCategoryIndex
+                            )
+                        )
                     }
                 )
             }
@@ -93,6 +91,7 @@ fun CategoryDetailTopBar(
     onTabSelected: (Int) -> Unit
 ) {
     ScrollableTabRow(
+        modifier = Modifier.fillMaxWidth(),
         selectedTabIndex = selectedIndex,
         edgePadding = 16.dp,
         indicator = { tabPositions ->
