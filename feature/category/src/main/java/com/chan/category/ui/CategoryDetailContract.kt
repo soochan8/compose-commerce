@@ -11,10 +11,13 @@ class CategoryDetailContract {
 
     sealed interface Event : ViewEvent {
         data class CategoryDetailLoad(val categoryId: String) : Event
+
+        data class CategoryTabSelected(val categoryId: String) : Event
     }
 
     data class State(
         val loadingState: LoadingState = LoadingState.Idle,
+        val selectedCategoryId: String? = null,
         val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
         val categoryDetailList: List<ProductModel> = emptyList()
     ) : ViewState
