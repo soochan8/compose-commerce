@@ -74,4 +74,16 @@ interface ProductDao {
             ?.products
             ?: emptyList()
     }
+
+    // 상품 이름으로 검색하기
+    suspend fun searchProductsByName(query: String): List<ProductEntity.Categories.SubCategories.Products> {
+        if (query.isBlank()) {
+            return emptyList()
+        }
+        return getAll()
+            .flatMap { it.categories }
+            .flatMap { it.subCategories }
+            .flatMap { it.products }
+            .filter { it.productName.contains(query, ignoreCase = true) }
+    }
 }
