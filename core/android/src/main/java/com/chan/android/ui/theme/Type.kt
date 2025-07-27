@@ -72,6 +72,7 @@ data class AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = FontSize.loginField,
         color = LightGray
+    ),
 
 
     //상품 상세
