@@ -17,7 +17,9 @@ class CategoryDetailNavGraph @Inject constructor() : NavGraphProvider {
             route = CategoryDetailDestination.route,
             arguments = CategoryDetailDestination.arguments
         ) { backStackEntry ->
-            val categoryId = backStackEntry.arguments?.getString("categoryId")!!
+            val categoryId = requireNotNull(backStackEntry.arguments?.getString("categoryId")) {
+                "categoryId is required"
+            }
             CategoryDetailScreen(
                 categoryId = categoryId,
                 onProductClick = { productId ->
