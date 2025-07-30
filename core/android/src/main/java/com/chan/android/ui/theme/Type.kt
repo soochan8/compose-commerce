@@ -160,7 +160,7 @@ data class AppTypography(
     val currentTime: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = FontSize.searchAllDelete,
+        fontSize = FontSize.currentTime,
         color = LightGray,
     ),
 
