@@ -3,8 +3,13 @@ package com.chan.search.ui
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
+import com.chan.search.domain.model.RankChange
+import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
+import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
+import com.chan.search.ui.mappers.toTrendingSearchModel
+import com.chan.search.ui.model.TrendingSearchModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -13,6 +18,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +29,10 @@ class SearchViewModel @Inject constructor(
 
     init {
         observeSearchQuery()
+        getRecentSearches()
+        getRecommendedKeywords()
+        getTrendingSearches()
+        setCurrentTime()
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -38,19 +49,97 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
+    private fun setCurrentTime() {
+        setState { copy(currentTime = getRoundedDownTime()) }
+    }
+
+    private fun getRoundedDownTime(): String {
+        val now = LocalDateTime.now()
+        val roundedMinute = (now.minute / 10) * 10
+        val roundedTime = now.withMinute(roundedMinute)
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        return roundedTime.format(formatter)
+    }
+
     override fun handleEvent(event: SearchContract.Event) {
         when (event) {
-            is SearchContract.Event.OnSearchChanged -> {
-                setState { copy(search = event.search) }
-            }
+            is SearchContract.Event.OnSearchChanged -> setState { copy(search = event.search) }
             is SearchContract.Event.OnClickSearchResult -> {
-                TODO("검색어에 맞는 리스트 가져오기 + 상세화면 바인딩 예정")
+                //클릭 시, 검색어에 맞는 리스트 보여주기
+                addSearchKeyword(event.clickedProductName)
             }
-            SearchContract.Event.OnClickClearSearch -> {
-                setState { copy(search = "", searchResults = emptyList()) }
+            SearchContract.Event.OnClickClearSearch -> setState {
+                copy(
+                    search = "",
+                    searchResults = emptyList()
+                )
             }
-            SearchContract.Event.OnClickSearch -> TODO()
+
+            SearchContract.Event.OnClickSearch -> TODO("클릭 시, list")
+            is SearchContract.Event.OnAddSearchKeyword -> addSearchKeyword(event.search)
+            is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(event.search)
+            SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
         }
+    }
+
+    private fun getTrendingSearches() {
+        val trendingKeywords: List<TrendingSearchModel> = listOf(
+            TrendingSearchVO(rank = 1, keyword = "틴트", change = RankChange.UP),
+            TrendingSearchVO(rank = 2, keyword = "샴푸", change = RankChange.DOWN),
+            TrendingSearchVO(rank = 3, keyword = "기획세트", change = RankChange.NEW),
+            TrendingSearchVO(rank = 4, keyword = "선크림", change = RankChange.NONE),
+            TrendingSearchVO(rank = 5, keyword = "단백질쉐이크", change = RankChange.NEW),
+            TrendingSearchVO(rank = 6, keyword = "넘버즈인", change = RankChange.NONE),
+            TrendingSearchVO(rank = 7, keyword = "COLLAGEN", change = RankChange.UP),
+            TrendingSearchVO(rank = 8, keyword = "컬러그램 애교살", change = RankChange.NONE),
+            TrendingSearchVO(rank = 9, keyword = "모공", change = RankChange.DOWN),
+            TrendingSearchVO(rank = 10, keyword = "제이숲", change = RankChange.UP)
+        ).map { it.toTrendingSearchModel() }
+
+        setState { copy(trendingSearches = trendingKeywords) }
+    }
+
+    private fun getRecommendedKeywords() {
+        val recommendedKeywords: List<String> = listOf(
+            "남자 여름 선크림",
+            "마스크팩",
+            "클렌징폼",
+            "립스틱",
+            "핸드크림",
+            "비타민"
+        )
+        setState { copy(recommendedKeywords = recommendedKeywords) }
+    }
+
+    private fun getRecentSearches() {
+        searchRepository.getRecentSearches()
+            .map { entities ->
+                // 데이터베이스 Entity를 UI 모델로 변환
+                entities.map { it.toSearchHistoryModel() }
+            }
+            .onEach { recentSearchResult ->
+                // Flow가 새로운 데이터를 방출할 때마다 상태 업데이트
+                setState { copy(recentSearches = recentSearchResult) }
+            }
+            .launchIn(viewModelScope)
+    }
+
+    private fun addSearchKeyword(search: String) {
+        if (search.isEmpty()) return
+        handleRepositoryCall(
+            call = { searchRepository.addSearch(search) }
+        )
+    }
+
+    private fun removeSearchKeyword(search: String) {
+        handleRepositoryCall(
+            call = { searchRepository.deleteSearch(search) }
+        )
+    }
+
+    private fun clearAllSearchKeyword() {
+        handleRepositoryCall(
+            call = { searchRepository.clearAll() })
     }
 
     private fun searchProducts(query: String) {
@@ -67,7 +156,7 @@ class SearchViewModel @Inject constructor(
 
     private fun <T> handleRepositoryCall(
         call: suspend () -> T,
-        onSuccess: SearchContract.State.(T) -> SearchContract.State
+        onSuccess: SearchContract.State.(T) -> SearchContract.State = { this }
     ) {
         viewModelScope.launch {
             setState { copy(loadingState = LoadingState.Loading) }
