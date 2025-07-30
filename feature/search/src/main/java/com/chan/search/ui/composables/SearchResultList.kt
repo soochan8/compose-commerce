@@ -25,7 +25,7 @@ fun SearchResultList(
     results: List<SearchResultModel>,
     searchQuery: String,
     modifier: Modifier = Modifier,
-    onSearchResultItemClick: () -> Unit
+    onSearchResultItemClick: (String) -> Unit
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -39,7 +39,7 @@ fun SearchResultList(
                 fullName = product.productName,
                 searchText = searchQuery,
                 modifier = Modifier.clickable {
-                    onSearchResultItemClick()
+                    onSearchResultItemClick(product.productName)
                 }
             )
         }
