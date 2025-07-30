@@ -157,6 +157,13 @@ data class AppTypography(
         lineHeight = LineHeight.productTitleSpacing
     ),
 
+    val currentTime: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchAllDelete,
+        color = LightGray,
+    ),
+
     val searchChip: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
@@ -170,6 +177,18 @@ data class AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = FontSize.searchResultText,
         color = Black,
+    ),
+    val trendingSearch: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.trendingSearch,
+        color = Black,
+    ),
+    val trendingRankNew: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.trendingRankNew,
+        color = Gray,
     )
 
 )

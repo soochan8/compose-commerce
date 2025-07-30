@@ -30,8 +30,11 @@ object FontSize {
     val searchHint = 14.sp
     val searchTitle = 16.sp
     val searchAllDelete = 12.sp
+    val currentTime = 12.sp
     val searchChipText = 12.sp
     val searchResultText = 16.sp
+    val trendingSearch = 14.sp
+    val trendingRankNew = 10.sp
 }
 
 object LineHeight {
