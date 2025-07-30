@@ -69,7 +69,7 @@ fun SearchTextField(
                 if (search.isNotEmpty()) {
                     Icon(
                         imageVector = Icons.Default.Clear,
-                        contentDescription = "Clear search query",
+                        contentDescription = "Clear search",
                         modifier = Modifier
                             .clickable(onClick = onClearSearch)
                             .padding(horizontal = Spacing.spacing2)
