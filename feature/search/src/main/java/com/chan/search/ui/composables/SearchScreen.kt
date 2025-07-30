@@ -72,20 +72,40 @@ fun SearchScreen(
                 search = state.search,
                 onSearchChanged = { viewModel.setEvent(SearchContract.Event.OnSearchChanged(it)) },
                 onClearSearch = { viewModel.setEvent(SearchContract.Event.OnClickClearSearch) },
-                onSearchClick = { viewModel.setEvent(SearchContract.Event.OnClickSearch) },
+                onSearchClick = { viewModel.setEvent(SearchContract.Event.OnAddSearchKeyword(state.search)) },
                 modifier = Modifier.padding(Spacing.spacing4)
             )
             HorizontalDivider(color = dividerColor, thickness = 1.dp)
 
             if (state.search.isBlank()) {
-                //추후 구현 예정
-
+                if (state.recentSearches.isNotEmpty()) {
+                    RecentSearchList(
+                        recentSearches = state.recentSearches,
+                        onRemoveSearch = {
+                            viewModel.setEvent(
+                                SearchContract.Event.OnRemoveSearchKeyword(
+                                    it
+                                )
+                            )
+                        },
+                        onClearAllRecentSearches = { viewModel.setEvent(SearchContract.Event.OnClearAllRecentSearches) },
+                    )
+                }
+                RecommendedKeywordList(recommendedKeywords = state.recommendedKeywords)
+                TrendingSearchList(
+                    trendingSearches = state.trendingSearches,
+                    currentTime = state.currentTime
+                )
             } else {
                 SearchResultList(
                     results = state.searchResults,
                     searchQuery = state.search,
                     onSearchResultItemClick = {
-                        viewModel.setEvent(SearchContract.Event.OnClickSearchResult(search = state.search))
+                        viewModel.setEvent(
+                            SearchContract.Event.OnClickSearchResult(
+                                clickedProductName = it
+                            )
+                        )
                     }
                 )
             }
