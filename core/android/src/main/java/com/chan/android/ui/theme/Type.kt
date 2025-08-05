@@ -189,6 +189,12 @@ data class AppTypography(
         fontWeight = FontWeight.Normal,
         fontSize = FontSize.trendingRankNew,
         color = Gray,
+    ),
+    val tab: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.tab,
+        color = Gray,
     )
 
 )
