@@ -38,6 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.chan.android.model.ProductModel
+import com.chan.android.ui.theme.Radius
+import com.chan.android.ui.theme.Spacing
 
 @Composable
 fun ProductCard(
@@ -69,11 +71,12 @@ fun ProductCard(
                 model = product.imageUrl,
                 contentDescription = product.productName,
                 modifier = Modifier
-                    .size(160.dp)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .height(180.dp)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(Radius.radius2)),
                 contentScale = ContentScale.Crop
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             Text(
                 text = product.productName,
@@ -82,39 +85,39 @@ fun ProductCard(
                 fontSize = 14.sp,
                 maxLines = 3
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             Price(product)
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             if (product.tags.isNotEmpty()) {
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.spacing1)) {
                     product.tags.forEach { tag ->
                         TagChip(tagLabel = tag)
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             Review(product)
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
                     contentDescription = "like",
                     modifier = Modifier
-                        .size(16.dp)
+                        .size(Spacing.spacing4)
                         .clickable {
                             onLikeClick(product.productId)
                         }
                 )
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(Spacing.spacing5))
                 Icon(
                     imageVector = Icons.Default.ShoppingCart,
                     contentDescription = "cart",
                     modifier = Modifier
-                        .size(16.dp)
+                        .size(Spacing.spacing4)
                         .clickable {
                             onCartClick(product.productId)
                         }
@@ -187,7 +190,7 @@ fun Review(reviews: ProductModel) {
             tint = Color.Gray,
             modifier = Modifier.size(10.dp)
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(Spacing.spacing1))
         Text(
             text = reviews.reviewCount,
             fontSize = 10.sp,
