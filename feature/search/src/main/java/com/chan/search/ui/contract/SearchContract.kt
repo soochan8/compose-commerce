@@ -1,9 +1,10 @@
-package com.chan.search.ui
+package com.chan.search.ui.contract
 
 import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
+import com.chan.android.model.ProductModel
 import com.chan.search.ui.model.SearchHistoryModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
@@ -12,7 +13,6 @@ class SearchContract {
 
     sealed class Event : ViewEvent {
         data class OnSearchChanged(val search: String) : Event()
-        object OnClickSearch : Event()
         object OnClickClearSearch : Event()
         data class OnClickSearchResult(val clickedProductName: String) : Event()
 
@@ -31,7 +31,9 @@ class SearchContract {
         val recommendedKeywords: List<String> = emptyList(),
         val trendingSearches: List<TrendingSearchModel> = emptyList(),
 
-        val currentTime: String = ""
+        val searchResultProducts: List<ProductModel> = emptyList(),
+        val currentTime: String = "",
+        val showSearchResult: Boolean = false,
     ) : ViewState
 
     sealed class Effect : ViewEffect {
