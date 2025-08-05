@@ -7,8 +7,10 @@ import kotlinx.coroutines.flow.Flow
 interface SearchRepository {
     suspend fun searchProductName(search: String): List<ProductVO>
 
-    fun getRecentSearches() : Flow<List<SearchHistoryVO>>
+    fun getRecentSearches(): Flow<List<SearchHistoryVO>>
     suspend fun addSearch(search: String)
     suspend fun deleteSearch(search: String)
     suspend fun clearAll()
+
+    suspend fun getSearchResultProducts(search: String): List<ProductVO>
 }

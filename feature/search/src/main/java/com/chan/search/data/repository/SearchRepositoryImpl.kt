@@ -40,4 +40,8 @@ class SearchRepositoryImpl @Inject constructor(
     override suspend fun clearAll() {
         return searchHistoryDao.clearAll()
     }
+
+    override suspend fun getSearchResultProducts(search: String): List<ProductVO> {
+        return productDao.searchProductsByName(search).map { it.toDomain() }
+    }
 }
