@@ -1,4 +1,4 @@
-package com.chan.search.ui
+package com.chan.search.ui.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
@@ -6,6 +6,8 @@ import com.chan.android.LoadingState
 import com.chan.search.domain.model.RankChange
 import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
+import com.chan.search.ui.contract.SearchContract
+import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
@@ -63,26 +65,51 @@ class SearchViewModel @Inject constructor(
 
     override fun handleEvent(event: SearchContract.Event) {
         when (event) {
-            is SearchContract.Event.OnSearchChanged -> setState { copy(search = event.search) }
-            is SearchContract.Event.OnClickSearchResult -> {
-                //클릭 시, 검색어에 맞는 리스트 보여주기
-                addSearchKeyword(event.clickedProductName)
-            }
-            SearchContract.Event.OnClickClearSearch -> setState {
+            is SearchContract.Event.OnSearchChanged -> setState {
                 copy(
-                    search = "",
-                    searchResults = emptyList()
+                    search = event.search
                 )
             }
 
-            SearchContract.Event.OnClickSearch -> TODO("클릭 시, list")
-            is SearchContract.Event.OnAddSearchKeyword -> addSearchKeyword(event.search)
-            is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(event.search)
+            is SearchContract.Event.OnClickSearchResult -> {
+                //클릭 시, 검색어에 맞는 리스트 보여주기
+                addSearchKeyword(event.clickedProductName)
+                setState { copy(showSearchResult = true) }
+            }
+
+            SearchContract.Event.OnClickClearSearch -> setState {
+                copy(
+                    search = "",
+                    searchResults = emptyList(),
+                    showSearchResult = false
+                )
+            }
+
+            is SearchContract.Event.OnAddSearchKeyword -> {
+                addSearchKeyword(event.search)
+                getSearchResultProducts(event.search)
+                setState { copy(showSearchResult = true) }
+            }
+
+            is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(
+                event.search
+            )
+
             SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
         }
     }
 
+    private fun getSearchResultProducts(search: String) {
+        handleRepositoryCall(
+            call = {
+                searchRepository.getSearchResultProducts(search).map { it.toProductsModel() }
+            },
+            onSuccess = { searchResultProducts -> copy(searchResultProducts = searchResultProducts) }
+        )
+    }
+
     private fun getTrendingSearches() {
+        //급상승 검색어 더미 데이터
         val trendingKeywords: List<TrendingSearchModel> = listOf(
             TrendingSearchVO(rank = 1, keyword = "틴트", change = RankChange.UP),
             TrendingSearchVO(rank = 2, keyword = "샴푸", change = RankChange.DOWN),
@@ -100,6 +127,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getRecommendedKeywords() {
+        //추천 키워드 더미 데이터
         val recommendedKeywords: List<String> = listOf(
             "남자 여름 선크림",
             "마스크팩",
