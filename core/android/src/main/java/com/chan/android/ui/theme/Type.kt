@@ -131,6 +131,70 @@ data class AppTypography(
         fontWeight = FontWeight.Bold,
         fontSize = FontSize.purchaseTotalPrice,
         color = Black
+    ),
+
+    //Search
+    val searchHintTextStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchHint,
+        color = Gray
+    ),
+
+    val searchTitle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = FontSize.searchTitle,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val searchAllDelete: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchAllDelete,
+        color = LightGray,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val currentTime: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.currentTime,
+        color = LightGray,
+    ),
+
+    val searchChip: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchChipText,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+
+    val searchResultText: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.searchResultText,
+        color = Black,
+    ),
+    val trendingSearch: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.trendingSearch,
+        color = Black,
+    ),
+    val trendingRankNew: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.trendingRankNew,
+        color = Gray,
+    ),
+    val tab: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.tab,
+        color = Gray,
     )
 
 )

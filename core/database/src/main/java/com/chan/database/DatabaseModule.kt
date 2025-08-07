@@ -6,8 +6,9 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
-import com.chan.database.dao.UserDao
 import com.chan.database.dao.ProductDetailDao
+import com.chan.database.dao.SearchHistoryDao
+import com.chan.database.dao.UserDao
 import com.chan.database.entity.ProductEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -46,7 +47,8 @@ object DatabaseModule {
                     }
                 }
             }
-        ).fallbackToDestructiveMigration()
+        )
+            .addMigrations(MIGRATION_13_14)
             .build()
     }
 
@@ -74,7 +76,11 @@ object DatabaseModule {
     fun provideUserDao(db: AppDatabase): UserDao =
         db.userDao()
 
-    @Provides    
+    @Provides
     fun provideProductDetailDao(db: AppDatabase): ProductDetailDao =
         db.productDetailDao()
+
+    @Provides
+    fun provideSearchHistoryDao(db: AppDatabase): SearchHistoryDao =
+        db.searchHistoryDao()
 }
