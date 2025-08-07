@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface SearchHistoryDao {
     // 최근 검색어를 시간순으로 정렬
-    @Query("SELECT * FROM searchHistory ORDER BY timestamp DESC")
+    @Query("SELECT * FROM searchHistory ORDER BY timeStamp DESC")
     fun getRecentSearches(): Flow<List<SearchHistoryEntity>>
 
     // 검색어 추가
