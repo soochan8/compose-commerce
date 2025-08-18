@@ -11,7 +11,10 @@ import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
+import com.chan.search.ui.model.FilterChipType
+import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.TrendingSearchModel
+import com.chan.search.ui.model.filter.DeliveryOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -35,6 +38,7 @@ class SearchViewModel @Inject constructor(
         getRecommendedKeywords()
         getTrendingSearches()
         setCurrentTime()
+        initializeFilterChips()
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -71,7 +75,7 @@ class SearchViewModel @Inject constructor(
                 )
             }
 
-            is SearchContract.Event.OnClickSearchResult -> {
+            is SearchContract.Event.OnClickSearchProduct -> {
                 //클릭 시, 검색어에 맞는 리스트 보여주기
                 addSearchKeyword(event.clickedProductName)
                 setState { copy(showSearchResult = true) }
@@ -88,7 +92,7 @@ class SearchViewModel @Inject constructor(
             is SearchContract.Event.OnAddSearchKeyword -> {
                 addSearchKeyword(event.search)
                 getSearchResultProducts(event.search)
-                setState { copy(showSearchResult = true) }
+                setState { copy(showSearchResult = true, search = event.search) }
             }
 
             is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(
@@ -96,7 +100,97 @@ class SearchViewModel @Inject constructor(
             )
 
             SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
+            SearchContract.Event.OnSearchTextFocus -> setState { copy(showSearchResult = false) }
+            SearchContract.Event.OnUpdateFilterClick -> setState { copy(showFilter = !showFilter) }
+            is SearchContract.Event.OnFilterChipClicked -> handleFilterChipClick(event.chip)
+            is SearchContract.Event.OnDeliveryOptionChanged -> handleDeliveryOptionChange(event.option)
         }
+    }
+
+    private fun handleDeliveryOptionChange(option: DeliveryOption) {
+        val currentSelectedOption = viewState.value.selectedDeliveryOption
+        val newSelectedOption = if (currentSelectedOption == option) {
+            null
+        } else {
+            option
+        }
+
+        setState {
+            copy(
+                selectedDeliveryOption = newSelectedOption,
+                filterChips = this.filterChips.map { chip ->
+                    if (chip.chipType != FilterChipType.TOGGLE) {
+                        chip
+                    } else {
+                        val chipCorrespondsToNewSelection =
+                            (chip.text == "오늘드림" && newSelectedOption == DeliveryOption.TODAY_DELIVERY) ||
+                                    (chip.text == "픽업" && newSelectedOption == DeliveryOption.PICKUP)
+
+                        chip.copy(isSelected = chipCorrespondsToNewSelection)
+                    }
+                }
+            )
+        }
+    }
+
+    private fun handleFilterChipClick(clickedChip: SearchResultFilterChipModel) {
+        val isClickedChipAlreadySelected = viewState.value.filterChips
+            .find { it.text == clickedChip.text }
+            ?.isSelected == true
+
+        val newSelectedOption = if (!isClickedChipAlreadySelected) {
+            when (clickedChip.text) {
+                "오늘드림" -> DeliveryOption.TODAY_DELIVERY
+                "픽업" -> DeliveryOption.PICKUP
+                else -> viewState.value.selectedDeliveryOption
+            }
+        } else {
+            null
+        }
+
+        setState {
+            copy(
+                selectedDeliveryOption = newSelectedOption,
+                filterChips = this.filterChips.map { chip ->
+                    if (chip.chipType != FilterChipType.TOGGLE) {
+                        chip
+                    } else {
+                        if (chip.text == clickedChip.text) {
+                            chip.copy(isSelected = !isClickedChipAlreadySelected)
+                        } else {
+                            chip.copy(isSelected = false)
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    private fun initializeFilterChips() {
+        val filterChips = listOf(
+            SearchResultFilterChipModel(
+                text = "오늘드림",
+                chipType = FilterChipType.TOGGLE
+            ),
+            SearchResultFilterChipModel(
+                text = "픽업",
+                chipType = FilterChipType.TOGGLE
+            ),
+            SearchResultFilterChipModel(
+                text = "카테고리",
+                chipType = FilterChipType.DROP_DOWN
+            ),
+            SearchResultFilterChipModel(
+                text = "주요기능",
+                chipType = FilterChipType.DROP_DOWN
+            ),
+            SearchResultFilterChipModel(
+                text = "가격",
+                chipType = FilterChipType.DROP_DOWN
+            )
+
+        )
+        setState { copy(filterChips = filterChips) }
     }
 
     private fun getSearchResultProducts(search: String) {
