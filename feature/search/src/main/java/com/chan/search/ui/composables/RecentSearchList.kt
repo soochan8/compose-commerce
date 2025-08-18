@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,7 +41,8 @@ import com.chan.search.ui.model.SearchHistoryModel
 fun RecentSearchList(
     recentSearches: List<SearchHistoryModel>,
     onRemoveSearch: (String) -> Unit,
-    onClearAllRecentSearches: () -> Unit
+    onClearAllRecentSearches: () -> Unit,
+    onSearchClick: (String) -> Unit,
 ) {
     Column(modifier = Modifier.padding(Spacing.spacing4)) {
         Row(
@@ -70,7 +72,8 @@ fun RecentSearchList(
             recentSearches.forEach { search ->
                 RecentSearchChip(
                     keyword = search.search,
-                    onRemove = { onRemoveSearch(search.search) }
+                    onRemove = { onRemoveSearch(search.search) },
+                    onSearchClick = { onSearchClick(it) }
                 )
             }
         }
@@ -80,17 +83,20 @@ fun RecentSearchList(
 @Composable
 fun RecentSearchChip(
     keyword: String,
-    onRemove: () -> Unit
+    onRemove: () -> Unit,
+    onSearchClick: (String) -> Unit
 ) {
     Surface(
         shape = RoundedCornerShape(Radius.radius6),
         color = Color.White,
-        border = BorderStroke(1.dp, LightGray.copy(alpha = 0.2f))
+        border = BorderStroke(1.dp, LightGray.copy(alpha = 0.2f)),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(horizontal = Spacing.spacing3, vertical = Spacing.spacing2)
+                .padding(horizontal = Spacing.spacing3, vertical = Spacing.spacing2).clickable {
+                    onSearchClick(keyword)
+                }
         ) {
             Text(text = keyword, style = MaterialTheme.appTypography.searchChip)
             IconButton(
