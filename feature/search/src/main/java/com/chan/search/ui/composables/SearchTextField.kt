@@ -19,8 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
@@ -32,15 +34,24 @@ fun SearchTextField(
     search: String,
     onSearchChanged: (String) -> Unit,
     onClearSearch: () -> Unit,
-    onSearchClick: () -> Unit,
+    onSearchClick: (String) -> Unit,
+    onSearchTextFocus: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
+
+
     BasicTextField(
         value = search,
         onValueChange = onSearchChanged,
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .onFocusChanged { focusState ->
+                if (focusState.isFocused) {
+                    onSearchTextFocus()
+                }
+            },
         singleLine = true,
         cursorBrush = SolidColor(Black),
         decorationBox = { innerTextField ->
@@ -80,7 +91,10 @@ fun SearchTextField(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search",
                     modifier = Modifier
-                        .clickable(onClick = onSearchClick)
+                        .clickable {
+                            onSearchClick(search)
+                            focusManager.clearFocus()
+                        }
                         .padding(end = Spacing.spacing2)
                         .size(Spacing.spacing5)
                 )
