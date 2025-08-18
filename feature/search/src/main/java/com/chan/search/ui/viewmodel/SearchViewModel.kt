@@ -11,7 +11,6 @@ import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
-import com.chan.search.ui.mappers.toUiModel
 import com.chan.search.ui.model.FilterChipType
 import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.TrendingSearchModel
@@ -40,8 +39,6 @@ class SearchViewModel @Inject constructor(
         getTrendingSearches()
         setCurrentTime()
         initializeFilterChips()
-        initializeCategoryFilters()
-        updateFilteredProductCount() // 초기 개수 업데이트
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -104,100 +101,14 @@ class SearchViewModel @Inject constructor(
 
             SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
             SearchContract.Event.OnSearchTextFocus -> setState { copy(showSearchResult = false) }
-            SearchContract.Event.Filter.OnFilterClick -> setState {
-                copy(
-                    filter = filter.copy(
-                        showFilter = !filter.showFilter
-                    )
-                )
-            }
-
-            SearchContract.Event.Filter.OnClear -> handleFilterClear()
-
-            is SearchContract.Event.Filter.OnFilterChipClicked -> handleFilterChipClick(event.chip)
-            is SearchContract.Event.Filter.OnDeliveryOptionChanged -> handleDeliveryOptionChange(
-                event.option
-            )
-
-            is SearchContract.Event.Filter.OnCategoryHeaderClick -> handleCategoryHeaderClick(event.categoryName)
-            is SearchContract.Event.Filter.OnSubCategoryClick -> handleSubCategoryClick(event.subCategoryName)
-            SearchContract.Event.Filter.OnCategoryClick -> setState {
-                copy(
-                    filter = filter.copy(
-                        isCategorySectionExpanded = !filter.isCategorySectionExpanded
-                    )
-                )
-            }
-
-            is SearchContract.Event.TabRow.OnResultTabSelected -> {
-                setState { copy(resultTabRow = resultTabRow.copy(resultSelectedTabIndex = event.index)) }
-            }
-        }
-    }
-
-    private fun handleFilterClear() {
-        setState {
-            copy(
-                filter = filter.copy(
-                    selectedDeliveryOption = null,
-                    expandedCategoryName = null,
-                    selectedSubCategories = emptySet(),
-                    isCategorySectionExpanded = false,
-                    filterChips = filter.filterChips.map { it.copy(isSelected = false) }
-                )
-            )
-        }
-        // 현재 검색어로 검색 결과를 다시 조회
-        getSearchResultProducts(viewState.value.search)
-    }
-
-    private fun handleSubCategoryClick(subCategoryName: String) {
-        val currentSelected = viewState.value.filter.selectedSubCategories
-        val newSelected = if (currentSelected.contains(subCategoryName)) {
-            currentSelected - subCategoryName
-        } else {
-            currentSelected + subCategoryName
-        }
-        setState { copy(filter = filter.copy(selectedSubCategories = newSelected)) }
-        updateFilteredProductList()
-    }
-
-    private fun updateFilteredProductCount() {
-        viewModelScope.launch {
-            val count =
-                searchRepository.getFilteredProductCount(viewState.value.filter.selectedSubCategories)
-            setState { copy(filter = filter.copy(filteredProductCount = count)) }
-        }
-    }
-
-    private fun updateFilteredProductList() {
-        viewModelScope.launch {
-            val filteredProducts =
-                searchRepository.getFilteredProducts(viewState.value.filter.selectedSubCategories)
-                    .map { it.toProductsModel() }
-            setState {
-                copy(
-                    searchResultProducts = filteredProducts,
-                    filter = filter.copy(
-                        filteredProductCount = filteredProducts.size // 개수도 함께 업데이트
-                    )
-                )
-            }
-        }
-    }
-
-    private fun handleCategoryHeaderClick(categoryName: String) {
-        setState {
-            if (this.filter.expandedCategoryName == categoryName) {
-                copy(filter = filter.copy(expandedCategoryName = null))
-            } else {
-                copy(filter = filter.copy(expandedCategoryName = categoryName))
-            }
+            SearchContract.Event.OnUpdateFilterClick -> setState { copy(showFilter = !showFilter) }
+            is SearchContract.Event.OnFilterChipClicked -> handleFilterChipClick(event.chip)
+            is SearchContract.Event.OnDeliveryOptionChanged -> handleDeliveryOptionChange(event.option)
         }
     }
 
     private fun handleDeliveryOptionChange(option: DeliveryOption) {
-        val currentSelectedOption = viewState.value.filter.selectedDeliveryOption
+        val currentSelectedOption = viewState.value.selectedDeliveryOption
         val newSelectedOption = if (currentSelectedOption == option) {
             null
         } else {
@@ -206,27 +117,24 @@ class SearchViewModel @Inject constructor(
 
         setState {
             copy(
-                filter = filter.copy(
-                    selectedDeliveryOption = newSelectedOption,
-                    filterChips = filter.filterChips.map { chip ->
-                        if (chip.chipType != FilterChipType.TOGGLE) {
-                            chip
-                        } else {
-                            val chipCorrespondsToNewSelection =
-                                (chip.text == "오늘드림" && newSelectedOption == DeliveryOption.TODAY_DELIVERY) ||
-                                        (chip.text == "픽업" && newSelectedOption == DeliveryOption.PICKUP)
+                selectedDeliveryOption = newSelectedOption,
+                filterChips = this.filterChips.map { chip ->
+                    if (chip.chipType != FilterChipType.TOGGLE) {
+                        chip
+                    } else {
+                        val chipCorrespondsToNewSelection =
+                            (chip.text == "오늘드림" && newSelectedOption == DeliveryOption.TODAY_DELIVERY) ||
+                                    (chip.text == "픽업" && newSelectedOption == DeliveryOption.PICKUP)
 
-                            chip.copy(isSelected = chipCorrespondsToNewSelection)
-                        }
+                        chip.copy(isSelected = chipCorrespondsToNewSelection)
                     }
-                )
-
+                }
             )
         }
     }
 
     private fun handleFilterChipClick(clickedChip: SearchResultFilterChipModel) {
-        val isClickedChipAlreadySelected = viewState.value.filter.filterChips
+        val isClickedChipAlreadySelected = viewState.value.filterChips
             .find { it.text == clickedChip.text }
             ?.isSelected == true
 
@@ -234,7 +142,7 @@ class SearchViewModel @Inject constructor(
             when (clickedChip.text) {
                 "오늘드림" -> DeliveryOption.TODAY_DELIVERY
                 "픽업" -> DeliveryOption.PICKUP
-                else -> viewState.value.filter.selectedDeliveryOption
+                else -> viewState.value.selectedDeliveryOption
             }
         } else {
             null
@@ -242,35 +150,19 @@ class SearchViewModel @Inject constructor(
 
         setState {
             copy(
-                filter = filter.copy(
-                    selectedDeliveryOption = newSelectedOption,
-                    filterChips = this.filter.filterChips.map { chip ->
-                        if (chip.chipType != FilterChipType.TOGGLE) {
-                            chip
+                selectedDeliveryOption = newSelectedOption,
+                filterChips = this.filterChips.map { chip ->
+                    if (chip.chipType != FilterChipType.TOGGLE) {
+                        chip
+                    } else {
+                        if (chip.text == clickedChip.text) {
+                            chip.copy(isSelected = !isClickedChipAlreadySelected)
                         } else {
-                            if (chip.text == clickedChip.text) {
-                                chip.copy(isSelected = !isClickedChipAlreadySelected)
-                            } else {
-                                chip.copy(isSelected = false)
-                            }
+                            chip.copy(isSelected = false)
                         }
                     }
-                )
+                }
             )
-        }
-    }
-
-    private fun initializeCategoryFilters() {
-        viewModelScope.launch {
-            val categories = searchRepository.getFilterCategories()
-                .map { it.toUiModel() }
-            setState {
-                copy(
-                    filter = filter.copy(
-                        categoryFilters = categories
-                    )
-                )
-            }
         }
     }
 
@@ -298,23 +190,15 @@ class SearchViewModel @Inject constructor(
             )
 
         )
-        setState { copy(filter = filter.copy(filterChips = filterChips)) }
+        setState { copy(filterChips = filterChips) }
     }
-
 
     private fun getSearchResultProducts(search: String) {
         handleRepositoryCall(
             call = {
                 searchRepository.getSearchResultProducts(search).map { it.toProductsModel() }
             },
-            onSuccess = { searchResultProducts ->
-                copy(
-                    searchResultProducts = searchResultProducts,
-                    filter = filter.copy(
-                        filteredProductCount = searchResultProducts.size
-                    )
-                )
-            }
+            onSuccess = { searchResultProducts -> copy(searchResultProducts = searchResultProducts) }
         )
     }
 
