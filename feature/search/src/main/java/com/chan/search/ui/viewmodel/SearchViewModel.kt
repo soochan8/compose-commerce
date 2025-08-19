@@ -11,6 +11,7 @@ import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
+import com.chan.search.ui.mappers.toUiModel
 import com.chan.search.ui.model.FilterChipType
 import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.TrendingSearchModel
@@ -39,6 +40,8 @@ class SearchViewModel @Inject constructor(
         getTrendingSearches()
         setCurrentTime()
         initializeFilterChips()
+        initializeCategoryFilters()
+        updateFilteredProductCount() // 초기 개수 업데이트
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -102,8 +105,68 @@ class SearchViewModel @Inject constructor(
             SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
             SearchContract.Event.OnSearchTextFocus -> setState { copy(showSearchResult = false) }
             SearchContract.Event.OnUpdateFilterClick -> setState { copy(showFilter = !showFilter) }
+            SearchContract.Event.OnFilterClear -> handleFilterClear()
+
             is SearchContract.Event.OnFilterChipClicked -> handleFilterChipClick(event.chip)
             is SearchContract.Event.OnDeliveryOptionChanged -> handleDeliveryOptionChange(event.option)
+            is SearchContract.Event.OnCategoryHeaderClick -> handleCategoryHeaderClick(event.categoryName)
+            is SearchContract.Event.OnSubCategoryClick -> handleSubCategoryClick(event.subCategoryName)
+            SearchContract.Event.OnFilterCategoryClick -> setState { copy(isCategorySectionExpanded = !isCategorySectionExpanded) }
+        }
+    }
+
+    private fun handleFilterClear() {
+        setState {
+            copy(
+                selectedDeliveryOption = null,
+                expandedCategoryName = null,
+                selectedSubCategories = emptySet(),
+                isCategorySectionExpanded = false,
+                filterChips = this.filterChips.map { it.copy(isSelected = false) }
+            )
+        }
+        // 현재 검색어로 검색 결과를 다시 조회
+        getSearchResultProducts(viewState.value.search)
+    }
+
+    private fun handleSubCategoryClick(subCategoryName: String) {
+        val currentSelected = viewState.value.selectedSubCategories
+        val newSelected = if (currentSelected.contains(subCategoryName)) {
+            currentSelected - subCategoryName
+        } else {
+            currentSelected + subCategoryName
+        }
+        setState { copy(selectedSubCategories = newSelected) }
+        updateFilteredProductList()
+    }
+
+    private fun updateFilteredProductCount() {
+        viewModelScope.launch {
+            val count = searchRepository.getFilteredProductCount(viewState.value.selectedSubCategories)
+            setState { copy(filteredProductCount = count) }
+        }
+    }
+
+    private fun updateFilteredProductList() {
+        viewModelScope.launch {
+            val filteredProducts = searchRepository.getFilteredProducts(viewState.value.selectedSubCategories)
+                .map { it.toProductsModel() }
+            setState {
+                copy(
+                    searchResultProducts = filteredProducts,
+                    filteredProductCount = filteredProducts.size // 개수도 함께 업데이트
+                )
+            }
+        }
+    }
+
+    private fun handleCategoryHeaderClick(categoryName: String) {
+        setState {
+            if (this.expandedCategoryName == categoryName) {
+                copy(expandedCategoryName = null)
+            } else {
+                copy(expandedCategoryName = categoryName)
+            }
         }
     }
 
@@ -166,6 +229,14 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    private fun initializeCategoryFilters() {
+        viewModelScope.launch {
+            val categories = searchRepository.getFilterCategories()
+                .map { it.toUiModel() }
+            setState { copy(categoryFilters = categories) }
+        }
+    }
+
     private fun initializeFilterChips() {
         val filterChips = listOf(
             SearchResultFilterChipModel(
@@ -193,12 +264,18 @@ class SearchViewModel @Inject constructor(
         setState { copy(filterChips = filterChips) }
     }
 
+
     private fun getSearchResultProducts(search: String) {
         handleRepositoryCall(
             call = {
                 searchRepository.getSearchResultProducts(search).map { it.toProductsModel() }
             },
-            onSuccess = { searchResultProducts -> copy(searchResultProducts = searchResultProducts) }
+            onSuccess = { searchResultProducts ->
+                copy(
+                    searchResultProducts = searchResultProducts,
+                    filteredProductCount = searchResultProducts.size // 개수도 함께 업데이트
+                )
+            }
         )
     }
 
