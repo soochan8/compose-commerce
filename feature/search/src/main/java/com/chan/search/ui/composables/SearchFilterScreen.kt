@@ -20,38 +20,33 @@ import androidx.compose.ui.unit.dp
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.search.R
+import com.chan.search.ui.contract.SearchContract
 import com.chan.search.ui.model.filter.DeliveryOption
 import com.chan.search.ui.model.filter.FilterCategoriesModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchFilterScreen(
-    selectedDeliveryOption: DeliveryOption?,
-    categoryFilters: List<FilterCategoriesModel>,
-    expandedCategoryName: String?,
-    selectedSubCategories: Set<String>,
-    isCategorySectionExpanded: Boolean,
-    filteredProductCount: Int,
-    onClose: () -> Unit,
-    onDeliveryOptionClick: (DeliveryOption) -> Unit,
-    onCategoryHeaderClick: (String) -> Unit,
-    onSubCategoryClick: (String) -> Unit,
-    onFilterCategoryClick: () -> Unit,
-    onFilterClear: () -> Unit,
+    state: SearchContract.State,
+    onEvent: (SearchContract.Event) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Scaffold(
         modifier = modifier,
         containerColor = White,
-        topBar = { FilterHeader(
-            onClose = onClose,
-            onFilterClear = onFilterClear
-        ) },
-        bottomBar = { FilterBottomButton(
-            itemCount = filteredProductCount,
-            onClick = onClose
-        ) }
+        topBar = {
+            FilterHeader(
+                onClose = { onEvent(SearchContract.Event.OnUpdateFilterClick) },
+                onFilterClear = { onEvent(SearchContract.Event.OnFilterClear) }
+            )
+        },
+        bottomBar = {
+            FilterBottomButton(
+                itemCount = state.filteredProductCount,
+                onApplyFilters = { onEvent(SearchContract.Event.OnUpdateFilterClick) }
+            )
+        }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
@@ -60,8 +55,8 @@ fun SearchFilterScreen(
             // "오늘드림", "픽업" 체크박스 섹션
             item {
                 FilterToggleSection(
-                    selectedOption = selectedDeliveryOption,
-                    onOptionClick = onDeliveryOptionClick
+                    selectedOption = state.selectedDeliveryOption,
+                    onOptionClick = { onEvent(SearchContract.Event.OnDeliveryOptionChanged(it)) }
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.2f),
@@ -75,21 +70,27 @@ fun SearchFilterScreen(
                 //카테고리
                 ExpandableFilterSection(
                     title = stringResource(R.string.category_label),
-                    isExpanded = isCategorySectionExpanded,
-                    onClick = onFilterCategoryClick
+                    isExpanded = state.isCategorySectionExpanded,
+                    onClick = { onEvent(SearchContract.Event.OnFilterCategoryClick) }
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
                     thickness = 1.dp
                 )
                 //서브 카테고리
-                if (isCategorySectionExpanded) {
+                if (state.isCategorySectionExpanded) {
                     SubFilterCategory(
-                        categoryFilters = categoryFilters,
-                        expandedCategoryName = expandedCategoryName,
-                        selectedSubCategories = selectedSubCategories,
-                        onCategoryHeaderClick = onCategoryHeaderClick,
-                        onSubCategoryClick = onSubCategoryClick
+                        categoryFilters = state.categoryFilters,
+                        expandedCategoryName = state.expandedCategoryName,
+                        selectedSubCategories = state.selectedSubCategories,
+                        onCategoryHeaderClick = {
+                            onEvent(
+                                SearchContract.Event.OnCategoryHeaderClick(
+                                    it
+                                )
+                            )
+                        },
+                        onSubCategoryClick = { onEvent(SearchContract.Event.OnSubCategoryClick(it)) }
                     )
                 }
             }
@@ -103,7 +104,10 @@ fun SearchFilterScreen(
             }
 
             item {
-                ExpandableFilterSection(title = stringResource(R.string.product_view_mode_label), details = "2단")
+                ExpandableFilterSection(
+                    title = stringResource(R.string.product_view_mode_label),
+                    details = "2단"
+                )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
                     thickness = 1.dp
@@ -118,8 +122,8 @@ private fun SubFilterCategory(
     categoryFilters: List<FilterCategoriesModel>,
     expandedCategoryName: String?,
     selectedSubCategories: Set<String>,
-    onCategoryHeaderClick: (String) -> Unit,
-    onSubCategoryClick: (String) -> Unit,
+    onCategoryHeaderClick: (categoryName: String) -> Unit,
+    onSubCategoryClick: (subCategoryName: String) -> Unit,
 ) {
     Column {
         categoryFilters.forEach { category ->
@@ -258,10 +262,10 @@ fun ExpandableFilterSection(
 @Composable
 fun FilterBottomButton(
     itemCount: Int,
-    onClick: () -> Unit
+    onApplyFilters: () -> Unit
 ) {
     Button(
-        onClick = onClick,
+        onClick = onApplyFilters,
         modifier = Modifier
             .fillMaxWidth()
             .padding(Spacing.spacing4),
@@ -279,3 +283,4 @@ fun FilterBottomButton(
         )
     }
 }
+
