@@ -10,6 +10,7 @@ import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
 import com.chan.search.ui.model.filter.DeliveryOption
+import com.chan.search.ui.model.filter.FilterCategoriesModel
 
 class SearchContract {
 
@@ -24,9 +25,13 @@ class SearchContract {
         object OnClearAllRecentSearches : Event()
 
         object OnUpdateFilterClick : Event()
+        object OnFilterClear : Event()
 
         data class OnFilterChipClicked(val chip: SearchResultFilterChipModel) : Event()
         data class OnDeliveryOptionChanged(val option: DeliveryOption) : Event()
+        data class OnCategoryHeaderClick(val categoryName: String) : Event()
+        data class OnSubCategoryClick(val subCategoryName: String) : Event()
+        object OnFilterCategoryClick : Event()
     }
 
     data class State(
@@ -45,7 +50,13 @@ class SearchContract {
         val showFilter: Boolean = false,
 
         val selectedDeliveryOption: DeliveryOption? = null,
-        val filterChips: List<SearchResultFilterChipModel> = emptyList()
+        val filterChips: List<SearchResultFilterChipModel> = emptyList(),
+
+        val categoryFilters: List<FilterCategoriesModel> = emptyList(),
+        val expandedCategoryName: String? = null,
+        val selectedSubCategories: Set<String> = emptySet(),
+        val isCategorySectionExpanded: Boolean = false,
+        val filteredProductCount: Int = 0
     ) : ViewState
 
     sealed class Effect : ViewEffect {
