@@ -15,4 +15,5 @@
     <string name="price_label">가격</string>
 
     <string name="filter_label">필터</string>
+    <string name="product_view_mode_label">상품 보기 방식</string>
 </resources>
