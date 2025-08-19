@@ -1,6 +1,7 @@
 package com.chan.search.domain.repository
 
 import com.chan.domain.ProductVO
+import com.chan.search.domain.model.FilterCategoriesVO
 import com.chan.search.domain.model.SearchHistoryVO
 import kotlinx.coroutines.flow.Flow
 
@@ -13,4 +14,8 @@ interface SearchRepository {
     suspend fun clearAll()
 
     suspend fun getSearchResultProducts(search: String): List<ProductVO>
+
+    suspend fun getFilterCategories(): List<FilterCategoriesVO>
+    suspend fun getFilteredProducts(subCategoryNames: Set<String>): List<ProductVO>
+    suspend fun getFilteredProductCount(subCategoryNames: Set<String>): Int
 }
