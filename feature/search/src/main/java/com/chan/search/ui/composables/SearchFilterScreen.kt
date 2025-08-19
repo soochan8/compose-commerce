@@ -3,11 +3,11 @@ package com.chan.search.ui.composables
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -21,21 +21,37 @@ import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.search.R
 import com.chan.search.ui.model.filter.DeliveryOption
+import com.chan.search.ui.model.filter.FilterCategoriesModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchFilterScreen(
     selectedDeliveryOption: DeliveryOption?,
+    categoryFilters: List<FilterCategoriesModel>,
+    expandedCategoryName: String?,
+    selectedSubCategories: Set<String>,
+    isCategorySectionExpanded: Boolean,
+    filteredProductCount: Int,
     onClose: () -> Unit,
     onDeliveryOptionClick: (DeliveryOption) -> Unit,
+    onCategoryHeaderClick: (String) -> Unit,
+    onSubCategoryClick: (String) -> Unit,
+    onFilterCategoryClick: () -> Unit,
+    onFilterClear: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Scaffold(
         modifier = modifier,
         containerColor = White,
-        topBar = { FilterHeader(onClose = onClose) },
-        bottomBar = { FilterBottomButton(itemCount = 2878) }
+        topBar = { FilterHeader(
+            onClose = onClose,
+            onFilterClear = onFilterClear
+        ) },
+        bottomBar = { FilterBottomButton(
+            itemCount = filteredProductCount,
+            onClick = onClose
+        ) }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
@@ -55,12 +71,31 @@ fun SearchFilterScreen(
                 )
             }
 
-            // 확장 가능한 필터 카테고리 목록
-            val filterCategories = listOf(
-                "카테고리", "가격"
-            )
-            items(filterCategories) { categoryTitle ->
-                ExpandableFilterSection(title = categoryTitle)
+            item {
+                //카테고리
+                ExpandableFilterSection(
+                    title = stringResource(R.string.category_label),
+                    isExpanded = isCategorySectionExpanded,
+                    onClick = onFilterCategoryClick
+                )
+                HorizontalDivider(
+                    color = Color.LightGray.copy(alpha = 0.5f),
+                    thickness = 1.dp
+                )
+                //서브 카테고리
+                if (isCategorySectionExpanded) {
+                    SubFilterCategory(
+                        categoryFilters = categoryFilters,
+                        expandedCategoryName = expandedCategoryName,
+                        selectedSubCategories = selectedSubCategories,
+                        onCategoryHeaderClick = onCategoryHeaderClick,
+                        onSubCategoryClick = onSubCategoryClick
+                    )
+                }
+            }
+
+            item {
+                ExpandableFilterSection(title = stringResource(R.string.price_label))
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
                     thickness = 1.dp
@@ -68,7 +103,7 @@ fun SearchFilterScreen(
             }
 
             item {
-                ExpandableFilterSection(title = "상품 보기 방식", details = "2단")
+                ExpandableFilterSection(title = stringResource(R.string.product_view_mode_label), details = "2단")
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
                     thickness = 1.dp
@@ -78,17 +113,54 @@ fun SearchFilterScreen(
     }
 }
 
+@Composable
+private fun SubFilterCategory(
+    categoryFilters: List<FilterCategoriesModel>,
+    expandedCategoryName: String?,
+    selectedSubCategories: Set<String>,
+    onCategoryHeaderClick: (String) -> Unit,
+    onSubCategoryClick: (String) -> Unit,
+) {
+    Column {
+        categoryFilters.forEach { category ->
+            ExpandableFilterSection(
+                title = category.name,
+                isExpanded = expandedCategoryName == category.name,
+                onClick = { onCategoryHeaderClick(category.name) }
+            )
+            if (expandedCategoryName == category.name) {
+                Column(modifier = Modifier.padding(start = Spacing.spacing4)) {
+                    category.subCategories.forEach { subCategory ->
+                        FilterCheckboxItem(
+                            label = subCategory.subCategoryName,
+                            checked = selectedSubCategories.contains(subCategory.subCategoryName),
+                            onOptionClick = { onSubCategoryClick(subCategory.subCategoryName) }
+                        )
+                    }
+                }
+            }
+            HorizontalDivider(
+                color = Color.LightGray.copy(alpha = 0.5f),
+                thickness = 1.dp
+            )
+        }
+    }
+}
+
 // 상단 헤더: "필터", 초기화, 닫기 버튼
 @Composable
-fun FilterHeader(onClose: () -> Unit) {
+fun FilterHeader(
+    onClose: () -> Unit,
+    onFilterClear: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Spacing.spacing4, vertical = Spacing.spacing3),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(R.string.filter_label),
+            text = "필터",
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold
         )
@@ -96,9 +168,11 @@ fun FilterHeader(onClose: () -> Unit) {
         Icon(
             imageVector = Icons.Default.Refresh,
             contentDescription = "필터 초기화",
-            modifier = Modifier.size(28.dp)
+            modifier = Modifier
+                .size(28.dp)
+                .clickable(onClick = onFilterClear)
         )
-        Spacer(Modifier.width(Spacing.spacing4))
+        Spacer(Modifier.width(16.dp))
         Icon(
             imageVector = Icons.Default.Close,
             contentDescription = "필터 닫기",
@@ -145,10 +219,16 @@ fun FilterCheckboxItem(label: String, checked: Boolean, onOptionClick: () -> Uni
 }
 
 @Composable
-fun ExpandableFilterSection(title: String, details: String? = null) {
+fun ExpandableFilterSection(
+    title: String,
+    details: String? = null,
+    isExpanded: Boolean = false,
+    onClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(onClick = onClick)
             .padding(Spacing.spacing4),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -158,16 +238,16 @@ fun ExpandableFilterSection(title: String, details: String? = null) {
             fontWeight = FontWeight.Bold
         )
         Spacer(Modifier.weight(1f))
-        if (details != null) {
+        details?.let { subDetailText ->
             Text(
-                text = details,
+                text = subDetailText,
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Gray,
                 modifier = Modifier.padding(end = Spacing.spacing2)
             )
         }
         Icon(
-            imageVector = Icons.Default.KeyboardArrowDown,
+            imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
             contentDescription = "더보기",
             tint = Color.Gray
         )
@@ -176,10 +256,12 @@ fun ExpandableFilterSection(title: String, details: String? = null) {
 
 // 하단 "N개 상품 보기" 버튼
 @Composable
-fun FilterBottomButton(itemCount: Int) {
+fun FilterBottomButton(
+    itemCount: Int,
+    onClick: () -> Unit
+) {
     Button(
-        // onClick을 비워두어 클릭 비활성화
-        onClick = { },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(Spacing.spacing4),

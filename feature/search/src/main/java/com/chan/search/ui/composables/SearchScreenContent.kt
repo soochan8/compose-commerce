@@ -33,11 +33,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.chan.android.model.ProductModel
+import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.appTypography
 import com.chan.android.ui.theme.dividerColor
-import com.chan.android.ui.theme.Black
 import com.chan.navigation.Routes
 import com.chan.search.R
 import com.chan.search.ui.composables.result.SearchResultScreen
@@ -45,6 +45,7 @@ import com.chan.search.ui.model.SearchHistoryModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
 import com.chan.search.ui.model.filter.DeliveryOption
+import com.chan.search.ui.model.filter.FilterCategoriesModel
 
 @Composable
 fun SearchScreenContent(
@@ -59,6 +60,11 @@ fun SearchScreenContent(
     searchResultProducts: List<ProductModel>,
     showFilter: Boolean,
     selectedDeliveryOption: DeliveryOption?,
+    categoryFilters: List<FilterCategoriesModel>,
+    expandedCategoryName: String?,
+    selectedSubCategories: Set<String>,
+    isCategorySectionExpanded: Boolean,
+    filteredProductCount: Int,
     onSearchChanged: (String) -> Unit,
     onClearSearch: () -> Unit,
     onSearchClick: (String) -> Unit,
@@ -68,8 +74,12 @@ fun SearchScreenContent(
     onSearchResultItemClick: (String) -> Unit,
     onClickBack: () -> Unit,
     onClickCart: () -> Unit,
+    onFilterClear: () -> Unit,
     onUpdateFilterClick: () -> Unit,
-    onDeliveryOptionClick: (DeliveryOption) -> Unit
+    onDeliveryOptionClick: (DeliveryOption) -> Unit,
+    onCategoryHeaderClick: (String) -> Unit,
+    onSubCategoryClick: (String) -> Unit,
+    onFilterCategoryClick: () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -179,8 +189,17 @@ fun SearchScreenContent(
             ) {
                 SearchFilterScreen(
                     selectedDeliveryOption = selectedDeliveryOption,
+                    categoryFilters = categoryFilters,
+                    expandedCategoryName = expandedCategoryName,
+                    selectedSubCategories = selectedSubCategories,
+                    isCategorySectionExpanded = isCategorySectionExpanded,
+                    filteredProductCount = filteredProductCount,
                     onClose = onUpdateFilterClick,
                     onDeliveryOptionClick = onDeliveryOptionClick,
+                    onCategoryHeaderClick = onCategoryHeaderClick,
+                    onSubCategoryClick = onSubCategoryClick,
+                    onFilterCategoryClick = onFilterCategoryClick,
+                    onFilterClear = onFilterClear,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .fillMaxHeight()
