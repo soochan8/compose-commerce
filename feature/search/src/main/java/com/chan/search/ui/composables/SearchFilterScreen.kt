@@ -37,14 +37,14 @@ fun SearchFilterScreen(
         containerColor = White,
         topBar = {
             FilterHeader(
-                onClose = { onEvent(SearchContract.Event.OnUpdateFilterClick) },
-                onFilterClear = { onEvent(SearchContract.Event.OnFilterClear) }
+                onClose = { onEvent(SearchContract.Event.Filter.OnFilterClick) },
+                onFilterClear = { onEvent(SearchContract.Event.Filter.OnClear) }
             )
         },
         bottomBar = {
             FilterBottomButton(
                 itemCount = state.filteredProductCount,
-                onApplyFilters = { onEvent(SearchContract.Event.OnUpdateFilterClick) }
+                onApplyFilters = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
             )
         }
     ) { paddingValues ->
@@ -56,7 +56,7 @@ fun SearchFilterScreen(
             item {
                 FilterToggleSection(
                     selectedOption = state.selectedDeliveryOption,
-                    onOptionClick = { onEvent(SearchContract.Event.OnDeliveryOptionChanged(it)) }
+                    onOptionClick = { onEvent(SearchContract.Event.Filter.OnDeliveryOptionChanged(it)) }
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.2f),
@@ -71,7 +71,7 @@ fun SearchFilterScreen(
                 ExpandableFilterSection(
                     title = stringResource(R.string.category_label),
                     isExpanded = state.isCategorySectionExpanded,
-                    onClick = { onEvent(SearchContract.Event.OnFilterCategoryClick) }
+                    onClick = { onEvent(SearchContract.Event.Filter.OnCategoryClick) }
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
@@ -85,12 +85,12 @@ fun SearchFilterScreen(
                         selectedSubCategories = state.selectedSubCategories,
                         onCategoryHeaderClick = {
                             onEvent(
-                                SearchContract.Event.OnCategoryHeaderClick(
+                                SearchContract.Event.Filter.OnCategoryHeaderClick(
                                     it
                                 )
                             )
                         },
-                        onSubCategoryClick = { onEvent(SearchContract.Event.OnSubCategoryClick(it)) }
+                        onSubCategoryClick = { onEvent(SearchContract.Event.Filter.OnSubCategoryClick(it)) }
                     )
                 }
             }
@@ -283,4 +283,5 @@ fun FilterBottomButton(
         )
     }
 }
+
 
