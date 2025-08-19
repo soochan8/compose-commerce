@@ -1,10 +1,11 @@
 package com.chan.search.data.mappers
 
+import com.chan.database.dto.FilterCategoriesDto
 import com.chan.database.entity.ProductEntity
 import com.chan.database.entity.search.SearchHistoryEntity
 import com.chan.domain.ProductVO
+import com.chan.search.domain.model.FilterCategoriesVO
 import com.chan.search.domain.model.SearchHistoryVO
-import com.chan.search.ui.model.SearchHistoryModel
 
 fun ProductEntity.Categories.SubCategories.Products.toDomain(): ProductVO {
     return ProductVO(
