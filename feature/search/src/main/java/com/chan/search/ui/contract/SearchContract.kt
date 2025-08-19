@@ -24,14 +24,16 @@ class SearchContract {
         data class OnRemoveSearchKeyword(val search: String) : Event()
         object OnClearAllRecentSearches : Event()
 
-        object OnUpdateFilterClick : Event()
-        object OnFilterClear : Event()
 
-        data class OnFilterChipClicked(val chip: SearchResultFilterChipModel) : Event()
-        data class OnDeliveryOptionChanged(val option: DeliveryOption) : Event()
-        data class OnCategoryHeaderClick(val categoryName: String) : Event()
-        data class OnSubCategoryClick(val subCategoryName: String) : Event()
-        object OnFilterCategoryClick : Event()
+        sealed class Filter : Event() {
+            data class OnDeliveryOptionChanged(val option: DeliveryOption) : Filter()
+            data class OnCategoryHeaderClick(val categoryName: String) : Filter()
+            data class OnSubCategoryClick(val subCategoryName: String) : Filter()
+            data class OnFilterChipClicked(val chip: SearchResultFilterChipModel) : Filter()
+            object OnCategoryClick : Filter()
+            object OnFilterClick : Filter()
+            object OnClear : Filter()
+        }
     }
 
     data class State(
@@ -47,17 +49,21 @@ class SearchContract {
         val searchResultProducts: List<ProductModel> = emptyList(),
         val currentTime: String = "",
         val showSearchResult: Boolean = false,
-        val showFilter: Boolean = false,
 
+        val filter: FilterState = FilterState()
+
+    ) : ViewState
+
+    data class FilterState (
+        val showFilter: Boolean = false,
         val selectedDeliveryOption: DeliveryOption? = null,
         val filterChips: List<SearchResultFilterChipModel> = emptyList(),
-
         val categoryFilters: List<FilterCategoriesModel> = emptyList(),
         val expandedCategoryName: String? = null,
         val selectedSubCategories: Set<String> = emptySet(),
         val isCategorySectionExpanded: Boolean = false,
         val filteredProductCount: Int = 0
-    ) : ViewState
+    )
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()

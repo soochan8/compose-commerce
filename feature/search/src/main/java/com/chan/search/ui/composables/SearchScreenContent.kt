@@ -133,7 +133,7 @@ fun SearchScreenContent(
         }
 
         AnimatedVisibility(
-            visible = state.showFilter,
+            visible = state.filter.showFilter,
             enter = fadeIn(animationSpec = tween(300)),
             exit = fadeOut(animationSpec = tween(300))
         ) {
@@ -144,13 +144,13 @@ fun SearchScreenContent(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
-                        onClick = { onEvent(SearchContract.Event.OnUpdateFilterClick) }
+                        onClick = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
                     )
             )
         }
 
         AnimatedVisibility(
-            visible = state.showFilter,
+            visible = state.filter.showFilter,
             enter = slideInHorizontally(
                 initialOffsetX = { it },
                 animationSpec = tween(300)
