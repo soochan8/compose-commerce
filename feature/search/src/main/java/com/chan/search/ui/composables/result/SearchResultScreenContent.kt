@@ -61,7 +61,7 @@ fun SearchResultScreenContent(
     products: List<ProductModel>,
     filters: List<SearchResultFilterChipModel>,
     onToggleFilter: (SearchResultFilterChipModel) -> Unit,
-    onNavigateToFilter: () -> Unit,
+    onFilterClick: () -> Unit,
     onProductClick: (String) -> Unit
 ) {
     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -95,7 +95,7 @@ fun SearchResultScreenContent(
                     FilterChipsRow(
                         filters = filters,
                         onToggleFilter = onToggleFilter,
-                        onNavigateToFilter = onNavigateToFilter,
+                        onFilterClick = onFilterClick,
                     )
                     HorizontalDivider(color = dividerColor, thickness = 1.dp)
                 }
@@ -224,7 +224,7 @@ private fun SearchResultTabRow(
 private fun FilterChipsRow(
     filters: List<SearchResultFilterChipModel>,
     onToggleFilter: (SearchResultFilterChipModel) -> Unit,
-    onNavigateToFilter: () -> Unit,
+    onFilterClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxWidth()) {
@@ -239,7 +239,7 @@ private fun FilterChipsRow(
                 FilterChip(
                     filter = filter,
                     onToggleFilter = onToggleFilter,
-                    onNavigateToFilter = onNavigateToFilter,
+                    onFilterClick = onFilterClick,
                 )
             }
         }
@@ -250,7 +250,7 @@ private fun FilterChipsRow(
 private fun FilterChip(
     filter: SearchResultFilterChipModel,
     onToggleFilter: (SearchResultFilterChipModel) -> Unit,
-    onNavigateToFilter: () -> Unit,
+    onFilterClick: () -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val containerColor = if (filter.isSelected) Color.Black else Color.White
@@ -267,7 +267,7 @@ private fun FilterChip(
                 onClick = {
                     when (filter.chipType) {
                         FilterChipType.TOGGLE -> onToggleFilter(filter)
-                        FilterChipType.DROP_DOWN -> onNavigateToFilter()
+                        FilterChipType.DROP_DOWN -> onFilterClick()
                     }
                 }
             )
