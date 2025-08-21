@@ -43,7 +43,7 @@ fun SearchFilterScreen(
         },
         bottomBar = {
             FilterBottomButton(
-                itemCount = state.filteredProductCount,
+                itemCount = state.filter.filteredProductCount,
                 onApplyFilters = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
             )
         }
@@ -55,7 +55,7 @@ fun SearchFilterScreen(
             // "오늘드림", "픽업" 체크박스 섹션
             item {
                 FilterToggleSection(
-                    selectedOption = state.selectedDeliveryOption,
+                    selectedOption = state.filter.selectedDeliveryOption,
                     onOptionClick = { onEvent(SearchContract.Event.Filter.OnDeliveryOptionChanged(it)) }
                 )
                 HorizontalDivider(
@@ -70,7 +70,7 @@ fun SearchFilterScreen(
                 //카테고리
                 ExpandableFilterSection(
                     title = stringResource(R.string.category_label),
-                    isExpanded = state.isCategorySectionExpanded,
+                    isExpanded = state.filter.isCategorySectionExpanded,
                     onClick = { onEvent(SearchContract.Event.Filter.OnCategoryClick) }
                 )
                 HorizontalDivider(
@@ -78,11 +78,11 @@ fun SearchFilterScreen(
                     thickness = 1.dp
                 )
                 //서브 카테고리
-                if (state.isCategorySectionExpanded) {
+                if (state.filter.isCategorySectionExpanded) {
                     SubFilterCategory(
-                        categoryFilters = state.categoryFilters,
-                        expandedCategoryName = state.expandedCategoryName,
-                        selectedSubCategories = state.selectedSubCategories,
+                        categoryFilters = state.filter.categoryFilters,
+                        expandedCategoryName = state.filter.expandedCategoryName,
+                        selectedSubCategories = state.filter.selectedSubCategories,
                         onCategoryHeaderClick = {
                             onEvent(
                                 SearchContract.Event.Filter.OnCategoryHeaderClick(
@@ -283,5 +283,7 @@ fun FilterBottomButton(
         )
     }
 }
+
+
 
 
