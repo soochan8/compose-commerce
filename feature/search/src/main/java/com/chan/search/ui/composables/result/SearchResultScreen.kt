@@ -11,14 +11,8 @@ fun SearchResultScreen(
 ) {
 
     SearchResultScreenContent(
-        products = state.searchResultProducts,
-        filters = state.filter.filterChips,
-        onToggleFilter = {
-            onEvent(SearchContract.Event.Filter.OnFilterChipClicked(it))
-        },
-        onFilterClick = {
-            onEvent(SearchContract.Event.Filter.OnFilterClick)
-        },
+        state = state,
+        onEvent = onEvent,
         onProductClick = { productId ->
             onProductClick(productId)
         }
