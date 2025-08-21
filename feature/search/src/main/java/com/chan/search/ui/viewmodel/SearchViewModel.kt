@@ -128,6 +128,10 @@ class SearchViewModel @Inject constructor(
                     )
                 )
             }
+
+            is SearchContract.Event.TabRow.OnResultTabSelected -> {
+                setState { copy(resultTabRow = resultTabRow.copy(resultSelectedTabIndex = event.index)) }
+            }
         }
     }
 
