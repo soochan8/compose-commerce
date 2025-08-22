@@ -1,0 +1,5114 @@
+[
+  {
+    "productId": "p1",
+    "productName": "더샘 제품 1",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품1",
+    "originalPrice": 10823,
+    "discountPercent": 10,
+    "discountPrice": 9740,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 935,
+    "categoryIds": [
+      "c81",
+      "c115",
+      "c53",
+      "c68",
+      "c101",
+      "c114"
+    ]
+  },
+  {
+    "productId": "p2",
+    "productName": "더샘 제품 2",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품2",
+    "originalPrice": 33182,
+    "discountPercent": 30,
+    "discountPrice": 23227,
+    "tags": [
+      "SALE",
+      "BEST"
+    ],
+    "reviewRating": 4.9,
+    "reviewCount": 4522,
+    "categoryIds": [
+      "c67",
+      "c116",
+      "c38",
+      "c2",
+      "c61",
+      "c86",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p3",
+    "productName": "더샘 제품 3",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품3",
+    "originalPrice": 41070,
+    "discountPercent": 40,
+    "discountPrice": 24642,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 1846,
+    "categoryIds": [
+      "c18",
+      "c76"
+    ]
+  },
+  {
+    "productId": "p4",
+    "productName": "더샘 제품 4",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품4",
+    "originalPrice": 3506,
+    "discountPercent": 20,
+    "discountPrice": 2804,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 2359,
+    "categoryIds": [
+      "c29",
+      "c49",
+      "c59",
+      "c55"
+    ]
+  },
+  {
+    "productId": "p5",
+    "productName": "더샘 제품 5",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품5",
+    "originalPrice": 43603,
+    "discountPercent": 20,
+    "discountPrice": 34882,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 125,
+    "categoryIds": [
+      "c55",
+      "c5",
+      "c82"
+    ]
+  },
+  {
+    "productId": "p6",
+    "productName": "더샘 제품 6",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품6",
+    "originalPrice": 20521,
+    "discountPercent": 20,
+    "discountPrice": 16416,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 223,
+    "categoryIds": [
+      "c98",
+      "c57",
+      "c17",
+      "c3",
+      "c34",
+      "c47"
+    ]
+  },
+  {
+    "productId": "p7",
+    "productName": "더샘 제품 7",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품7",
+    "originalPrice": 35325,
+    "discountPercent": 10,
+    "discountPrice": 31792,
+    "tags": [
+      "NEW",
+      "오늘드림"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 4502,
+    "categoryIds": [
+      "c14",
+      "c43",
+      "c31"
+    ]
+  },
+  {
+    "productId": "p8",
+    "productName": "더샘 제품 8",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품8",
+    "originalPrice": 34332,
+    "discountPercent": 40,
+    "discountPrice": 20599,
+    "tags": [],
+    "reviewRating": 3.3,
+    "reviewCount": 379,
+    "categoryIds": [
+      "c5",
+      "c120",
+      "c49",
+      "c43"
+    ]
+  },
+  {
+    "productId": "p9",
+    "productName": "더샘 제품 9",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품9",
+    "originalPrice": 16078,
+    "discountPercent": 30,
+    "discountPrice": 11254,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 4.9,
+    "reviewCount": 785,
+    "categoryIds": [
+      "c88",
+      "c75",
+      "c51",
+      "c10",
+      "c17",
+      "c105",
+      "c116"
+    ]
+  },
+  {
+    "productId": "p10",
+    "productName": "더샘 제품 10",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품10",
+    "originalPrice": 29069,
+    "discountPercent": 30,
+    "discountPrice": 20348,
+    "tags": [],
+    "reviewRating": 4.8,
+    "reviewCount": 2972,
+    "categoryIds": [
+      "c59",
+      "c89",
+      "c108"
+    ]
+  },
+  {
+    "productId": "p11",
+    "productName": "더샘 제품 11",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품11",
+    "originalPrice": 21714,
+    "discountPercent": 10,
+    "discountPrice": 19542,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 2754,
+    "categoryIds": [
+      "c95",
+      "c63",
+      "c6",
+      "c53",
+      "c62",
+      "c66",
+      "c92"
+    ]
+  },
+  {
+    "productId": "p12",
+    "productName": "더샘 제품 12",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품12",
+    "originalPrice": 23607,
+    "discountPercent": 20,
+    "discountPrice": 18885,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 1453,
+    "categoryIds": [
+      "c51",
+      "c42",
+      "c77",
+      "c19",
+      "c84"
+    ]
+  },
+  {
+    "productId": "p13",
+    "productName": "더샘 제품 13",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품13",
+    "originalPrice": 6771,
+    "discountPercent": 40,
+    "discountPrice": 4062,
+    "tags": [],
+    "reviewRating": 4.5,
+    "reviewCount": 2531,
+    "categoryIds": [
+      "c78",
+      "c46",
+      "c7",
+      "c52"
+    ]
+  },
+  {
+    "productId": "p14",
+    "productName": "더샘 제품 14",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품14",
+    "originalPrice": 48467,
+    "discountPercent": 10,
+    "discountPrice": 43620,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 1839,
+    "categoryIds": [
+      "c45",
+      "c114",
+      "c21",
+      "c30",
+      "c44"
+    ]
+  },
+  {
+    "productId": "p15",
+    "productName": "더샘 제품 15",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품15",
+    "originalPrice": 24016,
+    "discountPercent": 30,
+    "discountPrice": 16811,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 15,
+    "categoryIds": [
+      "c46",
+      "c26",
+      "c13",
+      "c60"
+    ]
+  },
+  {
+    "productId": "p16",
+    "productName": "더샘 제품 16",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품16",
+    "originalPrice": 7880,
+    "discountPercent": 30,
+    "discountPrice": 5516,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.1,
+    "reviewCount": 3935,
+    "categoryIds": [
+      "c111",
+      "c24",
+      "c79",
+      "c51"
+    ]
+  },
+  {
+    "productId": "p17",
+    "productName": "더샘 제품 17",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품17",
+    "originalPrice": 18010,
+    "discountPercent": 50,
+    "discountPrice": 9005,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 680,
+    "categoryIds": [
+      "c46",
+      "c119",
+      "c8",
+      "c32",
+      "c55"
+    ]
+  },
+  {
+    "productId": "p18",
+    "productName": "더샘 제품 18",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품18",
+    "originalPrice": 31210,
+    "discountPercent": 40,
+    "discountPrice": 18726,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 4613,
+    "categoryIds": [
+      "c17",
+      "c7",
+      "c3"
+    ]
+  },
+  {
+    "productId": "p19",
+    "productName": "더샘 제품 19",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품19",
+    "originalPrice": 20399,
+    "discountPercent": 30,
+    "discountPrice": 14279,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 2716,
+    "categoryIds": [
+      "c21",
+      "c9",
+      "c43",
+      "c58"
+    ]
+  },
+  {
+    "productId": "p20",
+    "productName": "더샘 제품 20",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품20",
+    "originalPrice": 39886,
+    "discountPercent": 50,
+    "discountPrice": 19943,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 4542,
+    "categoryIds": [
+      "c51",
+      "c49",
+      "c53",
+      "c80",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p21",
+    "productName": "더샘 제품 21",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품21",
+    "originalPrice": 33480,
+    "discountPercent": 30,
+    "discountPrice": 23436,
+    "tags": [],
+    "reviewRating": 4.2,
+    "reviewCount": 3127,
+    "categoryIds": [
+      "c80",
+      "c62",
+      "c95",
+      "c60",
+      "c100"
+    ]
+  },
+  {
+    "productId": "p22",
+    "productName": "더샘 제품 22",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품22",
+    "originalPrice": 23835,
+    "discountPercent": 50,
+    "discountPrice": 11917,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 4925,
+    "categoryIds": [
+      "c90",
+      "c63",
+      "c117"
+    ]
+  },
+  {
+    "productId": "p23",
+    "productName": "더샘 제품 23",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품23",
+    "originalPrice": 44318,
+    "discountPercent": 50,
+    "discountPrice": 22159,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 2211,
+    "categoryIds": [
+      "c11",
+      "c24",
+      "c19",
+      "c23",
+      "c105"
+    ]
+  },
+  {
+    "productId": "p24",
+    "productName": "더샘 제품 24",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품24",
+    "originalPrice": 31591,
+    "discountPercent": 50,
+    "discountPrice": 15795,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 3.0,
+    "reviewCount": 2613,
+    "categoryIds": [
+      "c52",
+      "c49",
+      "c8",
+      "c76",
+      "c85"
+    ]
+  },
+  {
+    "productId": "p25",
+    "productName": "더샘 제품 25",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품25",
+    "originalPrice": 33129,
+    "discountPercent": 10,
+    "discountPrice": 29816,
+    "tags": [],
+    "reviewRating": 5.0,
+    "reviewCount": 382,
+    "categoryIds": [
+      "c31",
+      "c81",
+      "c77",
+      "c41",
+      "c45",
+      "c61",
+      "c88"
+    ]
+  },
+  {
+    "productId": "p26",
+    "productName": "더샘 제품 26",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품26",
+    "originalPrice": 33050,
+    "discountPercent": 10,
+    "discountPrice": 29745,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 775,
+    "categoryIds": [
+      "c79",
+      "c84",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p27",
+    "productName": "더샘 제품 27",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품27",
+    "originalPrice": 48323,
+    "discountPercent": 30,
+    "discountPrice": 33826,
+    "tags": [],
+    "reviewRating": 4.6,
+    "reviewCount": 1696,
+    "categoryIds": [
+      "c118",
+      "c117",
+      "c84"
+    ]
+  },
+  {
+    "productId": "p28",
+    "productName": "더샘 제품 28",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품28",
+    "originalPrice": 5012,
+    "discountPercent": 10,
+    "discountPrice": 4510,
+    "tags": [],
+    "reviewRating": 4.6,
+    "reviewCount": 117,
+    "categoryIds": [
+      "c62",
+      "c51",
+      "c2",
+      "c11",
+      "c13",
+      "c16",
+      "c95",
+      "c105"
+    ]
+  },
+  {
+    "productId": "p29",
+    "productName": "더샘 제품 29",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품29",
+    "originalPrice": 22008,
+    "discountPercent": 50,
+    "discountPrice": 11004,
+    "tags": [],
+    "reviewRating": 3.1,
+    "reviewCount": 2859,
+    "categoryIds": [
+      "c73",
+      "c116",
+      "c44",
+      "c71",
+      "c87"
+    ]
+  },
+  {
+    "productId": "p30",
+    "productName": "더샘 제품 30",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품30",
+    "originalPrice": 21779,
+    "discountPercent": 20,
+    "discountPrice": 17423,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 4396,
+    "categoryIds": [
+      "c72",
+      "c59",
+      "c15",
+      "c44",
+      "c116"
+    ]
+  },
+  {
+    "productId": "p31",
+    "productName": "더샘 제품 31",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품31",
+    "originalPrice": 28136,
+    "discountPercent": 40,
+    "discountPrice": 16881,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 1553,
+    "categoryIds": [
+      "c29",
+      "c61"
+    ]
+  },
+  {
+    "productId": "p32",
+    "productName": "더샘 제품 32",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품32",
+    "originalPrice": 7236,
+    "discountPercent": 50,
+    "discountPrice": 3618,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 829,
+    "categoryIds": [
+      "c120",
+      "c102"
+    ]
+  },
+  {
+    "productId": "p33",
+    "productName": "더샘 제품 33",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품33",
+    "originalPrice": 34281,
+    "discountPercent": 50,
+    "discountPrice": 17140,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 964,
+    "categoryIds": [
+      "c116",
+      "c30",
+      "c94",
+      "c54",
+      "c89",
+      "c117"
+    ]
+  },
+  {
+    "productId": "p34",
+    "productName": "더샘 제품 34",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품34",
+    "originalPrice": 30246,
+    "discountPercent": 40,
+    "discountPrice": 18147,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 549,
+    "categoryIds": [
+      "c120",
+      "c53",
+      "c116",
+      "c83"
+    ]
+  },
+  {
+    "productId": "p35",
+    "productName": "더샘 제품 35",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품35",
+    "originalPrice": 48204,
+    "discountPercent": 50,
+    "discountPrice": 24102,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 617,
+    "categoryIds": [
+      "c94",
+      "c66",
+      "c19",
+      "c47",
+      "c87"
+    ]
+  },
+  {
+    "productId": "p36",
+    "productName": "더샘 제품 36",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품36",
+    "originalPrice": 43734,
+    "discountPercent": 10,
+    "discountPrice": 39360,
+    "tags": [
+      "NEW",
+      "오늘드림"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 1071,
+    "categoryIds": [
+      "c65",
+      "c60",
+      "c105",
+      "c78",
+      "c82"
+    ]
+  },
+  {
+    "productId": "p37",
+    "productName": "더샘 제품 37",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품37",
+    "originalPrice": 30094,
+    "discountPercent": 50,
+    "discountPrice": 15047,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 1788,
+    "categoryIds": [
+      "c5",
+      "c88",
+      "c99",
+      "c1",
+      "c12"
+    ]
+  },
+  {
+    "productId": "p38",
+    "productName": "더샘 제품 38",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품38",
+    "originalPrice": 43820,
+    "discountPercent": 30,
+    "discountPrice": 30674,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 4341,
+    "categoryIds": [
+      "c85",
+      "c22",
+      "c10",
+      "c14",
+      "c27",
+      "c32"
+    ]
+  },
+  {
+    "productId": "p39",
+    "productName": "더샘 제품 39",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품39",
+    "originalPrice": 12091,
+    "discountPercent": 10,
+    "discountPrice": 10881,
+    "tags": [
+      "오늘드림",
+      "SALE"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 667,
+    "categoryIds": [
+      "c80",
+      "c99",
+      "c58",
+      "c53"
+    ]
+  },
+  {
+    "productId": "p40",
+    "productName": "더샘 제품 40",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품40",
+    "originalPrice": 16748,
+    "discountPercent": 10,
+    "discountPrice": 15073,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 4788,
+    "categoryIds": [
+      "c119",
+      "c35",
+      "c49",
+      "c51",
+      "c60",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p41",
+    "productName": "더샘 제품 41",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품41",
+    "originalPrice": 43564,
+    "discountPercent": 50,
+    "discountPrice": 21782,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 4807,
+    "categoryIds": [
+      "c54",
+      "c35",
+      "c117",
+      "c25",
+      "c28",
+      "c42"
+    ]
+  },
+  {
+    "productId": "p42",
+    "productName": "더샘 제품 42",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품42",
+    "originalPrice": 47819,
+    "discountPercent": 10,
+    "discountPrice": 43037,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 4497,
+    "categoryIds": [
+      "c50",
+      "c19",
+      "c48"
+    ]
+  },
+  {
+    "productId": "p43",
+    "productName": "더샘 제품 43",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품43",
+    "originalPrice": 46759,
+    "discountPercent": 50,
+    "discountPrice": 23379,
+    "tags": [],
+    "reviewRating": 3.9,
+    "reviewCount": 899,
+    "categoryIds": [
+      "c48",
+      "c5",
+      "c24",
+      "c40",
+      "c111"
+    ]
+  },
+  {
+    "productId": "p44",
+    "productName": "더샘 제품 44",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품44",
+    "originalPrice": 38226,
+    "discountPercent": 50,
+    "discountPrice": 19113,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 2259,
+    "categoryIds": [
+      "c22",
+      "c79",
+      "c115",
+      "c58"
+    ]
+  },
+  {
+    "productId": "p45",
+    "productName": "더샘 제품 45",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품45",
+    "originalPrice": 39420,
+    "discountPercent": 50,
+    "discountPrice": 19710,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 4017,
+    "categoryIds": [
+      "c38",
+      "c1",
+      "c16",
+      "c99",
+      "c106"
+    ]
+  },
+  {
+    "productId": "p46",
+    "productName": "더샘 제품 46",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품46",
+    "originalPrice": 49203,
+    "discountPercent": 20,
+    "discountPrice": 39362,
+    "tags": [],
+    "reviewRating": 3.4,
+    "reviewCount": 1738,
+    "categoryIds": [
+      "c21",
+      "c111",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p47",
+    "productName": "더샘 제품 47",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품47",
+    "originalPrice": 24345,
+    "discountPercent": 10,
+    "discountPrice": 21910,
+    "tags": [],
+    "reviewRating": 4.2,
+    "reviewCount": 4721,
+    "categoryIds": [
+      "c100",
+      "c91",
+      "c7",
+      "c30",
+      "c37",
+      "c39",
+      "c107"
+    ]
+  },
+  {
+    "productId": "p48",
+    "productName": "더샘 제품 48",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품48",
+    "originalPrice": 40548,
+    "discountPercent": 30,
+    "discountPrice": 28383,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 1597,
+    "categoryIds": [
+      "c91",
+      "c65",
+      "c96",
+      "c14",
+      "c20",
+      "c47"
+    ]
+  },
+  {
+    "productId": "p49",
+    "productName": "더샘 제품 49",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품49",
+    "originalPrice": 49173,
+    "discountPercent": 20,
+    "discountPrice": 39338,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 2039,
+    "categoryIds": [
+      "c13",
+      "c35",
+      "c55",
+      "c32",
+      "c117"
+    ]
+  },
+  {
+    "productId": "p50",
+    "productName": "더샘 제품 50",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품50",
+    "originalPrice": 40782,
+    "discountPercent": 30,
+    "discountPrice": 28547,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 2686,
+    "categoryIds": [
+      "c39",
+      "c62",
+      "c26",
+      "c71",
+      "c101"
+    ]
+  },
+  {
+    "productId": "p51",
+    "productName": "더샘 제품 51",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품51",
+    "originalPrice": 18930,
+    "discountPercent": 40,
+    "discountPrice": 11358,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 702,
+    "categoryIds": [
+      "c74",
+      "c15",
+      "c11",
+      "c8",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p52",
+    "productName": "더샘 제품 52",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품52",
+    "originalPrice": 14888,
+    "discountPercent": 30,
+    "discountPrice": 10421,
+    "tags": [],
+    "reviewRating": 4.1,
+    "reviewCount": 1209,
+    "categoryIds": [
+      "c111",
+      "c51",
+      "c1",
+      "c45",
+      "c53",
+      "c80",
+      "c93"
+    ]
+  },
+  {
+    "productId": "p53",
+    "productName": "더샘 제품 53",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품53",
+    "originalPrice": 33038,
+    "discountPercent": 50,
+    "discountPrice": 16519,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 4761,
+    "categoryIds": [
+      "c90",
+      "c21",
+      "c78",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p54",
+    "productName": "더샘 제품 54",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품54",
+    "originalPrice": 14395,
+    "discountPercent": 10,
+    "discountPrice": 12955,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 372,
+    "categoryIds": [
+      "c119",
+      "c59",
+      "c116",
+      "c25",
+      "c85",
+      "c93",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p55",
+    "productName": "더샘 제품 55",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품55",
+    "originalPrice": 5485,
+    "discountPercent": 30,
+    "discountPrice": 3839,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 1714,
+    "categoryIds": [
+      "c87",
+      "c108",
+      "c27",
+      "c71",
+      "c90"
+    ]
+  },
+  {
+    "productId": "p56",
+    "productName": "더샘 제품 56",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품56",
+    "originalPrice": 26274,
+    "discountPercent": 20,
+    "discountPrice": 21019,
+    "tags": [],
+    "reviewRating": 3.7,
+    "reviewCount": 2332,
+    "categoryIds": [
+      "c40",
+      "c45",
+      "c9",
+      "c43",
+      "c64",
+      "c91",
+      "c107",
+      "c108"
+    ]
+  },
+  {
+    "productId": "p57",
+    "productName": "더샘 제품 57",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품57",
+    "originalPrice": 27968,
+    "discountPercent": 30,
+    "discountPrice": 19577,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 3843,
+    "categoryIds": [
+      "c59",
+      "c83",
+      "c4",
+      "c7",
+      "c13",
+      "c41",
+      "c52"
+    ]
+  },
+  {
+    "productId": "p58",
+    "productName": "더샘 제품 58",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품58",
+    "originalPrice": 19394,
+    "discountPercent": 50,
+    "discountPrice": 9697,
+    "tags": [
+      "SALE",
+      "BEST"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 1576,
+    "categoryIds": [
+      "c17",
+      "c77",
+      "c3",
+      "c25",
+      "c29",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p59",
+    "productName": "더샘 제품 59",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품59",
+    "originalPrice": 39703,
+    "discountPercent": 20,
+    "discountPrice": 31762,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.0,
+    "reviewCount": 1271,
+    "categoryIds": [
+      "c89",
+      "c76",
+      "c3",
+      "c37",
+      "c70",
+      "c74"
+    ]
+  },
+  {
+    "productId": "p60",
+    "productName": "더샘 제품 60",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품60",
+    "originalPrice": 47187,
+    "discountPercent": 20,
+    "discountPrice": 37749,
+    "tags": [],
+    "reviewRating": 3.0,
+    "reviewCount": 432,
+    "categoryIds": [
+      "c113",
+      "c32",
+      "c90"
+    ]
+  },
+  {
+    "productId": "p61",
+    "productName": "더샘 제품 61",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품61",
+    "originalPrice": 34006,
+    "discountPercent": 40,
+    "discountPrice": 20403,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 1734,
+    "categoryIds": [
+      "c12",
+      "c24",
+      "c15",
+      "c68",
+      "c91"
+    ]
+  },
+  {
+    "productId": "p62",
+    "productName": "더샘 제품 62",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품62",
+    "originalPrice": 35547,
+    "discountPercent": 10,
+    "discountPrice": 31992,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 4436,
+    "categoryIds": [
+      "c81",
+      "c100"
+    ]
+  },
+  {
+    "productId": "p63",
+    "productName": "더샘 제품 63",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품63",
+    "originalPrice": 41032,
+    "discountPercent": 50,
+    "discountPrice": 20516,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 254,
+    "categoryIds": [
+      "c6",
+      "c109",
+      "c8",
+      "c44",
+      "c54"
+    ]
+  },
+  {
+    "productId": "p64",
+    "productName": "더샘 제품 64",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품64",
+    "originalPrice": 27068,
+    "discountPercent": 50,
+    "discountPrice": 13534,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 3844,
+    "categoryIds": [
+      "c34",
+      "c73",
+      "c35",
+      "c37",
+      "c99"
+    ]
+  },
+  {
+    "productId": "p65",
+    "productName": "더샘 제품 65",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품65",
+    "originalPrice": 32903,
+    "discountPercent": 10,
+    "discountPrice": 29612,
+    "tags": [
+      "NEW",
+      "SALE"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 3970,
+    "categoryIds": [
+      "c54",
+      "c65",
+      "c68",
+      "c25",
+      "c116"
+    ]
+  },
+  {
+    "productId": "p66",
+    "productName": "더샘 제품 66",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품66",
+    "originalPrice": 17958,
+    "discountPercent": 30,
+    "discountPrice": 12570,
+    "tags": [],
+    "reviewRating": 4.3,
+    "reviewCount": 2043,
+    "categoryIds": [
+      "c38",
+      "c32",
+      "c86",
+      "c48",
+      "c61",
+      "c101"
+    ]
+  },
+  {
+    "productId": "p67",
+    "productName": "더샘 제품 67",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품67",
+    "originalPrice": 3428,
+    "discountPercent": 20,
+    "discountPrice": 2742,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.9,
+    "reviewCount": 1546,
+    "categoryIds": [
+      "c98",
+      "c111",
+      "c11",
+      "c66",
+      "c94",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p68",
+    "productName": "더샘 제품 68",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품68",
+    "originalPrice": 30606,
+    "discountPercent": 10,
+    "discountPrice": 27545,
+    "tags": [],
+    "reviewRating": 4.2,
+    "reviewCount": 1037,
+    "categoryIds": [
+      "c110",
+      "c113",
+      "c90"
+    ]
+  },
+  {
+    "productId": "p69",
+    "productName": "더샘 제품 69",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품69",
+    "originalPrice": 21345,
+    "discountPercent": 10,
+    "discountPrice": 19210,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 4806,
+    "categoryIds": [
+      "c61",
+      "c36",
+      "c86",
+      "c34",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p70",
+    "productName": "더샘 제품 70",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품70",
+    "originalPrice": 7877,
+    "discountPercent": 20,
+    "discountPrice": 6301,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 3115,
+    "categoryIds": [
+      "c90",
+      "c8",
+      "c37",
+      "c48"
+    ]
+  },
+  {
+    "productId": "p71",
+    "productName": "더샘 제품 71",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품71",
+    "originalPrice": 25379,
+    "discountPercent": 20,
+    "discountPrice": 20303,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 3224,
+    "categoryIds": [
+      "c72",
+      "c88",
+      "c83",
+      "c6",
+      "c34",
+      "c36",
+      "c103",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p72",
+    "productName": "더샘 제품 72",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품72",
+    "originalPrice": 46341,
+    "discountPercent": 30,
+    "discountPrice": 32438,
+    "tags": [],
+    "reviewRating": 4.5,
+    "reviewCount": 4410,
+    "categoryIds": [
+      "c85",
+      "c36",
+      "c47",
+      "c7",
+      "c76"
+    ]
+  },
+  {
+    "productId": "p73",
+    "productName": "더샘 제품 73",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품73",
+    "originalPrice": 30139,
+    "discountPercent": 20,
+    "discountPrice": 24111,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 1109,
+    "categoryIds": [
+      "c21",
+      "c67",
+      "c41",
+      "c44"
+    ]
+  },
+  {
+    "productId": "p74",
+    "productName": "더샘 제품 74",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품74",
+    "originalPrice": 45101,
+    "discountPercent": 50,
+    "discountPrice": 22550,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 2284,
+    "categoryIds": [
+      "c20",
+      "c11",
+      "c9",
+      "c50",
+      "c100",
+      "c106",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p75",
+    "productName": "더샘 제품 75",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품75",
+    "originalPrice": 9818,
+    "discountPercent": 20,
+    "discountPrice": 7854,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 2399,
+    "categoryIds": [
+      "c120",
+      "c41",
+      "c22",
+      "c50",
+      "c88"
+    ]
+  },
+  {
+    "productId": "p76",
+    "productName": "더샘 제품 76",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품76",
+    "originalPrice": 34129,
+    "discountPercent": 20,
+    "discountPrice": 27303,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 893,
+    "categoryIds": [
+      "c9",
+      "c6",
+      "c52",
+      "c83",
+      "c98"
+    ]
+  },
+  {
+    "productId": "p77",
+    "productName": "더샘 제품 77",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품77",
+    "originalPrice": 7519,
+    "discountPercent": 30,
+    "discountPrice": 5263,
+    "tags": [],
+    "reviewRating": 3.8,
+    "reviewCount": 970,
+    "categoryIds": [
+      "c2",
+      "c46",
+      "c48",
+      "c114"
+    ]
+  },
+  {
+    "productId": "p78",
+    "productName": "더샘 제품 78",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품78",
+    "originalPrice": 30396,
+    "discountPercent": 30,
+    "discountPrice": 21277,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 2454,
+    "categoryIds": [
+      "c29",
+      "c106",
+      "c64"
+    ]
+  },
+  {
+    "productId": "p79",
+    "productName": "더샘 제품 79",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품79",
+    "originalPrice": 15270,
+    "discountPercent": 30,
+    "discountPrice": 10689,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 4166,
+    "categoryIds": [
+      "c66",
+      "c109",
+      "c13",
+      "c15",
+      "c21",
+      "c28",
+      "c38",
+      "c42"
+    ]
+  },
+  {
+    "productId": "p80",
+    "productName": "더샘 제품 80",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품80",
+    "originalPrice": 43268,
+    "discountPercent": 30,
+    "discountPrice": 30287,
+    "tags": [
+      "NEW",
+      "BEST"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 3971,
+    "categoryIds": [
+      "c49",
+      "c92",
+      "c84",
+      "c98"
+    ]
+  },
+  {
+    "productId": "p81",
+    "productName": "더샘 제품 81",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품81",
+    "originalPrice": 19021,
+    "discountPercent": 50,
+    "discountPrice": 9510,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 4080,
+    "categoryIds": [
+      "c94",
+      "c13",
+      "c18",
+      "c47",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p82",
+    "productName": "더샘 제품 82",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품82",
+    "originalPrice": 30114,
+    "discountPercent": 20,
+    "discountPrice": 24091,
+    "tags": [],
+    "reviewRating": 4.8,
+    "reviewCount": 3029,
+    "categoryIds": [
+      "c65",
+      "c64",
+      "c12",
+      "c16",
+      "c26",
+      "c88",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p83",
+    "productName": "더샘 제품 83",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품83",
+    "originalPrice": 40072,
+    "discountPercent": 20,
+    "discountPrice": 32057,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 3.8,
+    "reviewCount": 62,
+    "categoryIds": [
+      "c51",
+      "c58",
+      "c33",
+      "c83"
+    ]
+  },
+  {
+    "productId": "p84",
+    "productName": "더샘 제품 84",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품84",
+    "originalPrice": 17911,
+    "discountPercent": 40,
+    "discountPrice": 10746,
+    "tags": [
+      "NEW",
+      "오늘드림"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 703,
+    "categoryIds": [
+      "c25",
+      "c15",
+      "c64",
+      "c57"
+    ]
+  },
+  {
+    "productId": "p85",
+    "productName": "더샘 제품 85",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품85",
+    "originalPrice": 39048,
+    "discountPercent": 10,
+    "discountPrice": 35143,
+    "tags": [
+      "NEW",
+      "BEST"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 2991,
+    "categoryIds": [
+      "c101",
+      "c57",
+      "c3",
+      "c86",
+      "c89",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p86",
+    "productName": "더샘 제품 86",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품86",
+    "originalPrice": 35295,
+    "discountPercent": 30,
+    "discountPrice": 24706,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 1253,
+    "categoryIds": [
+      "c12",
+      "c79",
+      "c5",
+      "c25",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p87",
+    "productName": "더샘 제품 87",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품87",
+    "originalPrice": 49908,
+    "discountPercent": 40,
+    "discountPrice": 29944,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.1,
+    "reviewCount": 3043,
+    "categoryIds": [
+      "c2",
+      "c69",
+      "c26",
+      "c64",
+      "c82",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p88",
+    "productName": "더샘 제품 88",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품88",
+    "originalPrice": 25607,
+    "discountPercent": 10,
+    "discountPrice": 23046,
+    "tags": [],
+    "reviewRating": 3.3,
+    "reviewCount": 3443,
+    "categoryIds": [
+      "c91",
+      "c10",
+      "c47",
+      "c73",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p89",
+    "productName": "더샘 제품 89",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품89",
+    "originalPrice": 12042,
+    "discountPercent": 50,
+    "discountPrice": 6021,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 3951,
+    "categoryIds": [
+      "c71",
+      "c85",
+      "c1",
+      "c22",
+      "c44",
+      "c80"
+    ]
+  },
+  {
+    "productId": "p90",
+    "productName": "더샘 제품 90",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품90",
+    "originalPrice": 32630,
+    "discountPercent": 50,
+    "discountPrice": 16315,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 4.1,
+    "reviewCount": 2311,
+    "categoryIds": [
+      "c66",
+      "c119",
+      "c111",
+      "c114"
+    ]
+  },
+  {
+    "productId": "p91",
+    "productName": "더샘 제품 91",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품91",
+    "originalPrice": 32530,
+    "discountPercent": 40,
+    "discountPrice": 19518,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 130,
+    "categoryIds": [
+      "c120",
+      "c98",
+      "c36",
+      "c96",
+      "c97"
+    ]
+  },
+  {
+    "productId": "p92",
+    "productName": "더샘 제품 92",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품92",
+    "originalPrice": 43225,
+    "discountPercent": 30,
+    "discountPrice": 30257,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.9,
+    "reviewCount": 1971,
+    "categoryIds": [
+      "c21",
+      "c55",
+      "c18",
+      "c29",
+      "c114"
+    ]
+  },
+  {
+    "productId": "p93",
+    "productName": "더샘 제품 93",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품93",
+    "originalPrice": 45872,
+    "discountPercent": 10,
+    "discountPrice": 41284,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 2261,
+    "categoryIds": [
+      "c112",
+      "c97",
+      "c54",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p94",
+    "productName": "더샘 제품 94",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품94",
+    "originalPrice": 25729,
+    "discountPercent": 10,
+    "discountPrice": 23156,
+    "tags": [],
+    "reviewRating": 4.3,
+    "reviewCount": 956,
+    "categoryIds": [
+      "c88",
+      "c104",
+      "c43",
+      "c2",
+      "c28"
+    ]
+  },
+  {
+    "productId": "p95",
+    "productName": "더샘 제품 95",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품95",
+    "originalPrice": 14294,
+    "discountPercent": 30,
+    "discountPrice": 10005,
+    "tags": [],
+    "reviewRating": 4.3,
+    "reviewCount": 1083,
+    "categoryIds": [
+      "c75",
+      "c11",
+      "c4"
+    ]
+  },
+  {
+    "productId": "p96",
+    "productName": "더샘 제품 96",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품96",
+    "originalPrice": 33731,
+    "discountPercent": 10,
+    "discountPrice": 30357,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 3170,
+    "categoryIds": [
+      "c96",
+      "c101",
+      "c90",
+      "c4",
+      "c75"
+    ]
+  },
+  {
+    "productId": "p97",
+    "productName": "더샘 제품 97",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품97",
+    "originalPrice": 13150,
+    "discountPercent": 20,
+    "discountPrice": 10520,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 3683,
+    "categoryIds": [
+      "c89",
+      "c6",
+      "c38",
+      "c39",
+      "c47",
+      "c55"
+    ]
+  },
+  {
+    "productId": "p98",
+    "productName": "더샘 제품 98",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품98",
+    "originalPrice": 24545,
+    "discountPercent": 30,
+    "discountPrice": 17181,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 2262,
+    "categoryIds": [
+      "c85",
+      "c42",
+      "c19",
+      "c22",
+      "c48",
+      "c61",
+      "c82",
+      "c89"
+    ]
+  },
+  {
+    "productId": "p99",
+    "productName": "더샘 제품 99",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품99",
+    "originalPrice": 22297,
+    "discountPercent": 30,
+    "discountPrice": 15607,
+    "tags": [],
+    "reviewRating": 3.4,
+    "reviewCount": 875,
+    "categoryIds": [
+      "c46",
+      "c117",
+      "c35",
+      "c16",
+      "c37",
+      "c75",
+      "c119"
+    ]
+  },
+  {
+    "productId": "p100",
+    "productName": "더샘 제품 100",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품100",
+    "originalPrice": 21974,
+    "discountPercent": 30,
+    "discountPrice": 15381,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 1141,
+    "categoryIds": [
+      "c115",
+      "c72",
+      "c33",
+      "c40",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p101",
+    "productName": "더샘 제품 101",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품101",
+    "originalPrice": 44229,
+    "discountPercent": 20,
+    "discountPrice": 35383,
+    "tags": [],
+    "reviewRating": 4.4,
+    "reviewCount": 2275,
+    "categoryIds": [
+      "c95",
+      "c31",
+      "c18",
+      "c56",
+      "c63"
+    ]
+  },
+  {
+    "productId": "p102",
+    "productName": "더샘 제품 102",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품102",
+    "originalPrice": 40316,
+    "discountPercent": 10,
+    "discountPrice": 36284,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 168,
+    "categoryIds": [
+      "c75",
+      "c7",
+      "c80",
+      "c31",
+      "c38",
+      "c48",
+      "c52",
+      "c98",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p103",
+    "productName": "더샘 제품 103",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품103",
+    "originalPrice": 35698,
+    "discountPercent": 40,
+    "discountPrice": 21418,
+    "tags": [],
+    "reviewRating": 4.7,
+    "reviewCount": 3056,
+    "categoryIds": [
+      "c62",
+      "c96",
+      "c5",
+      "c30",
+      "c86"
+    ]
+  },
+  {
+    "productId": "p104",
+    "productName": "더샘 제품 104",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품104",
+    "originalPrice": 6697,
+    "discountPercent": 50,
+    "discountPrice": 3348,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 2175,
+    "categoryIds": [
+      "c102",
+      "c93",
+      "c112",
+      "c5",
+      "c45",
+      "c74"
+    ]
+  },
+  {
+    "productId": "p105",
+    "productName": "더샘 제품 105",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품105",
+    "originalPrice": 13487,
+    "discountPercent": 50,
+    "discountPrice": 6743,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 4884,
+    "categoryIds": [
+      "c84",
+      "c55",
+      "c73",
+      "c99"
+    ]
+  },
+  {
+    "productId": "p106",
+    "productName": "더샘 제품 106",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품106",
+    "originalPrice": 28683,
+    "discountPercent": 20,
+    "discountPrice": 22946,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 3400,
+    "categoryIds": [
+      "c61",
+      "c56",
+      "c48",
+      "c52",
+      "c100"
+    ]
+  },
+  {
+    "productId": "p107",
+    "productName": "더샘 제품 107",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품107",
+    "originalPrice": 48456,
+    "discountPercent": 10,
+    "discountPrice": 43610,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 3254,
+    "categoryIds": [
+      "c74",
+      "c101",
+      "c36",
+      "c45",
+      "c58",
+      "c60"
+    ]
+  },
+  {
+    "productId": "p108",
+    "productName": "더샘 제품 108",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품108",
+    "originalPrice": 37640,
+    "discountPercent": 10,
+    "discountPrice": 33876,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.1,
+    "reviewCount": 3317,
+    "categoryIds": [
+      "c68",
+      "c120",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p109",
+    "productName": "더샘 제품 109",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품109",
+    "originalPrice": 36677,
+    "discountPercent": 10,
+    "discountPrice": 33009,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 2767,
+    "categoryIds": [
+      "c21",
+      "c41",
+      "c44",
+      "c96"
+    ]
+  },
+  {
+    "productId": "p110",
+    "productName": "더샘 제품 110",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품110",
+    "originalPrice": 20372,
+    "discountPercent": 50,
+    "discountPrice": 10186,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 4867,
+    "categoryIds": [
+      "c31",
+      "c9",
+      "c2"
+    ]
+  },
+  {
+    "productId": "p111",
+    "productName": "더샘 제품 111",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품111",
+    "originalPrice": 36461,
+    "discountPercent": 10,
+    "discountPrice": 32814,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 2041,
+    "categoryIds": [
+      "c4",
+      "c65",
+      "c60",
+      "c90"
+    ]
+  },
+  {
+    "productId": "p112",
+    "productName": "더샘 제품 112",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품112",
+    "originalPrice": 7028,
+    "discountPercent": 40,
+    "discountPrice": 4216,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 1760,
+    "categoryIds": [
+      "c72",
+      "c24",
+      "c12",
+      "c42",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p113",
+    "productName": "더샘 제품 113",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품113",
+    "originalPrice": 9195,
+    "discountPercent": 30,
+    "discountPrice": 6436,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 4856,
+    "categoryIds": [
+      "c69",
+      "c85",
+      "c43",
+      "c72",
+      "c82",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p114",
+    "productName": "더샘 제품 114",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품114",
+    "originalPrice": 25892,
+    "discountPercent": 30,
+    "discountPrice": 18124,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 162,
+    "categoryIds": [
+      "c100",
+      "c105",
+      "c54"
+    ]
+  },
+  {
+    "productId": "p115",
+    "productName": "더샘 제품 115",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품115",
+    "originalPrice": 3515,
+    "discountPercent": 10,
+    "discountPrice": 3163,
+    "tags": [],
+    "reviewRating": 3.8,
+    "reviewCount": 1372,
+    "categoryIds": [
+      "c65",
+      "c104",
+      "c27"
+    ]
+  },
+  {
+    "productId": "p116",
+    "productName": "더샘 제품 116",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품116",
+    "originalPrice": 35952,
+    "discountPercent": 50,
+    "discountPrice": 17976,
+    "tags": [
+      "SALE",
+      "BEST"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 1126,
+    "categoryIds": [
+      "c49",
+      "c69",
+      "c53",
+      "c75",
+      "c100",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p117",
+    "productName": "더샘 제품 117",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품117",
+    "originalPrice": 27377,
+    "discountPercent": 20,
+    "discountPrice": 21901,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 3842,
+    "categoryIds": [
+      "c70",
+      "c115",
+      "c7",
+      "c8",
+      "c36",
+      "c88"
+    ]
+  },
+  {
+    "productId": "p118",
+    "productName": "더샘 제품 118",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품118",
+    "originalPrice": 31970,
+    "discountPercent": 10,
+    "discountPrice": 28773,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 2361,
+    "categoryIds": [
+      "c69",
+      "c74",
+      "c28",
+      "c70",
+      "c73",
+      "c87"
+    ]
+  },
+  {
+    "productId": "p119",
+    "productName": "더샘 제품 119",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품119",
+    "originalPrice": 20835,
+    "discountPercent": 20,
+    "discountPrice": 16668,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 1176,
+    "categoryIds": [
+      "c92",
+      "c93",
+      "c10",
+      "c13",
+      "c42",
+      "c84",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p120",
+    "productName": "더샘 제품 120",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품120",
+    "originalPrice": 9101,
+    "discountPercent": 10,
+    "discountPrice": 8190,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 2790,
+    "categoryIds": [
+      "c105",
+      "c8",
+      "c7",
+      "c45",
+      "c67",
+      "c119"
+    ]
+  },
+  {
+    "productId": "p121",
+    "productName": "더샘 제품 121",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품121",
+    "originalPrice": 7565,
+    "discountPercent": 50,
+    "discountPrice": 3782,
+    "tags": [],
+    "reviewRating": 4.6,
+    "reviewCount": 263,
+    "categoryIds": [
+      "c38",
+      "c71",
+      "c52",
+      "c74"
+    ]
+  },
+  {
+    "productId": "p122",
+    "productName": "더샘 제품 122",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품122",
+    "originalPrice": 30904,
+    "discountPercent": 20,
+    "discountPrice": 24723,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 4534,
+    "categoryIds": [
+      "c79",
+      "c40"
+    ]
+  },
+  {
+    "productId": "p123",
+    "productName": "더샘 제품 123",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품123",
+    "originalPrice": 35508,
+    "discountPercent": 40,
+    "discountPrice": 21304,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 4963,
+    "categoryIds": [
+      "c75",
+      "c78",
+      "c27",
+      "c28",
+      "c56",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p124",
+    "productName": "더샘 제품 124",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품124",
+    "originalPrice": 39481,
+    "discountPercent": 40,
+    "discountPrice": 23688,
+    "tags": [],
+    "reviewRating": 3.9,
+    "reviewCount": 1972,
+    "categoryIds": [
+      "c12",
+      "c35",
+      "c26",
+      "c19",
+      "c64"
+    ]
+  },
+  {
+    "productId": "p125",
+    "productName": "더샘 제품 125",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품125",
+    "originalPrice": 40192,
+    "discountPercent": 50,
+    "discountPrice": 20096,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 1940,
+    "categoryIds": [
+      "c71",
+      "c103",
+      "c117",
+      "c47",
+      "c50",
+      "c76",
+      "c92"
+    ]
+  },
+  {
+    "productId": "p126",
+    "productName": "더샘 제품 126",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품126",
+    "originalPrice": 32438,
+    "discountPercent": 40,
+    "discountPrice": 19462,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 2215,
+    "categoryIds": [
+      "c52",
+      "c82",
+      "c9",
+      "c61",
+      "c87",
+      "c108"
+    ]
+  },
+  {
+    "productId": "p127",
+    "productName": "더샘 제품 127",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품127",
+    "originalPrice": 35376,
+    "discountPercent": 10,
+    "discountPrice": 31838,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 2712,
+    "categoryIds": [
+      "c56",
+      "c2",
+      "c57",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p128",
+    "productName": "더샘 제품 128",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품128",
+    "originalPrice": 44099,
+    "discountPercent": 40,
+    "discountPrice": 26459,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 192,
+    "categoryIds": [
+      "c76",
+      "c72",
+      "c79",
+      "c33",
+      "c37",
+      "c43",
+      "c66",
+      "c67",
+      "c80"
+    ]
+  },
+  {
+    "productId": "p129",
+    "productName": "더샘 제품 129",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품129",
+    "originalPrice": 28425,
+    "discountPercent": 20,
+    "discountPrice": 22740,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 1762,
+    "categoryIds": [
+      "c105",
+      "c108",
+      "c4"
+    ]
+  },
+  {
+    "productId": "p130",
+    "productName": "더샘 제품 130",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품130",
+    "originalPrice": 32943,
+    "discountPercent": 10,
+    "discountPrice": 29648,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 343,
+    "categoryIds": [
+      "c41",
+      "c106",
+      "c85"
+    ]
+  },
+  {
+    "productId": "p131",
+    "productName": "더샘 제품 131",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품131",
+    "originalPrice": 26552,
+    "discountPercent": 30,
+    "discountPrice": 18586,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.3,
+    "reviewCount": 4435,
+    "categoryIds": [
+      "c46",
+      "c74",
+      "c6",
+      "c40",
+      "c71",
+      "c111"
+    ]
+  },
+  {
+    "productId": "p132",
+    "productName": "더샘 제품 132",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품132",
+    "originalPrice": 48822,
+    "discountPercent": 30,
+    "discountPrice": 34175,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 3469,
+    "categoryIds": [
+      "c59",
+      "c120",
+      "c33",
+      "c73",
+      "c106"
+    ]
+  },
+  {
+    "productId": "p133",
+    "productName": "더샘 제품 133",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품133",
+    "originalPrice": 21770,
+    "discountPercent": 20,
+    "discountPrice": 17416,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 3516,
+    "categoryIds": [
+      "c14",
+      "c86",
+      "c7"
+    ]
+  },
+  {
+    "productId": "p134",
+    "productName": "더샘 제품 134",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품134",
+    "originalPrice": 32361,
+    "discountPercent": 20,
+    "discountPrice": 25888,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 54,
+    "categoryIds": [
+      "c7",
+      "c91",
+      "c64",
+      "c93"
+    ]
+  },
+  {
+    "productId": "p135",
+    "productName": "더샘 제품 135",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품135",
+    "originalPrice": 7573,
+    "discountPercent": 50,
+    "discountPrice": 3786,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 3.7,
+    "reviewCount": 1027,
+    "categoryIds": [
+      "c102",
+      "c101",
+      "c69",
+      "c23",
+      "c96",
+      "c108",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p136",
+    "productName": "더샘 제품 136",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품136",
+    "originalPrice": 26311,
+    "discountPercent": 10,
+    "discountPrice": 23679,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 3710,
+    "categoryIds": [
+      "c86",
+      "c81",
+      "c31",
+      "c63"
+    ]
+  },
+  {
+    "productId": "p137",
+    "productName": "더샘 제품 137",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품137",
+    "originalPrice": 26593,
+    "discountPercent": 40,
+    "discountPrice": 15955,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 2274,
+    "categoryIds": [
+      "c17",
+      "c90",
+      "c72"
+    ]
+  },
+  {
+    "productId": "p138",
+    "productName": "더샘 제품 138",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품138",
+    "originalPrice": 48585,
+    "discountPercent": 10,
+    "discountPrice": 43726,
+    "tags": [],
+    "reviewRating": 4.2,
+    "reviewCount": 2191,
+    "categoryIds": [
+      "c27",
+      "c56",
+      "c3",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p139",
+    "productName": "더샘 제품 139",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품139",
+    "originalPrice": 22715,
+    "discountPercent": 20,
+    "discountPrice": 18172,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 2579,
+    "categoryIds": [
+      "c103",
+      "c23",
+      "c1"
+    ]
+  },
+  {
+    "productId": "p140",
+    "productName": "더샘 제품 140",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품140",
+    "originalPrice": 13945,
+    "discountPercent": 40,
+    "discountPrice": 8367,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 4641,
+    "categoryIds": [
+      "c9",
+      "c70",
+      "c59",
+      "c82"
+    ]
+  },
+  {
+    "productId": "p141",
+    "productName": "더샘 제품 141",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품141",
+    "originalPrice": 19305,
+    "discountPercent": 20,
+    "discountPrice": 15444,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 4664,
+    "categoryIds": [
+      "c2",
+      "c104",
+      "c10",
+      "c101"
+    ]
+  },
+  {
+    "productId": "p142",
+    "productName": "더샘 제품 142",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품142",
+    "originalPrice": 17455,
+    "discountPercent": 40,
+    "discountPrice": 10473,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 2291,
+    "categoryIds": [
+      "c27",
+      "c30",
+      "c51",
+      "c66",
+      "c98"
+    ]
+  },
+  {
+    "productId": "p143",
+    "productName": "더샘 제품 143",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품143",
+    "originalPrice": 48366,
+    "discountPercent": 40,
+    "discountPrice": 29019,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 1322,
+    "categoryIds": [
+      "c53",
+      "c107",
+      "c58",
+      "c3",
+      "c45",
+      "c72",
+      "c86",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p144",
+    "productName": "더샘 제품 144",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품144",
+    "originalPrice": 27805,
+    "discountPercent": 50,
+    "discountPrice": 13902,
+    "tags": [
+      "NEW",
+      "SALE"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 690,
+    "categoryIds": [
+      "c56",
+      "c76",
+      "c16",
+      "c87"
+    ]
+  },
+  {
+    "productId": "p145",
+    "productName": "더샘 제품 145",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품145",
+    "originalPrice": 36859,
+    "discountPercent": 20,
+    "discountPrice": 29487,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 2910,
+    "categoryIds": [
+      "c70",
+      "c91",
+      "c79",
+      "c15",
+      "c87"
+    ]
+  },
+  {
+    "productId": "p146",
+    "productName": "더샘 제품 146",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품146",
+    "originalPrice": 43682,
+    "discountPercent": 20,
+    "discountPrice": 34945,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 1368,
+    "categoryIds": [
+      "c53",
+      "c116",
+      "c16",
+      "c70"
+    ]
+  },
+  {
+    "productId": "p147",
+    "productName": "더샘 제품 147",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품147",
+    "originalPrice": 3908,
+    "discountPercent": 50,
+    "discountPrice": 1954,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 4499,
+    "categoryIds": [
+      "c36",
+      "c34",
+      "c33",
+      "c37",
+      "c48",
+      "c108"
+    ]
+  },
+  {
+    "productId": "p148",
+    "productName": "더샘 제품 148",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품148",
+    "originalPrice": 43991,
+    "discountPercent": 50,
+    "discountPrice": 21995,
+    "tags": [
+      "SALE",
+      "BEST"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 3113,
+    "categoryIds": [
+      "c69",
+      "c35",
+      "c94",
+      "c108",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p149",
+    "productName": "더샘 제품 149",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품149",
+    "originalPrice": 12813,
+    "discountPercent": 30,
+    "discountPrice": 8969,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 4364,
+    "categoryIds": [
+      "c64",
+      "c20",
+      "c95"
+    ]
+  },
+  {
+    "productId": "p150",
+    "productName": "더샘 제품 150",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품150",
+    "originalPrice": 35007,
+    "discountPercent": 30,
+    "discountPrice": 24504,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 3857,
+    "categoryIds": [
+      "c119",
+      "c41",
+      "c13",
+      "c34"
+    ]
+  },
+  {
+    "productId": "p151",
+    "productName": "더샘 제품 151",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품151",
+    "originalPrice": 21819,
+    "discountPercent": 20,
+    "discountPrice": 17455,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 2675,
+    "categoryIds": [
+      "c20",
+      "c97",
+      "c60",
+      "c14",
+      "c49",
+      "c94",
+      "c108",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p152",
+    "productName": "더샘 제품 152",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품152",
+    "originalPrice": 5232,
+    "discountPercent": 20,
+    "discountPrice": 4185,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 116,
+    "categoryIds": [
+      "c77",
+      "c20",
+      "c43",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p153",
+    "productName": "더샘 제품 153",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품153",
+    "originalPrice": 9580,
+    "discountPercent": 20,
+    "discountPrice": 7664,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 920,
+    "categoryIds": [
+      "c121",
+      "c71",
+      "c28",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p154",
+    "productName": "더샘 제품 154",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품154",
+    "originalPrice": 8989,
+    "discountPercent": 20,
+    "discountPrice": 7191,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 4991,
+    "categoryIds": [
+      "c101",
+      "c1",
+      "c110",
+      "c16"
+    ]
+  },
+  {
+    "productId": "p155",
+    "productName": "더샘 제품 155",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품155",
+    "originalPrice": 25313,
+    "discountPercent": 10,
+    "discountPrice": 22781,
+    "tags": [],
+    "reviewRating": 4.1,
+    "reviewCount": 3388,
+    "categoryIds": [
+      "c77",
+      "c94",
+      "c105"
+    ]
+  },
+  {
+    "productId": "p156",
+    "productName": "더샘 제품 156",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품156",
+    "originalPrice": 43272,
+    "discountPercent": 50,
+    "discountPrice": 21636,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 593,
+    "categoryIds": [
+      "c64",
+      "c77",
+      "c18",
+      "c96",
+      "c99"
+    ]
+  },
+  {
+    "productId": "p157",
+    "productName": "더샘 제품 157",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품157",
+    "originalPrice": 9915,
+    "discountPercent": 50,
+    "discountPrice": 4957,
+    "tags": [
+      "NEW",
+      "BEST"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 2993,
+    "categoryIds": [
+      "c54",
+      "c98",
+      "c17",
+      "c85",
+      "c112",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p158",
+    "productName": "더샘 제품 158",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품158",
+    "originalPrice": 22493,
+    "discountPercent": 20,
+    "discountPrice": 17994,
+    "tags": [],
+    "reviewRating": 3.4,
+    "reviewCount": 4886,
+    "categoryIds": [
+      "c120",
+      "c81",
+      "c6",
+      "c99"
+    ]
+  },
+  {
+    "productId": "p159",
+    "productName": "더샘 제품 159",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품159",
+    "originalPrice": 13345,
+    "discountPercent": 40,
+    "discountPrice": 8007,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 2045,
+    "categoryIds": [
+      "c118",
+      "c13",
+      "c16"
+    ]
+  },
+  {
+    "productId": "p160",
+    "productName": "더샘 제품 160",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품160",
+    "originalPrice": 10609,
+    "discountPercent": 10,
+    "discountPrice": 9548,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.1,
+    "reviewCount": 2147,
+    "categoryIds": [
+      "c22",
+      "c46",
+      "c107"
+    ]
+  },
+  {
+    "productId": "p161",
+    "productName": "더샘 제품 161",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품161",
+    "originalPrice": 26312,
+    "discountPercent": 40,
+    "discountPrice": 15787,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.7,
+    "reviewCount": 4866,
+    "categoryIds": [
+      "c99",
+      "c3",
+      "c67"
+    ]
+  },
+  {
+    "productId": "p162",
+    "productName": "더샘 제품 162",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품162",
+    "originalPrice": 35794,
+    "discountPercent": 20,
+    "discountPrice": 28635,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 3264,
+    "categoryIds": [
+      "c84",
+      "c56",
+      "c3",
+      "c97",
+      "c105",
+      "c107",
+      "c111"
+    ]
+  },
+  {
+    "productId": "p163",
+    "productName": "더샘 제품 163",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품163",
+    "originalPrice": 24667,
+    "discountPercent": 40,
+    "discountPrice": 14800,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 4825,
+    "categoryIds": [
+      "c19",
+      "c58",
+      "c6",
+      "c26",
+      "c110"
+    ]
+  },
+  {
+    "productId": "p164",
+    "productName": "더샘 제품 164",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품164",
+    "originalPrice": 44738,
+    "discountPercent": 30,
+    "discountPrice": 31316,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 222,
+    "categoryIds": [
+      "c89",
+      "c114",
+      "c29",
+      "c38",
+      "c57",
+      "c91",
+      "c99"
+    ]
+  },
+  {
+    "productId": "p165",
+    "productName": "더샘 제품 165",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품165",
+    "originalPrice": 32118,
+    "discountPercent": 10,
+    "discountPrice": 28906,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 4456,
+    "categoryIds": [
+      "c1",
+      "c117",
+      "c8",
+      "c23",
+      "c98"
+    ]
+  },
+  {
+    "productId": "p166",
+    "productName": "더샘 제품 166",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품166",
+    "originalPrice": 16078,
+    "discountPercent": 10,
+    "discountPrice": 14470,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 2408,
+    "categoryIds": [
+      "c63",
+      "c82",
+      "c49",
+      "c22",
+      "c40",
+      "c67",
+      "c93"
+    ]
+  },
+  {
+    "productId": "p167",
+    "productName": "더샘 제품 167",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품167",
+    "originalPrice": 5399,
+    "discountPercent": 50,
+    "discountPrice": 2699,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.7,
+    "reviewCount": 4568,
+    "categoryIds": [
+      "c36",
+      "c107",
+      "c78",
+      "c91"
+    ]
+  },
+  {
+    "productId": "p168",
+    "productName": "더샘 제품 168",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품168",
+    "originalPrice": 44588,
+    "discountPercent": 30,
+    "discountPrice": 31211,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 4706,
+    "categoryIds": [
+      "c95",
+      "c22",
+      "c106",
+      "c6",
+      "c32"
+    ]
+  },
+  {
+    "productId": "p169",
+    "productName": "더샘 제품 169",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품169",
+    "originalPrice": 28472,
+    "discountPercent": 30,
+    "discountPrice": 19930,
+    "tags": [
+      "오늘드림",
+      "NEW"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 2483,
+    "categoryIds": [
+      "c4",
+      "c9",
+      "c75",
+      "c102"
+    ]
+  },
+  {
+    "productId": "p170",
+    "productName": "더샘 제품 170",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품170",
+    "originalPrice": 34086,
+    "discountPercent": 40,
+    "discountPrice": 20451,
+    "tags": [],
+    "reviewRating": 3.0,
+    "reviewCount": 2104,
+    "categoryIds": [
+      "c93",
+      "c70",
+      "c106",
+      "c15",
+      "c65",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p171",
+    "productName": "더샘 제품 171",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품171",
+    "originalPrice": 18941,
+    "discountPercent": 50,
+    "discountPrice": 9470,
+    "tags": [
+      "SALE",
+      "BEST"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 1436,
+    "categoryIds": [
+      "c52",
+      "c58",
+      "c9",
+      "c30"
+    ]
+  },
+  {
+    "productId": "p172",
+    "productName": "더샘 제품 172",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품172",
+    "originalPrice": 14919,
+    "discountPercent": 30,
+    "discountPrice": 10443,
+    "tags": [],
+    "reviewRating": 4.0,
+    "reviewCount": 854,
+    "categoryIds": [
+      "c35",
+      "c100",
+      "c84"
+    ]
+  },
+  {
+    "productId": "p173",
+    "productName": "더샘 제품 173",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품173",
+    "originalPrice": 12901,
+    "discountPercent": 40,
+    "discountPrice": 7740,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 1221,
+    "categoryIds": [
+      "c95",
+      "c9",
+      "c14"
+    ]
+  },
+  {
+    "productId": "p174",
+    "productName": "더샘 제품 174",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품174",
+    "originalPrice": 47776,
+    "discountPercent": 10,
+    "discountPrice": 42998,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 1323,
+    "categoryIds": [
+      "c62",
+      "c29",
+      "c114"
+    ]
+  },
+  {
+    "productId": "p175",
+    "productName": "더샘 제품 175",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품175",
+    "originalPrice": 28003,
+    "discountPercent": 40,
+    "discountPrice": 16801,
+    "tags": [
+      "NEW",
+      "BEST"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 3740,
+    "categoryIds": [
+      "c87",
+      "c44",
+      "c54",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p176",
+    "productName": "더샘 제품 176",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품176",
+    "originalPrice": 23959,
+    "discountPercent": 30,
+    "discountPrice": 16771,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 4101,
+    "categoryIds": [
+      "c69",
+      "c70",
+      "c10",
+      "c39"
+    ]
+  },
+  {
+    "productId": "p177",
+    "productName": "더샘 제품 177",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품177",
+    "originalPrice": 45356,
+    "discountPercent": 50,
+    "discountPrice": 22678,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 2459,
+    "categoryIds": [
+      "c102",
+      "c25",
+      "c97",
+      "c108",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p178",
+    "productName": "더샘 제품 178",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품178",
+    "originalPrice": 32381,
+    "discountPercent": 30,
+    "discountPrice": 22666,
+    "tags": [],
+    "reviewRating": 3.4,
+    "reviewCount": 127,
+    "categoryIds": [
+      "c72",
+      "c102",
+      "c40"
+    ]
+  },
+  {
+    "productId": "p179",
+    "productName": "더샘 제품 179",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품179",
+    "originalPrice": 28608,
+    "discountPercent": 10,
+    "discountPrice": 25747,
+    "tags": [],
+    "reviewRating": 3.7,
+    "reviewCount": 440,
+    "categoryIds": [
+      "c86",
+      "c40",
+      "c94",
+      "c32",
+      "c74"
+    ]
+  },
+  {
+    "productId": "p180",
+    "productName": "더샘 제품 180",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품180",
+    "originalPrice": 9816,
+    "discountPercent": 30,
+    "discountPrice": 6871,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 627,
+    "categoryIds": [
+      "c97",
+      "c79",
+      "c76",
+      "c102",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p181",
+    "productName": "더샘 제품 181",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품181",
+    "originalPrice": 13284,
+    "discountPercent": 40,
+    "discountPrice": 7970,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 421,
+    "categoryIds": [
+      "c31",
+      "c78",
+      "c21",
+      "c26"
+    ]
+  },
+  {
+    "productId": "p182",
+    "productName": "더샘 제품 182",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품182",
+    "originalPrice": 13303,
+    "discountPercent": 30,
+    "discountPrice": 9312,
+    "tags": [],
+    "reviewRating": 3.3,
+    "reviewCount": 1152,
+    "categoryIds": [
+      "c95",
+      "c12",
+      "c19",
+      "c39",
+      "c53",
+      "c97",
+      "c117"
+    ]
+  },
+  {
+    "productId": "p183",
+    "productName": "더샘 제품 183",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품183",
+    "originalPrice": 13488,
+    "discountPercent": 40,
+    "discountPrice": 8092,
+    "tags": [],
+    "reviewRating": 3.9,
+    "reviewCount": 2124,
+    "categoryIds": [
+      "c67",
+      "c106",
+      "c26",
+      "c28",
+      "c39",
+      "c83"
+    ]
+  },
+  {
+    "productId": "p184",
+    "productName": "더샘 제품 184",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품184",
+    "originalPrice": 27852,
+    "discountPercent": 40,
+    "discountPrice": 16711,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.6,
+    "reviewCount": 3596,
+    "categoryIds": [
+      "c69",
+      "c60",
+      "c25",
+      "c26",
+      "c55",
+      "c67"
+    ]
+  },
+  {
+    "productId": "p185",
+    "productName": "더샘 제품 185",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품185",
+    "originalPrice": 10755,
+    "discountPercent": 50,
+    "discountPrice": 5377,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.9,
+    "reviewCount": 2951,
+    "categoryIds": [
+      "c51",
+      "c10",
+      "c57",
+      "c72",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p186",
+    "productName": "더샘 제품 186",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품186",
+    "originalPrice": 42610,
+    "discountPercent": 40,
+    "discountPrice": 25566,
+    "tags": [],
+    "reviewRating": 4.2,
+    "reviewCount": 4996,
+    "categoryIds": [
+      "c23",
+      "c33",
+      "c11",
+      "c69",
+      "c102"
+    ]
+  },
+  {
+    "productId": "p187",
+    "productName": "더샘 제품 187",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품187",
+    "originalPrice": 43536,
+    "discountPercent": 50,
+    "discountPrice": 21768,
+    "tags": [],
+    "reviewRating": 3.9,
+    "reviewCount": 4515,
+    "categoryIds": [
+      "c3",
+      "c14",
+      "c25",
+      "c31",
+      "c45"
+    ]
+  },
+  {
+    "productId": "p188",
+    "productName": "더샘 제품 188",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품188",
+    "originalPrice": 24729,
+    "discountPercent": 30,
+    "discountPrice": 17310,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 4483,
+    "categoryIds": [
+      "c41",
+      "c11",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p189",
+    "productName": "더샘 제품 189",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품189",
+    "originalPrice": 29732,
+    "discountPercent": 20,
+    "discountPrice": 23785,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 1781,
+    "categoryIds": [
+      "c88",
+      "c77",
+      "c73",
+      "c4",
+      "c18",
+      "c81"
+    ]
+  },
+  {
+    "productId": "p190",
+    "productName": "더샘 제품 190",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품190",
+    "originalPrice": 30468,
+    "discountPercent": 30,
+    "discountPrice": 21327,
+    "tags": [
+      "NEW",
+      "오늘드림"
+    ],
+    "reviewRating": 3.7,
+    "reviewCount": 349,
+    "categoryIds": [
+      "c79",
+      "c87",
+      "c46",
+      "c90",
+      "c101",
+      "c118",
+      "c121"
+    ]
+  },
+  {
+    "productId": "p191",
+    "productName": "더샘 제품 191",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품191",
+    "originalPrice": 30887,
+    "discountPercent": 50,
+    "discountPrice": 15443,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 3269,
+    "categoryIds": [
+      "c89",
+      "c10",
+      "c60",
+      "c23",
+      "c25",
+      "c67",
+      "c104"
+    ]
+  },
+  {
+    "productId": "p192",
+    "productName": "더샘 제품 192",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품192",
+    "originalPrice": 15086,
+    "discountPercent": 40,
+    "discountPrice": 9051,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 848,
+    "categoryIds": [
+      "c63",
+      "c76",
+      "c34",
+      "c21",
+      "c83",
+      "c113"
+    ]
+  },
+  {
+    "productId": "p193",
+    "productName": "더샘 제품 193",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품193",
+    "originalPrice": 14926,
+    "discountPercent": 50,
+    "discountPrice": 7463,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 2314,
+    "categoryIds": [
+      "c114",
+      "c92",
+      "c34",
+      "c57"
+    ]
+  },
+  {
+    "productId": "p194",
+    "productName": "더샘 제품 194",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품194",
+    "originalPrice": 44662,
+    "discountPercent": 20,
+    "discountPrice": 35729,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 2196,
+    "categoryIds": [
+      "c42",
+      "c107",
+      "c56",
+      "c13",
+      "c66",
+      "c81"
+    ]
+  },
+  {
+    "productId": "p195",
+    "productName": "더샘 제품 195",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품195",
+    "originalPrice": 6979,
+    "discountPercent": 20,
+    "discountPrice": 5583,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 4407,
+    "categoryIds": [
+      "c114",
+      "c91",
+      "c50",
+      "c4",
+      "c15",
+      "c83",
+      "c93"
+    ]
+  },
+  {
+    "productId": "p196",
+    "productName": "더샘 제품 196",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품196",
+    "originalPrice": 26666,
+    "discountPercent": 10,
+    "discountPrice": 23999,
+    "tags": [],
+    "reviewRating": 4.5,
+    "reviewCount": 2343,
+    "categoryIds": [
+      "c97",
+      "c44"
+    ]
+  },
+  {
+    "productId": "p197",
+    "productName": "더샘 제품 197",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품197",
+    "originalPrice": 4239,
+    "discountPercent": 30,
+    "discountPrice": 2967,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 3935,
+    "categoryIds": [
+      "c52",
+      "c86",
+      "c58",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p198",
+    "productName": "더샘 제품 198",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품198",
+    "originalPrice": 23894,
+    "discountPercent": 10,
+    "discountPrice": 21504,
+    "tags": [],
+    "reviewRating": 4.7,
+    "reviewCount": 2675,
+    "categoryIds": [
+      "c113",
+      "c63",
+      "c71"
+    ]
+  },
+  {
+    "productId": "p199",
+    "productName": "더샘 제품 199",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품199",
+    "originalPrice": 21343,
+    "discountPercent": 40,
+    "discountPrice": 12805,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 4504,
+    "categoryIds": [
+      "c59",
+      "c120",
+      "c36",
+      "c30"
+    ]
+  },
+  {
+    "productId": "p200",
+    "productName": "더샘 제품 200",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품200",
+    "originalPrice": 7120,
+    "discountPercent": 10,
+    "discountPrice": 6408,
+    "tags": [],
+    "reviewRating": 4.6,
+    "reviewCount": 3716,
+    "categoryIds": [
+      "c2",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p201",
+    "productName": "더샘 제품 201",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품201",
+    "originalPrice": 35311,
+    "discountPercent": 40,
+    "discountPrice": 21186,
+    "tags": [
+      "오늘드림"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 470,
+    "categoryIds": [
+      "c44",
+      "c120",
+      "c5"
+    ]
+  },
+  {
+    "productId": "p202",
+    "productName": "더샘 제품 202",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품202",
+    "originalPrice": 20747,
+    "discountPercent": 10,
+    "discountPrice": 18672,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 344,
+    "categoryIds": [
+      "c29",
+      "c77",
+      "c81"
+    ]
+  },
+  {
+    "productId": "p203",
+    "productName": "더샘 제품 203",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품203",
+    "originalPrice": 24227,
+    "discountPercent": 50,
+    "discountPrice": 12113,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 4560,
+    "categoryIds": [
+      "c95",
+      "c80",
+      "c27",
+      "c40"
+    ]
+  },
+  {
+    "productId": "p204",
+    "productName": "더샘 제품 204",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품204",
+    "originalPrice": 27410,
+    "discountPercent": 30,
+    "discountPrice": 19187,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 5.0,
+    "reviewCount": 1674,
+    "categoryIds": [
+      "c59",
+      "c92",
+      "c109",
+      "c113"
+    ]
+  },
+  {
+    "productId": "p205",
+    "productName": "더샘 제품 205",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품205",
+    "originalPrice": 32065,
+    "discountPercent": 40,
+    "discountPrice": 19239,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 1249,
+    "categoryIds": [
+      "c83",
+      "c31",
+      "c22",
+      "c73"
+    ]
+  },
+  {
+    "productId": "p206",
+    "productName": "더샘 제품 206",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품206",
+    "originalPrice": 27213,
+    "discountPercent": 50,
+    "discountPrice": 13606,
+    "tags": [],
+    "reviewRating": 4.6,
+    "reviewCount": 3958,
+    "categoryIds": [
+      "c30",
+      "c112",
+      "c49"
+    ]
+  },
+  {
+    "productId": "p207",
+    "productName": "더샘 제품 207",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품207",
+    "originalPrice": 31906,
+    "discountPercent": 50,
+    "discountPrice": 15953,
+    "tags": [],
+    "reviewRating": 4.7,
+    "reviewCount": 1772,
+    "categoryIds": [
+      "c27",
+      "c24",
+      "c5",
+      "c19",
+      "c33",
+      "c46",
+      "c84",
+      "c92",
+      "c102",
+      "c113"
+    ]
+  },
+  {
+    "productId": "p208",
+    "productName": "더샘 제품 208",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품208",
+    "originalPrice": 47092,
+    "discountPercent": 30,
+    "discountPrice": 32964,
+    "tags": [],
+    "reviewRating": 3.6,
+    "reviewCount": 1634,
+    "categoryIds": [
+      "c65",
+      "c34",
+      "c75",
+      "c12",
+      "c32",
+      "c70",
+      "c73",
+      "c99",
+      "c103"
+    ]
+  },
+  {
+    "productId": "p209",
+    "productName": "더샘 제품 209",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품209",
+    "originalPrice": 14075,
+    "discountPercent": 20,
+    "discountPrice": 11260,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 1642,
+    "categoryIds": [
+      "c103",
+      "c62"
+    ]
+  },
+  {
+    "productId": "p210",
+    "productName": "더샘 제품 210",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품210",
+    "originalPrice": 24852,
+    "discountPercent": 20,
+    "discountPrice": 19881,
+    "tags": [],
+    "reviewRating": 5.0,
+    "reviewCount": 4114,
+    "categoryIds": [
+      "c54",
+      "c10",
+      "c77",
+      "c16",
+      "c41",
+      "c47",
+      "c56"
+    ]
+  },
+  {
+    "productId": "p211",
+    "productName": "더샘 제품 211",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품211",
+    "originalPrice": 43221,
+    "discountPercent": 20,
+    "discountPrice": 34576,
+    "tags": [
+      "BEST"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 1225,
+    "categoryIds": [
+      "c39",
+      "c30",
+      "c32",
+      "c50",
+      "c102"
+    ]
+  },
+  {
+    "productId": "p212",
+    "productName": "더샘 제품 212",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품212",
+    "originalPrice": 46086,
+    "discountPercent": 10,
+    "discountPrice": 41477,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 2497,
+    "categoryIds": [
+      "c20",
+      "c38",
+      "c12"
+    ]
+  },
+  {
+    "productId": "p213",
+    "productName": "더샘 제품 213",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품213",
+    "originalPrice": 9988,
+    "discountPercent": 10,
+    "discountPrice": 8989,
+    "tags": [
+      "NEW",
+      "SALE"
+    ],
+    "reviewRating": 3.7,
+    "reviewCount": 843,
+    "categoryIds": [
+      "c17",
+      "c58",
+      "c28",
+      "c42",
+      "c43",
+      "c54"
+    ]
+  },
+  {
+    "productId": "p214",
+    "productName": "더샘 제품 214",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품214",
+    "originalPrice": 37907,
+    "discountPercent": 50,
+    "discountPrice": 18953,
+    "tags": [
+      "NEW",
+      "SALE"
+    ],
+    "reviewRating": 3.5,
+    "reviewCount": 3013,
+    "categoryIds": [
+      "c64",
+      "c32",
+      "c6",
+      "c14",
+      "c17",
+      "c20",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p215",
+    "productName": "더샘 제품 215",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품215",
+    "originalPrice": 35185,
+    "discountPercent": 10,
+    "discountPrice": 31666,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 385,
+    "categoryIds": [
+      "c28",
+      "c27",
+      "c84",
+      "c2",
+      "c4",
+      "c92"
+    ]
+  },
+  {
+    "productId": "p216",
+    "productName": "더샘 제품 216",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품216",
+    "originalPrice": 20594,
+    "discountPercent": 40,
+    "discountPrice": 12356,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.3,
+    "reviewCount": 2717,
+    "categoryIds": [
+      "c55",
+      "c12",
+      "c35",
+      "c23",
+      "c29",
+      "c78",
+      "c92"
+    ]
+  },
+  {
+    "productId": "p217",
+    "productName": "더샘 제품 217",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품217",
+    "originalPrice": 8170,
+    "discountPercent": 40,
+    "discountPrice": 4902,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 3.3,
+    "reviewCount": 728,
+    "categoryIds": [
+      "c16",
+      "c81",
+      "c14",
+      "c15",
+      "c57",
+      "c100"
+    ]
+  },
+  {
+    "productId": "p218",
+    "productName": "더샘 제품 218",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품218",
+    "originalPrice": 46237,
+    "discountPercent": 50,
+    "discountPrice": 23118,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 3138,
+    "categoryIds": [
+      "c59",
+      "c24"
+    ]
+  },
+  {
+    "productId": "p219",
+    "productName": "더샘 제품 219",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품219",
+    "originalPrice": 7926,
+    "discountPercent": 30,
+    "discountPrice": 5548,
+    "tags": [],
+    "reviewRating": 3.2,
+    "reviewCount": 4785,
+    "categoryIds": [
+      "c63",
+      "c8",
+      "c87",
+      "c57",
+      "c89"
+    ]
+  },
+  {
+    "productId": "p220",
+    "productName": "더샘 제품 220",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품220",
+    "originalPrice": 32798,
+    "discountPercent": 50,
+    "discountPrice": 16399,
+    "tags": [],
+    "reviewRating": 4.3,
+    "reviewCount": 2684,
+    "categoryIds": [
+      "c97",
+      "c17",
+      "c85",
+      "c18",
+      "c89"
+    ]
+  },
+  {
+    "productId": "p221",
+    "productName": "더샘 제품 221",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품221",
+    "originalPrice": 38435,
+    "discountPercent": 10,
+    "discountPrice": 34591,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 1280,
+    "categoryIds": [
+      "c96",
+      "c67",
+      "c68"
+    ]
+  },
+  {
+    "productId": "p222",
+    "productName": "더샘 제품 222",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품222",
+    "originalPrice": 40001,
+    "discountPercent": 40,
+    "discountPrice": 24000,
+    "tags": [],
+    "reviewRating": 3.5,
+    "reviewCount": 1122,
+    "categoryIds": [
+      "c30",
+      "c27",
+      "c5",
+      "c4",
+      "c100",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p223",
+    "productName": "더샘 제품 223",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품223",
+    "originalPrice": 38970,
+    "discountPercent": 20,
+    "discountPrice": 31176,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 423,
+    "categoryIds": [
+      "c62",
+      "c50",
+      "c22",
+      "c33",
+      "c47"
+    ]
+  },
+  {
+    "productId": "p224",
+    "productName": "더샘 제품 224",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품224",
+    "originalPrice": 30886,
+    "discountPercent": 10,
+    "discountPrice": 27797,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.3,
+    "reviewCount": 3951,
+    "categoryIds": [
+      "c31",
+      "c70",
+      "c8",
+      "c29",
+      "c50",
+      "c76"
+    ]
+  },
+  {
+    "productId": "p225",
+    "productName": "더샘 제품 225",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품225",
+    "originalPrice": 49806,
+    "discountPercent": 20,
+    "discountPrice": 39844,
+    "tags": [],
+    "reviewRating": 3.1,
+    "reviewCount": 1938,
+    "categoryIds": [
+      "c107",
+      "c63",
+      "c116",
+      "c19",
+      "c117"
+    ]
+  },
+  {
+    "productId": "p226",
+    "productName": "더샘 제품 226",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품226",
+    "originalPrice": 41891,
+    "discountPercent": 30,
+    "discountPrice": 29323,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 3264,
+    "categoryIds": [
+      "c11",
+      "c111",
+      "c50"
+    ]
+  },
+  {
+    "productId": "p227",
+    "productName": "더샘 제품 227",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품227",
+    "originalPrice": 36360,
+    "discountPercent": 10,
+    "discountPrice": 32724,
+    "tags": [],
+    "reviewRating": 3.7,
+    "reviewCount": 3569,
+    "categoryIds": [
+      "c113",
+      "c39",
+      "c24",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p228",
+    "productName": "더샘 제품 228",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품228",
+    "originalPrice": 16201,
+    "discountPercent": 30,
+    "discountPrice": 11340,
+    "tags": [],
+    "reviewRating": 4.1,
+    "reviewCount": 1240,
+    "categoryIds": [
+      "c74",
+      "c119",
+      "c63",
+      "c43",
+      "c78",
+      "c88"
+    ]
+  },
+  {
+    "productId": "p229",
+    "productName": "더샘 제품 229",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품229",
+    "originalPrice": 33464,
+    "discountPercent": 20,
+    "discountPrice": 26771,
+    "tags": [
+      "SALE",
+      "오늘드림"
+    ],
+    "reviewRating": 4.8,
+    "reviewCount": 1565,
+    "categoryIds": [
+      "c18",
+      "c109",
+      "c48",
+      "c71"
+    ]
+  },
+  {
+    "productId": "p230",
+    "productName": "더샘 제품 230",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품230",
+    "originalPrice": 14829,
+    "discountPercent": 40,
+    "discountPrice": 8897,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.4,
+    "reviewCount": 2449,
+    "categoryIds": [
+      "c107",
+      "c97",
+      "c73"
+    ]
+  },
+  {
+    "productId": "p231",
+    "productName": "더샘 제품 231",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품231",
+    "originalPrice": 9378,
+    "discountPercent": 20,
+    "discountPrice": 7502,
+    "tags": [],
+    "reviewRating": 3.0,
+    "reviewCount": 2573,
+    "categoryIds": [
+      "c94",
+      "c37",
+      "c92"
+    ]
+  },
+  {
+    "productId": "p232",
+    "productName": "더샘 제품 232",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품232",
+    "originalPrice": 7656,
+    "discountPercent": 50,
+    "discountPrice": 3828,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 1898,
+    "categoryIds": [
+      "c65",
+      "c119",
+      "c93"
+    ]
+  },
+  {
+    "productId": "p233",
+    "productName": "더샘 제품 233",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품233",
+    "originalPrice": 7725,
+    "discountPercent": 40,
+    "discountPrice": 4635,
+    "tags": [
+      "NEW",
+      "BEST"
+    ],
+    "reviewRating": 3.2,
+    "reviewCount": 1944,
+    "categoryIds": [
+      "c39",
+      "c42",
+      "c110",
+      "c61",
+      "c66"
+    ]
+  },
+  {
+    "productId": "p234",
+    "productName": "더샘 제품 234",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품234",
+    "originalPrice": 9004,
+    "discountPercent": 10,
+    "discountPrice": 8103,
+    "tags": [
+      "오늘드림",
+      "BEST"
+    ],
+    "reviewRating": 3.1,
+    "reviewCount": 3279,
+    "categoryIds": [
+      "c82",
+      "c98",
+      "c24",
+      "c39",
+      "c45",
+      "c69"
+    ]
+  },
+  {
+    "productId": "p235",
+    "productName": "더샘 제품 235",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품235",
+    "originalPrice": 19807,
+    "discountPercent": 50,
+    "discountPrice": 9903,
+    "tags": [],
+    "reviewRating": 3.7,
+    "reviewCount": 3427,
+    "categoryIds": [
+      "c106",
+      "c1",
+      "c20",
+      "c113",
+      "c118"
+    ]
+  },
+  {
+    "productId": "p236",
+    "productName": "더샘 제품 236",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품236",
+    "originalPrice": 45607,
+    "discountPercent": 30,
+    "discountPrice": 31924,
+    "tags": [
+      "SALE",
+      "NEW"
+    ],
+    "reviewRating": 4.2,
+    "reviewCount": 1957,
+    "categoryIds": [
+      "c78",
+      "c23",
+      "c14",
+      "c83",
+      "c96"
+    ]
+  },
+  {
+    "productId": "p237",
+    "productName": "더샘 제품 237",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품237",
+    "originalPrice": 4653,
+    "discountPercent": 40,
+    "discountPrice": 2791,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 4697,
+    "categoryIds": [
+      "c62",
+      "c82",
+      "c23",
+      "c75",
+      "c80",
+      "c107"
+    ]
+  },
+  {
+    "productId": "p238",
+    "productName": "더샘 제품 238",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품238",
+    "originalPrice": 25509,
+    "discountPercent": 40,
+    "discountPrice": 15305,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 3330,
+    "categoryIds": [
+      "c57",
+      "c110",
+      "c33"
+    ]
+  },
+  {
+    "productId": "p239",
+    "productName": "더샘 제품 239",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품239",
+    "originalPrice": 43583,
+    "discountPercent": 20,
+    "discountPrice": 34866,
+    "tags": [],
+    "reviewRating": 4.7,
+    "reviewCount": 4352,
+    "categoryIds": [
+      "c106",
+      "c26",
+      "c96"
+    ]
+  },
+  {
+    "productId": "p240",
+    "productName": "더샘 제품 240",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품240",
+    "originalPrice": 46976,
+    "discountPercent": 30,
+    "discountPrice": 32883,
+    "tags": [
+      "NEW"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 5,
+    "categoryIds": [
+      "c94",
+      "c113"
+    ]
+  },
+  {
+    "productId": "p241",
+    "productName": "더샘 제품 241",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품241",
+    "originalPrice": 49235,
+    "discountPercent": 30,
+    "discountPrice": 34464,
+    "tags": [
+      "오늘드림",
+      "SALE"
+    ],
+    "reviewRating": 4.0,
+    "reviewCount": 808,
+    "categoryIds": [
+      "c111",
+      "c1",
+      "c61",
+      "c105",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p242",
+    "productName": "더샘 제품 242",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품242",
+    "originalPrice": 27007,
+    "discountPercent": 50,
+    "discountPrice": 13503,
+    "tags": [],
+    "reviewRating": 4.9,
+    "reviewCount": 1445,
+    "categoryIds": [
+      "c23",
+      "c15",
+      "c28",
+      "c55"
+    ]
+  },
+  {
+    "productId": "p243",
+    "productName": "더샘 제품 243",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품243",
+    "originalPrice": 29293,
+    "discountPercent": 30,
+    "discountPrice": 20505,
+    "tags": [
+      "BEST",
+      "NEW"
+    ],
+    "reviewRating": 3.9,
+    "reviewCount": 2839,
+    "categoryIds": [
+      "c36",
+      "c46",
+      "c80",
+      "c119"
+    ]
+  },
+  {
+    "productId": "p244",
+    "productName": "더샘 제품 244",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품244",
+    "originalPrice": 25356,
+    "discountPercent": 40,
+    "discountPrice": 15213,
+    "tags": [
+      "BEST",
+      "SALE"
+    ],
+    "reviewRating": 3.6,
+    "reviewCount": 1784,
+    "categoryIds": [
+      "c34",
+      "c41",
+      "c78",
+      "c10",
+      "c18"
+    ]
+  },
+  {
+    "productId": "p245",
+    "productName": "더샘 제품 245",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품245",
+    "originalPrice": 3204,
+    "discountPercent": 30,
+    "discountPrice": 2242,
+    "tags": [
+      "BEST",
+      "오늘드림"
+    ],
+    "reviewRating": 3.0,
+    "reviewCount": 4126,
+    "categoryIds": [
+      "c24",
+      "c62",
+      "c38",
+      "c56"
+    ]
+  },
+  {
+    "productId": "p246",
+    "productName": "더샘 제품 246",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품246",
+    "originalPrice": 44300,
+    "discountPercent": 40,
+    "discountPrice": 26580,
+    "tags": [],
+    "reviewRating": 5.0,
+    "reviewCount": 728,
+    "categoryIds": [
+      "c35",
+      "c33",
+      "c118",
+      "c18",
+      "c20",
+      "c50",
+      "c114",
+      "c115"
+    ]
+  },
+  {
+    "productId": "p247",
+    "productName": "더샘 제품 247",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품247",
+    "originalPrice": 11981,
+    "discountPercent": 40,
+    "discountPrice": 7188,
+    "tags": [],
+    "reviewRating": 4.1,
+    "reviewCount": 3721,
+    "categoryIds": [
+      "c79",
+      "c95",
+      "c81",
+      "c17",
+      "c20",
+      "c42"
+    ]
+  },
+  {
+    "productId": "p248",
+    "productName": "더샘 제품 248",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품248",
+    "originalPrice": 40628,
+    "discountPercent": 20,
+    "discountPrice": 32502,
+    "tags": [
+      "NEW",
+      "SALE"
+    ],
+    "reviewRating": 3.4,
+    "reviewCount": 1796,
+    "categoryIds": [
+      "c37",
+      "c93",
+      "c1",
+      "c77",
+      "c112"
+    ]
+  },
+  {
+    "productId": "p249",
+    "productName": "더샘 제품 249",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품249",
+    "originalPrice": 16722,
+    "discountPercent": 40,
+    "discountPrice": 10033,
+    "tags": [
+      "SALE"
+    ],
+    "reviewRating": 4.5,
+    "reviewCount": 1092,
+    "categoryIds": [
+      "c65",
+      "c37",
+      "c40",
+      "c60",
+      "c74",
+      "c109"
+    ]
+  },
+  {
+    "productId": "p250",
+    "productName": "더샘 제품 250",
+    "brandName": "더샘",
+    "imageUrl": "https://dummyimage.com/200x200/cccccc/000000.png&text=더샘+제품250",
+    "originalPrice": 8834,
+    "discountPercent": 20,
+    "discountPrice": 7067,
+    "tags": [],
+    "reviewRating": 4.4,
+    "reviewCount": 4505,
+    "categoryIds": [
+      "c113",
+      "c66",
+      "c11"
+    ]
+  }
+]
