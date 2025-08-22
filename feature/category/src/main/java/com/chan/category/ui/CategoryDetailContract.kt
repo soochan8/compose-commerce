@@ -5,6 +5,7 @@ import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
 import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
 import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 
 class CategoryDetailContract {
@@ -19,7 +20,8 @@ class CategoryDetailContract {
         val loadingState: LoadingState = LoadingState.Idle,
         val selectedCategoryTabId: String? = null,
         val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
-        val categoryDetailList: List<ProductModel> = emptyList()
+        val categoryDetailList: List<ProductModel> = emptyList(),
+        val productListByCategory: List<ProductModel> = emptyList()
     ) : ViewState
 
     sealed interface Effect : ViewEffect {

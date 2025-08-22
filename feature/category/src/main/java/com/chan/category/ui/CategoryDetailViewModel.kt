@@ -20,13 +20,14 @@ class CategoryDetailViewModel @Inject constructor(
     override fun handleEvent(event: CategoryDetailContract.Event) {
         when (event) {
             is CategoryDetailContract.Event.CategoryDetailLoad -> {
+                setState { copy(selectedCategoryTabId = event.categoryId) }
                 getCategoryTabList(event.categoryId)
-                getCategoryDetailList(event.categoryId)
+                getProductsByCategoryId(event.categoryId)
             }
 
             is CategoryDetailContract.Event.CategoryTabSelected -> {
                 setState { copy(selectedCategoryTabId = event.categoryId) }
-                getCategoryDetailList(categoryId = event.categoryId)
+                getProductsByCategoryId(categoryId = event.categoryId)
             }
         }
     }
@@ -34,19 +35,21 @@ class CategoryDetailViewModel @Inject constructor(
     private fun getCategoryTabList(categoryId: String) {
         handleRepositoryCall(
             call = {
-                categoryDetailRepository.getCategoryDetailTabs(categoryId).map { it.toTabsModel() }
+                categoryDetailRepository.getCategoryTabs(categoryId).map { it.toTabsModel() }
             },
             onSuccess = { categories -> copy(categoryNames = categories) }
         )
     }
 
-    private fun getCategoryDetailList(categoryId: String) {
+    private fun getProductsByCategoryId(categoryId: String) {
         handleRepositoryCall(
             call = {
-                categoryDetailRepository.getCategoryDetailProducts(categoryId)
+                categoryDetailRepository.getProductsByCategory(categoryId)
                     .map { it.toProductsModel() }
             },
-            onSuccess = { detailLists -> copy(categoryDetailList = detailLists) }
+            onSuccess = { productsList ->
+                copy(productListByCategory = productsList)
+            }
         )
     }
 

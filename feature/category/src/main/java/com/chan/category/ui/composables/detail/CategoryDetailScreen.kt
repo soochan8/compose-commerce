@@ -71,7 +71,7 @@ fun CategoryDetailScreen(
             contentPadding = PaddingValues(8.dp)
         ) {
             items(
-                items = state.categoryDetailList,
+                items = state.productListByCategory,
                 key = { it.productId }
             ) { product ->
                 ProductCard(
