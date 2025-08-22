@@ -3,7 +3,10 @@ package com.chan.category.data.mapper
 import com.chan.category.domain.vo.ProductVO
 import com.chan.category.domain.vo.detail.CategoryDetailTabsVO
 import com.chan.database.dto.CategoryDetailTabsDto
+import com.chan.database.entity.CommonCategoryEntity
+import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
+import com.chan.domain.ProductsVO
 
 fun CategoryDetailTabsDto.toTabsDomain(): CategoryDetailTabsVO {
     return CategoryDetailTabsVO(
@@ -24,5 +27,28 @@ fun ProductEntity.Categories.SubCategories.Products.toDomain(): ProductVO {
         tags = tags,
         reviewRating = reviewRating,
         reviewCount = reviewCount
+    )
+}
+
+fun CommonCategoryEntity.toTabsDomain(): CategoryDetailTabsVO {
+    return CategoryDetailTabsVO(
+        categoryId = id,
+        categoryName = name,
+    )
+}
+
+fun CommonProductEntity.toProductsVO(): ProductsVO {
+    return ProductsVO(
+        productId = productId,
+        productName = productName,
+        brandName = brandName,
+        imageUrl = imageUrl,
+        originalPrice = originalPrice,
+        discountPercent = discountPercent,
+        discountPrice = discountPrice,
+        tags = tags,
+        reviewRating = reviewRating,
+        reviewCount = reviewCount,
+        categoryIds = categoryIds,
     )
 }
