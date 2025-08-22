@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.category.domain.CategoryRepository
-import com.chan.category.ui.mapper.toCategoryModel
-import com.chan.category.ui.model.CategoryModel
+import com.chan.category.ui.mapper.toCategoryUIModels
+import com.chan.category.ui.model.CategoriesModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,24 +19,26 @@ class CategoryViewModel @Inject constructor(
 
     override fun handleEvent(event: CategoryContract.Event) {
         when (event) {
-            is CategoryContract.Event.CategoriesLoad -> getCategories()
-            is CategoryContract.Event.SelectCategory -> updateSelectedCategoryId(event.categoryId)
+            is CategoryContract.Event.SelectedCategory -> updateSelectedCategoryId(event.categoryId)
         }
     }
 
-    fun getCategories() {
-        if (viewState.value.categoryList.isNotEmpty()) return
+    init {
+        getAllCategories()
+    }
+
+    fun getAllCategories() {
+        if (viewState.value.categories.isNotEmpty()) return
         handleRepositoryCall(
             call = {
-                categoryRepository.getCategories().map { it.toCategoryModel() } },
-            onSuccess = { categoryList ->
-                val firstId = categoryList.firstOrNull()?.id
-                val mappings = categoryHeaderMapping(categoryList)
-
+                categoryRepository.getAllCategories().toCategoryUIModels()
+            },
+            onSuccess = { categories ->
+                val headerPositions = categoryHeaderMapping(categories)
                 copy(
-                    categoryList = categoryList,
-                    selectedCategoryId = firstId,
-                    headerPositions = mappings
+                    categories = categories,
+                    selectedCategoryId = categories.firstOrNull()?.id,
+                    headerPositions = headerPositions
                 )
             }
         )
@@ -67,15 +69,15 @@ class CategoryViewModel @Inject constructor(
         setState { copy(selectedCategoryId = categoryId) }
     }
 
-    private fun categoryHeaderMapping(categories: List<CategoryModel>): List<Pair<Int, String>> {
-        val list = mutableListOf<Pair<Int, String>>()
+    private fun categoryHeaderMapping(categories: List<CategoriesModel>): List<Pair<Int, String>> {
         var index = 0
+        val positions = mutableListOf<Pair<Int, String>>()
+
         categories.forEach { category ->
-            list += index to category.id
-            category.categories.forEach { subCategory ->
-                index += 1 + subCategory.subCategories.size
-            }
+            positions.add(index to category.id)
+            index += 1 + category.subCategories.size
         }
-        return list
+
+        return positions
     }
 }

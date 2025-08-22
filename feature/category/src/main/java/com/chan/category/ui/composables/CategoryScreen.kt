@@ -46,10 +46,8 @@ fun CategoryScreen(
     val effects = categoryViewModel.effect
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
+    val categoryState = rememberLazyListState()
 
-    LaunchedEffect(Unit) {
-        categoryViewModel.setEvent(CategoryContract.Event.CategoriesLoad)
-    }
     LaunchedEffect(effects) {
         effects.collect { effect ->
             when (effect) {
@@ -61,46 +59,44 @@ fun CategoryScreen(
         }
     }
 
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.layoutInfo.visibleItemsInfo }
-            .map { visibleItems ->
-                //중앙에 가까운 Items
-                val start = listState.layoutInfo.viewportStartOffset
-                val end = listState.layoutInfo.viewportEndOffset
-                val centerY = (start + end) / 2
+    LaunchedEffect(state.selectedCategoryId) {
+        val index = state.categories.indexOfFirst { it.id == state.selectedCategoryId }
+        if (index != -1) {
+            categoryState.animateScrollToItem(index)
+        }
+    }
 
-                visibleItems.minByOrNull { info ->
-                    val itemCenter = info.offset + info.size / 2
-                    abs(itemCenter - centerY)
-                }?.index
+    LaunchedEffect(listState) {
+        snapshotFlow { listState.firstVisibleItemIndex }
+            .map { firstIndex ->
+                // 현재 보이는 첫 아이템 기준으로 헤더 찾기
+                state.headerPositions
+                    .filter { it.first <= firstIndex }
+                    .maxByOrNull { it.first }
+                    ?.second
             }
-            .mapNotNull { itemIndex ->
-                // 헤더의 CategoryIndex 구함
-                itemIndex?.let {
-                    state.headerPositions
-                        .filter { it.first <= itemIndex }
-                        .maxByOrNull { it.first }
-                        ?.second
-                }
-            }
+            .mapNotNull { it }
             .distinctUntilChanged()
             .collect { newCatId ->
                 categoryViewModel.setEvent(
-                    CategoryContract.Event.SelectCategory(newCatId)
+                    CategoryContract.Event.SelectedCategory(newCatId)
                 )
             }
     }
+
+
 
     Row(
         modifier = Modifier.fillMaxSize()
     ) {
         LazyColumn(
+            state = categoryState,
             modifier = Modifier
                 .fillMaxWidth(0.33f)
                 .fillMaxHeight()
                 .background(color = Color(0xFFF6F7F9))
         ) {
-            items(items = state.categoryList, key = { it.id }) { category ->
+            items(items = state.categories, key = { it.id }) { category ->
                 val selected = category.id == state.selectedCategoryId
                 Box(
                     modifier = Modifier
@@ -110,17 +106,19 @@ fun CategoryScreen(
                         )
                         .clickable {
                             val targetIndex = state.headerPositions
-                                .first { it.second == category.id }
-                                .first
+                                .firstOrNull { it.second == category.id }
+                                ?.first
 
-                            scope.launch {
-                                listState.scrollToItem(
-                                    index = targetIndex,
-                                    scrollOffset = 0
-                                )
+                            if (targetIndex != null) {
+                                scope.launch {
+                                    listState.scrollToItem(
+                                        index = targetIndex,
+                                        scrollOffset = 0
+                                    )
+                                }
                             }
                             categoryViewModel.setEvent(
-                                CategoryContract.Event.SelectCategory(
+                                CategoryContract.Event.SelectedCategory(
                                     category.id
                                 )
                             )
@@ -148,31 +146,34 @@ fun CategoryScreen(
                 .background(color = Color.White)
                 .padding(start = 20.dp)
         ) {
-            state.categoryList.forEach { category ->
-                category.categories.forEach { subCategory ->
-                    item(key = "header-${category.id}-${subCategory.id}") {
+            state.categories.forEach { category ->
+                item(key = "parent-${category.id}") {
+                    Text(
+                        text = category.name,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .padding(top = 25.dp)
+                            .clickable {
+                                navController.navigate(
+                                    Routes.CATEGORY_DETAIL.categoryDetailRoute(category.id)
+                                )
+                            }
+                    )
+                }
+                category.subCategories.forEach { subCategory ->
+                    item(key = "child-${subCategory.id}") {
                         Text(
                             text = subCategory.name,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
-                            modifier = Modifier.padding(top = 25.dp)
-                        )
-                    }
-                    items(
-                        items = subCategory.subCategories,
-                        key = { "${category.id}-${subCategory.id}-${it.categoryId}" }
-                    ) { subItem ->
-                        Text(
-                            text = subItem.categoryName,
-                            style = MaterialTheme.typography.titleSmall,
-                            color = Color.DarkGray,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 20.dp)
+                                .padding(top = 25.dp)
                                 .clickable {
                                     navController.navigate(
-                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(subItem.categoryId)
+                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(subCategory.id)
                                     )
                                 }
                         )

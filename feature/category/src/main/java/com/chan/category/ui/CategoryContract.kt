@@ -4,16 +4,15 @@ import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
-import com.chan.category.ui.model.CategoryModel
+import com.chan.category.ui.model.CategoriesModel
 
 class CategoryContract {
     sealed class Event : ViewEvent {
-        object CategoriesLoad : Event()
-        data class SelectCategory(val categoryId: String) : Event()
+        data class SelectedCategory(val categoryId: String) : Event()
     }
 
     data class State(
-        val categoryList: List<CategoryModel> = emptyList(),
+        val categories: List<CategoriesModel> = emptyList(),
         val selectedCategoryId: String? = null,
         val headerPositions: List<Pair<Int, String>> = emptyList(),
         val loadingState : LoadingState = LoadingState.Idle
