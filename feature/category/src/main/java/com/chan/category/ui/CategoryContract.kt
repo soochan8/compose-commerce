@@ -8,7 +8,8 @@ import com.chan.category.ui.model.CategoriesModel
 
 class CategoryContract {
     sealed class Event : ViewEvent {
-        data class SelectedCategory(val categoryId: String) : Event()
+        data class OnCategorySidebarClick(val categoryId: String) : Event()
+        data class OnCategoryClick(val categoryId: String) : Event()
     }
 
     data class State(
@@ -20,5 +21,9 @@ class CategoryContract {
 
     sealed class Effect : ViewEffect {
         data class ShowError(val errorMessage: String) : Effect()
+
+        sealed class Navigation: Effect() {
+            data class ToCategoryDetail(val categoryId: String) : Navigation()
+        }
     }
 }

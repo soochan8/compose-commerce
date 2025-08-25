@@ -19,7 +19,10 @@ class CategoryViewModel @Inject constructor(
 
     override fun handleEvent(event: CategoryContract.Event) {
         when (event) {
-            is CategoryContract.Event.SelectedCategory -> updateSelectedCategoryId(event.categoryId)
+            is CategoryContract.Event.OnCategorySidebarClick -> updateSelectedCategoryId(event.categoryId)
+            is CategoryContract.Event.OnCategoryClick -> {
+                setEffect { CategoryContract.Effect.Navigation.ToCategoryDetail(event.categoryId) }
+            }
         }
     }
 
