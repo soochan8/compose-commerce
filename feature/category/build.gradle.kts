@@ -74,4 +74,5 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.google.gson)
+    implementation(libs.coil)
 }
