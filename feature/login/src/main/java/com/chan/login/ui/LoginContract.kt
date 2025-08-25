@@ -19,6 +19,7 @@ class LoginContract {
         sealed class KakaoLoginEvent : Event() {
             object OnKakaoLoginButtonClicked : KakaoLoginEvent()
         }
+        object CheckUserSession : Event()
     }
 
     data class State(
@@ -26,6 +27,7 @@ class LoginContract {
         val password: String = "",
         val isAutoLoginChecked: Boolean = true,
         val isSaveIdChecked: Boolean = true,
+        val isSessionCheckCompleted: Boolean = false,
         val loadingState: LoadingState = LoadingState.Idle
     ) : ViewState
 
