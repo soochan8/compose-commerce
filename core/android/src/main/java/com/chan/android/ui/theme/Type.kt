@@ -74,6 +74,20 @@ data class AppTypography(
         color = LightGray
     ),
 
+    val categoryTextStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = FontSize.category,
+        color = Black
+    ),
+
+    val subCategoryTextStyle: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.subCategory,
+        color = Gray
+    ),
+
 
     //상품 상세
     val productDetailBrandName: TextStyle = TextStyle(

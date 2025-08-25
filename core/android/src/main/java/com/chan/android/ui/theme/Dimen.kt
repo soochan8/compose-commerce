@@ -14,7 +14,10 @@ object FontSize {
     val review = 10.sp
 
     val loginField = 14.sp
-  
+
+    val category = 16.sp
+    val subCategory = 14.sp
+
     val productDetailName = 16.sp
     val productDetailBrandName = 14.sp
     val productDetailOriginPrice = 14.sp
