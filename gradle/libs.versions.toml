@@ -25,6 +25,7 @@ storage = "1.5.0"
 jetbrainsKotlinJvm = "1.9.23"
 gson = "2.10.1"
 kakao = "2.19.0"
+security = "1.1.0-alpha06"
 
 
 [libraries]
@@ -67,6 +68,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-storage = { group = "androidx.test.services", name = "storage", version.ref = "storage" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 kakao-sdk-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
+androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
