@@ -1,24 +1,23 @@
 package com.chan.login.ui
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
-import com.chan.login.R
+import com.chan.auth.domain.AuthRepository
 import com.chan.login.domain.KakaoLoginManager
 import com.chan.login.domain.KakaoLoginResult
 import com.chan.login.domain.repository.LoginRepository
-import com.chan.login.domain.vo.UserVO
-import com.chan.login.util.SecurityUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
+    private val authRepository: AuthRepository,
     private val kakaoLoginManager: KakaoLoginManager
 ) : BaseViewModel<LoginContract.Event, LoginContract.State, LoginContract.Effect>() {
 
@@ -58,33 +57,14 @@ class LoginViewModel @Inject constructor(
         if (userId.isNotEmpty() && userPw.isNotEmpty()) {
             viewModelScope.launch {
                 setState { copy(loadingState = LoadingState.Loading) }
-                try {
-                    if (loginRepository.findUserByUserId(userId) != null) {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_user_already_exists) }
-                        return@launch
+                loginRepository.registerUser(userId, userPw)
+                    .onSuccess {
+                        setState { copy(loadingState = LoadingState.Success) }
                     }
-
-                    val salt = SecurityUtils.generateSalt()
-                    val hashedPassword = SecurityUtils.hashPassword(
-                        password = userPw.toCharArray(),
-                        salt = salt
-                    )
-                    val newUser = UserVO(
-                        userId = userId,
-                        hashedPassword = hashedPassword,
-                        salt = salt
-                    )
-
-                    loginRepository.registerUser(user = newUser)
-                    setState { copy(loadingState = LoadingState.Success) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.success_register) }
-
-
-                } catch (e: Exception) {
-                    setState { copy(loadingState = LoadingState.Error) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.error_unknown) }
-                }
+                    .onFailure { error ->
+                        setState { copy(loadingState = LoadingState.Error) }
+                        setEffect { LoginContract.Effect.ShowError(error.message ?: "회원가입 실패") }
+                    }
             }
         }
     }
@@ -93,31 +73,20 @@ class LoginViewModel @Inject constructor(
         if (userId.isNotEmpty() && userPw.isNotEmpty()) {
             viewModelScope.launch {
                 setState { copy(loadingState = LoadingState.Loading) }
-                try {
-                    val storedUser = loginRepository.findUserByUserId(userId)
-                    if (storedUser == null) {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_user_not_found) }
-                        return@launch
-                    }
 
-                    val isPasswordCorrect = SecurityUtils.verifyPassword(
-                        password = userPw.toCharArray(),
-                        salt = storedUser.salt,
-                        hashedPassword = storedUser.hashedPassword
-                    )
-
-                    if (isPasswordCorrect) {
+                loginRepository.appLogin(userId, userPw)
+                    .onSuccess {
                         setState { copy(loadingState = LoadingState.Success) }
+
+                        val dummyToken = UUID.nameUUIDFromBytes(userId.toByteArray()).toString()
+                        authRepository.login(userId, dummyToken)
+
                         setEffect { LoginContract.Effect.NavigateToHome }
-                    } else {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_password_mismatch) }
                     }
-                } catch (e: Exception) {
-                    setState { copy(loadingState = LoadingState.Error) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.error_unknown) }
-                }
+                    .onFailure { error ->
+                        setState { copy(loadingState = LoadingState.Error) }
+                        setEffect { LoginContract.Effect.ShowError(error.message ?: "로그인 실패") }
+                    }
             }
 
         }
@@ -129,7 +98,7 @@ class LoginViewModel @Inject constructor(
             .onEach { result ->
                 when (result) {
                     is KakaoLoginResult.Success -> handleKakaoLoginSuccess()
-                    is KakaoLoginResult.Error -> handleLoginError(R.string.login_failed)
+                    is KakaoLoginResult.Error -> handleLoginError("카카오 로그인 실패")
                     KakaoLoginResult.Cancelled -> {
                         setState { copy(loadingState = LoadingState.Idle) }
                     }
@@ -142,8 +111,8 @@ class LoginViewModel @Inject constructor(
         setEffect { LoginContract.Effect.NavigateToHome }
     }
 
-    private fun handleLoginError(@StringRes messageResId: Int) {
+    private fun handleLoginError(errorMsg: String) {
         setState { copy(loadingState = LoadingState.Error) }
-        setEffect { LoginContract.Effect.ShowError(messageResId = messageResId) }
+        setEffect { LoginContract.Effect.ShowError(errorMsg) }
     }
 } 
