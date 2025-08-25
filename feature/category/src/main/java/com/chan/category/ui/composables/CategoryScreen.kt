@@ -5,10 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -20,12 +23,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import com.chan.android.ui.theme.CategoryBackground
+import com.chan.android.ui.theme.Spacing
+import com.chan.android.ui.theme.appTypography
 import com.chan.category.ui.CategoryContract
 import com.chan.category.ui.CategoryViewModel
 import com.chan.navigation.Routes
@@ -33,7 +41,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
-import kotlin.math.abs
 
 
 @Composable
@@ -94,7 +101,7 @@ fun CategoryScreen(
             modifier = Modifier
                 .fillMaxWidth(0.33f)
                 .fillMaxHeight()
-                .background(color = Color(0xFFF6F7F9))
+                .background(color = CategoryBackground)
         ) {
             items(items = state.categories, key = { it.id }) { category ->
                 val selected = category.id == state.selectedCategoryId
@@ -123,14 +130,14 @@ fun CategoryScreen(
                                 )
                             )
                         }
-                        .padding(vertical = 2.dp, horizontal = 8.dp)
+                        .padding(vertical = 2.dp, horizontal = Spacing.spacing2)
                 ) {
                     Text(
                         text = category.name,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 12.dp, horizontal = 8.dp),
-                        style = MaterialTheme.typography.bodyMedium.copy(
+                            .padding(vertical = Spacing.spacing3, horizontal = Spacing.spacing2),
+                        style = MaterialTheme.appTypography.subCategoryTextStyle.copy(
                             fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
                         ),
                         color = if (selected) Color.Black else Color.Gray
@@ -144,33 +151,39 @@ fun CategoryScreen(
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .background(color = Color.White)
-                .padding(start = 20.dp)
+                .padding(start = Spacing.spacing5)
         ) {
             state.categories.forEach { category ->
                 item(key = "parent-${category.id}") {
-                    Text(
-                        text = category.name,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(top = 25.dp)
-                            .clickable {
-                                navController.navigate(
-                                    Routes.CATEGORY_DETAIL.categoryDetailRoute(category.id)
-                                )
-                            }
-                    )
+                    Row(
+                        modifier = Modifier.padding(top = Spacing.spacing6),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AsyncImage(
+                            model = category.imageUrl,
+                            contentDescription = "상위 카테고리 이미지",
+                            modifier = Modifier.size(Spacing.spacing7)
+                        )
+                        Spacer(modifier = Modifier.width(Spacing.spacing2))
+                        Text(
+                            text = category.name,
+                            style = MaterialTheme.appTypography.categoryTextStyle,
+                            modifier = Modifier
+                                .clickable {
+                                    navController.navigate(
+                                        Routes.CATEGORY_DETAIL.categoryDetailRoute(category.id)
+                                    )
+                                }
+                        )
+                    }
                 }
                 category.subCategories.forEach { subCategory ->
                     item(key = "child-${subCategory.id}") {
                         Text(
                             text = subCategory.name,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black,
+                            style = MaterialTheme.appTypography.subCategoryTextStyle,
                             modifier = Modifier
-                                .padding(top = 25.dp)
+                                .padding(top = Spacing.spacing6)
                                 .clickable {
                                     navController.navigate(
                                         Routes.CATEGORY_DETAIL.categoryDetailRoute(subCategory.id)
