@@ -22,6 +22,14 @@ class AuthRepositoryImpl @Inject constructor(
         private const val KEY_TOKEN = "token"
     }
 
+    init {
+        val userId = prefs.getString(KEY_USER_ID, null)
+        val token = prefs.getString(KEY_TOKEN, null)
+        if (userId != null && token != null) {
+            _sessionFlow.value = UserSession(userId, token)
+        }
+    }
+
     override suspend fun login(userId: String, token: String) {
         prefs.edit()
             .putString(KEY_USER_ID, userId)
