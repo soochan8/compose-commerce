@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,10 +17,8 @@ import com.chan.category.ui.CategoryViewModel
 import com.chan.category.ui.composables.category.CategoryContent
 import com.chan.category.ui.composables.category.CategorySidebar
 import com.chan.navigation.Routes
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapNotNull
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -31,13 +28,11 @@ fun CategoryScreen(
 ) {
 
     val state by categoryViewModel.viewState.collectAsState()
-    val effects = categoryViewModel.effect
-    val scope = rememberCoroutineScope()
     val contentListState = rememberLazyListState()
     val sidebarListState = rememberLazyListState()
 
     LaunchedEffect(Unit) {
-        categoryViewModel.effect.collect { effect ->
+        categoryViewModel.effect.collectLatest { effect ->
             when (effect) {
                 is CategoryContract.Effect.ShowError -> Log.d(
                     "CategoryScreen",
@@ -53,25 +48,22 @@ fun CategoryScreen(
                 is CategoryContract.Effect.ScrollToSidebar -> {
                     sidebarListState.scrollToItem(effect.index)
                 }
+
+                is CategoryContract.Effect.ScrollToContent -> {
+                    contentListState.scrollToItem(
+                        effect.index
+                    )
+                }
             }
         }
+
     }
 
     LaunchedEffect(contentListState) {
         snapshotFlow { contentListState.firstVisibleItemIndex }
-            .map { firstIndex ->
-                // 현재 보이는 첫 아이템 기준으로 헤더 찾기
-                state.headerPositions
-                    .filter { it.first <= firstIndex }
-                    .maxByOrNull { it.first }
-                    ?.second
-            }
-            .mapNotNull { it }
             .distinctUntilChanged()
-            .collect { newCatId ->
-                categoryViewModel.setEvent(
-                    CategoryContract.Event.OnCategorySidebarClick(newCatId)
-                )
+            .collect { firstIndex ->
+                categoryViewModel.setEvent(CategoryContract.Event.OnContentScroll(firstIndex))
             }
     }
 
@@ -83,19 +75,6 @@ fun CategoryScreen(
             selectedCategoryId = state.selectedCategoryId,
             listState = sidebarListState,
             onCategoryClick = { categoryId ->
-                val targetIndex = state.headerPositions
-                    .firstOrNull { it.second == categoryId }
-                    ?.first
-
-                if (targetIndex != null) {
-                    scope.launch {
-                        contentListState.scrollToItem(
-                            index = targetIndex,
-                            scrollOffset = 0
-                        )
-                    }
-                }
-
                 categoryViewModel.setEvent(
                     CategoryContract.Event.OnCategorySidebarClick(
                         categoryId

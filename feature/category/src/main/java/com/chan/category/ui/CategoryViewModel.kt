@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.category.domain.CategoryRepository
+import com.chan.category.ui.CategoryContract.Effect.Navigation.*
 import com.chan.category.ui.mapper.toCategoryUIModels
 import com.chan.category.ui.model.CategoriesModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,10 +20,14 @@ class CategoryViewModel @Inject constructor(
 
     override fun handleEvent(event: CategoryContract.Event) {
         when (event) {
-            is CategoryContract.Event.OnCategorySidebarClick -> updateSelectedCategoryId(event.categoryId)
-            is CategoryContract.Event.OnCategoryClick -> {
-                setEffect { CategoryContract.Effect.Navigation.ToCategoryDetail(event.categoryId) }
+            is CategoryContract.Event.OnCategorySidebarClick -> {
+                updateSelectedCategoryId(event.categoryId)
+                onScrollToSidebar(event.categoryId)
+                onScrollToContent(event.categoryId)
             }
+
+            is CategoryContract.Event.OnCategoryClick -> setEffect { ToCategoryDetail(event.categoryId) }
+            is CategoryContract.Event.OnContentScroll -> handleContentScroll(event.firstVisibleIndex)
         }
     }
 
@@ -70,10 +75,37 @@ class CategoryViewModel @Inject constructor(
 
     private fun updateSelectedCategoryId(categoryId: String) {
         setState { copy(selectedCategoryId = categoryId) }
+    }
 
+    private fun onScrollToSidebar(categoryId: String) {
         val index = viewState.value.categories.indexOfFirst { it.id == categoryId }
         if (index != -1) {
             setEffect { CategoryContract.Effect.ScrollToSidebar(index) }
+        }
+    }
+
+    private fun onScrollToContent(categoryId: String) {
+        val targetIndex = viewState.value.headerPositions
+            .firstOrNull { it.second == categoryId }
+            ?.first
+
+        if (targetIndex != null) {
+            setEffect { CategoryContract.Effect.ScrollToContent(targetIndex) }
+        }
+    }
+
+    private fun handleContentScroll(firstVisibleIndex: Int) {
+        val newCategoryId = viewState.value.headerPositions
+            .filter { it.first <= firstVisibleIndex }
+            .maxByOrNull { it.first }
+            ?.second
+
+        newCategoryId?.let { id ->
+            if (id != viewState.value.selectedCategoryId) {
+                updateSelectedCategoryId(id)
+            }
+
+            onScrollToSidebar(id)
         }
     }
 
