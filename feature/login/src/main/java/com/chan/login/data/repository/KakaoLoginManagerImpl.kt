@@ -30,7 +30,13 @@ class KakaoLoginManagerImpl @Inject constructor(
                     }
                 }
                 //로그인 성공
-                token != null -> trySend(KakaoLoginResult.Success(token.accessToken))
+                token != null -> {
+                    UserApiClient.instance.me { user, meError ->
+                        if (user != null) {
+                            trySend(KakaoLoginResult.Success(user.id.toString(), token.accessToken))
+                        }
+                    }
+                }
             }
             close()
         }
