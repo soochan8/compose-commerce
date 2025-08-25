@@ -70,6 +70,11 @@ class CategoryViewModel @Inject constructor(
 
     private fun updateSelectedCategoryId(categoryId: String) {
         setState { copy(selectedCategoryId = categoryId) }
+
+        val index = viewState.value.categories.indexOfFirst { it.id == categoryId }
+        if (index != -1) {
+            setEffect { CategoryContract.Effect.ScrollToSidebar(index) }
+        }
     }
 
     private fun categoryHeaderMapping(categories: List<CategoriesModel>): List<Pair<Int, String>> {

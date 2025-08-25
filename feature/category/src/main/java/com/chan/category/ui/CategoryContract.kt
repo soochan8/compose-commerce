@@ -21,7 +21,7 @@ class CategoryContract {
 
     sealed class Effect : ViewEffect {
         data class ShowError(val errorMessage: String) : Effect()
-
+        data class ScrollToSidebar(val index: Int): Effect()
         sealed class Navigation: Effect() {
             data class ToCategoryDetail(val categoryId: String) : Navigation()
         }

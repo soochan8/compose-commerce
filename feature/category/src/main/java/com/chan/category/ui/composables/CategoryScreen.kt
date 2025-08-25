@@ -49,14 +49,11 @@ fun CategoryScreen(
                         Routes.CATEGORY_DETAIL.categoryDetailRoute(effect.categoryId)
                     )
                 }
-            }
-        }
-    }
 
-    LaunchedEffect(state.selectedCategoryId) {
-        val index = state.categories.indexOfFirst { it.id == state.selectedCategoryId }
-        if (index != -1) {
-            sidebarListState.animateScrollToItem(index)
+                is CategoryContract.Effect.ScrollToSidebar -> {
+                    sidebarListState.scrollToItem(effect.index)
+                }
+            }
         }
     }
 
