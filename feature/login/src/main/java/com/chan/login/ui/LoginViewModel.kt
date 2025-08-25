@@ -8,6 +8,7 @@ import com.chan.login.domain.KakaoLoginManager
 import com.chan.login.domain.KakaoLoginResult
 import com.chan.login.domain.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -27,6 +28,19 @@ class LoginViewModel @Inject constructor(
         when (event) {
             is LoginContract.Event.AppLoginEvent -> handleAppLoginEvents(event)
             is LoginContract.Event.KakaoLoginEvent -> loginWithKakao()
+            LoginContract.Event.CheckUserSession -> checkSessionStatus()
+        }
+    }
+
+    private fun checkSessionStatus() {
+        viewModelScope.launch {
+            val currentSession = authRepository.getSessionFlow().firstOrNull()
+
+            if(currentSession != null) {
+                setEffect { LoginContract.Effect.NavigateToHome }
+            } else {
+                setState { copy(isSessionCheckCompleted = true) }
+            }
         }
     }
 
@@ -97,7 +111,7 @@ class LoginViewModel @Inject constructor(
         kakaoLoginManager.login()
             .onEach { result ->
                 when (result) {
-                    is KakaoLoginResult.Success -> handleKakaoLoginSuccess()
+                    is KakaoLoginResult.Success -> handleKakaoLoginSuccess(result)
                     is KakaoLoginResult.Error -> handleLoginError("카카오 로그인 실패")
                     KakaoLoginResult.Cancelled -> {
                         setState { copy(loadingState = LoadingState.Idle) }
@@ -106,7 +120,14 @@ class LoginViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    private fun handleKakaoLoginSuccess() {
+    private fun handleKakaoLoginSuccess(result: KakaoLoginResult.Success) {
+        val userId = result.userId
+        val token = result.accessToken
+
+        viewModelScope.launch {
+            authRepository.login(userId, token)
+        }
+
         setState { copy(loadingState = LoadingState.Success) }
         setEffect { LoginContract.Effect.NavigateToHome }
     }
