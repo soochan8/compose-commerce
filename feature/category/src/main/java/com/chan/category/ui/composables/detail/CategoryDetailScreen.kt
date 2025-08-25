@@ -17,47 +17,32 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.chan.android.NoRippleTheme
 import com.chan.android.ProductCard
+import com.chan.android.model.ProductModel
+import com.chan.android.ui.theme.Black
+import com.chan.android.ui.theme.Gray
+import com.chan.android.ui.theme.Spacing
 import com.chan.category.ui.CategoryDetailContract
-import com.chan.category.ui.CategoryDetailViewModel
 import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 
 @Composable
 fun CategoryDetailScreen(
-    categoryId: String,
-    viewModel: CategoryDetailViewModel = hiltViewModel(),
-    onProductClick: (String) -> Unit
+    state: CategoryDetailContract.State,
+    onEvent: (CategoryDetailContract.Event) -> Unit
 ) {
-
-    val state by viewModel.viewState.collectAsState()
-    val selectedIndex =
-        state.categoryNames.indexOfFirst { it.categoryId == state.selectedCategoryTabId }
-            .coerceAtLeast(0)
-
-
-    LaunchedEffect(categoryId) {
-        viewModel.setEvent(CategoryDetailContract.Event.CategoryDetailLoad(categoryId))
-    }
-
     Scaffold(
         topBar = {
             if (state.categoryNames.isNotEmpty()) {
                 CategoryDetailTopBar(
                     tabs = state.categoryNames,
-                    selectedIndex = selectedIndex,
-                    onTabSelected = { index ->
-                        val selectedCategoryIndex = state.categoryNames[index].categoryId
-                        viewModel.setEvent(
+                    selectedIndex = state.selectedCategoryTabIndex,
+                    onTabSelected = { categoryId ->
+                        onEvent(
                             CategoryDetailContract.Event.CategoryTabSelected(
-                                selectedCategoryIndex
+                                categoryId
                             )
                         )
                     }
@@ -65,22 +50,35 @@ fun CategoryDetailScreen(
             }
         }
     ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        CategoryDetailProductGrid(
+            products = state.productListByCategory,
             modifier = Modifier.padding(top = padding.calculateTopPadding()),
-            contentPadding = PaddingValues(8.dp)
-        ) {
-            items(
-                items = state.productListByCategory,
-                key = { it.productId }
-            ) { product ->
-                ProductCard(
-                    product = product,
-                    onClick = { onProductClick(it) },
-                    onLikeClick = {},
-                    onCartClick = {}
-                )
-            }
+            onEvent = onEvent
+        )
+    }
+}
+
+@Composable
+fun CategoryDetailProductGrid(
+    products: List<ProductModel>,
+    modifier: Modifier = Modifier,
+    onEvent: (CategoryDetailContract.Event) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier,
+        contentPadding = PaddingValues(Spacing.spacing2)
+    ) {
+        items(
+            items = products,
+            key = { it.productId }
+        ) { product ->
+            ProductCard(
+                product = product,
+                onClick = { onEvent(CategoryDetailContract.Event.OnProductClick(it)) },
+                onLikeClick = {},
+                onCartClick = {}
+            )
         }
     }
 }
@@ -89,18 +87,18 @@ fun CategoryDetailScreen(
 fun CategoryDetailTopBar(
     tabs: List<CategoryDetailTabsModel>,
     selectedIndex: Int,
-    onTabSelected: (Int) -> Unit
+    onTabSelected: (String) -> Unit
 ) {
     ScrollableTabRow(
         modifier = Modifier.fillMaxWidth(),
         selectedTabIndex = selectedIndex,
-        edgePadding = 16.dp,
+        edgePadding = Spacing.spacing4,
         indicator = { tabPositions ->
             Box(
                 Modifier
                     .tabIndicatorOffset(tabPositions[selectedIndex])
                     .height(2.dp)
-                    .background(Color.Black)
+                    .background(Black)
             )
         },
     ) {
@@ -108,11 +106,11 @@ fun CategoryDetailTopBar(
             tabs.forEachIndexed { index, title ->
                 Tab(
                     selected = selectedIndex == index,
-                    onClick = { onTabSelected(index) },
+                    onClick = { onTabSelected(title.categoryId) },
                     text = {
                         Text(
                             text = title.categoryName,
-                            color = if (index == selectedIndex) Color.Black else Color.Gray
+                            color = if (index == selectedIndex) Black else Gray
                         )
                     }
                 )

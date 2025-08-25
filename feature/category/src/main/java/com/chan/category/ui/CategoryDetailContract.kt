@@ -10,21 +10,26 @@ import com.chan.category.ui.model.detail.CategoryDetailTabsModel
 
 class CategoryDetailContract {
 
-    sealed interface Event : ViewEvent {
-        data class CategoryDetailLoad(val categoryId: String) : Event
-
-        data class CategoryTabSelected(val categoryId: String) : Event
+    sealed class Event : ViewEvent {
+        data class CategoryDetailLoad(val categoryId: String) : Event()
+        data class CategoryTabSelected(val categoryId: String) : Event()
+        data class OnProductClick(val productId: String) : Event()
     }
 
     data class State(
         val loadingState: LoadingState = LoadingState.Idle,
         val selectedCategoryTabId: String? = null,
+        val selectedCategoryTabIndex: Int = 0,
         val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
         val categoryDetailList: List<ProductModel> = emptyList(),
         val productListByCategory: List<ProductModel> = emptyList()
     ) : ViewState
 
-    sealed interface Effect : ViewEffect {
-        data class ShowError(val errorMessage: String) : Effect
+    sealed class Effect : ViewEffect {
+        data class ShowError(val errorMessage: String) : Effect()
+
+        sealed class Navigation : Effect() {
+            data class ToProductDetail(val productId: String) : Navigation()
+        }
     }
 }
