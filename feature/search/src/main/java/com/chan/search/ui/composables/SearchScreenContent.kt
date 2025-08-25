@@ -26,7 +26,6 @@ import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.appTypography
 import com.chan.android.ui.theme.dividerColor
 import com.chan.search.R
-import com.chan.search.ui.composables.result.SearchResultScreen
 import com.chan.search.ui.model.SearchHistoryModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
@@ -96,9 +95,7 @@ fun SearchScreenContent(
                     )
                 }
             } else {
-                SearchResultScreen(products = searchResultProducts) {
 
-                }
             }
         }
     }
