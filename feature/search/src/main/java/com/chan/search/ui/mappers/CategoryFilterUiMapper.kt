@@ -1,19 +1,22 @@
 package com.chan.search.ui.mappers
 
-import com.chan.search.domain.model.FilterCategoriesVO
-import com.chan.search.ui.model.filter.FilterCategoriesModel
-import com.chan.search.ui.model.filter.FilterCategoriesModel.SubCategoryUiModel
+import com.chan.search.domain.model.CategoryVO
+import com.chan.search.domain.model.FilterCategoryListVO
+import com.chan.search.ui.model.filter.CategoryModel
+import com.chan.search.ui.model.filter.FilterCategoryListModel
 
-fun FilterCategoriesVO.toUiModel(): FilterCategoriesModel =
-    FilterCategoriesModel(
-        categoryId = this.categoryId,
-        name = this.name,
-        subCategories = this.subCategories.map {
-            SubCategoryUiModel(
-                subCategoryId = it.subCategoryId,
-                subCategoryName = it.subCategoryName
-            )
-        }
+fun FilterCategoryListVO.toFilterCategoryModel(): FilterCategoryListModel {
+    return FilterCategoryListModel(
+        parent = parent.toPresentation(),
+        children = children.map { it.toPresentation() }
     )
+}
+
+fun CategoryVO.toPresentation(): CategoryModel {
+    return CategoryModel(
+        id = id,
+        name = name
+    )
+}
 
 
