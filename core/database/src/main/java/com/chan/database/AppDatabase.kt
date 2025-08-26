@@ -25,26 +25,52 @@ import com.chan.database.entity.search.SearchHistoryEntity
 
 val MIGRATION_13_14 = object : Migration(13, 14) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL(
-            """
+        db.execSQL("""
             CREATE TABLE `searchHistory_new` (
                 `search` TEXT NOT NULL, 
                 `timeStamp` INTEGER NOT NULL, 
                 PRIMARY KEY(`search`)
             )
-        """.trimIndent()
-        )
+        """.trimIndent())
 
-        db.execSQL(
-            """
+        db.execSQL("""
             INSERT INTO `searchHistory_new` (search, timeStamp)
             SELECT search, MAX(timeStamp) FROM `searchHistory` GROUP BY search
-        """.trimIndent()
-        )
+        """.trimIndent())
 
         db.execSQL("DROP TABLE `searchHistory`")
 
         db.execSQL("ALTER TABLE `searchHistory_new` RENAME TO `searchHistory`")
+    }
+}
+
+val MIGRATION_14_15 = object : Migration(14, 15) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS `products` (
+                `productId` TEXT NOT NULL, 
+                `productName` TEXT NOT NULL, 
+                `brandName` TEXT NOT NULL, 
+                `imageUrl` TEXT NOT NULL, 
+                `originalPrice` INTEGER NOT NULL, 
+                `discountPercent` INTEGER NOT NULL, 
+                `discountPrice` INTEGER NOT NULL, 
+                `tags` TEXT NOT NULL, 
+                `reviewRating` REAL NOT NULL, 
+                `reviewCount` INTEGER NOT NULL, 
+                `categoryIds` TEXT NOT NULL, 
+                PRIMARY KEY(`productId`)
+            )
+        """.trimIndent())
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS `category` (
+                `id` TEXT NOT NULL, 
+                `name` TEXT NOT NULL, 
+                `parentCategoryId` TEXT, 
+                PRIMARY KEY(`id`)
+            )
+        """.trimIndent())
     }
 }
 
