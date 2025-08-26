@@ -10,7 +10,6 @@ import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
 import com.chan.search.ui.model.filter.DeliveryOption
-import com.chan.search.ui.model.filter.FilterCategoriesModel
 import com.chan.search.ui.model.filter.FilterCategoryListModel
 import com.chan.search.ui.model.result.SearchResultTab
 
