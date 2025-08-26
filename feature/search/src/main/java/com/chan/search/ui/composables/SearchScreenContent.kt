@@ -32,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.chan.android.model.ProductModel
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
@@ -41,53 +40,21 @@ import com.chan.android.ui.theme.dividerColor
 import com.chan.navigation.Routes
 import com.chan.search.R
 import com.chan.search.ui.composables.result.SearchResultScreen
-import com.chan.search.ui.model.SearchHistoryModel
-import com.chan.search.ui.model.SearchResultModel
-import com.chan.search.ui.model.TrendingSearchModel
-import com.chan.search.ui.model.filter.DeliveryOption
-import com.chan.search.ui.model.filter.FilterCategoriesModel
+import com.chan.search.ui.contract.SearchContract
 
 @Composable
 fun SearchScreenContent(
     navController: NavHostController,
-    search: String,
-    recentSearches: List<SearchHistoryModel>,
-    recommendedKeywords: List<String>,
-    trendingSearches: List<TrendingSearchModel>,
-    searchResults: List<SearchResultModel>,
-    currentTime: String,
-    showSearchResult: Boolean,
-    searchResultProducts: List<ProductModel>,
-    showFilter: Boolean,
-    selectedDeliveryOption: DeliveryOption?,
-    categoryFilters: List<FilterCategoriesModel>,
-    expandedCategoryName: String?,
-    selectedSubCategories: Set<String>,
-    isCategorySectionExpanded: Boolean,
-    filteredProductCount: Int,
-    onSearchChanged: (String) -> Unit,
-    onClearSearch: () -> Unit,
-    onSearchClick: (String) -> Unit,
-    onSearchTextFocus: () -> Unit,
-    onRemoveSearchKeyword: (String) -> Unit,
-    onClearAllRecentSearches: () -> Unit,
-    onSearchResultItemClick: (String) -> Unit,
-    onClickBack: () -> Unit,
-    onClickCart: () -> Unit,
-    onFilterClear: () -> Unit,
-    onUpdateFilterClick: () -> Unit,
-    onDeliveryOptionClick: (DeliveryOption) -> Unit,
-    onCategoryHeaderClick: (String) -> Unit,
-    onSubCategoryClick: (String) -> Unit,
-    onFilterCategoryClick: () -> Unit,
+    state: SearchContract.State,
+    onEvent: (SearchContract.Event) -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             containerColor = White,
             topBar = {
                 SearchTopAppBar(
-                    onClickBack = onClickBack,
-                    onClickCart = onClickCart
+                    onClickBack = { navController.popBackStack() },
+                    onClickCart = { }
                 )
             },
         ) { paddingValues ->
@@ -98,65 +65,75 @@ fun SearchScreenContent(
             ) {
 
                 SearchTextField(
-                    search = search,
-                    onSearchChanged = onSearchChanged,
-                    onClearSearch = onClearSearch,
-                    onSearchClick = {
-                        onSearchClick(it)
-                    },
-                    onSearchTextFocus = {
-                        onSearchTextFocus()
-                    },
+                    search = state.search,
+                    onSearchChanged = { onEvent(SearchContract.Event.OnSearchChanged(it)) },
+                    onClearSearch = { onEvent(SearchContract.Event.OnClickClearSearch) },
+                    onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
+                    onSearchTextFocus = { onEvent(SearchContract.Event.OnSearchTextFocus) },
                     modifier = Modifier.padding(Spacing.spacing4)
                 )
                 HorizontalDivider(color = dividerColor, thickness = 1.dp)
 
-                if (!showSearchResult) {
-                    if (search.isBlank()) {
-                        if (recentSearches.isNotEmpty()) {
+                when {
+                    state.showSearchResult -> {
+                        if (state.searchResultProducts.isEmpty()) {
+                            Text(text = stringResource(R.string.search_empty_product))
+                        } else {
+                            Box(modifier = Modifier.weight(1f)) {
+                                SearchResultScreen(
+                                    state = state,
+                                    onEvent = onEvent,
+                                    onProductClick = { productId ->
+                                        navController.navigate(
+                                            Routes.PRODUCT_DETAIL.productDetailRoute(productId)
+                                        )
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    state.search.isBlank() -> {
+                        if (state.recentSearches.isNotEmpty()) {
                             RecentSearchList(
-                                recentSearches = recentSearches,
-                                onRemoveSearch = onRemoveSearchKeyword,
-                                onClearAllRecentSearches = onClearAllRecentSearches,
-                                onSearchClick = {
-                                    onSearchClick(it)
+                                recentSearches = state.recentSearches,
+                                onRemoveSearch = {
+                                    onEvent(
+                                        SearchContract.Event.OnRemoveSearchKeyword(
+                                            it
+                                        )
+                                    )
                                 },
+                                onClearAllRecentSearches = { onEvent(SearchContract.Event.OnClearAllRecentSearches) },
+                                onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
                             )
                         }
-                        RecommendedKeywordList(recommendedKeywords = recommendedKeywords)
+                        RecommendedKeywordList(recommendedKeywords = state.recommendedKeywords)
                         TrendingSearchList(
-                            trendingSearches = trendingSearches,
-                            currentTime = currentTime
-                        )
-                    } else {
-                        SearchResultList(
-                            results = searchResults,
-                            searchQuery = search,
-                            onSearchResultItemClick = onSearchResultItemClick
+                            trendingSearches = state.trendingSearches,
+                            currentTime = state.currentTime
                         )
                     }
-                } else {
-                    if (searchResultProducts.isEmpty()) {
-                        Text(text = stringResource(R.string.search_empty_product))
-                    } else {
-                        Box(modifier = Modifier.weight(1f)) {
-                            SearchResultScreen(
-                                products = searchResultProducts,
-                                onNavigateToFilter = onUpdateFilterClick,
-                                onProductClick = { productId ->
-                                    navController.navigate(
-                                        Routes.PRODUCT_DETAIL.productDetailRoute(productId)
+
+                    else -> {
+                        SearchResultList(
+                            results = state.searchResults,
+                            searchQuery = state.search,
+                            onSearchResultItemClick = {
+                                onEvent(
+                                    SearchContract.Event.OnClickSearchProduct(
+                                        it
                                     )
-                                }
-                            )
-                        }
+                                )
+                            }
+                        )
                     }
                 }
             }
         }
 
         AnimatedVisibility(
-            visible = showFilter,
+            visible = state.filter.showFilter,
             enter = fadeIn(animationSpec = tween(300)),
             exit = fadeOut(animationSpec = tween(300))
         ) {
@@ -167,13 +144,13 @@ fun SearchScreenContent(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
-                        onClick = onUpdateFilterClick
+                        onClick = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
                     )
             )
         }
 
         AnimatedVisibility(
-            visible = showFilter,
+            visible = state.filter.showFilter,
             enter = slideInHorizontally(
                 initialOffsetX = { it },
                 animationSpec = tween(300)
@@ -188,18 +165,8 @@ fun SearchScreenContent(
                 contentAlignment = Alignment.CenterEnd
             ) {
                 SearchFilterScreen(
-                    selectedDeliveryOption = selectedDeliveryOption,
-                    categoryFilters = categoryFilters,
-                    expandedCategoryName = expandedCategoryName,
-                    selectedSubCategories = selectedSubCategories,
-                    isCategorySectionExpanded = isCategorySectionExpanded,
-                    filteredProductCount = filteredProductCount,
-                    onClose = onUpdateFilterClick,
-                    onDeliveryOptionClick = onDeliveryOptionClick,
-                    onCategoryHeaderClick = onCategoryHeaderClick,
-                    onSubCategoryClick = onSubCategoryClick,
-                    onFilterCategoryClick = onFilterCategoryClick,
-                    onFilterClear = onFilterClear,
+                    state = state,
+                    onEvent = onEvent,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .fillMaxHeight()

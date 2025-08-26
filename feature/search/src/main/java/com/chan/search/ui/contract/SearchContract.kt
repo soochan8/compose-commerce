@@ -11,6 +11,7 @@ import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
 import com.chan.search.ui.model.filter.DeliveryOption
 import com.chan.search.ui.model.filter.FilterCategoriesModel
+import com.chan.search.ui.model.result.SearchResultTab
 
 class SearchContract {
 
@@ -24,14 +25,19 @@ class SearchContract {
         data class OnRemoveSearchKeyword(val search: String) : Event()
         object OnClearAllRecentSearches : Event()
 
-        object OnUpdateFilterClick : Event()
-        object OnFilterClear : Event()
+        sealed class Filter : Event() {
+            data class OnDeliveryOptionChanged(val option: DeliveryOption) : Filter()
+            data class OnCategoryHeaderClick(val categoryName: String) : Filter()
+            data class OnSubCategoryClick(val subCategoryName: String) : Filter()
+            data class OnFilterChipClicked(val chip: SearchResultFilterChipModel) : Filter()
+            object OnCategoryClick : Filter()
+            object OnFilterClick : Filter()
+            object OnClear : Filter()
+        }
 
-        data class OnFilterChipClicked(val chip: SearchResultFilterChipModel) : Event()
-        data class OnDeliveryOptionChanged(val option: DeliveryOption) : Event()
-        data class OnCategoryHeaderClick(val categoryName: String) : Event()
-        data class OnSubCategoryClick(val subCategoryName: String) : Event()
-        object OnFilterCategoryClick : Event()
+        sealed class TabRow: Event() {
+            data class OnResultTabSelected(val index: Int): Event()
+        }
     }
 
     data class State(
@@ -47,17 +53,28 @@ class SearchContract {
         val searchResultProducts: List<ProductModel> = emptyList(),
         val currentTime: String = "",
         val showSearchResult: Boolean = false,
-        val showFilter: Boolean = false,
 
+        val filter: FilterState = FilterState(),
+        val resultTabRow: TabRow = TabRow()
+
+
+    ) : ViewState
+
+    data class TabRow(
+        val resultSelectedTabIndex : Int = 0,
+        val tabs: List<SearchResultTab> = SearchResultTab.allTabs
+    )
+
+    data class FilterState (
+        val showFilter: Boolean = false,
         val selectedDeliveryOption: DeliveryOption? = null,
         val filterChips: List<SearchResultFilterChipModel> = emptyList(),
-
         val categoryFilters: List<FilterCategoriesModel> = emptyList(),
         val expandedCategoryName: String? = null,
         val selectedSubCategories: Set<String> = emptySet(),
         val isCategorySectionExpanded: Boolean = false,
         val filteredProductCount: Int = 0
-    ) : ViewState
+    )
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
