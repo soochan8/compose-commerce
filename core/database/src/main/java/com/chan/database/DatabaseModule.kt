@@ -54,7 +54,7 @@ object DatabaseModule {
                 }
             }
         )
-            .addMigrations(MIGRATION_13_14)
+            .addMigrations(MIGRATION_13_14, MIGRATION_14_15)
             .build()
     }
 
