@@ -11,6 +11,7 @@ import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
 import com.chan.search.ui.model.filter.DeliveryOption
 import com.chan.search.ui.model.filter.FilterCategoriesModel
+import com.chan.search.ui.model.filter.FilterCategoryListModel
 import com.chan.search.ui.model.result.SearchResultTab
 
 class SearchContract {
@@ -69,7 +70,7 @@ class SearchContract {
         val showFilter: Boolean = false,
         val selectedDeliveryOption: DeliveryOption? = null,
         val filterChips: List<SearchResultFilterChipModel> = emptyList(),
-        val categoryFilters: List<FilterCategoriesModel> = emptyList(),
+        val categoryFilters: List<FilterCategoryListModel> = emptyList(),
         val expandedCategoryName: String? = null,
         val selectedSubCategories: Set<String> = emptySet(),
         val isCategorySectionExpanded: Boolean = false,
