@@ -22,7 +22,6 @@ import com.chan.android.ui.theme.White
 import com.chan.search.R
 import com.chan.search.ui.contract.SearchContract
 import com.chan.search.ui.model.filter.DeliveryOption
-import com.chan.search.ui.model.filter.FilterCategoriesModel
 import com.chan.search.ui.model.filter.FilterCategoryListModel
 
 @OptIn(ExperimentalMaterial3Api::class)

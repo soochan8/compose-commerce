@@ -3,13 +3,11 @@ package com.chan.search.ui.mappers
 import com.chan.android.model.ProductModel
 import com.chan.domain.ProductVO
 import com.chan.domain.ProductsVO
-import com.chan.search.domain.model.FilterCategoriesVO
 import com.chan.search.domain.model.SearchHistoryVO
 import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.ui.model.SearchHistoryModel
 import com.chan.search.ui.model.SearchResultModel
 import com.chan.search.ui.model.TrendingSearchModel
-import com.chan.search.ui.model.filter.FilterCategoriesModel
 import java.text.NumberFormat
 import java.util.Locale
 
