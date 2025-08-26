@@ -4,11 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
 import com.chan.database.dao.ProductDetailDao
+import com.chan.database.dao.ProductsDao
 import com.chan.database.dao.SearchHistoryDao
 import com.chan.database.dao.UserDao
+import com.chan.database.entity.CommonCategoryEntity
+import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -32,7 +36,8 @@ object DatabaseModule {
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context,
-        productDao: Provider<ProductDao>
+        productDao: Provider<ProductDao>,
+        productsDao: Provider<ProductsDao>
     ): AppDatabase {
         return Room.databaseBuilder(
             context,
@@ -43,6 +48,7 @@ object DatabaseModule {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     CoroutineScope(Dispatchers.IO).launch {
+                        insertAllProducts(context, productsDao.get())
                         products(context, productDao.get())
                     }
                 }
@@ -64,6 +70,18 @@ object DatabaseModule {
         productDao.insertAll(products)
     }
 
+    private suspend fun insertAllProducts(context: Context, productsDao: ProductsDao) {
+        val fileName = "product.json"
+        val jsonString = context.assets
+            .open(fileName)
+            .bufferedReader()
+            .use { it.readText() }
+
+        val listType = object : TypeToken<List<CommonProductEntity>>() {}.type
+        val products: List<CommonProductEntity> = Gson().fromJson(jsonString, listType)
+        productsDao.insertAllProducts(products)
+    }
+
     @Provides
     fun provideHomeBannerDao(db: AppDatabase): HomeBannerDao =
         db.homeBannerDao()
@@ -83,4 +101,12 @@ object DatabaseModule {
     @Provides
     fun provideSearchHistoryDao(db: AppDatabase): SearchHistoryDao =
         db.searchHistoryDao()
+
+    @Provides
+    fun provideCategoryDao(db: AppDatabase): CategoryDao =
+        db.categoryDao()
+
+    @Provides
+    fun provideProductsDao(db: AppDatabase): ProductsDao =
+        db.productsDao()
 }

@@ -1,6 +1,9 @@
 package com.chan.category.data.mapper
 
 import com.chan.category.domain.dto.CategoriesDto
+import com.chan.category.domain.vo.CategoryVO
+import com.chan.database.entity.CommonCategoryEntity
+import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
 
 fun ProductEntity.toCategoriesDto(): CategoriesDto {
@@ -23,5 +26,13 @@ fun ProductEntity.Categories.SubCategories.toCategoriesDto(): CategoriesDto.Cate
     return CategoriesDto.Categories.SubCategories(
         categoryId = categoryId,
         categoryName = categoryName
+    )
+}
+
+fun CommonCategoryEntity.toCategoryVO() : CategoryVO {
+    return CategoryVO(
+        id = id,
+        name = name,
+        parentCategoryId = parentCategoryId
     )
 }

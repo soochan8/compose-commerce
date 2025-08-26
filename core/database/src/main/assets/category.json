@@ -1,0 +1,607 @@
+[
+  {
+    "id": "c1",
+    "name": "스킨케어",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c2",
+    "name": "스킨/토너",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c3",
+    "name": "에센스/세럼/앰플",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c4",
+    "name": "크림",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c5",
+    "name": "로션",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c6",
+    "name": "미스트/오일",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c7",
+    "name": "스킨케어세트",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c8",
+    "name": "스킨케어 디바이스",
+    "parentCategoryId": "c1"
+  },
+  {
+    "id": "c9",
+    "name": "마스크팩",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c10",
+    "name": "시트팩",
+    "parentCategoryId": "c9"
+  },
+  {
+    "id": "c11",
+    "name": "패드",
+    "parentCategoryId": "c9"
+  },
+  {
+    "id": "c12",
+    "name": "페이셜팩",
+    "parentCategoryId": "c9"
+  },
+  {
+    "id": "c13",
+    "name": "코팩",
+    "parentCategoryId": "c9"
+  },
+  {
+    "id": "c14",
+    "name": "패치",
+    "parentCategoryId": "c9"
+  },
+  {
+    "id": "c15",
+    "name": "클렌징",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c16",
+    "name": "클렌징폼/젤",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c17",
+    "name": "오일/밤",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c18",
+    "name": "워터/밀크",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c19",
+    "name": "필링&스크럽",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c20",
+    "name": "티슈/패드",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c21",
+    "name": "립&아이리무버",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c22",
+    "name": "클렌징 디바이스",
+    "parentCategoryId": "c15"
+  },
+  {
+    "id": "c23",
+    "name": "선케어",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c24",
+    "name": "선크림",
+    "parentCategoryId": "c23"
+  },
+  {
+    "id": "c25",
+    "name": "선스틱",
+    "parentCategoryId": "c23"
+  },
+  {
+    "id": "c26",
+    "name": "선쿠션",
+    "parentCategoryId": "c23"
+  },
+  {
+    "id": "c27",
+    "name": "선스프레이/선패치",
+    "parentCategoryId": "c23"
+  },
+  {
+    "id": "c28",
+    "name": "태닝/애프터선",
+    "parentCategoryId": "c23"
+  },
+  {
+    "id": "c29",
+    "name": "메이크업",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c30",
+    "name": "립메이크업",
+    "parentCategoryId": "c29"
+  },
+  {
+    "id": "c31",
+    "name": "베이스메이크업",
+    "parentCategoryId": "c29"
+  },
+  {
+    "id": "c32",
+    "name": "아이메이크업",
+    "parentCategoryId": "c29"
+  },
+  {
+    "id": "c33",
+    "name": "네일",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c34",
+    "name": "일반네일",
+    "parentCategoryId": "c33"
+  },
+  {
+    "id": "c35",
+    "name": "젤네일",
+    "parentCategoryId": "c33"
+  },
+  {
+    "id": "c36",
+    "name": "네일팁/스티커",
+    "parentCategoryId": "c33"
+  },
+  {
+    "id": "c37",
+    "name": "네일케어/리무버",
+    "parentCategoryId": "c33"
+  },
+  {
+    "id": "c38",
+    "name": "뷰티소품",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c39",
+    "name": "메이크업소품",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c40",
+    "name": "아이소품",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c41",
+    "name": "스킨케어소품",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c42",
+    "name": "헤어소품",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c43",
+    "name": "네일/바디소품",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c44",
+    "name": "뷰티잡화",
+    "parentCategoryId": "c38"
+  },
+  {
+    "id": "c45",
+    "name": "더모 코스메틱",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c46",
+    "name": "스킨케어",
+    "parentCategoryId": "c45"
+  },
+  {
+    "id": "c47",
+    "name": "바디케어",
+    "parentCategoryId": "c45"
+  },
+  {
+    "id": "c48",
+    "name": "클렌징",
+    "parentCategoryId": "c45"
+  },
+  {
+    "id": "c49",
+    "name": "선케어",
+    "parentCategoryId": "c45"
+  },
+  {
+    "id": "c50",
+    "name": "마스크팩",
+    "parentCategoryId": "c45"
+  },
+  {
+    "id": "c51",
+    "name": "맨즈케어",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c52",
+    "name": "스킨케어",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c53",
+    "name": "메이크업",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c54",
+    "name": "쉐이빙/왁싱",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c55",
+    "name": "바디케어",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c56",
+    "name": "헤어케어",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c57",
+    "name": "프래그런스",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c58",
+    "name": "패션/취미",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c59",
+    "name": "헬스용품/식품",
+    "parentCategoryId": "c51"
+  },
+  {
+    "id": "c60",
+    "name": "향수/디퓨저",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c61",
+    "name": "향수",
+    "parentCategoryId": "c60"
+  },
+  {
+    "id": "c62",
+    "name": "미니/고체향수",
+    "parentCategoryId": "c60"
+  },
+  {
+    "id": "c63",
+    "name": "홈프래그런스",
+    "parentCategoryId": "c60"
+  },
+  {
+    "id": "c64",
+    "name": "헤어케어",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c65",
+    "name": "샴푸/린스",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c66",
+    "name": "트리트먼트/팩",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c67",
+    "name": "두피앰플/토닉",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c68",
+    "name": "헤어에센스",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c69",
+    "name": "염색약/펌",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c70",
+    "name": "헤어기기/브러시",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c71",
+    "name": "스타일링",
+    "parentCategoryId": "c64"
+  },
+  {
+    "id": "c72",
+    "name": "바디케어",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c73",
+    "name": "샤워/입욕",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c74",
+    "name": "로션/오일/미스트",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c75",
+    "name": "핸드케어",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c76",
+    "name": "풋케어",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c77",
+    "name": "제모/왁싱",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c78",
+    "name": "데오드란트",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c79",
+    "name": "선물세트",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c80",
+    "name": "베이비",
+    "parentCategoryId": "c72"
+  },
+  {
+    "id": "c81",
+    "name": "건강식품",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c82",
+    "name": "비타민",
+    "parentCategoryId": "c81"
+  },
+  {
+    "id": "c83",
+    "name": "영양제",
+    "parentCategoryId": "c81"
+  },
+  {
+    "id": "c84",
+    "name": "유산균",
+    "parentCategoryId": "c81"
+  },
+  {
+    "id": "c85",
+    "name": "슬리밍/이너뷰티",
+    "parentCategoryId": "c81"
+  },
+  {
+    "id": "c86",
+    "name": "푸드",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c87",
+    "name": "식단관리",
+    "parentCategoryId": "c86"
+  },
+  {
+    "id": "c88",
+    "name": "디저트",
+    "parentCategoryId": "c86"
+  },
+  {
+    "id": "c89",
+    "name": "생수",
+    "parentCategoryId": "c86"
+  },
+  {
+    "id": "c90",
+    "name": "간편식/요리",
+    "parentCategoryId": "c86"
+  },
+  {
+    "id": "c91",
+    "name": "베이비푸드",
+    "parentCategoryId": "c86"
+  },
+  {
+    "id": "c92",
+    "name": "구강용품",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c93",
+    "name": "칫솔",
+    "parentCategoryId": "c92"
+  },
+  {
+    "id": "c94",
+    "name": "치약",
+    "parentCategoryId": "c92"
+  },
+  {
+    "id": "c95",
+    "name": "애프터구강케어",
+    "parentCategoryId": "c92"
+  },
+  {
+    "id": "c96",
+    "name": "휴대용세트",
+    "parentCategoryId": "c92"
+  },
+  {
+    "id": "c97",
+    "name": "구강가전",
+    "parentCategoryId": "c92"
+  },
+  {
+    "id": "c98",
+    "name": "헬스/건강용품",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c99",
+    "name": "패치/국소케어",
+    "parentCategoryId": "c98"
+  },
+  {
+    "id": "c100",
+    "name": "릴랙스 용품",
+    "parentCategoryId": "c98"
+  },
+  {
+    "id": "c101",
+    "name": "생활/의료",
+    "parentCategoryId": "c98"
+  },
+  {
+    "id": "c102",
+    "name": "마사지/보호대",
+    "parentCategoryId": "c98"
+  },
+  {
+    "id": "c103",
+    "name": "운동용품",
+    "parentCategoryId": "c98"
+  },
+  {
+    "id": "c104",
+    "name": "위생용품",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c105",
+    "name": "마사지젤/오일",
+    "parentCategoryId": "c104"
+  },
+  {
+    "id": "c106",
+    "name": "테스트기",
+    "parentCategoryId": "c104"
+  },
+  {
+    "id": "c107",
+    "name": "화장지",
+    "parentCategoryId": "c104"
+  },
+  {
+    "id": "c108",
+    "name": "패션",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c109",
+    "name": "언더웨어",
+    "parentCategoryId": "c108"
+  },
+  {
+    "id": "c110",
+    "name": "홈웨어",
+    "parentCategoryId": "c108"
+  },
+  {
+    "id": "c111",
+    "name": "액티브웨어",
+    "parentCategoryId": "c108"
+  },
+  {
+    "id": "c112",
+    "name": "패션잡화",
+    "parentCategoryId": "c108"
+  },
+  {
+    "id": "c113",
+    "name": "리빙/가전",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c114",
+    "name": "가전",
+    "parentCategoryId": "c113"
+  },
+  {
+    "id": "c115",
+    "name": "주방",
+    "parentCategoryId": "c113"
+  },
+  {
+    "id": "c116",
+    "name": "세제/청소",
+    "parentCategoryId": "c113"
+  },
+  {
+    "id": "c117",
+    "name": "인테리어/욕실",
+    "parentCategoryId": "c113"
+  },
+  {
+    "id": "c118",
+    "name": "취미/팬시",
+    "parentCategoryId": null
+  },
+  {
+    "id": "c119",
+    "name": "팬시/캐릭터",
+    "parentCategoryId": "c118"
+  },
+  {
+    "id": "c120",
+    "name": "문구",
+    "parentCategoryId": "c118"
+  },
+  {
+    "id": "c121",
+    "name": "디지털/기기",
+    "parentCategoryId": "c118"
+  }
+]

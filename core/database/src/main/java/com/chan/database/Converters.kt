@@ -19,4 +19,15 @@ class Converters {
             object :
                 TypeToken<List<ProductEntity.Categories>>() {}.type
         )
+
+
+    @TypeConverter
+    fun fromListToString(list: List<String>?): String {
+        return list?.joinToString(",") ?: ""
+    }
+
+    @TypeConverter
+    fun fromStringToList(value: String): List<String> {
+        return if (value.isEmpty()) emptyList() else value.split(",")
+    }
 }

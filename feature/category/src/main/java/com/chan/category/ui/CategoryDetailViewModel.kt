@@ -20,45 +20,71 @@ class CategoryDetailViewModel @Inject constructor(
     override fun handleEvent(event: CategoryDetailContract.Event) {
         when (event) {
             is CategoryDetailContract.Event.CategoryDetailLoad -> {
+                updateSelectedTabId(event.categoryId)
                 getCategoryTabList(event.categoryId)
-                getCategoryDetailList(event.categoryId)
+                getProductsByCategoryId(event.categoryId)
             }
 
             is CategoryDetailContract.Event.CategoryTabSelected -> {
-                setState { copy(selectedCategoryTabId = event.categoryId) }
-                getCategoryDetailList(categoryId = event.categoryId)
+                updateSelectedTabId(event.categoryId)
+                getProductsByCategoryId(event.categoryId)
+                updateSelectedTabIndex(event.categoryId)
+            }
+
+            is CategoryDetailContract.Event.OnProductClick -> {
+                setEffect { CategoryDetailContract.Effect.Navigation.ToProductDetail(event.productId) }
             }
         }
+    }
+
+    private fun updateSelectedTabId(categoryId: String) {
+        setState { copy(selectedCategoryTabId = categoryId) }
+    }
+
+    private fun updateSelectedTabIndex(categoryId: String) {
+        val selectedIndex =
+            viewState.value.categoryNames.indexOfFirst { it.categoryId == categoryId }
+                .coerceAtLeast(0)
+
+        setState { copy(selectedCategoryTabIndex = selectedIndex) }
+
     }
 
     private fun getCategoryTabList(categoryId: String) {
         handleRepositoryCall(
             call = {
-                categoryDetailRepository.getCategoryDetailTabs(categoryId).map { it.toTabsModel() }
+                categoryDetailRepository.getCategoryTabs(categoryId).map { it.toTabsModel() }
             },
-            onSuccess = { categories -> copy(categoryNames = categories) }
+            onSuccess = { categories -> copy(categoryNames = categories) },
+            onFinally = {
+                updateSelectedTabIndex(categoryId)
+            }
         )
     }
 
-    private fun getCategoryDetailList(categoryId: String) {
+    private fun getProductsByCategoryId(categoryId: String) {
         handleRepositoryCall(
             call = {
-                categoryDetailRepository.getCategoryDetailProducts(categoryId)
+                categoryDetailRepository.getProductsByCategory(categoryId)
                     .map { it.toProductsModel() }
             },
-            onSuccess = { detailLists -> copy(categoryDetailList = detailLists) }
+            onSuccess = { productsList ->
+                copy(productListByCategory = productsList)
+            }
         )
     }
 
     private fun <T> handleRepositoryCall(
         call: suspend () -> T,
-        onSuccess: CategoryDetailContract.State.(T) -> CategoryDetailContract.State
+        onSuccess: CategoryDetailContract.State.(T) -> CategoryDetailContract.State,
+        onFinally: suspend (T) -> Unit = {}
     ) {
         viewModelScope.launch {
             setState { copy(loadingState = LoadingState.Loading) }
             try {
                 val result = call()
                 setState { onSuccess(result).copy(loadingState = LoadingState.Success) }
+                onFinally(result)
             } catch (e: Exception) {
                 setState { copy(loadingState = LoadingState.Error) }
                 setEffect { CategoryDetailContract.Effect.ShowError(e.message.toString()) }

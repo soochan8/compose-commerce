@@ -4,8 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.category.domain.CategoryRepository
-import com.chan.category.ui.mapper.toCategoryModel
-import com.chan.category.ui.model.CategoryModel
+import com.chan.category.ui.CategoryContract.Effect.Navigation.*
+import com.chan.category.ui.mapper.toCategoryUIModels
+import com.chan.category.ui.model.CategoriesModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,24 +20,33 @@ class CategoryViewModel @Inject constructor(
 
     override fun handleEvent(event: CategoryContract.Event) {
         when (event) {
-            is CategoryContract.Event.CategoriesLoad -> getCategories()
-            is CategoryContract.Event.SelectCategory -> updateSelectedCategoryId(event.categoryId)
+            is CategoryContract.Event.OnCategorySidebarClick -> {
+                updateSelectedCategoryId(event.categoryId)
+                onScrollToSidebar(event.categoryId)
+                onScrollToContent(event.categoryId)
+            }
+
+            is CategoryContract.Event.OnCategoryClick -> setEffect { ToCategoryDetail(event.categoryId) }
+            is CategoryContract.Event.OnContentScroll -> handleContentScroll(event.firstVisibleIndex)
         }
     }
 
-    fun getCategories() {
-        if (viewState.value.categoryList.isNotEmpty()) return
+    init {
+        getAllCategories()
+    }
+
+    fun getAllCategories() {
+        if (viewState.value.categories.isNotEmpty()) return
         handleRepositoryCall(
             call = {
-                categoryRepository.getCategories().map { it.toCategoryModel() } },
-            onSuccess = { categoryList ->
-                val firstId = categoryList.firstOrNull()?.id
-                val mappings = categoryHeaderMapping(categoryList)
-
+                categoryRepository.getAllCategories().toCategoryUIModels()
+            },
+            onSuccess = { categories ->
+                val headerPositions = categoryHeaderMapping(categories)
                 copy(
-                    categoryList = categoryList,
-                    selectedCategoryId = firstId,
-                    headerPositions = mappings
+                    categories = categories,
+                    selectedCategoryId = categories.firstOrNull()?.id,
+                    headerPositions = headerPositions
                 )
             }
         )
@@ -67,15 +77,47 @@ class CategoryViewModel @Inject constructor(
         setState { copy(selectedCategoryId = categoryId) }
     }
 
-    private fun categoryHeaderMapping(categories: List<CategoryModel>): List<Pair<Int, String>> {
-        val list = mutableListOf<Pair<Int, String>>()
-        var index = 0
-        categories.forEach { category ->
-            list += index to category.id
-            category.categories.forEach { subCategory ->
-                index += 1 + subCategory.subCategories.size
-            }
+    private fun onScrollToSidebar(categoryId: String) {
+        val index = viewState.value.categories.indexOfFirst { it.id == categoryId }
+        if (index != -1) {
+            setEffect { CategoryContract.Effect.ScrollToSidebar(index) }
         }
-        return list
+    }
+
+    private fun onScrollToContent(categoryId: String) {
+        val targetIndex = viewState.value.headerPositions
+            .firstOrNull { it.second == categoryId }
+            ?.first
+
+        if (targetIndex != null) {
+            setEffect { CategoryContract.Effect.ScrollToContent(targetIndex) }
+        }
+    }
+
+    private fun handleContentScroll(firstVisibleIndex: Int) {
+        val newCategoryId = viewState.value.headerPositions
+            .filter { it.first <= firstVisibleIndex }
+            .maxByOrNull { it.first }
+            ?.second
+
+        newCategoryId?.let { id ->
+            if (id != viewState.value.selectedCategoryId) {
+                updateSelectedCategoryId(id)
+            }
+
+            onScrollToSidebar(id)
+        }
+    }
+
+    private fun categoryHeaderMapping(categories: List<CategoriesModel>): List<Pair<Int, String>> {
+        var index = 0
+        val positions = mutableListOf<Pair<Int, String>>()
+
+        categories.forEach { category ->
+            positions.add(index to category.id)
+            index += 1 + category.subCategories.size
+        }
+
+        return positions
     }
 }

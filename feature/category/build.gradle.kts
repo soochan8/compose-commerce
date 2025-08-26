@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:domain"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -73,4 +74,5 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.google.gson)
+    implementation(libs.coil)
 }

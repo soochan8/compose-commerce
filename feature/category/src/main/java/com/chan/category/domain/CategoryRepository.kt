@@ -1,7 +1,7 @@
 package com.chan.category.domain
 
-import com.chan.category.domain.dto.CategoriesDto
+import com.chan.category.domain.vo.CategoryVO
 
 interface CategoryRepository {
-    suspend fun getCategories() : List<CategoriesDto>
+    suspend fun getAllCategories() : List<CategoryVO>
 }
