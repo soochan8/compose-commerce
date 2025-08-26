@@ -58,5 +58,8 @@ fun LoginRoute(navController: NavHostController) {
     }
 
     if (state.isSessionCheckCompleted)
-        LoginScreen()
+        LoginScreen(
+            state = state,
+            onEvent = viewModel::setEvent
+        )
 }
