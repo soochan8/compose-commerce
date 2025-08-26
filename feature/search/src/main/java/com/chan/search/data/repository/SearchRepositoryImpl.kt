@@ -1,15 +1,16 @@
 package com.chan.search.data.repository
 
+import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.ProductDao
 import com.chan.database.dao.ProductsDao
 import com.chan.database.dao.SearchHistoryDao
 import com.chan.domain.ProductVO
 import com.chan.domain.ProductsVO
-import com.chan.search.data.mappers.toCategoryFilterDomain
+import com.chan.search.data.mappers.toCategoryVO
 import com.chan.search.data.mappers.toDomain
 import com.chan.search.data.mappers.toProductsVO
 import com.chan.search.data.mappers.toSearchHistoryEntity
-import com.chan.search.domain.model.FilterCategoriesVO
+import com.chan.search.domain.model.FilterCategoryListVO
 import com.chan.search.domain.model.SearchHistoryVO
 import com.chan.search.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class SearchRepositoryImpl @Inject constructor(
     private val productDao: ProductDao,
     private val searchHistoryDao: SearchHistoryDao,
-    private val productsDao: ProductsDao
+    private val productsDao: ProductsDao,
+    private val categoryDao: CategoryDao
 ) : SearchRepository {
     override suspend fun searchProductName(search: String): List<ProductsVO> {
         return productsDao.searchProductsByName(search).map { it.toProductsVO() }
@@ -50,8 +52,23 @@ class SearchRepositoryImpl @Inject constructor(
         return searchHistoryDao.clearAll()
     }
 
-    override suspend fun getFilterCategories(): List<FilterCategoriesVO> {
-        return productDao.getFilterCategories().map { it.toCategoryFilterDomain() }
+    override suspend fun getFilterCategories(): List<FilterCategoryListVO> {
+        val allCategories = categoryDao.getAllCategories()
+
+        val childrenMap = allCategories
+            .filter { it.parentCategoryId != null }
+            .groupBy { it.parentCategoryId!! }
+
+        return allCategories
+            .filter { it.parentCategoryId == null }
+            .map { parentEntity ->
+                val childrenEntities = childrenMap[parentEntity.id] ?: emptyList()
+
+                FilterCategoryListVO(
+                    parent = parentEntity.toCategoryVO(),
+                    children = childrenEntities.map { it.toCategoryVO() }
+                )
+            }
     }
 
     override suspend fun getFilteredProducts(subCategoryNames: Set<String>): List<ProductVO> {
