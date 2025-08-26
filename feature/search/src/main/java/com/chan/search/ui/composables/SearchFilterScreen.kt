@@ -23,6 +23,7 @@ import com.chan.search.R
 import com.chan.search.ui.contract.SearchContract
 import com.chan.search.ui.model.filter.DeliveryOption
 import com.chan.search.ui.model.filter.FilterCategoriesModel
+import com.chan.search.ui.model.filter.FilterCategoryListModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,7 +120,7 @@ fun SearchFilterScreen(
 
 @Composable
 private fun SubFilterCategory(
-    categoryFilters: List<FilterCategoriesModel>,
+    categoryFilters: List<FilterCategoryListModel>,
     expandedCategoryName: String?,
     selectedSubCategories: Set<String>,
     onCategoryHeaderClick: (categoryName: String) -> Unit,
@@ -128,17 +129,17 @@ private fun SubFilterCategory(
     Column {
         categoryFilters.forEach { category ->
             ExpandableFilterSection(
-                title = category.name,
-                isExpanded = expandedCategoryName == category.name,
-                onClick = { onCategoryHeaderClick(category.name) }
+                title = category.parent.name,
+                isExpanded = expandedCategoryName == category.parent.name,
+                onClick = { onCategoryHeaderClick(category.parent.name) }
             )
-            if (expandedCategoryName == category.name) {
+            if (expandedCategoryName == category.parent.name) {
                 Column(modifier = Modifier.padding(start = Spacing.spacing4)) {
-                    category.subCategories.forEach { subCategory ->
+                    category.children.forEach { subCategory ->
                         FilterCheckboxItem(
-                            label = subCategory.subCategoryName,
-                            checked = selectedSubCategories.contains(subCategory.subCategoryName),
-                            onOptionClick = { onSubCategoryClick(subCategory.subCategoryName) }
+                            label = subCategory.name,
+                            checked = selectedSubCategories.contains(subCategory.name),
+                            onOptionClick = { onSubCategoryClick(subCategory.name) }
                         )
                     }
                 }
