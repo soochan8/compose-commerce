@@ -7,11 +7,11 @@ import com.chan.search.domain.model.RankChange
 import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
 import com.chan.search.ui.contract.SearchContract
+import com.chan.search.ui.mappers.toFilterCategoryModel
 import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
-import com.chan.search.ui.mappers.toUiModel
 import com.chan.search.ui.model.FilterChipType
 import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.TrendingSearchModel
@@ -263,7 +263,7 @@ class SearchViewModel @Inject constructor(
     private fun initializeCategoryFilters() {
         viewModelScope.launch {
             val categories = searchRepository.getFilterCategories()
-                .map { it.toUiModel() }
+                .map { it.toFilterCategoryModel() }
             setState {
                 copy(
                     filter = filter.copy(
@@ -352,11 +352,9 @@ class SearchViewModel @Inject constructor(
     private fun getRecentSearches() {
         searchRepository.getRecentSearches()
             .map { entities ->
-                // 데이터베이스 Entity를 UI 모델로 변환
                 entities.map { it.toSearchHistoryModel() }
             }
             .onEach { recentSearchResult ->
-                // Flow가 새로운 데이터를 방출할 때마다 상태 업데이트
                 setState { copy(recentSearches = recentSearchResult) }
             }
             .launchIn(viewModelScope)
