@@ -18,27 +18,36 @@ class KakaoLoginManagerImpl @Inject constructor(
 ) : KakaoLoginManager {
 
     override fun login(): Flow<KakaoLoginResult> = callbackFlow {
+        val sendResult = { result: KakaoLoginResult ->
+            trySend(result)
+            close()
+        }
+
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             when {
                 error != null -> {
                     //취소
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        trySend(KakaoLoginResult.Cancelled)
-                    } else {
-                        //로그인 실패
-                        trySend(KakaoLoginResult.Error(error.message ?: "KaKao Login Error"))
-                    }
+                    val result =
+                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                            KakaoLoginResult.Cancelled
+                        } else {
+                            //로그인 실패
+                            KakaoLoginResult.Error(error.message ?: "KaKao Login Error")
+                        }
+                    sendResult(result)
                 }
                 //로그인 성공
                 token != null -> {
                     UserApiClient.instance.me { user, meError ->
-                        if (user != null) {
-                            trySend(KakaoLoginResult.Success(user.id.toString(), token.accessToken))
+                        val result = if (user != null) {
+                            KakaoLoginResult.Success(user.id.toString(), token.accessToken)
+                        } else {
+                            KakaoLoginResult.Error(error.message ?: "KaKao Login Error")
                         }
+                        sendResult(result)
                     }
                 }
             }
-            close()
         }
 
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(context)) {
@@ -47,8 +56,7 @@ class KakaoLoginManagerImpl @Inject constructor(
                     //로그인을 취소한 경우
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         //
-                        trySend(KakaoLoginResult.Cancelled)
-                        close()
+                        sendResult(KakaoLoginResult.Cancelled)
                         return@loginWithKakaoTalk
                     }
                     UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
