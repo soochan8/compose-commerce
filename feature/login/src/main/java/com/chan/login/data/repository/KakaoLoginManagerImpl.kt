@@ -42,7 +42,7 @@ class KakaoLoginManagerImpl @Inject constructor(
                         val result = if (user != null) {
                             KakaoLoginResult.Success(user.id.toString(), token.accessToken)
                         } else {
-                            KakaoLoginResult.Error(error.message ?: "KaKao Login Error")
+                            KakaoLoginResult.Error(error?.message ?: "KaKao Login Error")
                         }
                         sendResult(result)
                     }
