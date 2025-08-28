@@ -71,7 +71,7 @@ class SearchContract {
         val filterChips: List<SearchResultFilterChipModel> = emptyList(),
         val categoryFilters: List<FilterCategoryListModel> = emptyList(),
         val expandedCategoryName: String? = null,
-        val selectedSubCategories: Set<String> = emptySet(),
+        val selectedCategoryIds: Set<String> = emptySet(),
         val isCategorySectionExpanded: Boolean = false,
         val filteredProductCount: Int = 0
     )
