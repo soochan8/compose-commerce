@@ -2,6 +2,7 @@ package com.chan.login.data.repository
 
 import com.chan.database.dao.UserDao
 import com.chan.login.data.mapper.toUserEntity
+import com.chan.login.data.mapper.toUserVO
 import com.chan.login.domain.repository.LoginRepository
 import com.chan.login.domain.vo.UserVO
 import com.chan.login.util.SecurityUtils
@@ -35,8 +36,7 @@ class LoginRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun appLogin(userId: String, userPw: String): Result<Unit> {
-        return runCatching {
+    override suspend fun appLogin(userId: String, userPw: String): UserVO {
             val storedUser =
                 userDao.findByUsername(userId) ?: throw SecurityException("존재하지 않는 아이디입니다.")
 
@@ -48,7 +48,6 @@ class LoginRepositoryImpl @Inject constructor(
 
             if (!isPasswordCorrect) throw SecurityException("비밀번호가 일치하지 않습니다.")
 
-            storedUser
-        }
+            return storedUser.toUserVO()
     }
 }

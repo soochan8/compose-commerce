@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             val currentSession = authRepository.getSessionFlow().firstOrNull()
 
-            if(currentSession != null) {
+            if (currentSession != null) {
                 setEffect { LoginContract.Effect.NavigateToHome }
             } else {
                 setState { copy(isSessionCheckCompleted = true) }
@@ -84,25 +84,26 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun loginWithApp(userId: String, userPw: String) {
-        if (userId.isNotEmpty() && userPw.isNotEmpty()) {
-            viewModelScope.launch {
-                setState { copy(loadingState = LoadingState.Loading) }
+        if (userId.isBlank() || userPw.isBlank()) {
+            setEffect { LoginContract.Effect.ShowError("아이디와 비밀번호를 입력해주세요.") }
+            return
+        }
 
-                loginRepository.appLogin(userId, userPw)
-                    .onSuccess {
-                        setState { copy(loadingState = LoadingState.Success) }
+        viewModelScope.launch {
+            setState { copy(loadingState = LoadingState.Loading) }
+            try {
+                val user = loginRepository.appLogin(userId, userPw)
 
-                        val dummyToken = UUID.nameUUIDFromBytes(userId.toByteArray()).toString()
-                        authRepository.login(userId, dummyToken)
+                val dummyToken = UUID.nameUUIDFromBytes(user.userId.toByteArray()).toString()
+                authRepository.login(user.userId, dummyToken)
 
-                        setEffect { LoginContract.Effect.NavigateToHome }
-                    }
-                    .onFailure { error ->
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(error.message ?: "로그인 실패") }
-                    }
+                setState { copy(loadingState = LoadingState.Success) }
+                setEffect { LoginContract.Effect.NavigateToHome }
+
+            } catch (e: Exception) {
+                setState { copy(loadingState = LoadingState.Error) }
+                setEffect { LoginContract.Effect.ShowError(e.message ?: "로그인 실패") }
             }
-
         }
     }
 
