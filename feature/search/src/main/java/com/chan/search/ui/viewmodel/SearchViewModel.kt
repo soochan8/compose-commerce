@@ -41,7 +41,6 @@ class SearchViewModel @Inject constructor(
         setCurrentTime()
         initializeFilterChips()
         initializeCategoryFilters()
-        updateFilteredProductCount() // 초기 개수 업데이트
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -141,7 +140,7 @@ class SearchViewModel @Inject constructor(
                 filter = filter.copy(
                     selectedDeliveryOption = null,
                     expandedCategoryName = null,
-                    selectedSubCategories = emptySet(),
+                    selectedCategoryIds = emptySet(),
                     isCategorySectionExpanded = false,
                     filterChips = filter.filterChips.map { it.copy(isSelected = false) }
                 )
@@ -152,28 +151,20 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun handleSubCategoryClick(subCategoryName: String) {
-        val currentSelected = viewState.value.filter.selectedSubCategories
+        val currentSelected = viewState.value.filter.selectedCategoryIds
         val newSelected = if (currentSelected.contains(subCategoryName)) {
             currentSelected - subCategoryName
         } else {
             currentSelected + subCategoryName
         }
-        setState { copy(filter = filter.copy(selectedSubCategories = newSelected)) }
+        setState { copy(filter = filter.copy(selectedCategoryIds = newSelected)) }
         updateFilteredProductList()
-    }
-
-    private fun updateFilteredProductCount() {
-        viewModelScope.launch {
-            val count =
-                searchRepository.getFilteredProductCount(viewState.value.filter.selectedSubCategories)
-            setState { copy(filter = filter.copy(filteredProductCount = count)) }
-        }
     }
 
     private fun updateFilteredProductList() {
         viewModelScope.launch {
             val filteredProducts =
-                searchRepository.getFilteredProducts(viewState.value.filter.selectedSubCategories)
+                searchRepository.getFilteredProducts(viewState.value.filter.selectedCategoryIds)
                     .map { it.toProductsModel() }
             setState {
                 copy(
