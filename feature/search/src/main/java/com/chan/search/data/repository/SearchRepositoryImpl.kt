@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(
-    private val productDao: ProductDao,
     private val searchHistoryDao: SearchHistoryDao,
     private val productsDao: ProductsDao,
     private val categoryDao: CategoryDao
@@ -71,11 +70,13 @@ class SearchRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun getFilteredProducts(subCategoryNames: Set<String>): List<ProductVO> {
-        return productDao.getProductsBySubCategoryNames(subCategoryNames).map { it.toDomain() }
-    }
-
-    override suspend fun getFilteredProductCount(subCategoryNames: Set<String>): Int {
-        return productDao.getProductCountBySubCategoryNames(subCategoryNames)
+    //DB 쿼리로 필터링 제한
+    override suspend fun getFilteredProducts(selectedCategoryId: Set<String>): List<ProductsVO> {
+        val allProducts = productsDao.getAllProducts()
+        return allProducts
+            .filter { product ->
+                product.categoryIds.any { it in selectedCategoryId }
+            }
+            .map { it.toProductsVO() }
     }
 }
