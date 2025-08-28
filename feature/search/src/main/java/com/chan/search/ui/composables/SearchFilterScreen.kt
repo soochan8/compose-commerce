@@ -82,7 +82,7 @@ fun SearchFilterScreen(
                     SubFilterCategory(
                         categoryFilters = state.filter.categoryFilters,
                         expandedCategoryName = state.filter.expandedCategoryName,
-                        selectedSubCategories = state.filter.selectedSubCategories,
+                        selectedCategoryIds = state.filter.selectedCategoryIds,
                         onCategoryHeaderClick = {
                             onEvent(
                                 SearchContract.Event.Filter.OnCategoryHeaderClick(
@@ -90,7 +90,13 @@ fun SearchFilterScreen(
                                 )
                             )
                         },
-                        onSubCategoryClick = { onEvent(SearchContract.Event.Filter.OnSubCategoryClick(it)) }
+                        onSubCategoryClick = {
+                            onEvent(
+                                SearchContract.Event.Filter.OnSubCategoryClick(
+                                    it
+                                )
+                            )
+                        }
                     )
                 }
             }
@@ -121,7 +127,7 @@ fun SearchFilterScreen(
 private fun SubFilterCategory(
     categoryFilters: List<FilterCategoryListModel>,
     expandedCategoryName: String?,
-    selectedSubCategories: Set<String>,
+    selectedCategoryIds: Set<String>,
     onCategoryHeaderClick: (categoryName: String) -> Unit,
     onSubCategoryClick: (subCategoryName: String) -> Unit,
 ) {
@@ -137,8 +143,8 @@ private fun SubFilterCategory(
                     category.children.forEach { subCategory ->
                         FilterCheckboxItem(
                             label = subCategory.name,
-                            checked = selectedSubCategories.contains(subCategory.name),
-                            onOptionClick = { onSubCategoryClick(subCategory.name) }
+                            checked = selectedCategoryIds.contains(subCategory.id),
+                            onOptionClick = { onSubCategoryClick(subCategory.id) }
                         )
                     }
                 }
