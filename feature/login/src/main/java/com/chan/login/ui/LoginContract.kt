@@ -1,5 +1,6 @@
 package com.chan.login.ui
 
+import androidx.annotation.StringRes
 import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
@@ -33,6 +34,6 @@ class LoginContract {
 
     sealed class Effect : ViewEffect {
         object NavigateToHome : Effect()
-        data class ShowError(val errorMsg: String) : Effect()
+        data class ShowError(@StringRes val errorMsg: Int) : Effect()
     }
 }

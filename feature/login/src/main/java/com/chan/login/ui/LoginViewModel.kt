@@ -1,9 +1,11 @@
 package com.chan.login.ui
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.auth.domain.AuthRepository
+import com.chan.login.R
 import com.chan.login.domain.KakaoLoginManager
 import com.chan.login.domain.KakaoLoginResult
 import com.chan.login.domain.repository.LoginRepository
@@ -76,8 +78,7 @@ class LoginViewModel @Inject constructor(
                         setState { copy(loadingState = LoadingState.Success) }
                     }
                     .onFailure { error ->
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(error.message ?: "회원가입 실패") }
+                        handleLoginError(errorMsg = R.string.failure_register)
                     }
             }
         }
@@ -85,7 +86,7 @@ class LoginViewModel @Inject constructor(
 
     private fun loginWithApp(userId: String, userPw: String) {
         if (userId.isBlank() || userPw.isBlank()) {
-            setEffect { LoginContract.Effect.ShowError("아이디와 비밀번호를 입력해주세요.") }
+            setEffect { LoginContract.Effect.ShowError(R.string.failure_empty_id_or_password) }
             return
         }
 
@@ -101,8 +102,7 @@ class LoginViewModel @Inject constructor(
                 setEffect { LoginContract.Effect.NavigateToHome }
 
             } catch (e: Exception) {
-                setState { copy(loadingState = LoadingState.Error) }
-                setEffect { LoginContract.Effect.ShowError(e.message ?: "로그인 실패") }
+                handleLoginError(errorMsg = R.string.login_label)
             }
         }
     }
@@ -113,7 +113,7 @@ class LoginViewModel @Inject constructor(
             .onEach { result ->
                 when (result) {
                     is KakaoLoginResult.Success -> handleKakaoLoginSuccess(result)
-                    is KakaoLoginResult.Error -> handleLoginError("카카오 로그인 실패")
+                    is KakaoLoginResult.Error -> handleLoginError(errorMsg = R.string.failure_kakao_login)
                     KakaoLoginResult.Cancelled -> {
                         setState { copy(loadingState = LoadingState.Idle) }
                     }
@@ -133,7 +133,7 @@ class LoginViewModel @Inject constructor(
         setEffect { LoginContract.Effect.NavigateToHome }
     }
 
-    private fun handleLoginError(errorMsg: String) {
+    private fun handleLoginError(@StringRes errorMsg: Int) {
         setState { copy(loadingState = LoadingState.Error) }
         setEffect { LoginContract.Effect.ShowError(errorMsg) }
     }
