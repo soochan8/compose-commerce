@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -32,6 +33,7 @@ class LoginNavGraph @Inject constructor() : NavGraphProvider {
 fun LoginRoute(navController: NavHostController) {
     val viewModel: LoginViewModel = hiltViewModel()
     val state by viewModel.viewState.collectAsState()
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.setEvent(LoginContract.Event.CheckUserSession)
@@ -51,7 +53,8 @@ fun LoginRoute(navController: NavHostController) {
                 }
 
                 is LoginContract.Effect.ShowError -> {
-                    Log.e("LoginErrorInfo", effect.errorMsg)
+                    val errorMsg = context.getString(effect.errorMsg)
+                    Log.e("LoginErrorInfo", errorMsg)
                 }
             }
         }
