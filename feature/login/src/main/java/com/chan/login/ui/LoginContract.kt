@@ -1,10 +1,10 @@
 package com.chan.login.ui
 
+import androidx.annotation.StringRes
 import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
-import androidx.annotation.StringRes
 
 class LoginContract {
 
@@ -20,6 +20,7 @@ class LoginContract {
         sealed class KakaoLoginEvent : Event() {
             object OnKakaoLoginButtonClicked : KakaoLoginEvent()
         }
+        object CheckUserSession : Event()
     }
 
     data class State(
@@ -27,11 +28,12 @@ class LoginContract {
         val password: String = "",
         val isAutoLoginChecked: Boolean = true,
         val isSaveIdChecked: Boolean = true,
+        val isSessionCheckCompleted: Boolean = false,
         val loadingState: LoadingState = LoadingState.Idle
     ) : ViewState
 
     sealed class Effect : ViewEffect {
         object NavigateToHome : Effect()
-        data class ShowError(@StringRes val messageResId: Int) : Effect()
+        data class ShowError(@StringRes val errorMsg: Int) : Effect()
     }
 }

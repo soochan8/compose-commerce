@@ -4,21 +4,23 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
+import com.chan.auth.domain.AuthRepository
 import com.chan.login.R
 import com.chan.login.domain.KakaoLoginManager
 import com.chan.login.domain.KakaoLoginResult
 import com.chan.login.domain.repository.LoginRepository
-import com.chan.login.domain.vo.UserVO
-import com.chan.login.util.SecurityUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository,
+    private val authRepository: AuthRepository,
     private val kakaoLoginManager: KakaoLoginManager
 ) : BaseViewModel<LoginContract.Event, LoginContract.State, LoginContract.Effect>() {
 
@@ -28,6 +30,19 @@ class LoginViewModel @Inject constructor(
         when (event) {
             is LoginContract.Event.AppLoginEvent -> handleAppLoginEvents(event)
             is LoginContract.Event.KakaoLoginEvent -> loginWithKakao()
+            LoginContract.Event.CheckUserSession -> checkSessionStatus()
+        }
+    }
+
+    private fun checkSessionStatus() {
+        viewModelScope.launch {
+            val currentSession = authRepository.getSessionFlow().firstOrNull()
+
+            if (currentSession != null) {
+                setEffect { LoginContract.Effect.NavigateToHome }
+            } else {
+                setState { copy(isSessionCheckCompleted = true) }
+            }
         }
     }
 
@@ -58,68 +73,37 @@ class LoginViewModel @Inject constructor(
         if (userId.isNotEmpty() && userPw.isNotEmpty()) {
             viewModelScope.launch {
                 setState { copy(loadingState = LoadingState.Loading) }
-                try {
-                    if (loginRepository.findUserByUserId(userId) != null) {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_user_already_exists) }
-                        return@launch
+                loginRepository.registerUser(userId, userPw)
+                    .onSuccess {
+                        setState { copy(loadingState = LoadingState.Success) }
                     }
-
-                    val salt = SecurityUtils.generateSalt()
-                    val hashedPassword = SecurityUtils.hashPassword(
-                        password = userPw.toCharArray(),
-                        salt = salt
-                    )
-                    val newUser = UserVO(
-                        userId = userId,
-                        hashedPassword = hashedPassword,
-                        salt = salt
-                    )
-
-                    loginRepository.registerUser(user = newUser)
-                    setState { copy(loadingState = LoadingState.Success) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.success_register) }
-
-
-                } catch (e: Exception) {
-                    setState { copy(loadingState = LoadingState.Error) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.error_unknown) }
-                }
+                    .onFailure { error ->
+                        handleLoginError(errorMsg = R.string.failure_register)
+                    }
             }
         }
     }
 
     private fun loginWithApp(userId: String, userPw: String) {
-        if (userId.isNotEmpty() && userPw.isNotEmpty()) {
-            viewModelScope.launch {
-                setState { copy(loadingState = LoadingState.Loading) }
-                try {
-                    val storedUser = loginRepository.findUserByUserId(userId)
-                    if (storedUser == null) {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_user_not_found) }
-                        return@launch
-                    }
+        if (userId.isBlank() || userPw.isBlank()) {
+            setEffect { LoginContract.Effect.ShowError(R.string.failure_empty_id_or_password) }
+            return
+        }
 
-                    val isPasswordCorrect = SecurityUtils.verifyPassword(
-                        password = userPw.toCharArray(),
-                        salt = storedUser.salt,
-                        hashedPassword = storedUser.hashedPassword
-                    )
+        viewModelScope.launch {
+            setState { copy(loadingState = LoadingState.Loading) }
+            try {
+                val user = loginRepository.appLogin(userId, userPw)
 
-                    if (isPasswordCorrect) {
-                        setState { copy(loadingState = LoadingState.Success) }
-                        setEffect { LoginContract.Effect.NavigateToHome }
-                    } else {
-                        setState { copy(loadingState = LoadingState.Error) }
-                        setEffect { LoginContract.Effect.ShowError(R.string.error_password_mismatch) }
-                    }
-                } catch (e: Exception) {
-                    setState { copy(loadingState = LoadingState.Error) }
-                    setEffect { LoginContract.Effect.ShowError(R.string.error_unknown) }
-                }
+                val dummyToken = UUID.nameUUIDFromBytes(user.userId.toByteArray()).toString()
+                authRepository.login(user.userId, dummyToken)
+
+                setState { copy(loadingState = LoadingState.Success) }
+                setEffect { LoginContract.Effect.NavigateToHome }
+
+            } catch (e: Exception) {
+                handleLoginError(errorMsg = R.string.login_label)
             }
-
         }
     }
 
@@ -128,8 +112,8 @@ class LoginViewModel @Inject constructor(
         kakaoLoginManager.login()
             .onEach { result ->
                 when (result) {
-                    is KakaoLoginResult.Success -> handleKakaoLoginSuccess()
-                    is KakaoLoginResult.Error -> handleLoginError(R.string.login_failed)
+                    is KakaoLoginResult.Success -> handleKakaoLoginSuccess(result)
+                    is KakaoLoginResult.Error -> handleLoginError(errorMsg = R.string.failure_kakao_login)
                     KakaoLoginResult.Cancelled -> {
                         setState { copy(loadingState = LoadingState.Idle) }
                     }
@@ -137,13 +121,20 @@ class LoginViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    private fun handleKakaoLoginSuccess() {
+    private fun handleKakaoLoginSuccess(result: KakaoLoginResult.Success) {
+        val userId = result.userId
+        val token = result.accessToken
+
+        viewModelScope.launch {
+            authRepository.login(userId, token)
+        }
+
         setState { copy(loadingState = LoadingState.Success) }
         setEffect { LoginContract.Effect.NavigateToHome }
     }
 
-    private fun handleLoginError(@StringRes messageResId: Int) {
+    private fun handleLoginError(@StringRes errorMsg: Int) {
         setState { copy(loadingState = LoadingState.Error) }
-        setEffect { LoginContract.Effect.ShowError(messageResId = messageResId) }
+        setEffect { LoginContract.Effect.ShowError(errorMsg) }
     }
 } 

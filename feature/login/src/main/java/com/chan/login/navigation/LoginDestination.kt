@@ -10,7 +10,6 @@ import com.chan.navigation.Routes
 object LoginDestination : BottomNavDestination {
     override val title = R.string.my_page
     override val icon = Icons.Default.Person
-    override val route = Routes.MYPAGE.route
+    override val route = Routes.LOGIN.route
     override val arguments: List<NamedNavArgument> = emptyList()
-
 }
