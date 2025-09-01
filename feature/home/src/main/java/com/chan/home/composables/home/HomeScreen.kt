@@ -48,9 +48,14 @@ fun HomeScreen(
         onRankingTabSelected = { categoryId ->
             homeViewModel.handleEvent(HomeContract.Event.RankingTabSelected(categoryId = categoryId))
         },
-        onItemClick ={ productId ->
+        onItemClick = { productId ->
             navController.navigate(
                 Routes.PRODUCT_DETAIL.productDetailRoute(productId)
+            )
+        },
+        onCartClick = { productId ->
+            navController.navigate(
+                Routes.CART_POPUP.cartPopUpRoute("p2")
             )
         }
     )

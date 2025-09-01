@@ -34,7 +34,8 @@ fun HomeCategoryRanking(
     categoryTabs: List<HomeRankingCategoryTabModel>,
     categories: List<HomeRankingCategoryProductModel>,
     pagerState: PagerState,
-    onTabSelected: (String) -> Unit
+    onTabSelected: (String) -> Unit,
+    onCartClick: (productId: String) -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
@@ -82,7 +83,9 @@ fun HomeCategoryRanking(
                     .fillMaxWidth(),
             ) {
                 categories.forEach {
-                    RankingCard(it)
+                    RankingCard(
+                        categoryProducts = it,
+                        onCartClick = onCartClick)
                 }
             }
         }

@@ -27,7 +27,8 @@ fun HomeScreenContent(
     pagerState: PagerState,
     onTabClick: (Int) -> Unit,
     onRankingTabSelected: (String) -> Unit,
-    onItemClick: (productId: String) -> Unit
+    onItemClick: (productId: String) -> Unit,
+    onCartClick: (productId: String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -50,7 +51,8 @@ fun HomeScreenContent(
                     HomePage(
                         homeState = homeState,
                         onRankingTabSelected = onRankingTabSelected,
-                        onItemClick = onItemClick
+                        onItemClick = onItemClick,
+                        onCartClick = onCartClick
                     )
                 }
 
@@ -66,7 +68,8 @@ private fun HomePage(
     homeState: HomeContract.State,
     modifier: Modifier = Modifier,
     onRankingTabSelected: (String) -> Unit,
-    onItemClick: (productId: String) -> Unit
+    onItemClick: (productId: String) -> Unit,
+    onCartClick: (productId: String) -> Unit
 ) {
     val homeCategoryRankingPagerState = rememberPagerState { homeState.rankingCategoryTabs.size }
 
@@ -90,7 +93,8 @@ private fun HomePage(
                     categoryTabs = homeState.rankingCategoryTabs,
                     categories = homeState.rankingCategories,
                     pagerState = homeCategoryRankingPagerState,
-                    onTabSelected = onRankingTabSelected
+                    onTabSelected = onRankingTabSelected,
+                    onCartClick = onCartClick
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
