@@ -1,0 +1,72 @@
+package com.chan.cart
+
+import androidx.lifecycle.viewModelScope
+import com.chan.android.BaseViewModel
+import com.chan.android.LoadingState
+import com.chan.cart.domain.CartRepository
+import com.chan.cart.ui.mapper.toCartInProductsModel
+import com.chan.cart.ui.mapper.toPopupProductInfoModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class CartViewModel @Inject constructor(
+    private val cartRepository: CartRepository,
+) : BaseViewModel<CartContract.Event, CartContract.State, CartContract.Effect>() {
+    override fun setInitialState() = CartContract.State()
+
+    override fun handleEvent(event: CartContract.Event) {
+        when (event) {
+            is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
+            is CartContract.Event.LoadCartProducts -> loadCartInProducts()
+            is CartContract.Event.AddToProduct -> addToCart(event.productId)
+        }
+    }
+
+    private fun addToCart(productId: String) {
+        handleRepositoryCall(
+            call = { cartRepository.addToCart(productId = "p2") },
+            onSuccess = { result ->
+                setEffect { CartContract.Effect.ShowToast(R.string.success_cart_in) }
+                setEffect { CartContract.Effect.DismissCartPopup }
+                this
+            }
+        )
+    }
+
+    private fun loadCartInProducts() {
+        handleRepositoryCall(
+            call = { cartRepository.getInCartProducts() },
+            onSuccess = { products -> copy(cartInProducts = products.map { it.toCartInProductsModel() }) }
+        )
+    }
+
+    //장바구니 팝업 정보 조회
+    private fun loadPopupProductInfo(productId: String) {
+        handleRepositoryCall(
+            call = { cartRepository.getProductInfo(productId = "p2") },
+            onSuccess = { productInfo ->
+                copy(popupProductInfo = productInfo.toPopupProductInfoModel())
+            }
+        )
+    }
+
+    private fun <T> handleRepositoryCall(
+        call: suspend () -> T,
+        onSuccess: CartContract.State.(T) -> CartContract.State,
+        onFinally: suspend (T) -> Unit = {}
+    ) {
+        viewModelScope.launch {
+            setState { copy(loadingState = LoadingState.Loading) }
+            try {
+                val result = call()
+                setState { onSuccess(result).copy(loadingState = LoadingState.Success) }
+                onFinally(result)
+            } catch (e: Exception) {
+                setState { copy(loadingState = LoadingState.Error) }
+                setEffect { CartContract.Effect.ShowError(e.message.toString()) }
+            }
+        }
+    }
+}
