@@ -31,9 +31,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.chan.home.navigation.HomeDestination
+import com.chan.login.navigation.LoginDestination
 import com.chan.navigation.BottomNavigationBar
 import com.chan.navigation.NavDestinationProvider
 import com.chan.navigation.NavGraphProvider
+import com.chan.navigation.createLoginRoute
 import com.chan.product.navigation.ProductDetailDestination
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -110,10 +112,16 @@ class MainActivity : ComponentActivity() {
                 if (isShowBottomBar) {
                     BottomNavigationBar(
                         currentRoute = currentRoute,
-                        onNavigate = { route ->
-                            navController.navigate(route) {
+                        onNavigate = { destination ->
+                            val target = if (destination == LoginDestination) {
+                                createLoginRoute()
+                            } else {
+                                destination.route
+                            }
+
+                            navController.navigate(target) {
                                 launchSingleTop = true
-                                if (route == HomeDestination.route) popUpTo(0)
+                                if (destination.route == HomeDestination.route) popUpTo(0)
                             }
                         },
                         navDestinations = allNavDestinations,
