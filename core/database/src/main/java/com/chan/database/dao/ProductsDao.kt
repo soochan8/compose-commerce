@@ -29,4 +29,7 @@ interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllProducts(products: List<CommonProductEntity>)
+
+    @Query("SELECT * FROM products WHERE productId = :productId")
+    suspend fun getProductsByProductId(productId: String): CommonProductEntity
 }
