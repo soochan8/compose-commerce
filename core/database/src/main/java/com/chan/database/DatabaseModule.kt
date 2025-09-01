@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.chan.database.dao.CartDao
 import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
@@ -11,7 +12,6 @@ import com.chan.database.dao.ProductDetailDao
 import com.chan.database.dao.ProductsDao
 import com.chan.database.dao.SearchHistoryDao
 import com.chan.database.dao.UserDao
-import com.chan.database.entity.CommonCategoryEntity
 import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
 import com.google.gson.Gson
@@ -54,7 +54,7 @@ object DatabaseModule {
                 }
             }
         )
-            .addMigrations(MIGRATION_13_14)
+            .addMigrations(MIGRATION_13_14, MIGRATION_15_16)
             .build()
     }
 
@@ -109,4 +109,8 @@ object DatabaseModule {
     @Provides
     fun provideProductsDao(db: AppDatabase): ProductsDao =
         db.productsDao()
+
+    @Provides
+    fun provideCartDao(db: AppDatabase): CartDao =
+        db.cartDao()
 }
