@@ -8,11 +8,19 @@ enum class Routes(val route: String) {
     HISTORY("history"),
     MYPAGE("mypage"),
     LOGIN("login"),
-    SEARCH("search");
+    SEARCH("search"),
+    CART("cart"),
+    CART_POPUP("cart/{productId}");
 
     fun categoryDetailRoute(categoryId: String) =
         "categoryDetail/$categoryId"
 
     fun productDetailRoute(productId: String) =
         "productDetail/$productId"
+
+    fun cartPopUpRoute(productId: String) =
+        "cart/$productId"
+}
+fun createLoginRoute(redirect: String = ""): String {
+    return "${Routes.LOGIN.route}?redirect=$redirect"
 }
