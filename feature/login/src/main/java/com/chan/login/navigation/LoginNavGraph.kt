@@ -22,15 +22,20 @@ class LoginNavGraph @Inject constructor() : NavGraphProvider {
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController
     ) {
-        navGraphBuilder.composable(LoginDestination.route) {
-            LoginRoute(navController)
+        navGraphBuilder.composable(
+            route = LoginDestination.route,
+            arguments = LoginDestination.arguments
+        ) { backStackEntry ->
+            val redirectRoute = backStackEntry.arguments?.getString("redirect") ?: ""
+
+            LoginRoute(navController, redirectRoute)
         }
     }
 }
 
 
 @Composable
-fun LoginRoute(navController: NavHostController) {
+fun LoginRoute(navController: NavHostController, redirectRoute: String) {
     val viewModel: LoginViewModel = hiltViewModel()
     val state by viewModel.viewState.collectAsState()
     val context = LocalContext.current
@@ -43,12 +48,9 @@ fun LoginRoute(navController: NavHostController) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 LoginContract.Effect.NavigateToHome -> {
-                    navController.navigate(
-                        Routes.MYPAGE.route
-                    ) {
-                        popUpTo(LoginDestination.route) {
-                            inclusive = true
-                        }
+                    val target = if (redirectRoute.isNotEmpty()) redirectRoute else Routes.MYPAGE.route
+                    navController.navigate(target) {
+                        popUpTo(Routes.LOGIN.route) { inclusive = true }
                     }
                 }
 
