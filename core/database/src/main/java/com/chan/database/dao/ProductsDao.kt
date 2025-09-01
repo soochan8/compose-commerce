@@ -46,4 +46,7 @@ interface ProductsDao {
     //인기 상품
     @Query("SELECT * FROM products ORDER BY reviewCount DESC LIMIT :limit")
     fun getPopularProducts(limit: Int) : Flow<List<CommonProductEntity>>
+
+    @Query("SELECT * FROM products WHERE productId = :productId")
+    suspend fun getProductsByProductId(productId: String): CommonProductEntity
 }
