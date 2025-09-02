@@ -6,8 +6,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.chan.database.entity.CommonProductEntity
+import com.chan.database.dto.ProductWithCartDto
 import com.chan.database.entity.cart.CartProductEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
@@ -28,13 +29,15 @@ interface CartDao {
 
 
     //장바구니 리스트 조회
-    @Query("""
-        SELECT p.*, c.quantity as cartQuantity 
-        FROM products p 
-        JOIN cart_products c ON p.productId = c.productId
-        WHERE c.userId = :userId
-    """)
-    suspend fun getInCartProducts(userId: String): List<CommonProductEntity>
+    @Query(
+        """
+    SELECT p.*, c.quantity as cartQuantity, c.isSelected as isSelected
+    FROM products p
+    JOIN cart_products c ON p.productId = c.productId
+    WHERE c.userId = :userId
+"""
+    )
+    fun getInCartProducts(userId: String): Flow<List<ProductWithCartDto>>
 
 
     //장바구니 상품 개수 증가
@@ -65,5 +68,15 @@ interface CartDao {
             }
         }
     }
+
+    //장바구니 상품 클릭 여부
+    @Query(
+        """
+        UPDATE cart_products
+        SET isSelected = :isSelected
+        WHERE userId = :userId AND productId = :productId
+    """
+    )
+    suspend fun updateProductSelected(userId: String, productId: String, isSelected: Boolean)
 
 }
