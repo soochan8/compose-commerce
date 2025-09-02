@@ -7,6 +7,7 @@ import com.chan.cart.domain.CartRepository
 import com.chan.cart.ui.mapper.toCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,17 @@ class CartViewModel @Inject constructor(
             is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
             is CartContract.Event.LoadCartProducts -> loadCartInProducts()
             is CartContract.Event.AddToProduct -> addToCart(event.productId)
+            is CartContract.Event.UpdateProductSelected -> updateProductSelected(event.productId, event.isSelected)
         }
+    }
+
+    private fun updateProductSelected(productId: String, isSelected: Boolean) {
+        handleRepositoryCall(
+            call = { cartRepository.updateProductSelected(productId = "p2", isSelected = isSelected) },
+            onSuccess = { result ->
+                this
+            }
+        )
     }
 
     private fun addToCart(productId: String) {
@@ -36,10 +47,13 @@ class CartViewModel @Inject constructor(
     }
 
     private fun loadCartInProducts() {
-        handleRepositoryCall(
-            call = { cartRepository.getInCartProducts() },
-            onSuccess = { products -> copy(cartInProducts = products.map { it.toCartInProductsModel() }) }
-        )
+        viewModelScope.launch {
+            cartRepository.getInCartProducts() // Flow<List<CartProductVO>>
+                .map { list -> list.map { it.toCartInProductsModel() } }
+                .collect { products ->
+                    setState { copy(cartInProducts = products) }
+                }
+        }
     }
 
     //장바구니 팝업 정보 조회
