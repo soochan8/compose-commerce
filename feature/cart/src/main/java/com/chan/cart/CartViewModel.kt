@@ -22,13 +22,44 @@ class CartViewModel @Inject constructor(
             is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
             is CartContract.Event.LoadCartProducts -> loadCartInProducts()
             is CartContract.Event.AddToProduct -> addToCart(event.productId)
-            is CartContract.Event.UpdateProductSelected -> updateProductSelected(event.productId, event.isSelected)
+            is CartContract.Event.UpdateProductSelected -> updateProductSelected(
+                event.productId,
+                event.isSelected
+            )
+
+            is CartContract.Event.UpdateProductQuantity -> updateProductQuantity(
+                event.productId,
+                event.isAdd
+            )
+        }
+    }
+
+    private fun updateProductQuantity(productId: String, isAdd: Boolean) {
+        if (isAdd) {
+            handleRepositoryCall(
+                call = { cartRepository.increaseProductQuantity(productId = "p2") },
+                onSuccess = { result ->
+                    this
+                }
+            )
+        } else {
+            handleRepositoryCall(
+                call = { cartRepository.decreaseProductQuantity(productId = "p2") },
+                onSuccess = { result ->
+                    this
+                }
+            )
         }
     }
 
     private fun updateProductSelected(productId: String, isSelected: Boolean) {
         handleRepositoryCall(
-            call = { cartRepository.updateProductSelected(productId = "p2", isSelected = isSelected) },
+            call = {
+                cartRepository.updateProductSelected(
+                    productId = "p2",
+                    isSelected = isSelected
+                )
+            },
             onSuccess = { result ->
                 this
             }
@@ -51,7 +82,11 @@ class CartViewModel @Inject constructor(
             cartRepository.getInCartProducts() // Flow<List<CartProductVO>>
                 .map { list -> list.map { it.toCartInProductsModel() } }
                 .collect { products ->
-                    setState { copy(cartInProducts = products) }
+                    setState {
+                        copy(cartInProducts = products,
+                            totalProductsCount = products.sumOf { it.quantity },
+                            totalPrice = products.sumOf { it.quantity * it.discountPrice })
+                    }
                 }
         }
     }
