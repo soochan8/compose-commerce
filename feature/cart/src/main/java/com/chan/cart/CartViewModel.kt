@@ -8,6 +8,7 @@ import com.chan.cart.ui.mapper.toCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +32,19 @@ class CartViewModel @Inject constructor(
                 event.productId,
                 event.isAdd
             )
+
+            CartContract.Event.OnAllSelected -> updateAllSelected()
         }
+    }
+
+    private fun updateAllSelected() {
+        val allSelected = !viewState.value.allSelected
+        handleRepositoryCall(
+            call = { cartRepository.updateAllProductSelected(allSelected) },
+            onSuccess = {
+                copy(allSelected = allSelected)
+            }
+        )
     }
 
     private fun updateProductQuantity(productId: String, isAdd: Boolean) {
@@ -79,13 +92,17 @@ class CartViewModel @Inject constructor(
 
     private fun loadCartInProducts() {
         viewModelScope.launch {
-            cartRepository.getInCartProducts() // Flow<List<CartProductVO>>
+            cartRepository.getInCartProducts()
                 .map { list -> list.map { it.toCartInProductsModel() } }
                 .collect { products ->
+                    val isAllSelected = products.isNotEmpty() && products.all { it.isSelected }
                     setState {
-                        copy(cartInProducts = products,
+                        copy(
+                            cartInProducts = products,
                             totalProductsCount = products.sumOf { it.quantity },
-                            totalPrice = products.sumOf { it.quantity * it.discountPrice })
+                            totalPrice = products.sumOf { it.quantity * it.discountPrice },
+                            allSelected = isAllSelected
+                        )
                     }
                 }
         }
