@@ -83,4 +83,7 @@ interface CartDao {
     @Query("UPDATE cart_products SET isSelected = :isAllSelected WHERE userId = :userId")
     suspend fun updateAllProductSelected(userId: String, isAllSelected: Boolean)
 
+    //장바구니 상품 제거
+    @Query("DELETE FROM cart_products WHERE userId = :userId AND productId = :productId")
+    suspend fun deleteCartByProductId(userId: String, productId: String)
 }

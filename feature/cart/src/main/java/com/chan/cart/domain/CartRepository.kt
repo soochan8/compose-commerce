@@ -12,4 +12,5 @@ interface CartRepository {
     suspend fun increaseProductQuantity(productId: String)
     suspend fun decreaseProductQuantity(productId: String)
     suspend fun updateAllProductSelected(isAllSelected: Boolean)
+    suspend fun deleteCartByProductId(productId: String)
 }

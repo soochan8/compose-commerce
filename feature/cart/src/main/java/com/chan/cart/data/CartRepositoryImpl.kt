@@ -67,4 +67,9 @@ class CartRepositoryImpl @Inject constructor(
         val userId = requireUserId()
         cartDao.updateAllProductSelected(userId, isAllSelected)
     }
+
+    override suspend fun deleteCartByProductId(productId: String) {
+        val userId = requireUserId()
+        cartDao.deleteCartByProductId(userId, productId)
+    }
 }
