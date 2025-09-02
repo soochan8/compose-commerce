@@ -6,10 +6,12 @@ import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
 import com.chan.cart.model.CartInProductsModel
+import com.chan.cart.model.CartInTobBarModel
 import com.chan.cart.model.PopupProductInfoModel
 
 class CartContract {
     sealed class Event : ViewEvent {
+        data class SelectedTab(val index: Int) : Event()
         data class LoadPopupProductInfo(val productId: String) : Event()
         object LoadCartProducts : Event()
         data class AddToProduct(val productId: String) : Event()
@@ -20,6 +22,8 @@ class CartContract {
     }
 
     data class State(
+        val selectedTabIndex: Int = 0,
+        val tobBars : List<CartInTobBarModel> = emptyList(),
         val popupProductInfo: PopupProductInfoModel = PopupProductInfoModel.EMPTY,
         val cartInProducts: List<CartInProductsModel> = emptyList(),
         val totalProductsCount : Int = 0,
