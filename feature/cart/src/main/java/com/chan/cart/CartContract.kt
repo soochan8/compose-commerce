@@ -14,11 +14,14 @@ class CartContract {
         object LoadCartProducts : Event()
         data class AddToProduct(val productId: String) : Event()
         data class UpdateProductSelected(val productId: String, val isSelected: Boolean) : Event()
+        data class UpdateProductQuantity(val productId: String, val isAdd: Boolean) : Event()
     }
 
     data class State(
         val popupProductInfo: PopupProductInfoModel = PopupProductInfoModel.EMPTY,
         val cartInProducts: List<CartInProductsModel> = emptyList(),
+        val totalProductsCount : Int = 0,
+        val totalPrice : Int = 0,
         val loadingState: LoadingState = LoadingState.Idle
     ) : ViewState
 
