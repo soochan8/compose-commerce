@@ -63,9 +63,18 @@ val MIGRATION_15_16 = object : Migration(15, 16) {
     }
 }
 
+val MIGRATION_16_17 = object : Migration(16, 17) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("""
+            ALTER TABLE cart_products
+            ADD COLUMN isSelected INTEGER NOT NULL DEFAULT 1
+        """.trimIndent())
+    }
+}
+
 @Database(
     entities = [HomeBannerEntity::class, ProductEntity::class, ProductDetailEntity::class, UserEntity::class, SearchHistoryEntity::class, CommonProductEntity::class, CommonCategoryEntity::class, CartProductEntity::class],
-    version = 16,
+    version = 17,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 12, to = 13)
