@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.cart.domain.CartRepository
+import com.chan.cart.model.CartInTobBarModel
 import com.chan.cart.ui.mapper.toCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +16,16 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val cartRepository: CartRepository,
 ) : BaseViewModel<CartContract.Event, CartContract.State, CartContract.Effect>() {
+
+    init {
+        loadCartInTobBar()
+    }
+
     override fun setInitialState() = CartContract.State()
 
     override fun handleEvent(event: CartContract.Event) {
         when (event) {
+            is CartContract.Event.SelectedTab -> selectedTab(event.index)
             is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
             is CartContract.Event.LoadCartProducts -> loadCartInProducts()
             is CartContract.Event.AddToProduct -> addToCart(event.productId)
@@ -35,6 +42,19 @@ class CartViewModel @Inject constructor(
             CartContract.Event.OnAllSelected -> updateAllSelected()
             is CartContract.Event.DeleteProduct -> deleteProduct(event.productId)
         }
+    }
+
+    private fun selectedTab(index: Int) {
+        setState { copy(selectedTabIndex = index) }
+    }
+
+    private fun loadCartInTobBar() {
+        val tobBars = listOf(
+            CartInTobBarModel("normal", "일반 배송"),
+            CartInTobBarModel("today", "오늘 드림"),
+            CartInTobBarModel("pickup", "픽업")
+        )
+        setState { copy(tobBars = tobBars) }
     }
 
     private fun deleteProduct(productId: String) {
