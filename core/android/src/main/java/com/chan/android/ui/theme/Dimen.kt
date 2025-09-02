@@ -39,6 +39,9 @@ object FontSize {
     val trendingSearch = 14.sp
     val trendingRankNew = 10.sp
     val tab = 14.sp
+
+    val cartTotalCount = 12.sp
+    val cartTotalPrice = 16.sp
 }
 
 object LineHeight {
