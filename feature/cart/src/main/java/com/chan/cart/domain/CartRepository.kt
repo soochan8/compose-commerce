@@ -9,4 +9,6 @@ interface CartRepository {
     suspend fun addToCart(productId: String)
     fun getInCartProducts() : Flow<List<CartProductVO>>
     suspend fun updateProductSelected(productId: String, isSelected: Boolean)
+    suspend fun increaseProductQuantity(productId: String)
+    suspend fun decreaseProductQuantity(productId: String)
 }

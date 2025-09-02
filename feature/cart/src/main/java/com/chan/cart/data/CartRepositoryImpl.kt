@@ -52,4 +52,14 @@ class CartRepositoryImpl @Inject constructor(
             isSelected = isSelected
         )
     }
+
+    override suspend fun increaseProductQuantity(productId: String) {
+        val userId = requireUserId()
+        cartDao.increaseQuantity(userId, productId)
+    }
+
+    override suspend fun decreaseProductQuantity(productId: String) {
+        val userId = requireUserId()
+        cartDao.decreaseQuantity(userId, productId)
+    }
 }
