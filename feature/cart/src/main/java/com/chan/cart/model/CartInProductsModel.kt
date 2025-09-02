@@ -5,11 +5,14 @@ data class CartInProductsModel(
     val productName: String,
     val brandName: String,
     val imageUrl: String,
-    val originalPrice: Int,
-    val discountPercent: Int,
+    val originalPrice: String,
+    val discountPercent: String,
     val discountPrice: Int,
+    val discountPriceLabel: String,
     val tags: List<String>,
-    val reviewRating: Float,
-    val reviewCount: Int,
-    val categoryIds: List<String>
+    val reviewRating: String,
+    val reviewCount: String,
+    val categoryIds: List<String>,
+    val isSelected : Boolean,
+    val quantity : Int
 )
