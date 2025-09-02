@@ -8,7 +8,6 @@ import com.chan.cart.ui.mapper.toCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEmpty
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,7 +33,15 @@ class CartViewModel @Inject constructor(
             )
 
             CartContract.Event.OnAllSelected -> updateAllSelected()
+            is CartContract.Event.DeleteProduct -> deleteProduct(event.productId)
         }
+    }
+
+    private fun deleteProduct(productId: String) {
+        handleRepositoryCall(
+            call = { cartRepository.deleteCartByProductId(productId) },
+            onSuccess = { this }
+        )
     }
 
     private fun updateAllSelected() {
