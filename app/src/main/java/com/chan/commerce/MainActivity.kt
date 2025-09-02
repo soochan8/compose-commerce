@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.chan.cart.naivgation.CartDestination
 import com.chan.home.navigation.HomeDestination
 import com.chan.login.navigation.LoginDestination
 import com.chan.navigation.BottomNavigationBar
@@ -105,7 +106,7 @@ class MainActivity : ComponentActivity() {
 
                 //화면에 따라 BottomNavigationBar visibility 결정
                 val isShowBottomBar = when (currentRoute) {
-                    ProductDetailDestination.route -> false
+                    ProductDetailDestination.route, CartDestination.route -> false
                     else -> true
                 }
 
