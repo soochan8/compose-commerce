@@ -1,11 +1,15 @@
 package com.chan.cart.data
 
 import com.chan.auth.domain.AuthRepository
+import com.chan.cart.data.mapper.toCartProductVO
 import com.chan.cart.data.mapper.toProductsVO
 import com.chan.cart.domain.CartRepository
 import com.chan.database.dao.CartDao
 import com.chan.database.dao.ProductsDao
+import com.chan.domain.CartProductVO
 import com.chan.domain.ProductsVO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CartRepositoryImpl @Inject constructor(
@@ -31,8 +35,21 @@ class CartRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getInCartProducts(): List<ProductsVO> {
+    override fun getInCartProducts(): Flow<List<CartProductVO>> {
         val userId = requireUserId()
-        return cartDao.getInCartProducts(userId).map { it.toProductsVO() }
+        return cartDao.getInCartProducts(userId)
+            .map { list -> list.map { it.toCartProductVO() } }
+    }
+
+    override suspend fun updateProductSelected(
+        productId: String,
+        isSelected: Boolean
+    ) {
+        val userId = requireUserId()
+        cartDao.updateProductSelected(
+            userId = userId,
+            productId = productId,
+            isSelected = isSelected
+        )
     }
 }

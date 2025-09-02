@@ -13,6 +13,7 @@ class CartContract {
         data class LoadPopupProductInfo(val productId: String) : Event()
         object LoadCartProducts : Event()
         data class AddToProduct(val productId: String) : Event()
+        data class UpdateProductSelected(val productId: String, val isSelected: Boolean) : Event()
     }
 
     data class State(
