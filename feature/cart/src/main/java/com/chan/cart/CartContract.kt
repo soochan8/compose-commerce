@@ -15,6 +15,7 @@ class CartContract {
         data class AddToProduct(val productId: String) : Event()
         data class UpdateProductSelected(val productId: String, val isSelected: Boolean) : Event()
         data class UpdateProductQuantity(val productId: String, val isAdd: Boolean) : Event()
+        object OnAllSelected : Event()
     }
 
     data class State(
@@ -22,6 +23,7 @@ class CartContract {
         val cartInProducts: List<CartInProductsModel> = emptyList(),
         val totalProductsCount : Int = 0,
         val totalPrice : Int = 0,
+        val allSelected : Boolean = false,
         val loadingState: LoadingState = LoadingState.Idle
     ) : ViewState
 

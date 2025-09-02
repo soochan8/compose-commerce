@@ -62,4 +62,9 @@ class CartRepositoryImpl @Inject constructor(
         val userId = requireUserId()
         cartDao.decreaseQuantity(userId, productId)
     }
+
+    override suspend fun updateAllProductSelected(isAllSelected: Boolean) {
+        val userId = requireUserId()
+        cartDao.updateAllProductSelected(userId, isAllSelected)
+    }
 }

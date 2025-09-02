@@ -79,4 +79,8 @@ interface CartDao {
     )
     suspend fun updateProductSelected(userId: String, productId: String, isSelected: Boolean)
 
+    //장바구니 상품 전체 활성화/비활성화
+    @Query("UPDATE cart_products SET isSelected = :isAllSelected WHERE userId = :userId")
+    suspend fun updateAllProductSelected(userId: String, isAllSelected: Boolean)
+
 }
