@@ -20,7 +20,7 @@ import com.chan.android.ui.theme.dividerColor
 import com.chan.cart.CartContract
 import com.chan.cart.R
 import com.chan.cart.ui.composable.CartBottomBar
-import com.chan.cart.ui.composable.commonDeliveryScreen
+import com.chan.cart.ui.composable.commonCartScreen
 
 @Composable
 fun CartScreen(
@@ -60,7 +60,7 @@ fun CartScreen(
                 }
 
                 when (state.selectedTabIndex) {
-                    0 -> commonDeliveryScreen(state = state, onEvent = onEvent)
+                    0 -> commonCartScreen(state = state, onEvent = onEvent)
                 }
             }
         }

@@ -27,7 +27,7 @@ import com.chan.android.ui.theme.appTypography
 import com.chan.cart.CartContract
 
 @OptIn(ExperimentalFoundationApi::class)
-fun LazyListScope.commonDeliveryScreen(
+fun LazyListScope.commonCartScreen(
     state: CartContract.State,
     onEvent: (CartContract.Event) -> Unit
 ) {
