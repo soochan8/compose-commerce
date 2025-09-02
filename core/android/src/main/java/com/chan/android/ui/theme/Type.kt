@@ -36,6 +36,20 @@ data class AppTypography(
         color = Black,
         lineHeight = LineHeight.productTitleSpacing
     ),
+    val cartTotalCount: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = FontSize.cartTotalCount,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
+    val cartTotalPrice: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        fontSize = FontSize.cartTotalPrice,
+        color = Black,
+        lineHeight = LineHeight.productTitleSpacing
+    ),
     val originPrice: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
