@@ -26,4 +26,7 @@ interface CategoryDao {
 """)
     suspend fun getParentCategoryByCategoryId(categoryId: String): List<CommonCategoryEntity>
 
+    @Query("SELECT * FROM category WHERE parentCategoryId IS NULL")
+    suspend fun getParentCategory(): List<CommonCategoryEntity>
+
 }
