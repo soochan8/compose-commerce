@@ -97,8 +97,8 @@ fun CommonProductsCard(
                         TagChip(tagLabel = tag)
                     }
                 }
+                Spacer(modifier = Modifier.height(Spacing.spacing3))
             }
-            Spacer(modifier = Modifier.height(Spacing.spacing3))
 
             Review(product)
             Spacer(modifier = Modifier.height(Spacing.spacing3))
