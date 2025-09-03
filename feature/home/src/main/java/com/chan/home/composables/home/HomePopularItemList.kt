@@ -27,7 +27,7 @@ fun HomePopularItemList(
     onProductClick: (productId: String) -> Unit
 ) {
     val nestedScrollConnection = horizontalNestedScrollConnection()
-
+    val productCardSize = 170.dp
     Text(
         text = stringResource(R.string.home_popular_product),
         modifier = Modifier
@@ -46,7 +46,7 @@ fun HomePopularItemList(
         ) { item ->
             CommonProductsCard(
                 product = item,
-                modifier = Modifier.width(170.dp),
+                modifier = Modifier.width(productCardSize),
                 onClick = {
                     onProductClick(item.productId)
                 },
