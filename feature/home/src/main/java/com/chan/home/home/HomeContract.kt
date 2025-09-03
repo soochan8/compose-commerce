@@ -23,6 +23,7 @@ class HomeContract {
         object SaleProducts : Event()
         object Retry : Event()
 
+        data class RankingTabClicked(val index: Int) : Event()
         data class RankingTabSelected(val categoryId: String) : Event()
         data class OnProductClicked(val productId: String) : Event()
     }
@@ -32,8 +33,9 @@ class HomeContract {
         val bannerList: List<HomeBannerModel> = emptyList(),
         val popularProducts: List<ProductsModel> = emptyList(),
         val rankingCategoryTabs: List<HomeRankingCategoryTabModel> = emptyList(),
-        val rankingCategories: List<HomeRankingCategoryProductModel> = emptyList(),
+        val rankingCategories: List<ProductsModel> = emptyList(),
         val saleProductList: List<HomeSaleProductModel> = emptyList(),
+        val selectedRankingTabIndex: Int = 0,
         val isLoading: Boolean = false,
         val isError: Boolean = false
     ) : ViewState

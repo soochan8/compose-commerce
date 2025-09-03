@@ -6,14 +6,12 @@ import com.chan.home.domain.repository.HomeBannerRepository
 import com.chan.home.domain.repository.HomePopularItemRepository
 import com.chan.home.domain.repository.HomeSaleProductRepository
 import com.chan.home.domain.repository.RankingCategoryRepository
-import com.chan.home.mapper.toPopularProductModel
 import com.chan.home.mapper.toPresentation
-import com.chan.home.mapper.toRankingCategoryProductModel
+import com.chan.home.mapper.toProductsModel
 import com.chan.home.mapper.toRankingCategoryTabsModel
 import com.chan.home.mapper.toSaleProductModel
 import com.chan.home.model.HomeTabItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,6 +36,9 @@ class HomeViewModel @Inject constructor(
             HomeContract.Event.Retry -> getBanners()
             HomeContract.Event.PopularItemLoad -> getPopularProducts()
             HomeContract.Event.RankingCategoryTabsLoad -> getRankingCategoryTabs()
+            is HomeContract.Event.RankingTabClicked -> {
+                setState { copy(selectedRankingTabIndex = event.index) }
+            }
             is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
             is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
@@ -64,7 +65,7 @@ class HomeViewModel @Inject constructor(
     private fun getPopularProducts() {
         viewModelScope.launch {
             homePopularItemRepository.getPopularProducts(20)
-                .map { list -> list.map { it.toPopularProductModel() } }
+                .map { list -> list.map { it.toProductsModel() } }
                 .collect { products ->
                     setState { copy(popularProducts = products) }
                 }
@@ -85,13 +86,13 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getRankingCategories(categoryId: String) {
-        handleRepositoryCall(
-            call = {
-                rankingCategoryRepository.getRankingProductsByCategoryId(categoryId)
-                    .map { it.toRankingCategoryProductModel() }
-            },
-            onSuccess = { rankingCategoryProducts -> copy(rankingCategories = rankingCategoryProducts) }
-        )
+        viewModelScope.launch {
+            rankingCategoryRepository.getRankingProductsByCategoryId(categoryId)
+                .map { list -> list.map { it.toProductsModel() } }
+                .collect { rankingCategoryProducts ->
+                    setState { copy(rankingCategories = rankingCategoryProducts) }
+                }
+        }
     }
 
     private fun getSaleProducts() {
