@@ -1,7 +1,8 @@
 package com.chan.home.domain.repository
 
-import com.chan.home.domain.vo.ProductVO
+import com.chan.domain.ProductsVO
+import kotlinx.coroutines.flow.Flow
 
 interface HomePopularItemRepository {
-    suspend fun getPopularProducts(limit: Int): List<ProductVO>
+    fun getPopularProducts(limit: Int): Flow<List<ProductsVO>>
 }

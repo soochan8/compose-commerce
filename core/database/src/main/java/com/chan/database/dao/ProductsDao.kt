@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.chan.database.entity.CommonProductEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductsDao {
@@ -29,4 +30,8 @@ interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllProducts(products: List<CommonProductEntity>)
+
+    //인기 상품
+    @Query("SELECT * FROM products ORDER BY reviewCount DESC LIMIT :limit")
+    fun getPopularProducts(limit: Int) : Flow<List<CommonProductEntity>>
 }
