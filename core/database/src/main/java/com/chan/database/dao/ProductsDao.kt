@@ -28,6 +28,18 @@ interface ProductsDao {
     )
     suspend fun getProductsByCategoryId(categoryId: String): List<CommonProductEntity>
 
+    @Query(
+        """
+    SELECT * FROM products
+    WHERE categoryIds LIKE :categoryId || ',%' 
+       OR categoryIds LIKE '%,' || :categoryId || ',%' 
+       OR categoryIds LIKE '%,' || :categoryId
+       OR categoryIds = :categoryId
+       LIMIT :limit
+"""
+    )
+    fun getProductsByCategoryIdLimit(categoryId: String, limit: Int = 5): Flow<List<CommonProductEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllProducts(products: List<CommonProductEntity>)
 
