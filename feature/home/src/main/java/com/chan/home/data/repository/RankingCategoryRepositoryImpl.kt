@@ -1,22 +1,26 @@
 package com.chan.home.data.repository
 
 import com.chan.database.dao.CategoryDao
-import com.chan.database.dao.ProductDao
-import com.chan.home.data.mapper.toDomain
+import com.chan.database.dao.ProductsDao
+import com.chan.domain.ProductsVO
+import com.chan.home.data.mapper.toProductsVO
+import com.chan.home.data.mapper.toRankingCategoryTabVO
 import com.chan.home.domain.repository.RankingCategoryRepository
-import com.chan.home.domain.vo.ProductVO
 import com.chan.home.domain.vo.RankingCategoryTabVO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RankingCategoryRepositoryImpl @Inject constructor(
-    private val productDao: ProductDao,
-    private val categoryDao: CategoryDao
+    private val categoryDao: CategoryDao,
+    private val productsDao: ProductsDao,
 ) : RankingCategoryRepository {
     override suspend fun getCategoryTabs(): List<RankingCategoryTabVO> {
-        return productDao.getCategoryTabs().map { it.toDomain() }
+        return categoryDao.getParentCategory().map { it.toRankingCategoryTabVO() }
     }
 
-    override suspend fun getRankingProductsByCategoryId(categoryId: String): List<ProductVO> {
-        return productDao.getProductsByCategoryId(categoryId).map { it.toDomain() }
+    override fun getRankingProductsByCategoryId(categoryId: String): Flow<List<ProductsVO>> {
+        return productsDao.getProductsByCategoryIdLimit(categoryId)
+            .map { list -> list.map { it.toProductsVO() } }
     }
 }
