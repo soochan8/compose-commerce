@@ -6,12 +6,15 @@ import com.chan.home.domain.repository.HomeBannerRepository
 import com.chan.home.domain.repository.HomePopularItemRepository
 import com.chan.home.domain.repository.HomeSaleProductRepository
 import com.chan.home.domain.repository.RankingCategoryRepository
-import com.chan.home.mapper.toPopularItemModel
+import com.chan.home.mapper.toPopularProductModel
 import com.chan.home.mapper.toPresentation
 import com.chan.home.mapper.toRankingCategoryProductModel
 import com.chan.home.mapper.toRankingCategoryTabsModel
 import com.chan.home.mapper.toSaleProductModel
+import com.chan.home.model.HomeTabItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,19 +26,30 @@ class HomeViewModel @Inject constructor(
     private val saleProductRepository: HomeSaleProductRepository
 ) : BaseViewModel<HomeContract.Event, HomeContract.State, HomeContract.Effect>() {
 
-    override fun setInitialState() = HomeContract.State(
+    init {
+        loadHomeTopBar()
+    }
 
-    )
+    override fun setInitialState() = HomeContract.State()
 
     override fun handleEvent(event: HomeContract.Event) {
         when (event) {
             HomeContract.Event.BannerLoad -> getBanners()
             HomeContract.Event.Retry -> getBanners()
-            HomeContract.Event.PopularItemLoad -> getPopularItems()
+            HomeContract.Event.PopularItemLoad -> getPopularProducts()
             HomeContract.Event.RankingCategoryTabsLoad -> getRankingCategoryTabs()
             is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
+            is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
         }
+    }
+
+    private fun loadHomeTopBar() {
+        setState { copy(topBars = HomeTabItem.tabList()) }
+    }
+
+    private fun productClicked(productId: String) {
+        setEffect { HomeContract.Effect.Navigation.ToProductDetailRoute(productId) }
     }
 
     private fun getBanners() {
@@ -47,13 +61,14 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun getPopularItems() {
-        handleRepositoryCall(
-            call = {
-                homePopularItemRepository.getPopularProducts(20).map { it.toPopularItemModel() }
-            },
-            onSuccess = { popularProducts -> copy(popularItemList = popularProducts) }
-        )
+    private fun getPopularProducts() {
+        viewModelScope.launch {
+            homePopularItemRepository.getPopularProducts(20)
+                .map { list -> list.map { it.toPopularProductModel() } }
+                .collect { products ->
+                    setState { copy(popularProducts = products) }
+                }
+        }
     }
 
     private fun getRankingCategoryTabs() {
