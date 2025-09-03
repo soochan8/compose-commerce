@@ -31,11 +31,11 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.chan.home.model.HomeRankingCategoryProductModel
+import com.chan.android.model.ProductsModel
 
 @Composable
 fun RankingCard(
-    categoryProducts: HomeRankingCategoryProductModel
+    product: ProductsModel
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -49,8 +49,8 @@ fun RankingCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = categoryProducts.imageUrl,
-                contentDescription = categoryProducts.productName,
+                model = product.imageUrl,
+                contentDescription = product.productName,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(100.dp)
@@ -62,7 +62,7 @@ fun RankingCard(
             Column(modifier = Modifier.weight(1f)) {
                 // 상품명
                 Text(
-                    text = categoryProducts.productName,
+                    text = product.productName,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -73,20 +73,20 @@ fun RankingCard(
                 // 할인 및 가격 정보
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = categoryProducts.discountPercent,
+                        text = product.discountPercent,
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.Red,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = categoryProducts.discountPrice,
+                        text = product.discountPrice,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = categoryProducts.originalPrice,
+                        text = product.originalPrice,
                         style = MaterialTheme.typography.bodySmall,
                         textDecoration = TextDecoration.LineThrough,
                         color = Color.Gray

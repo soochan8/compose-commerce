@@ -21,9 +21,11 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.chan.android.model.ProductsModel
+import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.util.horizontalNestedScrollConnection
 import com.chan.home.R
-import com.chan.home.model.HomeRankingCategoryProductModel
+import com.chan.home.home.HomeContract
 import com.chan.home.model.HomeRankingCategoryTabModel
 import kotlinx.coroutines.launch
 
@@ -31,18 +33,24 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeCategoryRanking(
-    categoryTabs: List<HomeRankingCategoryTabModel>,
-    categories: List<HomeRankingCategoryProductModel>,
+    state : HomeContract.State,
+    onEvent : (HomeContract.Event) -> Unit,
     pagerState: PagerState,
-    onTabSelected: (String) -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
     val nestedScrollConnection = horizontalNestedScrollConnection()
 
     LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
-        if (!pagerState.isScrollInProgress && categoryTabs.isNotEmpty()) {
-            onTabSelected(categoryTabs[pagerState.currentPage].id)
+        if (!pagerState.isScrollInProgress && state.rankingCategoryTabs.isNotEmpty()) {
+            val categoryId = state.rankingCategoryTabs[pagerState.currentPage].id
+            onEvent(HomeContract.Event.RankingTabSelected(categoryId))
+        }
+    }
+
+    LaunchedEffect(state.selectedRankingTabIndex) {
+        scope.launch {
+            pagerState.scrollToPage(state.selectedRankingTabIndex)
         }
     }
 
@@ -50,25 +58,21 @@ fun HomeCategoryRanking(
         text = stringResource(R.string.home_category_ranking),
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 8.dp, top = 10.dp),
+            .padding(start = Spacing.spacing4, top = Spacing.spacing2, bottom = Spacing.spacing1),
         style = MaterialTheme.typography.bodyLarge,
         color = Color.Black,
         fontWeight = FontWeight.Bold,
     )
 
     Column {
-        // 카테고리 랭킹 탭
         CategoryTab(
-            categoryTabs = categoryTabs,
+            categoryTabs = state.rankingCategoryTabs,
             selectedCategoryTabIndex = pagerState.currentPage,
             onSelectedChanged = { idx ->
-                scope.launch {
-                    onTabSelected(categoryTabs[idx].id)
-                    pagerState.scrollToPage(idx)
-                }
+                onEvent(HomeContract.Event.RankingTabClicked(idx))
             }
         )
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(Spacing.spacing1))
 
         HorizontalPager(
             state = pagerState,
@@ -81,7 +85,7 @@ fun HomeCategoryRanking(
                 modifier = Modifier
                     .fillMaxWidth(),
             ) {
-                categories.forEach {
+                state.rankingCategories.forEach {
                     RankingCard(it)
                 }
             }

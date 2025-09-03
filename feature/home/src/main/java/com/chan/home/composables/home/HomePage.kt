@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.chan.android.ui.theme.Spacing
 import com.chan.home.home.HomeContract
 
 @Composable
@@ -20,9 +20,10 @@ fun HomePage(
         item {
             if (state.bannerList.isNotEmpty()) {
                 HomeBanner(bannerList = state.bannerList)
-                Spacer(modifier = Modifier.height(12.dp))
+                SectionSpacer()
             }
-
+        }
+        item {
             if (state.popularProducts.isNotEmpty()) {
                 HomePopularItemList(
                     product = state.popularProducts,
@@ -30,23 +31,27 @@ fun HomePage(
                         onEvent(HomeContract.Event.OnProductClicked(productId = productId))
                     }
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                SectionSpacer()
             }
-
+        }
+        item {
             if (state.rankingCategories.isNotEmpty()) {
                 HomeCategoryRanking(
-                    categoryTabs = state.rankingCategoryTabs,
-                    categories = state.rankingCategories,
-                    pagerState = homeCategoryRankingPagerState,
-                    onTabSelected = { categoryId ->
-                        onEvent(HomeContract.Event.RankingTabSelected(categoryId = categoryId))
-                    }
+                    state = state,
+                    onEvent = onEvent,
+                    pagerState = homeCategoryRankingPagerState
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                SectionSpacer()
             }
-
+        }
+        item {
             if (state.saleProductList.isNotEmpty())
                 HomeSaleProduct(saleProducts = state.saleProductList)
         }
     }
+}
+
+@Composable
+private fun SectionSpacer() {
+    Spacer(modifier = Modifier.height(Spacing.spacing3))
 }
