@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -44,21 +46,21 @@ import com.chan.android.ui.theme.Spacing
 @Composable
 fun ProductCard(
     product: ProductModel,
+    modifier: Modifier = Modifier.width(200.dp),
     onClick: (productId: String) -> Unit,
     onLikeClick: (productId: String) -> Unit,
-    onCartClick: (productId: String) -> Unit,
+    onCartClick: (productId: String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .clickable(
                 onClick = { onClick(product.productId) },
                 indication = null,
                 interactionSource = interactionSource
             ),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(Radius.radius2),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
     ) {
         Column(
@@ -71,7 +73,7 @@ fun ProductCard(
                 model = product.imageUrl,
                 contentDescription = product.productName,
                 modifier = Modifier
-                    .height(180.dp)
+                    .wrapContentHeight()
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(Radius.radius2)),
                 contentScale = ContentScale.Crop
@@ -83,7 +85,7 @@ fun ProductCard(
                 fontWeight = FontWeight.Medium,
                 color = Color.DarkGray,
                 fontSize = 14.sp,
-                maxLines = 3
+                maxLines = 2
             )
             Spacer(modifier = Modifier.height(Spacing.spacing3))
 
