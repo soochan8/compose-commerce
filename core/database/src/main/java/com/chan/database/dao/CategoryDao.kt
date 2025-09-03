@@ -24,6 +24,6 @@ interface CategoryDao {
         WHERE id = :categoryId
     )
 """)
-    suspend fun getParentCategory(categoryId: String): List<CommonCategoryEntity>
+    suspend fun getParentCategoryByCategoryId(categoryId: String): List<CommonCategoryEntity>
 
 }

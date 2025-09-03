@@ -15,7 +15,7 @@ class CategoryDetailRepositoryImpl @Inject constructor(
 ) : CategoryDetailRepository {
 
     override suspend fun getCategoryTabs(categoryId: String): List<CategoryDetailTabsVO> {
-        return categoryDao.getParentCategory(categoryId).map { it.toTabsDomain() }
+        return categoryDao.getParentCategoryByCategoryId(categoryId).map { it.toTabsDomain() }
     }
 
     override suspend fun getProductsByCategory(categoryId: String): List<ProductsVO> {
