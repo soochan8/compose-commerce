@@ -1,6 +1,7 @@
 package com.chan.home.data.mapper
 
 import com.chan.database.dto.CategoryTabDto
+import com.chan.database.entity.CommonCategoryEntity
 import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
 import com.chan.database.entity.home.HomeBannerEntity
@@ -54,6 +55,15 @@ fun CategoryTabDto.toDomain() : RankingCategoryTabVO {
         name = name
     )
 }
+
+fun CommonCategoryEntity.toRankingCategoryTabVO() : RankingCategoryTabVO {
+    return RankingCategoryTabVO(
+        id = id,
+        name = name
+    )
+}
+
+
 
 
 
