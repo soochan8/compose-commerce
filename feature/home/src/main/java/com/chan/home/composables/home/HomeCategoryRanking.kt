@@ -20,21 +20,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import com.chan.android.model.ProductsModel
+import com.chan.android.model.ProductCardOrientation
+import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.util.horizontalNestedScrollConnection
 import com.chan.home.R
 import com.chan.home.home.HomeContract
-import com.chan.home.model.HomeRankingCategoryTabModel
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeCategoryRanking(
-    state : HomeContract.State,
-    onEvent : (HomeContract.Event) -> Unit,
+    state: HomeContract.State,
+    onEvent: (HomeContract.Event) -> Unit,
     pagerState: PagerState,
 ) {
 
@@ -86,7 +85,18 @@ fun HomeCategoryRanking(
                     .fillMaxWidth(),
             ) {
                 state.rankingCategories.forEach {
-                    RankingCard(it)
+                    CommonProductsCard(
+                        product = it,
+                        modifier = Modifier.fillMaxWidth(),
+                        orientation = ProductCardOrientation.HORIZONTAL,
+                        showLikeButton = true,
+                        showCartButton = true,
+                        onClick = { productId ->
+                            onEvent(HomeContract.Event.OnProductClicked(productId = productId))
+                        },
+                        onLikeClick = {},
+                        onCartClick = {}
+                    )
                 }
             }
         }
