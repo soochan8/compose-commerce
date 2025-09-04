@@ -35,9 +35,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.chan.android.model.ProductCardOrientation
 import com.chan.android.model.ProductsModel
 import com.chan.android.ui.theme.Radius
 import com.chan.android.ui.theme.Spacing
@@ -46,6 +48,9 @@ import com.chan.android.ui.theme.Spacing
 fun CommonProductsCard(
     product: ProductsModel,
     modifier: Modifier = Modifier.width(200.dp),
+    orientation: ProductCardOrientation = ProductCardOrientation.VERTICAL,
+    showLikeButton: Boolean = true,
+    showCartButton: Boolean = true,
     onClick: (productId: String) -> Unit,
     onLikeClick: (productId: String) -> Unit,
     onCartClick: (productId: String) -> Unit
@@ -62,67 +67,149 @@ fun CommonProductsCard(
         shape = RoundedCornerShape(Radius.radius2),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            horizontalAlignment = Alignment.Start
-        ) {
-            AsyncImage(
-                model = product.imageUrl,
-                contentDescription = product.productName,
+        if (orientation == ProductCardOrientation.VERTICAL) {
+            Column(
                 modifier = Modifier
-                    .wrapContentHeight()
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(Radius.radius2)),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(Spacing.spacing3))
+                    .fillMaxSize()
+                    .padding(8.dp),
+                horizontalAlignment = Alignment.Start
+            ) {
+                AsyncImage(
+                    model = product.imageUrl,
+                    contentDescription = product.productName,
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(Radius.radius2)),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(modifier = Modifier.height(Spacing.spacing3))
 
-            Text(
-                text = product.productName,
-                fontWeight = FontWeight.Medium,
-                color = Color.DarkGray,
-                fontSize = 14.sp,
-                maxLines = 2
-            )
-            Spacer(modifier = Modifier.height(Spacing.spacing3))
+                Text(
+                    text = product.productName,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.DarkGray,
+                    fontSize = 14.sp,
+                    maxLines = 2
+                )
+                Spacer(modifier = Modifier.height(Spacing.spacing3))
 
-            Price(product)
-            Spacer(modifier = Modifier.height(Spacing.spacing3))
+                Price(product)
+                Spacer(modifier = Modifier.height(Spacing.spacing3))
 
-            if (product.tags.isNotEmpty()) {
-                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.spacing1)) {
-                    product.tags.forEach { tag ->
-                        TagChip(tagLabel = tag)
+                if (product.tags.isNotEmpty()) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(Spacing.spacing1)) {
+                        product.tags.forEach { tag ->
+                            TagChip(tagLabel = tag)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(Spacing.spacing3))
+                }
+
+                Review(product)
+                Spacer(modifier = Modifier.height(Spacing.spacing3))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.spacing5)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "like",
+                        modifier = Modifier
+                            .size(Spacing.spacing4)
+                            .clickable {
+                                onLikeClick(product.productId)
+                            }
+                    )
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = "cart",
+                        modifier = Modifier
+                            .size(Spacing.spacing4)
+                            .clickable {
+                                onCartClick(product.productId)
+                            }
+                    )
+                }
+            }
+        } else {
+            Row(
+                modifier = Modifier.padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AsyncImage(
+                    model = product.imageUrl,
+                    contentDescription = product.productName,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column(modifier = Modifier.weight(1f)) {
+                    // 상품명
+                    Text(
+                        text = product.productName,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    // 할인 및 가격 정보
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = product.discountPercent,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = Color.Red,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = product.discountPrice,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = product.originalPrice,
+                            style = MaterialTheme.typography.bodySmall,
+                            textDecoration = TextDecoration.LineThrough,
+                            color = Color.Gray
+                        )
                     }
                 }
-                Spacer(modifier = Modifier.height(Spacing.spacing3))
-            }
-
-            Review(product)
-            Spacer(modifier = Modifier.height(Spacing.spacing3))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "like",
-                    modifier = Modifier
-                        .size(Spacing.spacing4)
-                        .clickable {
-                            onLikeClick(product.productId)
-                        }
-                )
-                Spacer(modifier = Modifier.width(Spacing.spacing5))
-                Icon(
-                    imageVector = Icons.Default.ShoppingCart,
-                    contentDescription = "cart",
-                    modifier = Modifier
-                        .size(Spacing.spacing4)
-                        .clickable {
-                            onCartClick(product.productId)
-                        }
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(Spacing.spacing5)
+                ) {
+                    if (showLikeButton) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = "like",
+                            modifier = Modifier
+                                .size(Spacing.spacing4)
+                                .clickable {
+                                    onLikeClick(product.productId)
+                                }
+                        )
+                    }
+                    if (showCartButton) {
+                        Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "cart",
+                            modifier = Modifier
+                                .size(Spacing.spacing4)
+                                .clickable {
+                                    onCartClick(product.productId)
+                                }
+                        )
+                    }
+                }
             }
         }
     }
