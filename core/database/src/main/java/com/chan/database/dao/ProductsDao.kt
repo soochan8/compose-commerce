@@ -29,4 +29,8 @@ interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllProducts(products: List<CommonProductEntity>)
+
+    //검색어가 포함된 상품
+    @Query("SELECT * FROM products WHERE productName LIKE '%' || :search || '%'")
+    suspend fun searchProductsByName(search: String) : List<CommonProductEntity>
 }

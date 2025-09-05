@@ -7,4 +7,13 @@
     <string name="recommend_keyword">추천 키워드</string>
     <string name="trending_search">급상승 검색어</string>
     <string name="trending_new">NEW</string>
+    <string name="search_empty_product">검색하신 상품이 없습니다.</string>
+
+    <string name="today_delivery_label">오늘드림</string>
+    <string name="pick_up_label">픽업</string>
+    <string name="category_label">카테고리</string>
+    <string name="price_label">가격</string>
+
+    <string name="filter_label">필터</string>
+    <string name="product_view_mode_label">상품 보기 방식</string>
 </resources>
