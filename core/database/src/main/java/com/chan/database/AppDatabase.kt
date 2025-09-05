@@ -68,6 +68,32 @@ val MIGRATION_16_17 = object : Migration(16, 17) {
         db.execSQL("""
             ALTER TABLE cart_products
             ADD COLUMN isSelected INTEGER NOT NULL DEFAULT 1
+val MIGRATION_14_15 = object : Migration(14, 15) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS `products` (
+                `productId` TEXT NOT NULL, 
+                `productName` TEXT NOT NULL, 
+                `brandName` TEXT NOT NULL, 
+                `imageUrl` TEXT NOT NULL, 
+                `originalPrice` INTEGER NOT NULL, 
+                `discountPercent` INTEGER NOT NULL, 
+                `discountPrice` INTEGER NOT NULL, 
+                `tags` TEXT NOT NULL, 
+                `reviewRating` REAL NOT NULL, 
+                `reviewCount` INTEGER NOT NULL, 
+                `categoryIds` TEXT NOT NULL, 
+                PRIMARY KEY(`productId`)
+            )
+        """.trimIndent())
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS `category` (
+                `id` TEXT NOT NULL, 
+                `name` TEXT NOT NULL, 
+                `parentCategoryId` TEXT, 
+                PRIMARY KEY(`id`)
+            )
         """.trimIndent())
     }
 }

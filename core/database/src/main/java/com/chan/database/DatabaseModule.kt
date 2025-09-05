@@ -37,7 +37,8 @@ object DatabaseModule {
     fun provideDatabase(
         @ApplicationContext context: Context,
         productDao: Provider<ProductDao>,
-        productsDao: Provider<ProductsDao>
+        productsDao: Provider<ProductsDao>,
+        categoryDao: Provider<CategoryDao>,
     ): AppDatabase {
         return Room.databaseBuilder(
             context,
@@ -49,12 +50,13 @@ object DatabaseModule {
                     super.onCreate(db)
                     CoroutineScope(Dispatchers.IO).launch {
                         insertAllProducts(context, productsDao.get())
-                        products(context, productDao.get())
+                        insertAllCategories(context, categoryDao.get())
+//                        products(context, productDao.get())
                     }
                 }
             }
         )
-            .addMigrations(MIGRATION_13_14, MIGRATION_15_16, MIGRATION_16_17)
+            .addMigrations(MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17)
             .build()
     }
 
@@ -80,6 +82,18 @@ object DatabaseModule {
         val listType = object : TypeToken<List<CommonProductEntity>>() {}.type
         val products: List<CommonProductEntity> = Gson().fromJson(jsonString, listType)
         productsDao.insertAllProducts(products)
+    }
+
+    private suspend fun insertAllCategories(context: Context, categoryDao: CategoryDao) {
+        val fileName = "category.json"
+        val jsonString = context.assets
+            .open(fileName)
+            .bufferedReader()
+            .use { it.readText() }
+
+        val listType = object : TypeToken<List<CommonCategoryEntity>>() {}.type
+        val products: List<CommonCategoryEntity> = Gson().fromJson(jsonString, listType)
+        categoryDao.insertAllCategories(products)
     }
 
     @Provides

@@ -7,11 +7,15 @@ import com.chan.search.domain.model.RankChange
 import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
 import com.chan.search.ui.contract.SearchContract
+import com.chan.search.ui.mappers.toFilterCategoryModel
 import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
 import com.chan.search.ui.mappers.toSearchModel
 import com.chan.search.ui.mappers.toTrendingSearchModel
+import com.chan.search.ui.model.FilterChipType
+import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.TrendingSearchModel
+import com.chan.search.ui.model.filter.DeliveryOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
@@ -35,6 +39,8 @@ class SearchViewModel @Inject constructor(
         getRecommendedKeywords()
         getTrendingSearches()
         setCurrentTime()
+        initializeFilterChips()
+        initializeCategoryFilters()
     }
 
     override fun setInitialState() = SearchContract.State()
@@ -71,7 +77,7 @@ class SearchViewModel @Inject constructor(
                 )
             }
 
-            is SearchContract.Event.OnClickSearchResult -> {
+            is SearchContract.Event.OnClickSearchProduct -> {
                 //클릭 시, 검색어에 맞는 리스트 보여주기
                 addSearchKeyword(event.clickedProductName)
                 setState { copy(showSearchResult = true) }
@@ -88,7 +94,7 @@ class SearchViewModel @Inject constructor(
             is SearchContract.Event.OnAddSearchKeyword -> {
                 addSearchKeyword(event.search)
                 getSearchResultProducts(event.search)
-                setState { copy(showSearchResult = true) }
+                setState { copy(showSearchResult = true, search = event.search) }
             }
 
             is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(
@@ -96,15 +102,210 @@ class SearchViewModel @Inject constructor(
             )
 
             SearchContract.Event.OnClearAllRecentSearches -> clearAllSearchKeyword()
+            SearchContract.Event.OnSearchTextFocus -> setState { copy(showSearchResult = false) }
+            SearchContract.Event.Filter.OnFilterClick -> setState {
+                copy(
+                    filter = filter.copy(
+                        showFilter = !filter.showFilter
+                    )
+                )
+            }
+
+            SearchContract.Event.Filter.OnClear -> handleFilterClear()
+
+            is SearchContract.Event.Filter.OnFilterChipClicked -> handleFilterChipClick(event.chip)
+            is SearchContract.Event.Filter.OnDeliveryOptionChanged -> handleDeliveryOptionChange(
+                event.option
+            )
+
+            is SearchContract.Event.Filter.OnCategoryHeaderClick -> handleCategoryHeaderClick(event.categoryName)
+            is SearchContract.Event.Filter.OnSubCategoryClick -> handleSubCategoryClick(event.subCategoryName)
+            SearchContract.Event.Filter.OnCategoryClick -> setState {
+                copy(
+                    filter = filter.copy(
+                        isCategorySectionExpanded = !filter.isCategorySectionExpanded
+                    )
+                )
+            }
+
+            is SearchContract.Event.TabRow.OnResultTabSelected -> {
+                setState { copy(resultTabRow = resultTabRow.copy(resultSelectedTabIndex = event.index)) }
+            }
         }
     }
+
+    private fun handleFilterClear() {
+        setState {
+            copy(
+                filter = filter.copy(
+                    selectedDeliveryOption = null,
+                    expandedCategoryName = null,
+                    selectedCategoryIds = emptySet(),
+                    isCategorySectionExpanded = false,
+                    filterChips = filter.filterChips.map { it.copy(isSelected = false) }
+                )
+            )
+        }
+        // 현재 검색어로 검색 결과를 다시 조회
+        getSearchResultProducts(viewState.value.search)
+    }
+
+    private fun handleSubCategoryClick(subCategoryName: String) {
+        val currentSelected = viewState.value.filter.selectedCategoryIds
+        val newSelected = if (currentSelected.contains(subCategoryName)) {
+            currentSelected - subCategoryName
+        } else {
+            currentSelected + subCategoryName
+        }
+        setState { copy(filter = filter.copy(selectedCategoryIds = newSelected)) }
+        updateFilteredProductList()
+    }
+
+    private fun updateFilteredProductList() {
+        viewModelScope.launch {
+            val filteredProducts =
+                searchRepository.getFilteredProducts(viewState.value.filter.selectedCategoryIds)
+                    .map { it.toProductsModel() }
+            setState {
+                copy(
+                    searchResultProducts = filteredProducts,
+                    filter = filter.copy(
+                        filteredProductCount = filteredProducts.size // 개수도 함께 업데이트
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleCategoryHeaderClick(categoryName: String) {
+        setState {
+            if (this.filter.expandedCategoryName == categoryName) {
+                copy(filter = filter.copy(expandedCategoryName = null))
+            } else {
+                copy(filter = filter.copy(expandedCategoryName = categoryName))
+            }
+        }
+    }
+
+    private fun handleDeliveryOptionChange(option: DeliveryOption) {
+        val currentSelectedOption = viewState.value.filter.selectedDeliveryOption
+        val newSelectedOption = if (currentSelectedOption == option) {
+            null
+        } else {
+            option
+        }
+
+        setState {
+            copy(
+                filter = filter.copy(
+                    selectedDeliveryOption = newSelectedOption,
+                    filterChips = filter.filterChips.map { chip ->
+                        if (chip.chipType != FilterChipType.TOGGLE) {
+                            chip
+                        } else {
+                            val chipCorrespondsToNewSelection =
+                                (chip.text == "오늘드림" && newSelectedOption == DeliveryOption.TODAY_DELIVERY) ||
+                                        (chip.text == "픽업" && newSelectedOption == DeliveryOption.PICKUP)
+
+                            chip.copy(isSelected = chipCorrespondsToNewSelection)
+                        }
+                    }
+                )
+
+            )
+        }
+    }
+
+    private fun handleFilterChipClick(clickedChip: SearchResultFilterChipModel) {
+        val isClickedChipAlreadySelected = viewState.value.filter.filterChips
+            .find { it.text == clickedChip.text }
+            ?.isSelected == true
+
+        val newSelectedOption = if (!isClickedChipAlreadySelected) {
+            when (clickedChip.text) {
+                "오늘드림" -> DeliveryOption.TODAY_DELIVERY
+                "픽업" -> DeliveryOption.PICKUP
+                else -> viewState.value.filter.selectedDeliveryOption
+            }
+        } else {
+            null
+        }
+
+        setState {
+            copy(
+                filter = filter.copy(
+                    selectedDeliveryOption = newSelectedOption,
+                    filterChips = this.filter.filterChips.map { chip ->
+                        if (chip.chipType != FilterChipType.TOGGLE) {
+                            chip
+                        } else {
+                            if (chip.text == clickedChip.text) {
+                                chip.copy(isSelected = !isClickedChipAlreadySelected)
+                            } else {
+                                chip.copy(isSelected = false)
+                            }
+                        }
+                    }
+                )
+            )
+        }
+    }
+
+    private fun initializeCategoryFilters() {
+        viewModelScope.launch {
+            val categories = searchRepository.getFilterCategories()
+                .map { it.toFilterCategoryModel() }
+            setState {
+                copy(
+                    filter = filter.copy(
+                        categoryFilters = categories
+                    )
+                )
+            }
+        }
+    }
+
+    private fun initializeFilterChips() {
+        val filterChips = listOf(
+            SearchResultFilterChipModel(
+                text = "오늘드림",
+                chipType = FilterChipType.TOGGLE
+            ),
+            SearchResultFilterChipModel(
+                text = "픽업",
+                chipType = FilterChipType.TOGGLE
+            ),
+            SearchResultFilterChipModel(
+                text = "카테고리",
+                chipType = FilterChipType.DROP_DOWN
+            ),
+            SearchResultFilterChipModel(
+                text = "주요기능",
+                chipType = FilterChipType.DROP_DOWN
+            ),
+            SearchResultFilterChipModel(
+                text = "가격",
+                chipType = FilterChipType.DROP_DOWN
+            )
+
+        )
+        setState { copy(filter = filter.copy(filterChips = filterChips)) }
+    }
+
 
     private fun getSearchResultProducts(search: String) {
         handleRepositoryCall(
             call = {
                 searchRepository.getSearchResultProducts(search).map { it.toProductsModel() }
             },
-            onSuccess = { searchResultProducts -> copy(searchResultProducts = searchResultProducts) }
+            onSuccess = { searchResultProducts ->
+                copy(
+                    searchResultProducts = searchResultProducts,
+                    filter = filter.copy(
+                        filteredProductCount = searchResultProducts.size
+                    )
+                )
+            }
         )
     }
 
@@ -142,11 +343,9 @@ class SearchViewModel @Inject constructor(
     private fun getRecentSearches() {
         searchRepository.getRecentSearches()
             .map { entities ->
-                // 데이터베이스 Entity를 UI 모델로 변환
                 entities.map { it.toSearchHistoryModel() }
             }
             .onEach { recentSearchResult ->
-                // Flow가 새로운 데이터를 방출할 때마다 상태 업데이트
                 setState { copy(recentSearches = recentSearchResult) }
             }
             .launchIn(viewModelScope)

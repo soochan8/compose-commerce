@@ -32,4 +32,7 @@ interface ProductsDao {
 
     @Query("SELECT * FROM products WHERE productId = :productId")
     suspend fun getProductsByProductId(productId: String): CommonProductEntity
+    //검색어가 포함된 상품
+    @Query("SELECT * FROM products WHERE productName LIKE '%' || :search || '%'")
+    suspend fun searchProductsByName(search: String) : List<CommonProductEntity>
 }
