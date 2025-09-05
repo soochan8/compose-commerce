@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":feature:product"))
     implementation(project(":feature:search"))
     implementation(project(":feature:mypage"))
+    implementation(project(":feature:cart"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

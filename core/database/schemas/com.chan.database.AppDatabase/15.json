@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 15,
-    "identityHash": "b145cb8d68c0728edc921e0313726ac9",
+    "identityHash": "abc518f7270e8a6200d6587e4075c31d",
     "entities": [
       {
         "tableName": "homeBanner",
@@ -182,7 +182,7 @@
       },
       {
         "tableName": "products",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productId` TEXT NOT NULL, `productName` TEXT NOT NULL, `brandName` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `originalPrice` INTEGER NOT NULL, `discountPercent` INTEGER NOT NULL, `discountPrice` INTEGER NOT NULL, `tags` TEXT NOT NULL, `reviewRating` REAL NOT NULL, `reviewCount` INTEGER NOT NULL, `categoryIds` TEXT NOT NULL, PRIMARY KEY(`productId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productId` TEXT NOT NULL, `productName` TEXT NOT NULL, `brandName` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `originalPrice` INTEGER NOT NULL, `discountPercent` INTEGER NOT NULL, `discountPrice` INTEGER NOT NULL, `tags` TEXT NOT NULL, `reviewRating` REAL NOT NULL, `reviewCount` INTEGER NOT NULL, `categoryIds` TEXT NOT NULL, `isLiked` INTEGER NOT NULL, `isInCart` INTEGER NOT NULL, `cartQuantity` INTEGER NOT NULL, PRIMARY KEY(`productId`))",
         "fields": [
           {
             "fieldPath": "productId",
@@ -249,6 +249,24 @@
             "columnName": "categoryIds",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "isLiked",
+            "columnName": "isLiked",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isInCart",
+            "columnName": "isInCart",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cartQuantity",
+            "columnName": "cartQuantity",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -296,7 +314,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b145cb8d68c0728edc921e0313726ac9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'abc518f7270e8a6200d6587e4075c31d')"
     ]
   }
 }

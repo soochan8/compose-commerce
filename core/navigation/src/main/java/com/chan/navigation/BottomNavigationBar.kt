@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 @Composable
 fun BottomNavigationBar(
     currentRoute: String?,
-    onNavigate: (String) -> Unit,
+    onNavigate: (BottomNavDestination) -> Unit,
     navDestinations: List<BottomNavDestination>,
     modifier: Modifier = Modifier
 ) {
@@ -24,8 +24,8 @@ fun BottomNavigationBar(
     ) {
         navDestinations.forEach { screen ->
             NavigationBarItem(
-                selected = screen.route == currentRoute,
-                onClick = { onNavigate(screen.route) },
+                selected = screen.route.substringBefore("?") == currentRoute?.substringBefore("?"),
+                onClick = { onNavigate(screen) },
                 icon = {
                     Icon(
                         imageVector = screen.icon,

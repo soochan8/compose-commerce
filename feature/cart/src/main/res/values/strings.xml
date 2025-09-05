@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_option">옵션 선택</string>
+    <string name="close">닫기</string>
+    <string name="cart_in">장바구니 담기</string>
+    <string name="success_cart_in">장바구니 담겼습니다.</string>
+    <string name="empty_cart_in">장바구니에 담긴 상품이 없습니다.</string>
+    <string name="gift">구매하기</string>
+    <string name="purchase">선물하기</string>
+    <string name="free_shipping_condition">%1$d원 이상 무료 배송</string>
+</resources>

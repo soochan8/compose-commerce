@@ -6,6 +6,7 @@ interface AuthRepository {
     fun getSessionFlow(): Flow<UserSession?>
     suspend fun login(userId: String, token: String)
     suspend fun logout()
+    fun getCurrentUserId(): String?
 }
 
 data class UserSession(val userId: String, val token: String)

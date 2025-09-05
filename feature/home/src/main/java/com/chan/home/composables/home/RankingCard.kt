@@ -35,7 +35,8 @@ import com.chan.home.model.HomeRankingCategoryProductModel
 
 @Composable
 fun RankingCard(
-    categoryProducts: HomeRankingCategoryProductModel
+    categoryProducts: HomeRankingCategoryProductModel,
+    onCartClick : (productId: String) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -103,7 +104,7 @@ fun RankingCard(
                         contentDescription = "좋아요",
                     )
                 }
-                IconButton(onClick = { }) {
+                IconButton(onClick = {onCartClick(categoryProducts.productId) }) {
                     Icon(
                         imageVector = Icons.Default.ShoppingCart,
                         contentDescription = "장바구니"
