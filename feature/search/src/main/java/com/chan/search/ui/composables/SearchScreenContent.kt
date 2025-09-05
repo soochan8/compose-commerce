@@ -115,6 +115,7 @@ fun SearchScreenContent(
                         )
                     }
 
+
                     else -> {
                         SearchResultList(
                             results = state.searchResults,
