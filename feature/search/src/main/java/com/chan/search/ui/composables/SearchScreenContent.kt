@@ -41,9 +41,6 @@ import com.chan.navigation.Routes
 import com.chan.search.R
 import com.chan.search.ui.composables.result.SearchResultScreen
 import com.chan.search.ui.contract.SearchContract
-import com.chan.search.ui.model.SearchHistoryModel
-import com.chan.search.ui.model.SearchResultModel
-import com.chan.search.ui.model.TrendingSearchModel
 
 @Composable
 fun SearchScreenContent(
@@ -117,19 +114,8 @@ fun SearchScreenContent(
                             currentTime = state.currentTime
                         )
                     }
-                    RecommendedKeywordList(recommendedKeywords = recommendedKeywords)
-                    TrendingSearchList(
-                        trendingSearches = trendingSearches,
-                        currentTime = currentTime
-                    )
-                } else {
-                    SearchResultList(
-                        results = searchResults,
-                        searchQuery = search,
-                        onSearchResultItemClick = onSearchResultItemClick
-                    )
+
                 }
-            } else {
             }
         }
 

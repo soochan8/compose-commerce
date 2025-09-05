@@ -12,6 +12,7 @@ import com.chan.database.dao.ProductDetailDao
 import com.chan.database.dao.ProductsDao
 import com.chan.database.dao.SearchHistoryDao
 import com.chan.database.dao.UserDao
+import com.chan.database.entity.CommonCategoryEntity
 import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductEntity
 import com.google.gson.Gson

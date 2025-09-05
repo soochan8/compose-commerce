@@ -65,9 +65,14 @@ val MIGRATION_15_16 = object : Migration(15, 16) {
 
 val MIGRATION_16_17 = object : Migration(16, 17) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("""
-            ALTER TABLE cart_products
+        db.execSQL(
+            """
+            ALTER TABLE cart_products 
             ADD COLUMN isSelected INTEGER NOT NULL DEFAULT 1
+            """.trimIndent()
+        )
+    }
+}
 val MIGRATION_14_15 = object : Migration(14, 15) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL("""
