@@ -21,6 +21,8 @@ okhttp = "4.12.0"
 coil = "2.4.0"
 room = "2.6.1"
 datastore = "1.1.7"
+protobuf = "3.25.3"
+protobufPlugin = "0.9.4"
 storage = "1.5.0"
 jetbrainsKotlinJvm = "1.9.23"
 gson = "2.10.1"
@@ -64,6 +66,8 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+datastore-proto = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
+datastore-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-storage = { group = "androidx.test.services", name = "storage", version.ref = "storage" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
@@ -78,4 +82,5 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 

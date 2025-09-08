@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -76,4 +77,8 @@ dependencies {
 
     implementation(libs.google.gson)
     implementation(libs.coil)
+
+    implementation(libs.datastore)
+    implementation(libs.datastore.proto)
+    implementation(libs.datastore.javalite)
 }
