@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.chan.database.dao.CartDao
 import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
@@ -37,7 +36,6 @@ object DatabaseModule {
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context,
-        productDao: Provider<ProductDao>,
         productsDao: Provider<ProductsDao>,
         categoryDao: Provider<CategoryDao>,
     ): AppDatabase {
@@ -52,25 +50,12 @@ object DatabaseModule {
                     CoroutineScope(Dispatchers.IO).launch {
                         insertAllProducts(context, productsDao.get())
                         insertAllCategories(context, categoryDao.get())
-//                        products(context, productDao.get())
                     }
                 }
             }
         )
-            .addMigrations(MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17)
+            .addMigrations(MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17, MIGRATION_17_18)
             .build()
-    }
-
-    private suspend fun products(context: Context, productDao: ProductDao) {
-        val fileName = "product_list.json"
-        val jsonString = context.assets
-            .open(fileName)
-            .bufferedReader()
-            .use { it.readText() }
-
-        val listType = object : TypeToken<List<ProductEntity>>() {}.type
-        val products: List<ProductEntity> = Gson().fromJson(jsonString, listType)
-        productDao.insertAll(products)
     }
 
     private suspend fun insertAllProducts(context: Context, productsDao: ProductsDao) {
@@ -124,8 +109,4 @@ object DatabaseModule {
     @Provides
     fun provideProductsDao(db: AppDatabase): ProductsDao =
         db.productsDao()
-
-    @Provides
-    fun provideCartDao(db: AppDatabase): CartDao =
-        db.cartDao()
 }

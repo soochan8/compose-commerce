@@ -6,7 +6,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.chan.database.dao.CartDao
 import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
@@ -19,7 +18,6 @@ import com.chan.database.entity.CommonProductEntity
 import com.chan.database.entity.ProductDetailEntity
 import com.chan.database.entity.ProductEntity
 import com.chan.database.entity.UserEntity
-import com.chan.database.entity.cart.CartProductEntity
 import com.chan.database.entity.home.HomeBannerEntity
 import com.chan.database.entity.search.SearchHistoryEntity
 
@@ -103,9 +101,15 @@ val MIGRATION_14_15 = object : Migration(14, 15) {
     }
 }
 
+val MIGRATION_17_18 = object : Migration(17, 18) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("DROP TABLE IF EXISTS cart")
+    }
+}
+
 @Database(
-    entities = [HomeBannerEntity::class, ProductEntity::class, ProductDetailEntity::class, UserEntity::class, SearchHistoryEntity::class, CommonProductEntity::class, CommonCategoryEntity::class, CartProductEntity::class],
-    version = 17,
+    entities = [HomeBannerEntity::class, ProductEntity::class, ProductDetailEntity::class, UserEntity::class, SearchHistoryEntity::class, CommonProductEntity::class, CommonCategoryEntity::class],
+    version = 18,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 12, to = 13)
@@ -121,5 +125,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun searchHistoryDao(): SearchHistoryDao
     abstract fun categoryDao(): CategoryDao
     abstract fun productsDao(): ProductsDao
-    abstract fun cartDao(): CartDao
 }
