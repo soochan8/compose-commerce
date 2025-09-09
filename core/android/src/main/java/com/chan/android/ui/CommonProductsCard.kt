@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -188,26 +189,22 @@ fun CommonProductsCard(
                     verticalArrangement = Arrangement.spacedBy(Spacing.spacing5)
                 ) {
                     if (showLikeButton) {
-                        Icon(
-                            imageVector = Icons.Default.FavoriteBorder,
-                            contentDescription = "like",
-                            modifier = Modifier
-                                .size(Spacing.spacing4)
-                                .clickable {
-                                    onLikeClick(product.productId)
-                                }
-                        )
+                        IconButton(onClick = { onLikeClick(product.productId) }) {
+                            Icon(
+                                imageVector = Icons.Default.FavoriteBorder,
+                                contentDescription = "like",
+                                modifier = Modifier.size(Spacing.spacing4)
+                            )
+                        }
                     }
                     if (showCartButton) {
-                        Icon(
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "cart",
-                            modifier = Modifier
-                                .size(Spacing.spacing4)
-                                .clickable {
-                                    onCartClick(product.productId)
-                                }
-                        )
+                        IconButton(onClick = { onCartClick(product.productId) }) {
+                            Icon(
+                                imageVector = Icons.Default.ShoppingCart,
+                                contentDescription = "cart",
+                                modifier = Modifier.size(Spacing.spacing4)
+                            )
+                        }
                     }
                 }
             }
