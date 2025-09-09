@@ -54,6 +54,16 @@ fun HomeRoute(navController: NavHostController) {
                     effect.message,
                     Toast.LENGTH_SHORT
                 ).show()
+                is HomeContract.Effect.Navigation.ToCartPopupRoute -> {
+                    navController.navigate(
+                        Routes.CART_POPUP.cartPopUpRoute(effect.productId)
+                    )
+                }
+                is HomeContract.Effect.Navigation.ToCartRoute -> {
+                    navController.navigate(
+                        Routes.CART.route
+                    )
+                }
             }
         }
     }
