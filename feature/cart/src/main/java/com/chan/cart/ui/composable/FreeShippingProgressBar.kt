@@ -17,7 +17,7 @@ import com.chan.android.ui.theme.Radius
 import com.chan.android.ui.theme.Spacing
 import com.chan.cart.R
 
-const val FREE_SHIPPING_THRESHOLD = 100_000
+const val FREE_SHIPPING_THRESHOLD = 50000
 
 @Composable
 fun FreeShippingProgressBar(
