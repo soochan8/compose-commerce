@@ -5,7 +5,7 @@ import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.cart.domain.CartRepository
 import com.chan.cart.model.CartInTobBarModel
-import com.chan.cart.ui.mapper.toCartInProductsModel
+import com.chan.cart.ui.mapper.toDataStoreCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
@@ -14,11 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val cartRepository: CartRepository,
+    private val cartRepository: CartRepository
 ) : BaseViewModel<CartContract.Event, CartContract.State, CartContract.Effect>() {
 
     init {
         loadCartInTobBar()
+        loadCartInProducts()
     }
 
     override fun setInitialState() = CartContract.State()
@@ -26,7 +27,7 @@ class CartViewModel @Inject constructor(
     override fun handleEvent(event: CartContract.Event) {
         when (event) {
             is CartContract.Event.SelectedTab -> selectedTab(event.index)
-            is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
+            is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo1(event.productId)
             is CartContract.Event.LoadCartProducts -> loadCartInProducts()
             is CartContract.Event.AddToProduct -> addToCart(event.productId)
             is CartContract.Event.UpdateProductSelected -> updateProductSelected(
@@ -59,7 +60,7 @@ class CartViewModel @Inject constructor(
 
     private fun deleteProduct(productId: String) {
         handleRepositoryCall(
-            call = { cartRepository.deleteCartByProductId(productId) },
+            call = { cartRepository.removeProductFromCart(productId) },
             onSuccess = { this }
         )
     }
@@ -67,27 +68,24 @@ class CartViewModel @Inject constructor(
     private fun updateAllSelected() {
         val allSelected = !viewState.value.allSelected
         handleRepositoryCall(
-            call = { cartRepository.updateAllProductSelected(allSelected) },
+            call = { cartRepository.updateAllProductsSelected(allSelected) },
             onSuccess = {
                 copy(allSelected = allSelected)
             }
         )
     }
 
+
     private fun updateProductQuantity(productId: String, isAdd: Boolean) {
         if (isAdd) {
             handleRepositoryCall(
-                call = { cartRepository.increaseProductQuantity(productId = "p2") },
-                onSuccess = { result ->
-                    this
-                }
+                call = { cartRepository.increaseProductQuantity(productId = productId) },
+                onSuccess = { this }
             )
         } else {
             handleRepositoryCall(
-                call = { cartRepository.decreaseProductQuantity(productId = "p2") },
-                onSuccess = { result ->
-                    this
-                }
+                call = { cartRepository.decreaseProductQuantity(productId = productId) },
+                onSuccess = { this }
             )
         }
     }
@@ -96,20 +94,18 @@ class CartViewModel @Inject constructor(
         handleRepositoryCall(
             call = {
                 cartRepository.updateProductSelected(
-                    productId = "p2",
+                    productId = productId,
                     isSelected = isSelected
                 )
             },
-            onSuccess = { result ->
-                this
-            }
+            onSuccess = { this }
         )
     }
 
     private fun addToCart(productId: String) {
         handleRepositoryCall(
-            call = { cartRepository.addToCart(productId = "p2") },
-            onSuccess = { result ->
+            call = { cartRepository.addProductToCart(productId) },
+            onSuccess = {
                 setEffect { CartContract.Effect.ShowToast(R.string.success_cart_in) }
                 setEffect { CartContract.Effect.DismissCartPopup }
                 this
@@ -119,8 +115,8 @@ class CartViewModel @Inject constructor(
 
     private fun loadCartInProducts() {
         viewModelScope.launch {
-            cartRepository.getInCartProducts()
-                .map { list -> list.map { it.toCartInProductsModel() } }
+            cartRepository.getCartItems()
+                .map { cartItems -> cartItems.map { it.toDataStoreCartInProductsModel() } }
                 .collect { products ->
                     val isAllSelected = products.isNotEmpty() && products.all { it.isSelected }
                     setState {
@@ -135,10 +131,9 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    //장바구니 팝업 정보 조회
-    private fun loadPopupProductInfo(productId: String) {
+    private fun loadPopupProductInfo1(productId: String) {
         handleRepositoryCall(
-            call = { cartRepository.getProductInfo(productId = "p2") },
+            call = { cartRepository.getProductInfo(productId = productId) },
             onSuccess = { productInfo ->
                 copy(popupProductInfo = productInfo.toPopupProductInfoModel())
             }
