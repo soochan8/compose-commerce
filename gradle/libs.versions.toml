@@ -67,7 +67,7 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 datastore-proto = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
-datastore-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-storage = { group = "androidx.test.services", name = "storage", version.ref = "storage" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }

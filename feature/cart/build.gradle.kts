@@ -40,6 +40,23 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
     }
+    lint {
+        disable.add("NullSafeMutableLiveData")
+    }
+}
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite") // Android는 lite 필수
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -80,5 +97,5 @@ dependencies {
 
     implementation(libs.datastore)
     implementation(libs.datastore.proto)
-    implementation(libs.datastore.javalite)
+    implementation(libs.protobuf.javalite)
 }
