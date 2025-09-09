@@ -55,8 +55,9 @@ dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
     implementation(project(":core:navigation"))
-    implementation(project(":core:domain"))
     implementation(project(":feature:category"))
+    implementation(project(":core:domain"))
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -68,6 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.storage)
+    implementation(project(":core:domain"))
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)

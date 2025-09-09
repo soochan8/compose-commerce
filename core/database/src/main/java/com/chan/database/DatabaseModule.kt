@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.chan.database.dao.CartDao
 import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
