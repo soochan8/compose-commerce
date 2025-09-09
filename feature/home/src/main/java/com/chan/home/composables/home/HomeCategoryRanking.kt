@@ -35,6 +35,7 @@ fun HomeCategoryRanking(
     state: HomeContract.State,
     onEvent: (HomeContract.Event) -> Unit,
     pagerState: PagerState,
+    onTabSelected: (String) -> Unit
 ) {
 
     val scope = rememberCoroutineScope()
