@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.chan.database.dao.CartDao
 import com.chan.database.dao.CategoryDao
 import com.chan.database.dao.HomeBannerDao
 import com.chan.database.dao.ProductDao
@@ -50,8 +51,6 @@ object DatabaseModule {
                     super.onCreate(db)
                     CoroutineScope(Dispatchers.IO).launch {
                         insertAllProducts(context, productsDao.get())
-                        insertAllCategory(context, categoryDao.get())
-                        products(context, productDao.get())
                         insertAllCategories(context, categoryDao.get())
 //                        products(context, productDao.get())
                     }
@@ -84,18 +83,6 @@ object DatabaseModule {
         val listType = object : TypeToken<List<CommonProductEntity>>() {}.type
         val products: List<CommonProductEntity> = Gson().fromJson(jsonString, listType)
         productsDao.insertAllProducts(products)
-    }
-
-    private suspend fun insertAllCategory(context: Context, categoryDao: CategoryDao) {
-        val fileName = "category.json"
-        val jsonString = context.assets
-            .open(fileName)
-            .bufferedReader()
-            .use { it.readText() }
-
-        val listType = object : TypeToken<List<CommonCategoryEntity>>() {}.type
-        val category: List<CommonCategoryEntity> = Gson().fromJson(jsonString, listType)
-        categoryDao.insertAllCategories(category)
     }
 
     private suspend fun insertAllCategories(context: Context, categoryDao: CategoryDao) {
