@@ -94,8 +94,13 @@ fun HomeCategoryRanking(
                         onClick = { productId ->
                             onEvent(HomeContract.Event.OnProductClicked(productId = productId))
                         },
-                        onLikeClick = {},
-                        onCartClick = {}
+                        onLikeClick = {
+                                productId ->
+                            onEvent(HomeContract.Event.OnLikedClick(productId = productId))
+                        },
+                        onCartClick = { productId ->
+                            onEvent(HomeContract.Event.OnCartClicked(productId = productId))
+                        }
                     )
                 }
             }

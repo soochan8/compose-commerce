@@ -6,6 +6,7 @@ import com.chan.home.domain.repository.HomeBannerRepository
 import com.chan.home.domain.repository.HomePopularItemRepository
 import com.chan.home.domain.repository.HomeSaleProductRepository
 import com.chan.home.domain.repository.RankingCategoryRepository
+import com.chan.home.home.HomeContract.Effect.Navigation.*
 import com.chan.home.mapper.toPresentation
 import com.chan.home.mapper.toProductsModel
 import com.chan.home.mapper.toRankingCategoryTabsModel
@@ -42,6 +43,8 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
             is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
+            is HomeContract.Event.OnLikedClick -> setEffect { ToCartPopupRoute(event.productId) }
+            is HomeContract.Event.OnCartClicked -> setEffect { ToCartRoute(event.productId) }
         }
     }
 
@@ -50,7 +53,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun productClicked(productId: String) {
-        setEffect { HomeContract.Effect.Navigation.ToProductDetailRoute(productId) }
+        setEffect { ToProductDetailRoute(productId) }
     }
 
     private fun getBanners() {
