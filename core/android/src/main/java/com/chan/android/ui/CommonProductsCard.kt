@@ -185,8 +185,7 @@ fun CommonProductsCard(
                     }
                 }
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(Spacing.spacing5)
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     if (showLikeButton) {
                         IconButton(onClick = { onLikeClick(product.productId) }) {
