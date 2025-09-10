@@ -8,7 +8,7 @@ import com.chan.product.ui.model.ProductDetailModel
 
 class ProductDetailContract {
     sealed class Event : ViewEvent {
-        object ProductDetailLoad : Event()
+        data class OnCouponDownloadClick(val couponId: String) : Event()
     }
 
     data class State(
@@ -18,5 +18,8 @@ class ProductDetailContract {
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
+        data class ShowToast(val message: String) : Effect()
+        data class UpdateWebView(val couponId: String) : Effect()
+        data class RevertWebViewButton(val couponId: String) : Effect()
     }
 }

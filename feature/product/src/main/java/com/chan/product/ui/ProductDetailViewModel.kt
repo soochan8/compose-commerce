@@ -14,11 +14,16 @@ class ProductDetailViewModel @Inject constructor(
     private val productDetailRepository: ProductDetailRepository
 ) :
     BaseViewModel<ProductDetailContract.Event, ProductDetailContract.State, ProductDetailContract.Effect>() {
-    override fun setInitialState()= ProductDetailContract.State()
+
+    init {
+        getProductDetailInfo()
+    }
+
+    override fun setInitialState() = ProductDetailContract.State()
 
     override fun handleEvent(event: ProductDetailContract.Event) {
         when (event) {
-            ProductDetailContract.Event.ProductDetailLoad -> getProductDetailInfo()
+            is ProductDetailContract.Event.OnCouponDownloadClick -> downloadCoupon(event.couponId)
         }
     }
 
@@ -34,6 +39,23 @@ class ProductDetailViewModel @Inject constructor(
                 )
             }
         )
+    }
+
+    private fun downloadCoupon(couponId: String) {
+        viewModelScope.launch {
+            try {
+                setEffect { ProductDetailContract.Effect.ShowToast("쿠폰 발급 요청 중...") }
+
+                productDetailRepository.downloadCoupon(couponId)
+
+                setEffect { ProductDetailContract.Effect.ShowToast("쿠폰 발급 완료!") }
+                setEffect { ProductDetailContract.Effect.UpdateWebView(couponId) }
+            } catch (e: Exception) {
+                val errorMessage = e.message ?: "알 수 없는 오류가 발생했습니다."
+                setEffect { ProductDetailContract.Effect.ShowToast(errorMessage) }
+                setEffect { ProductDetailContract.Effect.RevertWebViewButton(couponId) }
+            }
+        }
     }
 
     private fun <T> handleRepositoryCall(
