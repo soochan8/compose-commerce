@@ -4,4 +4,5 @@ import com.chan.product.domain.vo.ProductDetailVO
 
 interface ProductDetailRepository {
     suspend fun getProductDetail(productId: String): ProductDetailVO
+    suspend fun downloadCoupon(couponId: String)
 }

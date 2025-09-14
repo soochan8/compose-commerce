@@ -48,12 +48,16 @@ import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.appTypography
 import com.chan.product.R
+import com.chan.product.ui.ProductDetailContract
 import com.chan.product.ui.model.ProductDetailModel
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
-fun ProductPurchaseBottomBar(productInfo: ProductDetailModel.ProductInfoModel) {
+fun ProductPurchaseBottomBar(
+    state: ProductDetailContract.State,
+    onEvent: (ProductDetailContract.Event) -> Unit
+) {
     var isExpanded by remember { mutableStateOf(false) }
     var quantity by remember { mutableStateOf(1) }
     var isTodayDeliveryChecked by remember { mutableStateOf(false) }
@@ -84,7 +88,7 @@ fun ProductPurchaseBottomBar(productInfo: ProductDetailModel.ProductInfoModel) {
                 PurchaseOptions(
                     quantity = quantity,
                     onQuantityChange = { newQuantity -> quantity = newQuantity },
-                    priceInfo = productInfo.price
+                    priceInfo = state.productDetailInfo!!.productInfo.price
                 )
             }
 
@@ -122,7 +126,7 @@ fun ProductPurchaseBottomBar(productInfo: ProductDetailModel.ProductInfoModel) {
                 horizontalArrangement = Arrangement.spacedBy(Spacing.spacing2)
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { onEvent(ProductDetailContract.Event.OnCartPopupClick(state.productDetailInfo!!.productId)) },
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(Radius.radius1),
                     colors = ButtonDefaults.buttonColors(
@@ -139,7 +143,7 @@ fun ProductPurchaseBottomBar(productInfo: ProductDetailModel.ProductInfoModel) {
                 }
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { onEvent(ProductDetailContract.Event.OnCartClick(state.productDetailInfo!!.productId)) },
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(Radius.radius1),
                     colors = ButtonDefaults.buttonColors(
