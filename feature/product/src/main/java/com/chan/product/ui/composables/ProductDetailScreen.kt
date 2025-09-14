@@ -20,7 +20,7 @@ fun ProductDetailScreen(
     Scaffold(
         bottomBar = {
             state.productDetailInfo?.let { productDetail ->
-                ProductPurchaseBottomBar(productInfo = productDetail.productInfo)
+                ProductPurchaseBottomBar(state, onEvent)
             }
         }
     ) { paddingValues ->
