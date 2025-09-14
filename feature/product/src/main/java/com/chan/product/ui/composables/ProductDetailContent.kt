@@ -25,6 +25,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +38,7 @@ import com.chan.android.ui.theme.Radius
 import com.chan.android.ui.theme.Spacing
 import com.chan.product.ui.ProductDetailContract
 import com.chan.product.ui.WebAppInterface
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 
 
@@ -54,7 +57,7 @@ fun ProductDetailContent(
     var currentToast by remember { mutableStateOf<Toast?>(null) }
     var webView by remember { mutableStateOf<WebView?>(null) }
 
-    DisposableEffect(webView) {
+    DisposableEffect(Unit) {
         onDispose {
             webView?.destroy()
         }
@@ -64,11 +67,17 @@ fun ProductDetailContent(
         effect.collect { effect ->
             when (effect) {
                 is ProductDetailContract.Effect.UpdateWebView -> {
-                    webView?.loadUrl("javascript:markCouponAsDownloaded('${effect.couponId}')")
+                    webView?.evaluateJavascript(
+                        "javascript:markCouponAsDownloaded('${effect.couponId}')",
+                        null
+                    )
                 }
 
                 is ProductDetailContract.Effect.RevertWebViewButton -> {
-                    webView?.loadUrl("javascript:revertCouponButton('${effect.couponId}')")
+                    webView?.evaluateJavascript(
+                        "javascript:revertCouponButton('${effect.couponId}')",
+                        null
+                    )
                 }
 
                 is ProductDetailContract.Effect.ShowToast -> {
@@ -81,6 +90,8 @@ fun ProductDetailContent(
                     "ProductDetailInfo",
                     effect.message
                 )
+
+                else -> Unit
             }
         }
     }
@@ -128,6 +139,10 @@ private fun WebViewComponent(
     onDownloadClick: (String) -> Unit
 ) {
     val localProductDetailFilePath = "product_detail.html"
+    val updatedOnWebViewReady by rememberUpdatedState(onWebViewReady)
+    val updatedOnDownloadClick by rememberUpdatedState(onDownloadClick)
+    val scope = rememberCoroutineScope { Dispatchers.Main }
+
     AndroidView(
         modifier = modifier,
         factory = { context ->
@@ -137,11 +152,11 @@ private fun WebViewComponent(
                 isVerticalScrollBarEnabled = true
                 settings.cacheMode = WebSettings.LOAD_DEFAULT
                 addJavascriptInterface(
-                    WebAppInterface(onDownloadClick),
+                    WebAppInterface(scope, updatedOnDownloadClick),
                     JAVASCRIPT_INTERFACE_NAME
                 )
                 loadUrl("file:///android_asset/$localProductDetailFilePath")
-                onWebViewReady(this)
+                updatedOnWebViewReady(this)
             }
         }
     )
