@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.product.domain.repository.ProductDetailRepository
+import com.chan.product.ui.ProductDetailContract.Effect.Navigation.ToCartPopupRoute
+import com.chan.product.ui.ProductDetailContract.Effect.Navigation.ToCartRoute
 import com.chan.product.ui.mapper.toProductDetailModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,14 +26,16 @@ class ProductDetailViewModel @Inject constructor(
     override fun handleEvent(event: ProductDetailContract.Event) {
         when (event) {
             is ProductDetailContract.Event.OnCouponDownloadClick -> downloadCoupon(event.couponId)
+            is ProductDetailContract.Event.OnCartPopupClick -> setEffect { ToCartPopupRoute(event.productId) }
+            is ProductDetailContract.Event.OnCartClick -> setEffect { ToCartRoute(event.productId) }
         }
     }
 
     private fun getProductDetailInfo() {
         handleRepositoryCall(
             call = {
-                //현재 json 데이터가 P001001이라 고정
-                productDetailRepository.getProductDetail("P001001").toProductDetailModel()
+                //현재 json 데이터가 p1이라 고정
+                productDetailRepository.getProductDetail("p1").toProductDetailModel()
             },
             onSuccess = { productDetails ->
                 copy(
