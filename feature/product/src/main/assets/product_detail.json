@@ -1,5 +1,5 @@
 {
-  "productId": "P001001",
+  "productId": "p1",
   "productInfo": {
     "name": "[대용량] 라운드랩 1025 독도 토너 500ml",
     "images": [
@@ -11,7 +11,7 @@
     "brandInfo": {
       "id": "B00123",
       "name": "라운드랩",
-      "logoImageUrl": "https://image.oliveyoung.co.kr/uploads/images/brand/20230904135503893.png"
+      "logoImageUrl": "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0023/A00000023251305ko.jpg?l=ko"
     },
     "price": {
       "originalPrice": 30000,
@@ -60,7 +60,7 @@
     {
       "optionId": "O001",
       "productId": "P001001",
-      "image": "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0012/A00000012975313ko.jpg",
+      "image": "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0023/A00000023251305ko.jpg?l=ko",
       "optionName": "500ml",
       "discountPercent": 34,
       "discountPrice": 19800,
@@ -73,7 +73,7 @@
     {
       "optionId": "O002",
       "productId": "P001002",
-      "image": "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0012/A00000012975313ko_2.jpg",
+      "image": "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0023/A00000023251305ko.jpg?l=ko",
       "optionName": "200ml",
       "discountPercent": 20,
       "discountPrice": 12000,
