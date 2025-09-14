@@ -9,6 +9,8 @@ import com.chan.product.ui.model.ProductDetailModel
 class ProductDetailContract {
     sealed class Event : ViewEvent {
         data class OnCouponDownloadClick(val couponId: String) : Event()
+        data class OnCartPopupClick(val productId: String) : Event()
+        data class OnCartClick(val productId: String) : Event()
     }
 
     data class State(
@@ -21,5 +23,10 @@ class ProductDetailContract {
         data class ShowToast(val message: String) : Effect()
         data class UpdateWebView(val couponId: String) : Effect()
         data class RevertWebViewButton(val couponId: String) : Effect()
+
+        sealed class Navigation : Effect() {
+            data class ToCartPopupRoute(val productId: String) : Effect()
+            data class ToCartRoute(val productId: String) : Effect()
+        }
     }
 }
