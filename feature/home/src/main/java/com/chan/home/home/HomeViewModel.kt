@@ -1,9 +1,11 @@
 package com.chan.home.home
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.chan.android.BaseViewModel
+import com.chan.android.model.ProductsModel
 import com.chan.home.domain.HomeUseCases
 import com.chan.home.domain.usecase.RankingUseCase
 import com.chan.home.home.HomeContract.Effect.Navigation.*
@@ -13,6 +15,10 @@ import com.chan.home.mapper.toRankingCategoryTabsModel
 import com.chan.home.mapper.toSaleProductModel
 import com.chan.home.model.HomeTabItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +28,10 @@ class HomeViewModel @Inject constructor(
     private val homeUseCases: HomeUseCases,
     private val rankingUseCases: RankingUseCase
 ) : BaseViewModel<HomeContract.Event, HomeContract.State, HomeContract.Effect>() {
+
+    private val _rankingProducts = MutableStateFlow<Flow<PagingData<ProductsModel>>?>(null)
+    val rankingProducts: StateFlow<Flow<PagingData<ProductsModel>>?> =
+        _rankingProducts.asStateFlow()
 
     init {
         loadHomeTopBar()
@@ -44,18 +54,16 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
             is HomeContract.Event.OnLikedClick -> setEffect { ToCartPopupRoute(event.productId) }
             is HomeContract.Event.OnCartClicked -> setEffect { ToCartRoute(event.productId) }
-
             HomeContract.Event.HomeRankingEvent.RankingProductsLoad -> loadRankingProducts()
         }
     }
 
     private fun loadRankingProducts() {
-        val rankingProducts =
-            rankingUseCases.rankingProductsUseCase.invoke()
-                .map { it.map { it.toProductsModel() } }
-                .cachedIn(viewModelScope)
+        if (_rankingProducts.value != null) return
 
-        setState { copy(homeRankingState = homeRankingState.copy(rankingProducts = rankingProducts)) }
+        _rankingProducts.value = rankingUseCases.rankingProductsUseCase.invoke()
+            .map { it.map { it.toProductsModel() } }
+            .cachedIn(viewModelScope)
     }
 
     private fun loadHomeTopBar() {

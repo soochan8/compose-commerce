@@ -1,6 +1,5 @@
 package com.chan.home.composables.ranking
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,8 +12,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -22,9 +24,11 @@ import com.chan.android.model.ProductsModel
 import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Spacing
 import com.chan.home.home.HomeContract
+import com.chan.home.home.HomeViewModel
 
 @Composable
 fun HomeRankingScreen(
+    viewModel: HomeViewModel = hiltViewModel(),
     state: HomeContract.State,
     onEvent: (HomeContract.Event) -> Unit
 ) {
@@ -33,7 +37,8 @@ fun HomeRankingScreen(
         onEvent(HomeContract.Event.HomeRankingEvent.RankingProductsLoad)
     }
 
-    val products = state.homeRankingState.rankingProducts?.collectAsLazyPagingItems()
+    val rankingProductsFlow by viewModel.rankingProducts.collectAsState()
+    val products = rankingProductsFlow?.collectAsLazyPagingItems()
 
     products?.let { lazyItems ->
         when (val refreshState = lazyItems.loadState.refresh) {
@@ -67,7 +72,10 @@ private fun SuccessProducts(
 }
 
 @Composable
-private fun ErrorProducts(refreshState: LoadState.Error, lazyItems: LazyPagingItems<ProductsModel>) {
+private fun ErrorProducts(
+    refreshState: LoadState.Error,
+    lazyItems: LazyPagingItems<ProductsModel>
+) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("데이터를 불러오지 못했습니다: ${refreshState.error.message}")
