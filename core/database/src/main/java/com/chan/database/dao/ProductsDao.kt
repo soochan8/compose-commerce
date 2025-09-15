@@ -14,7 +14,7 @@ interface ProductsDao {
     @Query("SELECT * FROM products")
     suspend fun getAllProducts(): List<CommonProductEntity>
 
-    @Query("SELECT * FROM products")
+    @Query("SELECT * FROM products ORDER BY productId ASC")
     fun getAllProductsPaging(): PagingSource<Int, CommonProductEntity>
 
     /**
