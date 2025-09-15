@@ -25,8 +25,8 @@ class HomeContract {
         data class OnLikedClick(val productId: String) : Event()
         data class OnCartClicked(val productId: String) : Event()
 
-        sealed class HomeRankingEvent : ViewEvent {
-            object RankingProductsLoad : Event()
+        sealed class HomeRankingEvent : Event() {
+            object RankingProductsLoad : HomeRankingEvent()
         }
     }
 
@@ -40,21 +40,14 @@ class HomeContract {
         val selectedRankingTabIndex: Int = 0,
         val isLoading: Boolean = false,
         val isError: Boolean = false,
-
-        val homeRankingState: HomeRankingState = HomeRankingState()
     ) : ViewState
-
-
-    data class HomeRankingState(
-        val rankingProducts: Flow<PagingData<ProductsModel>>? = null
-    )
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
-        sealed class Navigation : ViewEffect {
-            data class ToProductDetailRoute(val productId: String) : Effect()
-            data class ToCartPopupRoute(val productId: String) : Effect()
-            data class ToCartRoute(val productId: String) : Effect()
+        sealed class Navigation : Effect() {
+            data class ToProductDetailRoute(val productId: String) : Navigation()
+            data class ToCartPopupRoute(val productId: String) : Navigation()
+            data class ToCartRoute(val productId: String) : Navigation()
         }
     }
 }
