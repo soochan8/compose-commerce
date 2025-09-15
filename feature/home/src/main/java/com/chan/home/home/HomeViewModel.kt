@@ -33,10 +33,10 @@ class HomeViewModel @Inject constructor(
 
     override fun handleEvent(event: HomeContract.Event) {
         when (event) {
-            HomeContract.Event.BannerLoad -> getBanners()
-            HomeContract.Event.Retry -> getBanners()
-            HomeContract.Event.PopularItemLoad -> getPopularProducts()
-            HomeContract.Event.RankingCategoryTabsLoad -> getRankingCategoryTabs()
+            HomeContract.Event.BannerLoad -> loadBanners()
+            HomeContract.Event.Retry -> loadBanners()
+            HomeContract.Event.PopularItemLoad -> loadPopularProducts()
+            HomeContract.Event.RankingCategoryTabsLoad -> loadRankingCategoryTabs()
             is HomeContract.Event.RankingTabClicked -> {
                 setState { copy(selectedRankingTabIndex = event.index) }
             }
@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
         setEffect { ToProductDetailRoute(productId) }
     }
 
-    private fun getBanners() {
+    private fun loadBanners() {
         handleRepositoryCall(
             call = {
                 homeBannerRepository.getBanners().map { it.toPresentation() }
@@ -65,7 +65,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    private fun getPopularProducts() {
+    private fun loadPopularProducts() {
         viewModelScope.launch {
             homePopularItemRepository.getPopularProducts(20)
                 .map { list -> list.map { it.toProductsModel() } }
@@ -75,7 +75,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getRankingCategoryTabs() {
+    private fun loadRankingCategoryTabs() {
         handleRepositoryCall(
             call = {
                 rankingCategoryRepository.getCategoryTabs().map { it.toRankingCategoryTabsModel() }
