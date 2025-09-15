@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.chan.home.composables.home.HomePage
 import com.chan.home.composables.home.HomeTopTab
+import com.chan.home.composables.ranking.HomeRankingScreen
 import com.chan.home.home.HomeContract
 import com.chan.home.model.HomeTabItem
 import kotlinx.coroutines.launch
@@ -56,6 +57,10 @@ fun HomeScreen(
                 }
 
                 HomeTabItem.RecommendToday -> RecommendScreen()
+                HomeTabItem.Ranking -> HomeRankingScreen(
+                    state = state,
+                    onEvent = onEvent
+                )
                 else -> {}
             }
         }
