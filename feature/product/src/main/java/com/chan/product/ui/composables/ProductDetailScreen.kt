@@ -6,30 +6,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.chan.product.ui.ProductDetailContract
-import com.chan.product.ui.ProductDetailViewModel
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun ProductDetailScreen(
     productId: String,
-    viewModel: ProductDetailViewModel = hiltViewModel()
+    state: ProductDetailContract.State,
+    onEvent: (ProductDetailContract.Event) -> Unit,
+    effect: Flow<ProductDetailContract.Effect>
 ) {
-
-    val state by viewModel.viewState.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.setEvent(ProductDetailContract.Event.ProductDetailLoad)
-    }
-
     Scaffold(
         bottomBar = {
             state.productDetailInfo?.let { productDetail ->
-                ProductPurchaseBottomBar(productInfo = productDetail.productInfo)
+                ProductPurchaseBottomBar(state, onEvent)
             }
         }
     ) { paddingValues ->
@@ -41,7 +32,7 @@ fun ProductDetailScreen(
                     .verticalScroll(scrollState)
             ) {
                 ProductDetailHeader(productDetail.productInfo)
-                ProductDetailContent()
+                ProductDetailContent(state, onEvent, effect)
             }
         }
     }
