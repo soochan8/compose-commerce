@@ -1,5 +1,6 @@
 package com.chan.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,6 +13,9 @@ interface ProductsDao {
 
     @Query("SELECT * FROM products")
     suspend fun getAllProducts(): List<CommonProductEntity>
+
+    @Query("SELECT * FROM products")
+    fun getAllProductsPaging(): PagingSource<Int, CommonProductEntity>
 
     /**
      * categoryId가 "c1, c2, c3"형태로 구성
