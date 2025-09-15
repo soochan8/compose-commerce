@@ -1,11 +1,11 @@
 package com.chan.home.home
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.chan.android.BaseViewModel
-import com.chan.home.domain.repository.HomeBannerRepository
-import com.chan.home.domain.repository.HomePopularItemRepository
-import com.chan.home.domain.repository.HomeSaleProductRepository
-import com.chan.home.domain.repository.RankingCategoryRepository
+import com.chan.home.domain.HomeUseCases
+import com.chan.home.domain.usecase.RankingUseCase
 import com.chan.home.home.HomeContract.Effect.Navigation.*
 import com.chan.home.mapper.toPresentation
 import com.chan.home.mapper.toProductsModel
@@ -19,10 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeBannerRepository: HomeBannerRepository,
-    private val homePopularItemRepository: HomePopularItemRepository,
-    private val rankingCategoryRepository: RankingCategoryRepository,
-    private val saleProductRepository: HomeSaleProductRepository
+    private val homeUseCases: HomeUseCases,
+    private val rankingUseCases: RankingUseCase
 ) : BaseViewModel<HomeContract.Event, HomeContract.State, HomeContract.Effect>() {
 
     init {
@@ -40,12 +38,24 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.RankingTabClicked -> {
                 setState { copy(selectedRankingTabIndex = event.index) }
             }
+
             is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
             is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
             is HomeContract.Event.OnLikedClick -> setEffect { ToCartPopupRoute(event.productId) }
             is HomeContract.Event.OnCartClicked -> setEffect { ToCartRoute(event.productId) }
+
+            HomeContract.Event.HomeRankingEvent.RankingProductsLoad -> loadRankingProducts()
         }
+    }
+
+    private fun loadRankingProducts() {
+        val rankingProducts =
+            rankingUseCases.rankingProductsUseCase.invoke()
+                .map { it.map { it.toProductsModel() } }
+                .cachedIn(viewModelScope)
+
+        setState { copy(homeRankingState = homeRankingState.copy(rankingProducts = rankingProducts)) }
     }
 
     private fun loadHomeTopBar() {
@@ -59,7 +69,7 @@ class HomeViewModel @Inject constructor(
     private fun loadBanners() {
         handleRepositoryCall(
             call = {
-                homeBannerRepository.getBanners().map { it.toPresentation() }
+                homeUseCases.homeBanner.invoke().map { it.toPresentation() }
             },
             onSuccess = { bannerList -> copy(bannerList = bannerList) }
         )
@@ -67,7 +77,7 @@ class HomeViewModel @Inject constructor(
 
     private fun loadPopularProducts() {
         viewModelScope.launch {
-            homePopularItemRepository.getPopularProducts(20)
+            homeUseCases.popularProducts.invoke(20)
                 .map { list -> list.map { it.toProductsModel() } }
                 .collect { products ->
                     setState { copy(popularProducts = products) }
@@ -78,7 +88,7 @@ class HomeViewModel @Inject constructor(
     private fun loadRankingCategoryTabs() {
         handleRepositoryCall(
             call = {
-                rankingCategoryRepository.getCategoryTabs().map { it.toRankingCategoryTabsModel() }
+                homeUseCases.categoryTabs.invoke().map { it.toRankingCategoryTabsModel() }
             },
             onSuccess = { rankingCategoryTabs -> copy(rankingCategoryTabs = rankingCategoryTabs) },
             onFinally = { tabs ->
@@ -90,7 +100,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getRankingCategories(categoryId: String) {
         viewModelScope.launch {
-            rankingCategoryRepository.getRankingProductsByCategoryId(categoryId)
+            homeUseCases.categoryRankingProducts.invoke((categoryId))
                 .map { list -> list.map { it.toProductsModel() } }
                 .collect { rankingCategoryProducts ->
                     setState { copy(rankingCategories = rankingCategoryProducts) }
@@ -100,7 +110,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getSaleProducts() {
         handleRepositoryCall(
-            call = { saleProductRepository.getSaleProducts(20).map { it.toSaleProductModel() } },
+            call = { homeUseCases.saleProducts.invoke(20).map { it.toSaleProductModel() } },
             onSuccess = { saleProducts -> copy(saleProductList = saleProducts) }
         )
     }
