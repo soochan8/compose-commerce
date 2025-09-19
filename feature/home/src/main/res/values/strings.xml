@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main_title">OLIVE YOUNG</string>
     <string name="home_tab_home">홈</string>
     <string name="home_tab_recommend_today">오늘의 추천</string>
     <string name="home_tab_plan">기획전</string>
