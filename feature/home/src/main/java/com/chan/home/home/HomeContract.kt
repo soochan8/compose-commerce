@@ -1,6 +1,5 @@
 package com.chan.home.home
 
-import androidx.paging.PagingData
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
@@ -9,7 +8,6 @@ import com.chan.home.model.HomeBannerModel
 import com.chan.home.model.HomeRankingCategoryTabModel
 import com.chan.home.model.HomeSaleProductModel
 import com.chan.home.model.HomeTabItem
-import kotlinx.coroutines.flow.Flow
 
 class HomeContract {
     sealed class Event : ViewEvent {
@@ -23,7 +21,7 @@ class HomeContract {
         data class RankingTabSelected(val categoryId: String) : Event()
         data class OnProductClicked(val productId: String) : Event()
         data class OnLikedClick(val productId: String) : Event()
-        data class OnCartClicked(val productId: String) : Event()
+        data class OnAddToCartClick(val productId: String) : Event()
 
         sealed class HomeRankingEvent : Event() {
             object RankingProductsLoad : HomeRankingEvent()

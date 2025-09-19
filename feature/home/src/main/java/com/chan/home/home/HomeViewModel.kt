@@ -52,8 +52,8 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.RankingTabSelected -> getRankingCategories(event.categoryId)
             HomeContract.Event.SaleProducts -> getSaleProducts()
             is HomeContract.Event.OnProductClicked -> productClicked(event.productId)
-            is HomeContract.Event.OnLikedClick -> setEffect { ToCartPopupRoute(event.productId) }
-            is HomeContract.Event.OnCartClicked -> setEffect { ToCartRoute(event.productId) }
+            is HomeContract.Event.OnLikedClick -> {}
+            is HomeContract.Event.OnAddToCartClick -> setEffect { ToCartPopupRoute(event.productId)}
             HomeContract.Event.HomeRankingEvent.RankingProductsLoad -> loadRankingProducts()
         }
     }

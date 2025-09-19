@@ -63,8 +63,8 @@ private fun SuccessProducts(
                 CommonProductsCard(
                     product = product,
                     onClick = { onEvent(HomeContract.Event.OnProductClicked(it)) },
-                    onLikeClick = { onEvent(HomeContract.Event.OnLikedClick(it)) },
-                    onCartClick = { onEvent(HomeContract.Event.OnCartClicked(it)) }
+                    onLikeClick = { },
+                    onCartClick = { onEvent(HomeContract.Event.OnAddToCartClick(it)) }
                 )
             }
         }
