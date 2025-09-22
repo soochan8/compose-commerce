@@ -36,6 +36,7 @@ import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.dividerColor
 import com.chan.search.R
+import com.chan.search.ui.actions.SearchActions
 import com.chan.search.ui.composables.result.SearchResultScreen
 import com.chan.search.ui.contract.SearchContract
 
@@ -45,13 +46,16 @@ fun SearchScreen(
     state: SearchContract.State,
     onEvent: (SearchContract.Event) -> Unit
 ) {
+    val actions = remember(onEvent) { SearchActions(onEvent) }
+
+
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             containerColor = White,
             topBar = {
                 MainTopBar(
                     navigationIcon = {
-                        IconButton(onClick = { onEvent(SearchContract.Event.OnBackStackClick) }) {
+                        IconButton(onClick = actions.onBackClick) {
                             Icon(Icons.Default.ArrowBack, contentDescription = "뒤로가기")
                         }
                     },
@@ -64,7 +68,7 @@ fun SearchScreen(
                         }
                     },
                     actions = {
-                        IconButton(onClick = { onEvent(SearchContract.Event.OnCartClick) }) {
+                        IconButton(onClick = actions.onCartClick) {
                             Icon(Icons.Default.ShoppingCart, contentDescription = "장바구니")
                         }
                     }
@@ -79,10 +83,10 @@ fun SearchScreen(
 
                 SearchTextField(
                     search = state.search,
-                    onSearchChanged = { onEvent(SearchContract.Event.OnSearchChanged(it)) },
-                    onClearSearch = { onEvent(SearchContract.Event.OnClickClearSearch) },
-                    onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
-                    onSearchTextFocus = { onEvent(SearchContract.Event.OnSearchTextFocus) },
+                    onSearchChanged = actions::onSearchChanged,
+                    onClearSearch = actions.onClearSearch,
+                    onSearchClick = actions::onSearchClick,
+                    onSearchTextFocus = actions.onSearchTextFocus,
                     modifier = Modifier.padding(Spacing.spacing4)
                 )
                 HorizontalDivider(color = dividerColor, thickness = 1.dp)
@@ -96,9 +100,7 @@ fun SearchScreen(
                                 SearchResultScreen(
                                     state = state,
                                     onEvent = onEvent,
-                                    onProductClick = { productId ->
-                                        onEvent(SearchContract.Event.OnProductClick(productId))
-                                    }
+                                    onProductClick = actions::onProductClick
                                 )
                             }
                         }
@@ -108,15 +110,9 @@ fun SearchScreen(
                         if (state.recentSearches.isNotEmpty()) {
                             RecentSearchList(
                                 recentSearches = state.recentSearches,
-                                onRemoveSearch = {
-                                    onEvent(
-                                        SearchContract.Event.OnRemoveSearchKeyword(
-                                            it
-                                        )
-                                    )
-                                },
-                                onClearAllRecentSearches = { onEvent(SearchContract.Event.OnClearAllRecentSearches) },
-                                onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
+                                onRemoveSearch = actions::onRemoveSearchKeyword,
+                                onClearAllRecentSearches = actions.onClearAllRecentSearches,
+                                onSearchClick = actions::onAddSearchKeyword
                             )
                         }
                         RecommendedKeywordList(recommendedKeywords = state.recommendedKeywords)
@@ -131,13 +127,7 @@ fun SearchScreen(
                         SearchResultList(
                             results = state.searchResults,
                             searchQuery = state.search,
-                            onSearchResultItemClick = {
-                                onEvent(
-                                    SearchContract.Event.OnClickSearchProduct(
-                                        it
-                                    )
-                                )
-                            }
+                            onSearchResultItemClick = actions::onSearchResultItemClick
                         )
                     }
                 }
@@ -156,7 +146,7 @@ fun SearchScreen(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
-                        onClick = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
+                        onClick = actions.onFilterClick
                     )
             )
         }
