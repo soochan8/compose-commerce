@@ -11,7 +11,8 @@ class SearchActions(private val onEvent: (SearchContract.Event) -> Unit) {
     val onSearchTextFocus: () -> Unit = { onEvent(SearchContract.Event.OnSearchTextFocus) }
     val onClearAllRecentSearches: () -> Unit =
         { onEvent(SearchContract.Event.OnClearAllRecentSearches) }
-    val onFilterClick: () -> Unit = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
+
+    val filter: FilterActions = FilterActions(onEvent)
 
     fun onSearchChanged(search: String) = onEvent(SearchContract.Event.OnSearchChanged(search))
     fun onSearchClick(search: String) = onEvent(SearchContract.Event.OnAddSearchKeyword(search))
