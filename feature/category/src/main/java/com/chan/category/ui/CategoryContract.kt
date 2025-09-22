@@ -11,6 +11,8 @@ class CategoryContract {
         data class OnCategorySidebarClick(val categoryId: String) : Event()
         data class OnCategoryClick(val categoryId: String) : Event()
         data class OnContentScroll(val firstVisibleIndex: Int) : Event()
+
+        object OnSearchClick : Event()
     }
 
     data class State(
@@ -26,6 +28,7 @@ class CategoryContract {
         data class ScrollToContent(val index: Int) : Effect()
         sealed class Navigation : Effect() {
             data class ToCategoryDetail(val categoryId: String) : Navigation()
+            object ToSearchRoute : Navigation()
         }
     }
 }
