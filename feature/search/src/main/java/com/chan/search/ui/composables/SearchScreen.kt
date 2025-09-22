@@ -47,7 +47,8 @@ fun SearchScreen(
     onEvent: (SearchContract.Event) -> Unit
 ) {
     val actions = remember(onEvent) { SearchActions(onEvent) }
-
+    val isFilterVisible = state.filter.showFilter
+    val overlayInteraction = remember { MutableInteractionSource() }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -135,7 +136,7 @@ fun SearchScreen(
         }
 
         AnimatedVisibility(
-            visible = state.filter.showFilter,
+            visible = isFilterVisible,
             enter = fadeIn(animationSpec = tween(300)),
             exit = fadeOut(animationSpec = tween(300))
         ) {
@@ -144,15 +145,15 @@ fun SearchScreen(
                     .fillMaxSize()
                     .background(Black.copy(alpha = 0.5f))
                     .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
+                        interactionSource = overlayInteraction,
                         indication = null,
-                        onClick = actions.onFilterClick
+                        onClick = actions.filter.onFilterClick
                     )
             )
         }
 
         AnimatedVisibility(
-            visible = state.filter.showFilter,
+            visible = isFilterVisible,
             enter = slideInHorizontally(
                 initialOffsetX = { it },
                 animationSpec = tween(300)
@@ -168,7 +169,7 @@ fun SearchScreen(
             ) {
                 SearchFilterScreen(
                     filterState = state.filter,
-                    onEvent = onEvent,
+                    actions = actions.filter,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .fillMaxHeight()
