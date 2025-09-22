@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.search.R
+import com.chan.search.ui.actions.FilterActions
 import com.chan.search.ui.contract.SearchContract
 import com.chan.search.ui.model.filter.DeliveryOption
 import com.chan.search.ui.model.filter.FilterCategoryListModel
@@ -28,7 +29,7 @@ import com.chan.search.ui.model.filter.FilterCategoryListModel
 @Composable
 fun SearchFilterScreen(
     filterState: SearchContract.FilterState,
-    onEvent: (SearchContract.Event) -> Unit,
+    actions: FilterActions,
     modifier: Modifier = Modifier
 ) {
 
@@ -37,14 +38,14 @@ fun SearchFilterScreen(
         containerColor = White,
         topBar = {
             FilterHeader(
-                onClose = { onEvent(SearchContract.Event.Filter.OnFilterClick) },
-                onFilterClear = { onEvent(SearchContract.Event.Filter.OnClear) }
+                onClose = actions.onFilterClick,
+                onFilterClear = actions.onClear
             )
         },
         bottomBar = {
             FilterBottomButton(
                 itemCount = filterState.filteredProductCount,
-                onApplyFilters = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
+                onApplyFilters = actions.onFilterClick
             )
         }
     ) { paddingValues ->
@@ -56,7 +57,7 @@ fun SearchFilterScreen(
             item {
                 FilterToggleSection(
                     selectedOption = filterState.selectedDeliveryOption,
-                    onOptionClick = { onEvent(SearchContract.Event.Filter.OnDeliveryOptionChanged(it)) }
+                    onOptionClick = actions::onDeliveryOptionChanged
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.2f),
@@ -71,7 +72,7 @@ fun SearchFilterScreen(
                 ExpandableFilterSection(
                     title = stringResource(R.string.category_label),
                     isExpanded = filterState.isCategorySectionExpanded,
-                    onClick = { onEvent(SearchContract.Event.Filter.OnCategoryClick) }
+                    onClick = actions.onCategoryClick
                 )
                 HorizontalDivider(
                     color = Color.LightGray.copy(alpha = 0.5f),
@@ -83,20 +84,8 @@ fun SearchFilterScreen(
                         categoryFilters = filterState.categoryFilters,
                         expandedCategoryName = filterState.expandedCategoryName,
                         selectedCategoryIds = filterState.selectedCategoryIds,
-                        onCategoryHeaderClick = {
-                            onEvent(
-                                SearchContract.Event.Filter.OnCategoryHeaderClick(
-                                    it
-                                )
-                            )
-                        },
-                        onSubCategoryClick = {
-                            onEvent(
-                                SearchContract.Event.Filter.OnSubCategoryClick(
-                                    it
-                                )
-                            )
-                        }
+                        onCategoryHeaderClick = actions::onCategoryHeaderClick,
+                        onSubCategoryClick = actions::onSubCategoryClick
                     )
                 }
             }
