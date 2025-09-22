@@ -1,6 +1,7 @@
 package com.chan.category.ui.composables
 
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,9 +21,9 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.chan.android.model.MainTopBarAction
 import com.chan.android.ui.composable.CommonTopBar
 import com.chan.android.ui.composable.MainTopBar
+import com.chan.android.ui.theme.Spacing
 import com.chan.category.ui.CategoryContract
 import com.chan.category.ui.CategoryViewModel
 import com.chan.category.ui.composables.category.CategoryContent
@@ -111,7 +112,9 @@ fun CategoryScreen(
         }
     ) { innerPadding ->
         Row(
-            modifier = Modifier.fillMaxSize().padding(top = innerPadding.calculateTopPadding())
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding())
         ) {
             CategorySidebar(
                 categories = state.categories,
@@ -144,7 +147,7 @@ fun CategoryTopTabs(
     selectedIndex: Int,
     onTabClick: (Int) -> Unit
 ) {
-    Row {
+    Row(horizontalArrangement = Arrangement.spacedBy(Spacing.spacing4)) {
         tabs.forEachIndexed { index, title ->
             CommonTopBar(
                 title = title,
