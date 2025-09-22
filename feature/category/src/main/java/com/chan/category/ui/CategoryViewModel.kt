@@ -28,6 +28,7 @@ class CategoryViewModel @Inject constructor(
 
             is CategoryContract.Event.OnCategoryClick -> setEffect { ToCategoryDetail(event.categoryId) }
             is CategoryContract.Event.OnContentScroll -> handleContentScroll(event.firstVisibleIndex)
+            CategoryContract.Event.OnSearchClick -> setEffect { ToSearchRoute }
         }
     }
 
