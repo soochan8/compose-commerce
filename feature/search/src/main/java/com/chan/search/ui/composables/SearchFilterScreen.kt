@@ -27,7 +27,7 @@ import com.chan.search.ui.model.filter.FilterCategoryListModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchFilterScreen(
-    state: SearchContract.State,
+    filterState: SearchContract.FilterState,
     onEvent: (SearchContract.Event) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -43,7 +43,7 @@ fun SearchFilterScreen(
         },
         bottomBar = {
             FilterBottomButton(
-                itemCount = state.filter.filteredProductCount,
+                itemCount = filterState.filteredProductCount,
                 onApplyFilters = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
             )
         }
@@ -55,7 +55,7 @@ fun SearchFilterScreen(
             // "오늘드림", "픽업" 체크박스 섹션
             item {
                 FilterToggleSection(
-                    selectedOption = state.filter.selectedDeliveryOption,
+                    selectedOption = filterState.selectedDeliveryOption,
                     onOptionClick = { onEvent(SearchContract.Event.Filter.OnDeliveryOptionChanged(it)) }
                 )
                 HorizontalDivider(
@@ -70,7 +70,7 @@ fun SearchFilterScreen(
                 //카테고리
                 ExpandableFilterSection(
                     title = stringResource(R.string.category_label),
-                    isExpanded = state.filter.isCategorySectionExpanded,
+                    isExpanded = filterState.isCategorySectionExpanded,
                     onClick = { onEvent(SearchContract.Event.Filter.OnCategoryClick) }
                 )
                 HorizontalDivider(
@@ -78,11 +78,11 @@ fun SearchFilterScreen(
                     thickness = 1.dp
                 )
                 //서브 카테고리
-                if (state.filter.isCategorySectionExpanded) {
+                if (filterState.isCategorySectionExpanded) {
                     SubFilterCategory(
-                        categoryFilters = state.filter.categoryFilters,
-                        expandedCategoryName = state.filter.expandedCategoryName,
-                        selectedCategoryIds = state.filter.selectedCategoryIds,
+                        categoryFilters = filterState.categoryFilters,
+                        expandedCategoryName = filterState.expandedCategoryName,
+                        selectedCategoryIds = filterState.selectedCategoryIds,
                         onCategoryHeaderClick = {
                             onEvent(
                                 SearchContract.Event.Filter.OnCategoryHeaderClick(

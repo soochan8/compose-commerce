@@ -167,7 +167,7 @@ fun SearchScreen(
                 contentAlignment = Alignment.CenterEnd
             ) {
                 SearchFilterScreen(
-                    state = state,
+                    filterState = state.filter,
                     onEvent = onEvent,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
