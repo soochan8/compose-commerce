@@ -7,6 +7,7 @@ import com.chan.search.domain.model.RankChange
 import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
 import com.chan.search.ui.contract.SearchContract
+import com.chan.search.ui.contract.SearchContract.Effect.Navigation.ToCartRoute
 import com.chan.search.ui.mappers.toFilterCategoryModel
 import com.chan.search.ui.mappers.toProductsModel
 import com.chan.search.ui.mappers.toSearchHistoryModel
@@ -131,6 +132,8 @@ class SearchViewModel @Inject constructor(
             is SearchContract.Event.TabRow.OnResultTabSelected -> {
                 setState { copy(resultTabRow = resultTabRow.copy(resultSelectedTabIndex = event.index)) }
             }
+
+            SearchContract.Event.OnCartClick -> setEffect { ToCartRoute }
         }
     }
 

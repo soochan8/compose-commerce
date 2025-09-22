@@ -19,8 +19,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -32,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.chan.android.ui.composable.MainTopBar
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
@@ -42,6 +45,7 @@ import com.chan.search.R
 import com.chan.search.ui.composables.result.SearchResultScreen
 import com.chan.search.ui.contract.SearchContract
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreenContent(
     navController: NavHostController,
@@ -52,11 +56,27 @@ fun SearchScreenContent(
         Scaffold(
             containerColor = White,
             topBar = {
-                SearchTopAppBar(
-                    onClickBack = { navController.popBackStack() },
-                    onClickCart = { }
+                MainTopBar(
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(Icons.Default.ArrowBack, contentDescription = "뒤로가기")
+                        }
+                    },
+                    titleContent = {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = stringResource(R.string.search))
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { onEvent(SearchContract.Event.OnCartClick) }) {
+                            Icon(Icons.Default.ShoppingCart, contentDescription = "장바구니")
+                        }
+                    }
                 )
-            },
+            }
         ) { paddingValues ->
             Column(
                 modifier = Modifier

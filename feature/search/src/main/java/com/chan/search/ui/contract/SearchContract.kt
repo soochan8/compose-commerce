@@ -24,6 +24,7 @@ class SearchContract {
         data class OnAddSearchKeyword(val search: String) : Event()
         data class OnRemoveSearchKeyword(val search: String) : Event()
         object OnClearAllRecentSearches : Event()
+        object OnCartClick : Event()
 
         sealed class Filter : Event() {
             data class OnDeliveryOptionChanged(val option: DeliveryOption) : Filter()
@@ -78,5 +79,8 @@ class SearchContract {
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
+        sealed class Navigation : Effect() {
+            object ToCartRoute : Navigation()
+        }
     }
 } 
