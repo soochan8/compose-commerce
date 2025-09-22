@@ -25,6 +25,8 @@ class SearchContract {
         data class OnRemoveSearchKeyword(val search: String) : Event()
         object OnClearAllRecentSearches : Event()
         object OnCartClick : Event()
+        object OnBackStackClick : Event()
+        data class OnProductClick(val productId: String) : Event()
 
         sealed class Filter : Event() {
             data class OnDeliveryOptionChanged(val option: DeliveryOption) : Filter()
@@ -36,8 +38,8 @@ class SearchContract {
             object OnClear : Filter()
         }
 
-        sealed class TabRow: Event() {
-            data class OnResultTabSelected(val index: Int): Event()
+        sealed class TabRow : Event() {
+            data class OnResultTabSelected(val index: Int) : Event()
         }
     }
 
@@ -62,11 +64,11 @@ class SearchContract {
     ) : ViewState
 
     data class TabRow(
-        val resultSelectedTabIndex : Int = 0,
+        val resultSelectedTabIndex: Int = 0,
         val tabs: List<SearchResultTab> = SearchResultTab.allTabs
     )
 
-    data class FilterState (
+    data class FilterState(
         val showFilter: Boolean = false,
         val selectedDeliveryOption: DeliveryOption? = null,
         val filterChips: List<SearchResultFilterChipModel> = emptyList(),
@@ -81,6 +83,8 @@ class SearchContract {
         data class ShowError(val message: String) : Effect()
         sealed class Navigation : Effect() {
             object ToCartRoute : Navigation()
+            object ToBackStack : Navigation()
+            data class ToProductDetail(val productId: String) : Navigation()
         }
     }
 } 
