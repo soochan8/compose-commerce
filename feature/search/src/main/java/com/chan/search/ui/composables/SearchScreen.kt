@@ -1,41 +1,189 @@
 package com.chan.search.ui.composables
 
-import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import com.chan.navigation.Routes
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.chan.android.ui.composable.MainTopBar
+import com.chan.android.ui.theme.Black
+import com.chan.android.ui.theme.Spacing
+import com.chan.android.ui.theme.White
+import com.chan.android.ui.theme.dividerColor
+import com.chan.search.R
+import com.chan.search.ui.composables.result.SearchResultScreen
 import com.chan.search.ui.contract.SearchContract
-import com.chan.search.ui.viewmodel.SearchViewModel
-import kotlinx.coroutines.flow.collectLatest
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    navController: NavHostController,
-    viewModel: SearchViewModel = hiltViewModel()
+    state: SearchContract.State,
+    onEvent: (SearchContract.Event) -> Unit
 ) {
-    val state by viewModel.viewState.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.effect.collectLatest { effect ->
-            when(effect) {
-                SearchContract.Effect.Navigation.ToCartRoute -> navController.navigate(
-                    Routes.CART.route
+    Box(modifier = Modifier.fillMaxSize()) {
+        Scaffold(
+            containerColor = White,
+            topBar = {
+                MainTopBar(
+                    navigationIcon = {
+                        IconButton(onClick = { onEvent(SearchContract.Event.OnBackStackClick) }) {
+                            Icon(Icons.Default.ArrowBack, contentDescription = "뒤로가기")
+                        }
+                    },
+                    titleContent = {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = stringResource(R.string.search))
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { onEvent(SearchContract.Event.OnCartClick) }) {
+                            Icon(Icons.Default.ShoppingCart, contentDescription = "장바구니")
+                        }
+                    }
                 )
-                is SearchContract.Effect.ShowError -> Log.d(
-                    "SearchScreen",
-                    " Error : ${effect.message}"
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize()
+            ) {
+
+                SearchTextField(
+                    search = state.search,
+                    onSearchChanged = { onEvent(SearchContract.Event.OnSearchChanged(it)) },
+                    onClearSearch = { onEvent(SearchContract.Event.OnClickClearSearch) },
+                    onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
+                    onSearchTextFocus = { onEvent(SearchContract.Event.OnSearchTextFocus) },
+                    modifier = Modifier.padding(Spacing.spacing4)
+                )
+                HorizontalDivider(color = dividerColor, thickness = 1.dp)
+
+                when {
+                    state.showSearchResult -> {
+                        if (state.searchResultProducts.isEmpty()) {
+                            Text(text = stringResource(R.string.search_empty_product))
+                        } else {
+                            Box(modifier = Modifier.weight(1f)) {
+                                SearchResultScreen(
+                                    state = state,
+                                    onEvent = onEvent,
+                                    onProductClick = { productId ->
+                                        onEvent(SearchContract.Event.OnProductClick(productId))
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    state.search.isBlank() -> {
+                        if (state.recentSearches.isNotEmpty()) {
+                            RecentSearchList(
+                                recentSearches = state.recentSearches,
+                                onRemoveSearch = {
+                                    onEvent(
+                                        SearchContract.Event.OnRemoveSearchKeyword(
+                                            it
+                                        )
+                                    )
+                                },
+                                onClearAllRecentSearches = { onEvent(SearchContract.Event.OnClearAllRecentSearches) },
+                                onSearchClick = { onEvent(SearchContract.Event.OnAddSearchKeyword(it)) },
+                            )
+                        }
+                        RecommendedKeywordList(recommendedKeywords = state.recommendedKeywords)
+                        TrendingSearchList(
+                            trendingSearches = state.trendingSearches,
+                            currentTime = state.currentTime
+                        )
+                    }
+
+
+                    else -> {
+                        SearchResultList(
+                            results = state.searchResults,
+                            searchQuery = state.search,
+                            onSearchResultItemClick = {
+                                onEvent(
+                                    SearchContract.Event.OnClickSearchProduct(
+                                        it
+                                    )
+                                )
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        AnimatedVisibility(
+            visible = state.filter.showFilter,
+            enter = fadeIn(animationSpec = tween(300)),
+            exit = fadeOut(animationSpec = tween(300))
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Black.copy(alpha = 0.5f))
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = { onEvent(SearchContract.Event.Filter.OnFilterClick) }
+                    )
+            )
+        }
+
+        AnimatedVisibility(
+            visible = state.filter.showFilter,
+            enter = slideInHorizontally(
+                initialOffsetX = { it },
+                animationSpec = tween(300)
+            ),
+            exit = slideOutHorizontally(
+                targetOffsetX = { it },
+                animationSpec = tween(300)
+            )
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                SearchFilterScreen(
+                    state = state,
+                    onEvent = onEvent,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .fillMaxHeight()
                 )
             }
         }
     }
-
-    SearchScreenContent(
-        navController = navController,
-        state = state,
-        onEvent = viewModel::setEvent
-    )
 }

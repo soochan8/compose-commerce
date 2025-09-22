@@ -1,10 +1,20 @@
 package com.chan.search.ui.navigation
 
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.chan.navigation.NavGraphProvider
+import com.chan.navigation.Routes
 import com.chan.search.ui.composables.SearchScreen
+import com.chan.search.ui.contract.SearchContract
+import com.chan.search.ui.viewmodel.SearchViewModel
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 class SearchNavGraph @Inject constructor() : NavGraphProvider {
@@ -16,9 +26,44 @@ class SearchNavGraph @Inject constructor() : NavGraphProvider {
             route = SearchDestination.route,
             arguments = SearchDestination.arguments
         ) { backStackEntry ->
-            SearchScreen(
-                navController = navController
-            )
+            SearchRoute(navController)
         }
     }
+}
+
+@Composable
+fun SearchRoute(navController: NavHostController) {
+    val viewModel: SearchViewModel = hiltViewModel()
+    val state by viewModel.viewState.collectAsStateWithLifecycle()
+
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.collectLatest { effect ->
+            when (effect) {
+                SearchContract.Effect.Navigation.ToCartRoute -> {
+                    navController.navigate(
+                        Routes.CART.route
+                    )
+                }
+
+                is SearchContract.Effect.ShowError -> Log.d(
+                    "SearchScreen",
+                    " Error : ${effect.message}"
+                )
+
+                is SearchContract.Effect.Navigation.ToProductDetail -> {
+                    navController.navigate(
+                        Routes.PRODUCT_DETAIL.productDetailRoute(effect.productId)
+                    )
+                }
+
+                SearchContract.Effect.Navigation.ToBackStack -> navController.popBackStack()
+            }
+        }
+    }
+
+    SearchScreen(
+        state = state,
+        onEvent = viewModel::setEvent
+    )
 }
