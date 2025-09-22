@@ -37,8 +37,7 @@ fun CommonTopBar(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
                 onClick = onClick
-            )
-            .padding(horizontal = 16.dp),
+            ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
