@@ -21,7 +21,9 @@ class HomeContract {
         data class RankingTabSelected(val categoryId: String) : Event()
         data class OnProductClicked(val productId: String) : Event()
         data class OnLikedClick(val productId: String) : Event()
+        object OnCartClick : Event()
         data class OnAddToCartClick(val productId: String) : Event()
+        object OnSearchClick : Event()
 
         sealed class HomeRankingEvent : Event() {
             object RankingProductsLoad : HomeRankingEvent()
@@ -45,7 +47,8 @@ class HomeContract {
         sealed class Navigation : Effect() {
             data class ToProductDetailRoute(val productId: String) : Navigation()
             data class ToCartPopupRoute(val productId: String) : Navigation()
-            data class ToCartRoute(val productId: String) : Navigation()
+            object ToCartRoute : Navigation()
+            object ToSearchRoute : Navigation()
         }
     }
 }

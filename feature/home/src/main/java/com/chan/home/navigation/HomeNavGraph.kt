@@ -64,6 +64,12 @@ fun HomeRoute(navController: NavHostController) {
                         Routes.CART.route
                     )
                 }
+
+                HomeContract.Effect.Navigation.ToSearchRoute -> {
+                    navController.navigate(
+                        Routes.SEARCH.route
+                    )
+                }
             }
         }
     }
