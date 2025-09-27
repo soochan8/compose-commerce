@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.chan.android.LoadingState
 import com.chan.android.ui.composable.MainTopBar
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
@@ -94,7 +95,7 @@ fun SearchScreen(
 
                 when {
                     state.showSearchResult -> {
-                        if (state.searchResultProducts.isEmpty()) {
+                        if (state.searchResultProducts.isEmpty() && state.loadingState == LoadingState.Success) {
                             Text(text = stringResource(R.string.search_empty_product))
                         } else {
                             Box(modifier = Modifier.weight(1f)) {
