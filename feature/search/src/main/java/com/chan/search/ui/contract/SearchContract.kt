@@ -80,6 +80,7 @@ class SearchContract {
     )
 
     sealed class Effect : ViewEffect {
+        object ClearSearchFocus : Effect()
         data class ShowError(val message: String) : Effect()
         sealed class Navigation : Effect() {
             object ToCartRoute : Navigation()
