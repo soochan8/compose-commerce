@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Spacing
@@ -38,7 +37,6 @@ fun SearchTextField(
     onSearchTextFocus: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val focusManager = LocalFocusManager.current
 
 
     BasicTextField(
@@ -93,7 +91,6 @@ fun SearchTextField(
                     modifier = Modifier
                         .clickable {
                             onSearchClick(search)
-                            focusManager.clearFocus()
                         }
                         .padding(end = Spacing.spacing2)
                         .size(Spacing.spacing5)
