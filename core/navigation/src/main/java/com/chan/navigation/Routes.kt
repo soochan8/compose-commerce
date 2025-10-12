@@ -1,7 +1,10 @@
 package com.chan.navigation
 
+import android.net.Uri
+
 enum class Routes(val route: String) {
     HOME("home"),
+    HOME_BANNER_WEB_VIEW("homeBannerWebView/{url}"),
     CATEGORY("category"),
     CATEGORY_DETAIL("categoryDetail/{categoryId}"),
     PRODUCT_DETAIL("productDetail/{productId}"),
@@ -12,6 +15,9 @@ enum class Routes(val route: String) {
     CART("cart"),
     CART_POPUP("cart/{productId}");
 
+    fun homeBannerWebViewRoute(url: String) =
+        "homeBannerWebView/${Uri.encode(url)}"
+
     fun categoryDetailRoute(categoryId: String) =
         "categoryDetail/$categoryId"
 
@@ -21,6 +27,7 @@ enum class Routes(val route: String) {
     fun cartPopUpRoute(productId: String) =
         "cart/$productId"
 }
+
 fun createLoginRoute(redirect: String = ""): String {
     return "${Routes.LOGIN.route}?redirect=$redirect"
 }
