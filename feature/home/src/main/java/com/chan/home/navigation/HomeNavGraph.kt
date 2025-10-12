@@ -18,6 +18,7 @@ import com.chan.home.home.HomeContract
 import com.chan.home.home.HomeViewModel
 import com.chan.navigation.NavGraphProvider
 import com.chan.navigation.Routes
+import kotlinx.coroutines.flow.filterIsInstance
 import javax.inject.Inject
 
 class HomeNavGraph @Inject constructor() : NavGraphProvider {
@@ -36,7 +37,14 @@ class HomeNavGraph @Inject constructor() : NavGraphProvider {
             )
         ) { backStackEntry ->
             val url = backStackEntry.arguments?.getString("url") ?: ""
-            HomeBannerWebViewScreen(url = url)
+
+            val viewModel: HomeViewModel = hiltViewModel()
+
+            HomeBannerWebViewScreen(
+                url = url,
+                onEvent = viewModel::setEvent,
+                effect = viewModel.effect
+            )
         }
     }
 }
@@ -55,44 +63,39 @@ fun HomeRoute(navController: NavHostController) {
     }
 
     LaunchedEffect(viewModel.effect) {
-        viewModel.effect.collect { effect ->
-            when (effect) {
-                is HomeContract.Effect.Navigation.ToProductDetailRoute ->
-                    navController.navigate(
-                        Routes.PRODUCT_DETAIL.productDetailRoute(effect.productId)
-                    )
+        viewModel.effect
+            .filterIsInstance<HomeContract.Effect.Navigation>()
+            .collect { navEffect ->
+                when (navEffect) {
+                    is HomeContract.Effect.Navigation.ToProductDetailRoute ->
+                        navController.navigate(
+                            Routes.PRODUCT_DETAIL.productDetailRoute(navEffect.productId)
+                        )
 
-                is HomeContract.Effect.ShowError -> Toast.makeText(
-                    context,
-                    effect.message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                    is HomeContract.Effect.Navigation.ToCartPopupRoute ->
+                        navController.navigate(Routes.CART_POPUP.cartPopUpRoute(navEffect.productId))
 
-                is HomeContract.Effect.Navigation.ToCartPopupRoute -> {
-                    navController.navigate(
-                        Routes.CART_POPUP.cartPopUpRoute(effect.productId)
-                    )
-                }
+                    is HomeContract.Effect.Navigation.ToCartRoute ->
+                        navController.navigate(Routes.CART.route)
 
-                is HomeContract.Effect.Navigation.ToCartRoute -> {
-                    navController.navigate(
-                        Routes.CART.route
-                    )
-                }
+                    HomeContract.Effect.Navigation.ToSearchRoute ->
+                        navController.navigate(Routes.SEARCH.route)
 
-                HomeContract.Effect.Navigation.ToSearchRoute -> {
-                    navController.navigate(
-                        Routes.SEARCH.route
-                    )
-                }
-
-                is HomeContract.Effect.Navigation.ToWebView -> {
-                    navController.navigate(
-                        Routes.HOME_BANNER_WEB_VIEW.homeBannerWebViewRoute(effect.url)
-                    )
+                    is HomeContract.Effect.Navigation.ToWebView ->
+                        navController.navigate(
+                            Routes.HOME_BANNER_WEB_VIEW.homeBannerWebViewRoute(navEffect.url)
+                        )
                 }
             }
-        }
+    }
+
+
+    LaunchedEffect(viewModel.effect) {
+        viewModel.effect
+            .filterIsInstance<HomeContract.Effect.ShowError>()
+            .collect { error ->
+                Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
+            }
     }
 
     HomeScreen(
