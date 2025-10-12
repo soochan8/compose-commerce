@@ -9,8 +9,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.chan.home.composables.HomeScreen
+import com.chan.home.composables.home.banner.HomeBannerWebViewScreen
 import com.chan.home.home.HomeContract
 import com.chan.home.home.HomeViewModel
 import com.chan.navigation.NavGraphProvider
@@ -25,6 +28,16 @@ class HomeNavGraph @Inject constructor() : NavGraphProvider {
         navGraphBuilder.composable(HomeDestination.route) {
             HomeRoute(navController)
         }
+
+        navGraphBuilder.composable(
+            route = Routes.HOME_BANNER_WEB_VIEW.route,
+            arguments = listOf(
+                navArgument("url") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val url = backStackEntry.arguments?.getString("url") ?: ""
+            HomeBannerWebViewScreen(url = url)
+        }
     }
 }
 
@@ -35,7 +48,7 @@ fun HomeRoute(navController: NavHostController) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.setEvent(HomeContract.Event.BannerLoad)
+        viewModel.setEvent(HomeContract.Event.Banner.OnLoad)
         viewModel.setEvent(HomeContract.Event.PopularItemLoad)
         viewModel.setEvent(HomeContract.Event.RankingCategoryTabsLoad)
         viewModel.setEvent(HomeContract.Event.SaleProducts)
@@ -54,11 +67,13 @@ fun HomeRoute(navController: NavHostController) {
                     effect.message,
                     Toast.LENGTH_SHORT
                 ).show()
+
                 is HomeContract.Effect.Navigation.ToCartPopupRoute -> {
                     navController.navigate(
                         Routes.CART_POPUP.cartPopUpRoute(effect.productId)
                     )
                 }
+
                 is HomeContract.Effect.Navigation.ToCartRoute -> {
                     navController.navigate(
                         Routes.CART.route
@@ -68,6 +83,12 @@ fun HomeRoute(navController: NavHostController) {
                 HomeContract.Effect.Navigation.ToSearchRoute -> {
                     navController.navigate(
                         Routes.SEARCH.route
+                    )
+                }
+
+                is HomeContract.Effect.Navigation.ToWebView -> {
+                    navController.navigate(
+                        Routes.HOME_BANNER_WEB_VIEW.homeBannerWebViewRoute(effect.url)
                     )
                 }
             }
