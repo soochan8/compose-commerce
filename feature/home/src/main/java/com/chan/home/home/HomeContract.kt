@@ -14,6 +14,7 @@ class HomeContract {
         sealed class Banner : Event() {
             object OnLoad : Banner()
             data class OnClick(val bannerModel: HomeBannerModel) : Banner()
+            data class OnCouponClick(val couponId: String) : Banner()
         }
 
         object PopularItemLoad : Event()
@@ -48,11 +49,16 @@ class HomeContract {
     ) : ViewState
 
     data class BannerState(
-        val banners: List<HomeBannerModel> = emptyList(),
+        val banners: List<HomeBannerModel> = emptyList()
     )
 
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
+
+        sealed class Banner : Effect() {
+            object ShowCouponDownloaded: Banner()
+        }
+
         sealed class Navigation : Effect() {
             data class ToProductDetailRoute(val productId: String) : Navigation()
             data class ToCartPopupRoute(val productId: String) : Navigation()
