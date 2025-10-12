@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 18,
-    "identityHash": "19606f5c4d6e7e7b6f916fbed2aa7311",
+    "version": 19,
+    "identityHash": "d156031e816567e0b973ee6623f5fd6f",
     "entities": [
       {
         "tableName": "homeBanner",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `lineType` TEXT NOT NULL, `linkUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, `linkType` TEXT NOT NULL, `linkUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,8 +21,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "lineType",
-            "columnName": "lineType",
+            "fieldPath": "linkType",
+            "columnName": "linkType",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -302,7 +302,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '19606f5c4d6e7e7b6f916fbed2aa7311')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd156031e816567e0b973ee6623f5fd6f')"
     ]
   }
 }

@@ -7,6 +7,7 @@ fun HomeBannerVO.toPresentation(): HomeBannerModel {
     return HomeBannerModel(
         id = id,
         imageUrl = imageUrl,
-        title = title
+        linkType = linkType,
+        linkUrl = linkUrl
     )
 }
