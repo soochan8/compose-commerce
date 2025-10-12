@@ -11,7 +11,11 @@ import com.chan.home.model.HomeTabItem
 
 class HomeContract {
     sealed class Event : ViewEvent {
-        object BannerLoad : Event()
+        sealed class Banner : Event() {
+            object OnLoad : Banner()
+            data class OnClick(val bannerModel: HomeBannerModel) : Banner()
+        }
+
         object PopularItemLoad : Event()
         object RankingCategoryTabsLoad : Event()
         object SaleProducts : Event()
@@ -31,8 +35,9 @@ class HomeContract {
     }
 
     data class State(
+        val bannerState: BannerState = BannerState(),
+
         val topBars: List<HomeTabItem> = emptyList(),
-        val bannerList: List<HomeBannerModel> = emptyList(),
         val popularProducts: List<ProductsModel> = emptyList(),
         val rankingCategoryTabs: List<HomeRankingCategoryTabModel> = emptyList(),
         val rankingCategories: List<ProductsModel> = emptyList(),
@@ -42,6 +47,10 @@ class HomeContract {
         val isError: Boolean = false,
     ) : ViewState
 
+    data class BannerState(
+        val banners: List<HomeBannerModel> = emptyList(),
+    )
+
     sealed class Effect : ViewEffect {
         data class ShowError(val message: String) : Effect()
         sealed class Navigation : Effect() {
@@ -49,6 +58,7 @@ class HomeContract {
             data class ToCartPopupRoute(val productId: String) : Navigation()
             object ToCartRoute : Navigation()
             object ToSearchRoute : Navigation()
+            data class ToWebView(val url: String) : Navigation()
         }
     }
 }
