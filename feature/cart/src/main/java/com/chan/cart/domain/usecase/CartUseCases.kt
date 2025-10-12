@@ -3,7 +3,7 @@ package com.chan.cart.domain.usecase
 import com.chan.cart.domain.CartRepository
 import javax.inject.Inject
 
-data class CartUseCases(
+data class CartUseCases @Inject constructor(
     val productInfoUseCase: ProductInfoUseCase,
     val cartItemUseCase: CartItemUseCase,
     val addProductUseCase: AddProductUseCase,
