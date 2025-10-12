@@ -8,6 +8,7 @@ import com.chan.android.BaseViewModel
 import com.chan.android.model.ProductsModel
 import com.chan.home.domain.HomeUseCases
 import com.chan.home.domain.usecase.RankingUseCase
+import com.chan.home.home.HomeContract.Effect.Banner.ShowCouponDownloaded
 import com.chan.home.home.HomeContract.Effect.Navigation.*
 import com.chan.home.home.HomeContract.Effect.ShowError
 import com.chan.home.mapper.toPresentation
@@ -45,7 +46,9 @@ class HomeViewModel @Inject constructor(
         when (event) {
             HomeContract.Event.Banner.OnLoad -> loadBanners()
             is HomeContract.Event.Banner.OnClick -> handleBannerClick(event.bannerModel)
-
+            is HomeContract.Event.Banner.OnCouponClick -> {
+                setEffect { ShowCouponDownloaded }
+            }
             HomeContract.Event.Retry -> loadBanners()
             HomeContract.Event.PopularItemLoad -> loadPopularProducts()
             HomeContract.Event.RankingCategoryTabsLoad -> loadRankingCategoryTabs()
