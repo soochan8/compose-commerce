@@ -8,11 +8,14 @@ import com.chan.android.BaseViewModel
 import com.chan.android.model.ProductsModel
 import com.chan.home.domain.HomeUseCases
 import com.chan.home.domain.usecase.RankingUseCase
+import com.chan.home.home.HomeContract.Effect.Banner.ShowCouponDownloaded
 import com.chan.home.home.HomeContract.Effect.Navigation.*
+import com.chan.home.home.HomeContract.Effect.ShowError
 import com.chan.home.mapper.toPresentation
 import com.chan.home.mapper.toProductsModel
 import com.chan.home.mapper.toRankingCategoryTabsModel
 import com.chan.home.mapper.toSaleProductModel
+import com.chan.home.model.HomeBannerModel
 import com.chan.home.model.HomeTabItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +44,11 @@ class HomeViewModel @Inject constructor(
 
     override fun handleEvent(event: HomeContract.Event) {
         when (event) {
-            HomeContract.Event.BannerLoad -> loadBanners()
+            HomeContract.Event.Banner.OnLoad -> loadBanners()
+            is HomeContract.Event.Banner.OnClick -> handleBannerClick(event.bannerModel)
+            is HomeContract.Event.Banner.OnCouponClick -> {
+                setEffect { ShowCouponDownloaded }
+            }
             HomeContract.Event.Retry -> loadBanners()
             HomeContract.Event.PopularItemLoad -> loadPopularProducts()
             HomeContract.Event.RankingCategoryTabsLoad -> loadRankingCategoryTabs()
@@ -57,6 +64,13 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.OnAddToCartClick -> setEffect { ToCartPopupRoute(event.productId) }
             HomeContract.Event.HomeRankingEvent.RankingProductsLoad -> loadRankingProducts()
             HomeContract.Event.OnSearchClick -> setEffect { ToSearchRoute }
+        }
+    }
+
+    private fun handleBannerClick(bannerModel: HomeBannerModel) {
+        when (bannerModel.linkType) {
+            "WEB" -> setEffect { ToWebView(bannerModel.linkUrl) }
+            else -> setEffect { ShowError("잘못된 링크입니다.") }
         }
     }
 
@@ -81,7 +95,7 @@ class HomeViewModel @Inject constructor(
             call = {
                 homeUseCases.homeBanner.invoke().map { it.toPresentation() }
             },
-            onSuccess = { bannerList -> copy(bannerList = bannerList) }
+            onSuccess = { bannerList -> copy(bannerState = bannerState.copy(banners = bannerList)) }
         )
     }
 

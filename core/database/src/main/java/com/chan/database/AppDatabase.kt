@@ -107,9 +107,25 @@ val MIGRATION_17_18 = object : Migration(17, 18) {
     }
 }
 
+val MIGRATION_18_19 = object : Migration(18, 19) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("DROP TABLE IF EXISTS homeBanner")
+        database.execSQL("""
+            CREATE TABLE homeBanner (
+                id TEXT NOT NULL,
+                imageUrl TEXT NOT NULL,
+                linkType TEXT NOT NULL,
+                linkUrl TEXT NOT NULL,
+                PRIMARY KEY(id)
+            )
+        """)
+    }
+}
+
+
 @Database(
     entities = [HomeBannerEntity::class, ProductEntity::class, ProductDetailEntity::class, UserEntity::class, SearchHistoryEntity::class, CommonProductEntity::class, CommonCategoryEntity::class],
-    version = 18,
+    version = 19,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(from = 12, to = 13)

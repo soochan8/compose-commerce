@@ -14,7 +14,8 @@ fun HomeBannerEntity.toDomain(): HomeBannerVO {
     return HomeBannerVO(
         id = id,
         imageUrl = imageUrl,
-        title = title
+        linkType = linkType,
+        linkUrl = linkUrl
     )
 }
 

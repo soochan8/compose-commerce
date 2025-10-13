@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>올리브영 이벤트 배너</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 16px;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .content {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>🍀 올리브영 한정 이벤트 🍀</h1>
+<div class="content">
+    <p>최대 50% 할인 쿠폰을 받아가세요!</p>
+    <button onclick="downloadCoupon()">쿠폰받기</button>
+</div>
+
+<script>
+    function downloadCoupon() {
+        // JS → Android 호출
+        if (window.AndroidApp && window.AndroidApp.onCouponClicked) {
+            window.AndroidApp.onCouponClicked("C1234");
+        } else {
+            alert("Android 연결이 없습니다 (테스트 모드)");
+        }
+    }
+
+    // ✅ Android → JS로 호출될 수 있는 함수 (결과 표시)
+    function onCouponDownloadSuccess() {
+        const button = document.querySelector("button");
+        button.innerText = "쿠폰 다운로드 완료 ✅";
+        button.disabled = true;
+        button.style.backgroundColor = "#9E9E9E";
+    }
+</script>
+</body>
+</html>
