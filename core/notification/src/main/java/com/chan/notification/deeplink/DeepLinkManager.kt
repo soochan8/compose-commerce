@@ -10,7 +10,7 @@ class DeepLinkManager @Inject constructor() {
 
     companion object {
         private const val DEEPLINK_SCHEME = "commerce_app"
-        private val DEEPLINK_HOSTS = setOf("coupon")
+        private val DEEPLINK_HOSTS = setOf("webView")
         private val DEEPLINK_WEB_DOMAINS = setOf("https://www.mycommerce.com")
         private const val LOCAL_ASSET_PREFIX = "file:///android_asset/"
     }
