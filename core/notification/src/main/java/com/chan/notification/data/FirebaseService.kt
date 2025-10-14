@@ -6,10 +6,16 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.chan.notification.R
+import com.chan.notification.deeplink.DeepLinkManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FirebaseService : FirebaseMessagingService() {
+
+    @Inject lateinit var deepLinkManager: DeepLinkManager
 
     companion object {
         private const val CHANNEL_ID = "commerce_notification_channel"
@@ -33,8 +39,16 @@ class FirebaseService : FirebaseMessagingService() {
 
 
         val intent = if (!deeplink.isNullOrBlank()) {
-            Intent(Intent.ACTION_VIEW, Uri.parse(deeplink)).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val uri = Uri.parse(deeplink)
+
+            if(deepLinkManager.isSafeDeepLink(uri)) {
+                Intent(Intent.ACTION_VIEW, uri).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
+            } else {
+                packageManager.getLaunchIntentForPackage(packageName)?.apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
             }
         } else {
             packageManager.getLaunchIntentForPackage(packageName)?.apply {
