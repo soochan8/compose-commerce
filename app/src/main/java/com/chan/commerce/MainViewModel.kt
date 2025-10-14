@@ -4,6 +4,8 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chan.notification.deeplink.DeepLinkDestination
+import com.chan.notification.deeplink.DeepLinkManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -11,7 +13,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val deepLinkManager: DeepLinkManager
+) : ViewModel() {
 
     private val _deepLinkNavigation = MutableSharedFlow<String>(replay = 1)
     val deepLinkNavigation = _deepLinkNavigation.asSharedFlow()
@@ -19,18 +23,16 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun handleDeepLink(route: String) {
         viewModelScope.launch {
             val uri = Uri.parse(route)
-            when (uri.host) {
-                "coupon" -> {
-                    val path = uri.lastPathSegment
-
-                    //임시 html 파일 경로로 이동 (webView)
-                    val url = "file:///android_asset/event.html"
-                    _deepLinkNavigation.emit(url)
+            val destination = deepLinkManager.parse(uri)
+            when (destination) {
+                is DeepLinkDestination.WebView -> {
+                    _deepLinkNavigation.emit(destination.url)
                 }
-                else -> {
-                    Log.w("FCMTEST", "Unknown deeplink host: ${uri.host}")
+                null -> {
+                    Log.e("DeepLink", "Invalid or unsupported deeplink $uri")
                 }
             }
         }
     }
 }
+
