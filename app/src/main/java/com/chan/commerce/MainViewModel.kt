@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
 
-    private val _deepLinkNavigation = MutableSharedFlow<String>()
+    private val _deepLinkNavigation = MutableSharedFlow<String>(replay = 1)
     val deepLinkNavigation = _deepLinkNavigation.asSharedFlow()
 
     fun handleDeepLink(route: String) {
