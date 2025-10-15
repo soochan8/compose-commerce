@@ -1,17 +1,20 @@
 [
   {
-    "id": 1,
-    "imageUrl": "https://dummyimage.com/600x240/ff7f7f/ffffff&text=배너1",
-    "title": "배너1"
+    "id": "B001",
+    "imageUrl": "https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/8393463973704427122.jpg",
+    "linkType": "WEB",
+    "linkUrl": "file:///android_asset/event.html"
   },
   {
-    "id": 2,
-    "imageUrl": "https://dummyimage.com/600x240/ffbf7f/ffffff&text=배너2",
-    "title": "배너2"
+    "id": "B002",
+    "imageUrl": "https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/5429535423641461769.jpg",
+    "linkType": "WEB",
+    "linkUrl": "file:///android_asset/event.html"
   },
   {
-    "id": 3,
-    "imageUrl": "https://dummyimage.com/600x240/ffff7f/000000&text=배너3",
-    "title": "배너3"
+    "id": "B003",
+    "imageUrl": "https://image.oliveyoung.co.kr/uploads/images/display/90000010001/1/6565648612056639469.jpg",
+    "linkType": "WEB",
+    "linkUrl": "file:///android_asset/event.html"
   }
 ]

@@ -7,6 +7,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.chan.android.ui.theme.Spacing
+import com.chan.home.composables.home.banner.HomeBanner
 import com.chan.home.home.HomeContract
 
 @Composable
@@ -18,8 +19,8 @@ fun HomePage(
 
     LazyColumn {
         item {
-            if (state.bannerList.isNotEmpty()) {
-                HomeBanner(bannerList = state.bannerList)
+            if (state.bannerState.banners.isNotEmpty()) {
+                HomeBanner(state = state.bannerState, onEvent = onEvent)
                 SectionSpacer()
             }
         }

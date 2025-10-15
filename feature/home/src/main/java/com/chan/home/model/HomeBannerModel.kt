@@ -1,7 +1,8 @@
 package com.chan.home.model
 
 data class HomeBannerModel(
-    val id: Int,
+    val id: String,
     val imageUrl: String,
-    val title: String
+    val linkType: String,
+    val linkUrl: String
 )
