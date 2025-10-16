@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
@@ -35,7 +36,7 @@ class SearchNavGraph @Inject constructor() : NavGraphProvider {
 fun SearchRoute(navController: NavHostController) {
     val viewModel: SearchViewModel = hiltViewModel()
     val state by viewModel.viewState.collectAsStateWithLifecycle()
-
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(Unit) {
         viewModel.effect.collectLatest { effect ->
@@ -58,6 +59,7 @@ fun SearchRoute(navController: NavHostController) {
                 }
 
                 SearchContract.Effect.Navigation.ToBackStack -> navController.popBackStack()
+                SearchContract.Effect.ClearSearchFocus -> focusManager.clearFocus()
             }
         }
     }
