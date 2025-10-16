@@ -23,7 +23,7 @@ private const val JAVASCRIPT_INTERFACE_NAME = "AndroidApp"
 @Composable
 fun HomeBannerWebViewScreen(
     url: String,
-    onEvent: (HomeContract.Event.Banner) -> Unit,
+    onEvent: (HomeContract.Event) -> Unit,
     effect: Flow<HomeContract.Effect>,
 ) {
     val updatedOnDownloadClick by rememberUpdatedState(onEvent)

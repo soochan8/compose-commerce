@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeBanner(
     state: HomeContract.BannerState,
-    onEvent: (HomeContract.Event.Banner) -> Unit,
+    onEvent: (HomeContract.BannerEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -63,7 +63,7 @@ fun HomeBanner(
                 modifier = Modifier
                     .fillMaxSize()
                     .clickable {
-                        onEvent(HomeContract.Event.Banner.OnClick(banner))
+                        onEvent(HomeContract.BannerEvent.SelectBanner(banner))
                     },
                 contentScale = ContentScale.Crop
             )

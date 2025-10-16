@@ -20,7 +20,9 @@ fun HomePage(
     LazyColumn {
         item {
             if (state.bannerState.banners.isNotEmpty()) {
-                HomeBanner(state = state.bannerState, onEvent = onEvent)
+                HomeBanner(state = state.bannerState, onEvent = {
+                    onEvent(HomeContract.Event.Banner(it))
+                })
                 SectionSpacer()
             }
         }
