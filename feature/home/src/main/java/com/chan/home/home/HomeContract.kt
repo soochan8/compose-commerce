@@ -11,11 +11,7 @@ import com.chan.home.model.HomeTabItem
 
 class HomeContract {
     sealed class Event : ViewEvent {
-        sealed class Banner : Event() {
-            object OnLoad : Banner()
-            data class OnClick(val bannerModel: HomeBannerModel) : Banner()
-            data class OnCouponClick(val couponId: String) : Banner()
-        }
+        data class Banner(val event: BannerEvent) : Event()
 
         object PopularItemLoad : Event()
         object RankingCategoryTabsLoad : Event()
@@ -33,6 +29,12 @@ class HomeContract {
         sealed class HomeRankingEvent : Event() {
             object RankingProductsLoad : HomeRankingEvent()
         }
+    }
+
+    sealed class BannerEvent {
+        object LoadBanners : BannerEvent()
+        data class SelectBanner(val bannerModel: HomeBannerModel) : BannerEvent()
+        data class IssuedCoupon(val couponId: String) : BannerEvent()
     }
 
     data class State(
