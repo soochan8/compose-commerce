@@ -79,11 +79,15 @@ class SearchViewModel @Inject constructor(
                     search = event.search
                 )
             }
-
+            //검색어 결과 클릭 시
             is SearchContract.Event.OnClickSearchProduct -> {
-                //클릭 시, 검색어에 맞는 리스트 보여주기
+                //최근 검색어 추가
                 addSearchKeyword(event.clickedProductName)
-                setState { copy(showSearchResult = true) }
+                //검색 결과
+                getSearchResultProducts(event.clickedProductName)
+                //검색어 update
+                setState { copy(showSearchResult = true, search = event.clickedProductName) }
+                clearSearchCursorFocus()
             }
 
             SearchContract.Event.OnClickClearSearch -> setState {
@@ -98,6 +102,7 @@ class SearchViewModel @Inject constructor(
                 addSearchKeyword(event.search)
                 getSearchResultProducts(event.search)
                 setState { copy(showSearchResult = true, search = event.search) }
+                clearSearchCursorFocus()
             }
 
             is SearchContract.Event.OnRemoveSearchKeyword -> removeSearchKeyword(
@@ -139,6 +144,10 @@ class SearchViewModel @Inject constructor(
             is SearchContract.Event.OnProductClick -> setEffect { ToProductDetail(event.productId) }
             SearchContract.Event.OnBackStackClick -> setEffect { ToBackStack }
         }
+    }
+
+    private fun clearSearchCursorFocus() {
+        setEffect { SearchContract.Effect.ClearSearchFocus }
     }
 
     private fun handleFilterClear() {

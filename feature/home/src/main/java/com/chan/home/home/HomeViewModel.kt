@@ -8,6 +8,10 @@ import com.chan.android.BaseViewModel
 import com.chan.android.model.ProductsModel
 import com.chan.home.domain.HomeUseCases
 import com.chan.home.domain.usecase.RankingUseCase
+import com.chan.home.home.HomeContract.BannerEvent
+import com.chan.home.home.HomeContract.BannerEvent.IssuedCoupon
+import com.chan.home.home.HomeContract.BannerEvent.LoadBanners
+import com.chan.home.home.HomeContract.BannerEvent.SelectBanner
 import com.chan.home.home.HomeContract.Effect.Banner.ShowCouponDownloaded
 import com.chan.home.home.HomeContract.Effect.Navigation.*
 import com.chan.home.home.HomeContract.Effect.ShowError
@@ -44,11 +48,6 @@ class HomeViewModel @Inject constructor(
 
     override fun handleEvent(event: HomeContract.Event) {
         when (event) {
-            HomeContract.Event.Banner.OnLoad -> loadBanners()
-            is HomeContract.Event.Banner.OnClick -> handleBannerClick(event.bannerModel)
-            is HomeContract.Event.Banner.OnCouponClick -> {
-                setEffect { ShowCouponDownloaded }
-            }
             HomeContract.Event.Retry -> loadBanners()
             HomeContract.Event.PopularItemLoad -> loadPopularProducts()
             HomeContract.Event.RankingCategoryTabsLoad -> loadRankingCategoryTabs()
@@ -64,6 +63,15 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.OnAddToCartClick -> setEffect { ToCartPopupRoute(event.productId) }
             HomeContract.Event.HomeRankingEvent.RankingProductsLoad -> loadRankingProducts()
             HomeContract.Event.OnSearchClick -> setEffect { ToSearchRoute }
+            is HomeContract.Event.Banner -> handleBannerEvent(event.event)
+        }
+    }
+
+    private fun handleBannerEvent(event: BannerEvent) {
+        when (event) {
+            is LoadBanners -> loadBanners()
+            is SelectBanner -> handleBannerClick(event.bannerModel)
+            is IssuedCoupon -> setEffect { ShowCouponDownloaded }
         }
     }
 

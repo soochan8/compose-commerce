@@ -56,7 +56,7 @@ fun HomeRoute(navController: NavHostController) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.setEvent(HomeContract.Event.Banner.OnLoad)
+        viewModel.setEvent(HomeContract.Event.Banner(HomeContract.BannerEvent.LoadBanners))
         viewModel.setEvent(HomeContract.Event.PopularItemLoad)
         viewModel.setEvent(HomeContract.Event.RankingCategoryTabsLoad)
         viewModel.setEvent(HomeContract.Event.SaleProducts)

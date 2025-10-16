@@ -16,7 +16,7 @@ class WebViewInterface(
     @JavascriptInterface
     fun onCouponClicked(couponId: String) {
         scope.launch {
-            onCouponClicked(HomeContract.Event.Banner.OnCouponClick(couponId))
+            onCouponClicked(HomeContract.Event.Banner(HomeContract.BannerEvent.IssuedCoupon(couponId)))
         }
     }
 }
