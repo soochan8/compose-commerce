@@ -21,7 +21,7 @@ class SearchActions(private val onEvent: (SearchContract.Event) -> Unit) {
         onEvent(SearchContract.Event.OnClickSearchProduct(productName))
 
     fun onRemoveSearchKeyword(keyword: String) =
-        onEvent(SearchContract.Event.OnProductClick(keyword))
+        onEvent(SearchContract.Event.OnRemoveSearchKeyword(keyword))
 
     fun onAddSearchKeyword(keyword: String) =
         onEvent(SearchContract.Event.OnAddSearchKeyword(keyword))
