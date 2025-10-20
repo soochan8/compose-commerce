@@ -71,6 +71,7 @@ fun HomeBannerWebViewScreen(
                 stopLoading()
                 webChromeClient = null
                 removeJavascriptInterface(JAVASCRIPT_INTERFACE_NAME)
+                removeAllViews()
                 destroy()
                 webView = null
             }
