@@ -16,6 +16,9 @@ import com.chan.cart.CartViewModel
 import com.chan.cart.ui.CartScreen
 import com.chan.cart.ui.popup.CartPopupScreen
 import com.chan.navigation.NavGraphProvider
+import com.chan.navigation.Routes
+import com.chan.navigation.createLoginRoute
+import kotlinx.coroutines.flow.filterIsInstance
 import javax.inject.Inject
 
 class CartNavGraph @Inject constructor() : NavGraphProvider {
@@ -41,16 +44,34 @@ class CartNavGraph @Inject constructor() : NavGraphProvider {
 fun CartRoute(navController: NavHostController) {
     val viewModel: CartViewModel = hiltViewModel()
     val state by viewModel.viewState.collectAsState()
-    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.effect
+            .filterIsInstance<CartContract.Effect.Navigation>()
+            .collect { navigate ->
+                when (navigate) {
+                    CartContract.Effect.Navigation.ToLogin -> {
+                        navController.navigate(createLoginRoute(Routes.CART.route)) {
+                            popUpTo(Routes.CART.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                }
+            }
+    }
 
     LaunchedEffect(Unit) {
         viewModel.setEvent(CartContract.Event.LoadCartProducts)
+        viewModel.setEvent(CartContract.Event.CheckUserSession)
     }
 
-    CartScreen(
-        state = state,
-        onEvent = viewModel::setEvent
-    )
+    if (state.isSessionCheckCompleted) {
+        CartScreen(
+            state = state,
+            onEvent = viewModel::setEvent
+        )
+    }
 }
 
 
@@ -60,24 +81,39 @@ fun CartPopupRoute(navController: NavHostController, productId: String) {
     val state by viewModel.viewState.collectAsState()
     val context = LocalContext.current
 
+    LaunchedEffect(Unit) {
+        viewModel.effect
+            .collect { effect ->
+                when (effect) {
+                    is CartContract.Effect.ShowToast -> {
+                        Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    is CartContract.Effect.ShowError -> {
+                        Toast.makeText(context, effect.errorMsg, Toast.LENGTH_SHORT).show()
+                    }
+
+                    CartContract.Effect.DismissCartPopup -> {
+                        navController.popBackStack()
+                    }
+
+                    CartContract.Effect.Navigation.ToLogin -> {
+                        navController.navigate(createLoginRoute(Routes.HOME.route)) {
+                            popUpTo(Routes.CART.route) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
     LaunchedEffect(key1 = productId) {
         viewModel.handleEvent(CartContract.Event.LoadPopupProductInfo(productId))
     }
 
     LaunchedEffect(Unit) {
-        viewModel.effect.collect { effect ->
-            when (effect) {
-                is CartContract.Effect.ShowToast -> {
-                    Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
-                }
-
-                is CartContract.Effect.ShowError -> {
-                    Toast.makeText(context, effect.errorMsg, Toast.LENGTH_SHORT).show()
-                }
-
-                CartContract.Effect.DismissCartPopup -> navController.popBackStack()
-            }
-        }
+        viewModel.setEvent(CartContract.Event.CheckUserSession)
     }
 
     CartPopupScreen(
