@@ -5,6 +5,7 @@ import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
+import com.chan.android.state.SessionState
 import com.chan.cart.model.CartInProductsModel
 import com.chan.cart.model.CartInTobBarModel
 import com.chan.cart.model.PopupProductInfoModel
@@ -14,6 +15,7 @@ class CartContract {
         data class SelectedTab(val index: Int) : Event()
         data class LoadPopupProductInfo(val productId: String) : Event()
         object LoadCartProducts : Event()
+        object CheckUserSession : Event()
         data class AddToProduct(val productId: String) : Event()
         data class UpdateProductSelected(val productId: String, val isSelected: Boolean) : Event()
         data class UpdateProductQuantity(val productId: String, val isAdd: Boolean) : Event()
@@ -29,12 +31,17 @@ class CartContract {
         val totalProductsCount : Int = 0,
         val totalPrice : Int = 0,
         val allSelected : Boolean = false,
-        val loadingState: LoadingState = LoadingState.Idle
-    ) : ViewState
+        val loadingState: LoadingState = LoadingState.Idle,
+        override val isSessionCheckCompleted: Boolean = false
+    ) : ViewState, SessionState
 
     sealed class Effect : ViewEffect {
         data class ShowError(val errorMsg: String) : Effect()
         data class ShowToast(@StringRes val message: Int) : Effect()
         object DismissCartPopup : Effect()
+
+        sealed class Navigation : Effect() {
+            object ToLogin : Navigation()
+        }
     }
 }
