@@ -40,7 +40,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun logout() {
-        prefs.edit().remove(KEY_TOKEN).apply()
+        prefs.edit().remove(KEY_USER_ID).remove(KEY_TOKEN).apply()
 
         _sessionFlow.value = null
     }
