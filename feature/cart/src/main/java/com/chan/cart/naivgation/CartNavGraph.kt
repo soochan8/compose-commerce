@@ -62,7 +62,6 @@ fun CartRoute(navController: NavHostController) {
     }
 
     LaunchedEffect(Unit) {
-        viewModel.setEvent(CartContract.Event.LoadCartProducts)
         viewModel.setEvent(CartContract.Event.CheckUserSession)
     }
 
