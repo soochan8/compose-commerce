@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
     kotlin("kapt")
 }
 
@@ -62,6 +63,7 @@ dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:notification"))
 
     implementation(project(":feature:home"))
     implementation(project(":feature:category"))
@@ -88,6 +90,9 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
     implementation(libs.kakao.sdk.user)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.analytics)
 
     kapt(libs.hilt.compiler)
 

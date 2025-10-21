@@ -29,6 +29,8 @@ gson = "2.10.1"
 kakao = "2.19.0"
 security = "1.1.0-alpha06"
 paging = "3.3.6"
+firebaseBom= "33.3.0"
+googleServices = "4.4.1"
 
 
 [libraries]
@@ -52,8 +54,8 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-paging = {group = "androidx.paging", name = "paging-runtime", version.ref = "paging"}
-androidx-paging-compose = {group = "androidx.paging", name = "paging-compose", version.ref = "paging"}
+androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hiltVersion" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
@@ -77,6 +79,9 @@ androidx-storage = { group = "androidx.test.services", name = "storage", version
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 kakao-sdk-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
 androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.3.0" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging"}
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -87,4 +92,5 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
