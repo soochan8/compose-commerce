@@ -3,7 +3,7 @@ package com.chan.cart
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
-import com.chan.auth.domain.CheckSessionUseCase
+import com.chan.auth.domain.usecase.CheckSessionUseCase
 import com.chan.cart.CartContract.Effect.Navigation.ToLogin
 import com.chan.cart.domain.usecase.CartUseCases
 import com.chan.cart.model.CartInTobBarModel
@@ -55,6 +55,7 @@ class CartViewModel @Inject constructor(
 
             if (currentSession) {
                 setState { copy(isSessionCheckCompleted = true) }
+                setEvent(CartContract.Event.LoadCartProducts)
             } else {
                 setEffect { ToLogin }
             }
@@ -131,6 +132,7 @@ class CartViewModel @Inject constructor(
 
     private fun loadCartInProducts() {
         viewModelScope.launch {
+
             cartUseCases.cartItemUseCase()
                 .map { cartItems -> cartItems.map { it.toDataStoreCartInProductsModel() } }
                 .collect { products ->
