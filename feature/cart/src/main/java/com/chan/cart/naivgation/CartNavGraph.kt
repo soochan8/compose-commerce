@@ -52,9 +52,8 @@ fun CartRoute(navController: NavHostController) {
                 when (navigate) {
                     CartContract.Effect.Navigation.ToLogin -> {
                         navController.navigate(createLoginRoute(Routes.CART.route)) {
-                            popUpTo(Routes.CART.route) {
-                                inclusive = true
-                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     }
                 }
