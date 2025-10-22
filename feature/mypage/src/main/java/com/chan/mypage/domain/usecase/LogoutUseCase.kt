@@ -7,8 +7,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class LogoutUseCase @Inject constructor(
-    private val authRepository: AuthRepository,
-    @ApplicationContext private val context: Context
+    private val authRepository: AuthRepository
 ) {
     suspend operator fun invoke() {
         authRepository.logout()
