@@ -2,8 +2,9 @@ package com.chan.cart.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import com.chan.auth.domain.usecase.FlowCurrentUserIdUseCase
 import com.chan.auth.domain.usecase.GetCurrentUserIdUseCase
-import com.chan.cart.data.datastore.CartDataStoreManager
+import com.chan.database.datastore.CartDataStoreManager
 import com.chan.cart.data.mapper.toProductsVO
 import com.chan.cart.domain.CartRepository
 import com.chan.cart.proto.Cart
@@ -11,7 +12,9 @@ import com.chan.cart.proto.CartItem
 import com.chan.database.dao.ProductsDao
 import com.chan.domain.ProductsVO
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,13 +22,15 @@ import javax.inject.Singleton
 @Singleton
 class CartRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val dataStoreScope: CoroutineScope,
     private val productsDao: ProductsDao,
-    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val flowCurrentUserIdUseCase: FlowCurrentUserIdUseCase
 ) : CartRepository {
 
     private fun getCartStore(): DataStore<Cart> {
         val userId = getCurrentUserIdUseCase() ?: "guest"
-        return CartDataStoreManager.getDataStore(context, userId)
+        return CartDataStoreManager.getDataStore(context, userId, dataStoreScope)
     }
 
     override suspend fun getProductInfo(productId: String): ProductsVO {
@@ -34,8 +39,16 @@ class CartRepositoryImpl @Inject constructor(
     }
 
     override fun getCartItems(): Flow<List<CartItem>> {
-        return getCartStore().data.map { it.itemsList }
+        return flowCurrentUserIdUseCase()
+            .map { it ?: "guest" }
+            .flatMapLatest { userId ->
+                CartDataStoreManager
+                    .getDataStore(context, userId, dataStoreScope)
+                    .data
+                    .map { it.itemsList }
+            }
     }
+
 
     override suspend fun addProductToCart(productId: String) {
         getCartStore().updateData { cart ->
