@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.protobuf)
     kotlin("kapt")
 }
 
@@ -39,6 +40,21 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite") // Android는 lite 필수
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(project(":core:domain"))
 
@@ -63,4 +79,8 @@ dependencies {
     implementation(libs.hilt.core)
 
     kapt(libs.hilt.compiler)
+
+    implementation(libs.datastore)
+    implementation(libs.datastore.proto)
+    implementation(libs.protobuf.javalite)
 }

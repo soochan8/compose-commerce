@@ -1,34 +1,60 @@
 package com.chan.cart.data
 
+import android.content.Context
 import androidx.datastore.core.DataStore
+import com.chan.auth.domain.usecase.FlowCurrentUserIdUseCase
+import com.chan.auth.domain.usecase.GetCurrentUserIdUseCase
+import com.chan.database.datastore.CartDataStoreManager
 import com.chan.cart.data.mapper.toProductsVO
 import com.chan.cart.domain.CartRepository
 import com.chan.cart.proto.Cart
 import com.chan.cart.proto.CartItem
 import com.chan.database.dao.ProductsDao
 import com.chan.domain.ProductsVO
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class CartRepositoryImpl @Inject constructor(
-    private val dataStore: DataStore<Cart>,
-    private val productsDao: ProductsDao
+    @ApplicationContext private val context: Context,
+    private val productsDao: ProductsDao,
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val flowCurrentUserIdUseCase: FlowCurrentUserIdUseCase
 ) : CartRepository {
+
+    private fun getCartStore(): DataStore<Cart> {
+        val userId = getCurrentUserIdUseCase() ?: "guest"
+        return CartDataStoreManager.getDataStore(context, userId)
+    }
 
     override suspend fun getProductInfo(productId: String): ProductsVO {
         return productsDao.getProductsByProductId(productId)?.toProductsVO()
             ?: throw NoSuchElementException("Product not found with id: $productId")
     }
 
+//    override fun getCartItems(): Flow<List<CartItem>> {
+//        return getCartStore().data.map { it.itemsList }
+//    }
+//
     override fun getCartItems(): Flow<List<CartItem>> {
-        return dataStore.data.map { it.itemsList }
+        return flowCurrentUserIdUseCase()
+            .map { it ?: "guest" }
+            .flatMapLatest { userId ->
+                CartDataStoreManager
+                    .getDataStore(context, userId)
+                    .data
+                    .map { it.itemsList }
+            }
     }
 
+
+
     override suspend fun addProductToCart(productId: String) {
-        dataStore.updateData { cart ->
+        getCartStore().updateData { cart ->
             val existingItem = cart.itemsList.find { it.productId == productId }
 
             if (existingItem != null) {
@@ -91,7 +117,7 @@ class CartRepositoryImpl @Inject constructor(
     }
 
     override suspend fun decreaseProductQuantity(productId: String) {
-        dataStore.updateData { cart ->
+        getCartStore().updateData { cart ->
             val targetItem = cart.itemsList.find { it.productId == productId } ?: return@updateData cart
 
             val updatedItems = if (targetItem.quantity > 1) {
@@ -118,7 +144,7 @@ class CartRepositoryImpl @Inject constructor(
     }
 
     private suspend fun updateCartItems(transform: (List<CartItem>) -> List<CartItem>) {
-        dataStore.updateData { cart ->
+        getCartStore().updateData { cart ->
             val originalItems = cart.itemsList
             val updatedItems = transform(originalItems) // 로직 실행
             cart.toBuilder().clearItems().addAllItems(updatedItems).build()
