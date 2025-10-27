@@ -2,7 +2,7 @@ package com.chan.cart.data.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import com.chan.cart.data.datastore.cartProtoDataStore
+import com.chan.database.datastore.cartProtoDataStore
 import com.chan.cart.proto.Cart
 import dagger.Module
 import dagger.Provides
