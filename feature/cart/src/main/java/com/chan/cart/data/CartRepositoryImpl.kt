@@ -12,7 +12,6 @@ import com.chan.cart.proto.CartItem
 import com.chan.database.dao.ProductsDao
 import com.chan.domain.ProductsVO
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -22,7 +21,6 @@ import javax.inject.Singleton
 @Singleton
 class CartRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val dataStoreScope: CoroutineScope,
     private val productsDao: ProductsDao,
     private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
     private val flowCurrentUserIdUseCase: FlowCurrentUserIdUseCase
@@ -30,7 +28,7 @@ class CartRepositoryImpl @Inject constructor(
 
     private fun getCartStore(): DataStore<Cart> {
         val userId = getCurrentUserIdUseCase() ?: "guest"
-        return CartDataStoreManager.getDataStore(context, userId, dataStoreScope)
+        return CartDataStoreManager.getDataStore(context, userId)
     }
 
     override suspend fun getProductInfo(productId: String): ProductsVO {
@@ -38,16 +36,21 @@ class CartRepositoryImpl @Inject constructor(
             ?: throw NoSuchElementException("Product not found with id: $productId")
     }
 
+//    override fun getCartItems(): Flow<List<CartItem>> {
+//        return getCartStore().data.map { it.itemsList }
+//    }
+//
     override fun getCartItems(): Flow<List<CartItem>> {
         return flowCurrentUserIdUseCase()
             .map { it ?: "guest" }
             .flatMapLatest { userId ->
                 CartDataStoreManager
-                    .getDataStore(context, userId, dataStoreScope)
+                    .getDataStore(context, userId)
                     .data
                     .map { it.itemsList }
             }
     }
+
 
 
     override suspend fun addProductToCart(productId: String) {
