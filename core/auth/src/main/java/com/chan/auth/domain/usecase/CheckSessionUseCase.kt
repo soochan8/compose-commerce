@@ -1,5 +1,6 @@
-package com.chan.auth.domain
+package com.chan.auth.domain.usecase
 
+import com.chan.auth.domain.AuthRepository
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
