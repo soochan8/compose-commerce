@@ -3,6 +3,8 @@ package com.chan.cart
 import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
+import com.chan.auth.domain.usecase.CheckSessionUseCase
+import com.chan.cart.CartContract.Effect.Navigation.ToLogin
 import com.chan.cart.domain.usecase.CartUseCases
 import com.chan.cart.model.CartInTobBarModel
 import com.chan.cart.ui.mapper.toDataStoreCartInProductsModel
@@ -14,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
+    private val checkSessionUseCase: CheckSessionUseCase,
     private val cartUseCases: CartUseCases
 ) : BaseViewModel<CartContract.Event, CartContract.State, CartContract.Effect>() {
 
@@ -42,6 +45,20 @@ class CartViewModel @Inject constructor(
 
             CartContract.Event.OnAllSelected -> updateAllSelected()
             is CartContract.Event.DeleteProduct -> deleteProduct(event.productId)
+            CartContract.Event.CheckUserSession -> checkSessionStatus()
+        }
+    }
+
+    private fun checkSessionStatus() {
+        viewModelScope.launch {
+            val currentSession = checkSessionUseCase.invoke()
+
+            if (currentSession) {
+                setState { copy(isSessionCheckCompleted = true) }
+                setEvent(CartContract.Event.LoadCartProducts)
+            } else {
+                setEffect { ToLogin }
+            }
         }
     }
 
@@ -115,6 +132,7 @@ class CartViewModel @Inject constructor(
 
     private fun loadCartInProducts() {
         viewModelScope.launch {
+
             cartUseCases.cartItemUseCase()
                 .map { cartItems -> cartItems.map { it.toDataStoreCartInProductsModel() } }
                 .collect { products ->

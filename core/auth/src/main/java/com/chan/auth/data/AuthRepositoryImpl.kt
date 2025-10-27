@@ -3,6 +3,7 @@ package com.chan.auth.data
 import android.content.SharedPreferences
 import com.chan.auth.domain.AuthRepository
 import com.chan.auth.domain.UserSession
+import com.chan.database.datastore.CartDataStoreManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
-    private val prefs: SharedPreferences
+    private val prefs: SharedPreferences,
 ) : AuthRepository {
 
     private val _sessionFlow = MutableStateFlow<UserSession?>(null)
@@ -40,7 +41,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun logout() {
-        prefs.edit().remove(KEY_TOKEN).apply()
+        prefs.edit().remove(KEY_USER_ID).remove(KEY_TOKEN).apply()
 
         _sessionFlow.value = null
     }
