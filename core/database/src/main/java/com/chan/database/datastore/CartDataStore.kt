@@ -1,11 +1,10 @@
-package com.chan.cart.data.datastore
+package com.chan.database.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.chan.cart.proto.Cart
 
-val Context.cartProtoDataStore: DataStore<Cart> by dataStore(
+val Context.cartProtoDataStore: DataStore<com.chan.cart.proto.Cart> by dataStore(
     fileName = "cart.pb",
     serializer = CartSerializer
 )
