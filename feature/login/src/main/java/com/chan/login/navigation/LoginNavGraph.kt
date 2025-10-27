@@ -41,14 +41,11 @@ fun LoginRoute(navController: NavHostController, redirectRoute: String) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.setEvent(LoginContract.Event.CheckUserSession)
-    }
-
-    LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 LoginContract.Effect.NavigateToHome -> {
-                    val target = if (redirectRoute.isNotEmpty()) redirectRoute else Routes.MYPAGE.route
+                    val target =
+                        if (redirectRoute.isNotEmpty()) redirectRoute else Routes.MYPAGE.route
                     navController.navigate(target) {
                         popUpTo(Routes.LOGIN.route) { inclusive = true }
                     }
@@ -62,9 +59,15 @@ fun LoginRoute(navController: NavHostController, redirectRoute: String) {
         }
     }
 
-    if (state.isSessionCheckCompleted)
+    LaunchedEffect(Unit) {
+        viewModel.setEvent(LoginContract.Event.CheckUserSession)
+    }
+
+
+    if (state.isSessionCheckCompleted) {
         LoginScreen(
             state = state,
             onEvent = viewModel::setEvent
         )
+    }
 }
