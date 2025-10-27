@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
-    private val prefs: SharedPreferences
+    private val prefs: SharedPreferences,
 ) : AuthRepository {
 
     private val _sessionFlow = MutableStateFlow<UserSession?>(null)
@@ -44,8 +44,6 @@ class AuthRepositoryImpl @Inject constructor(
         prefs.edit().remove(KEY_USER_ID).remove(KEY_TOKEN).apply()
 
         _sessionFlow.value = null
-
-        CartDataStoreManager.clearAll()
     }
 
     override fun getCurrentUserId(): String? {
