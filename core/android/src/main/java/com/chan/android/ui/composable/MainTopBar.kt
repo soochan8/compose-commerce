@@ -15,16 +15,28 @@ fun MainTopBar(
     titleContent: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    titleStyle: TextStyle = MaterialTheme.appTypography.title
+    titleStyle: TextStyle = MaterialTheme.appTypography.title,
+    centerAligned: Boolean = false
 ) {
-    TopAppBar(
-        navigationIcon = { navigationIcon?.invoke() },
-        title = { ProvideTextStyle(titleStyle) { titleContent() } },
-        actions = { actions() },
-        scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = White,
-            scrolledContainerColor = White
-        )
+    val colors = TopAppBarDefaults.topAppBarColors(
+        containerColor = White,
+        scrolledContainerColor = White
     )
+    if (centerAligned) {
+        CenterAlignedTopAppBar(
+            navigationIcon = { navigationIcon?.invoke() },
+            title = { ProvideTextStyle(titleStyle) { titleContent() } },
+            actions = { actions() },
+            scrollBehavior = scrollBehavior,
+            colors = colors
+        )
+    } else {
+        TopAppBar(
+            navigationIcon = { navigationIcon?.invoke() },
+            title = { ProvideTextStyle(titleStyle) { titleContent() } },
+            actions = { actions() },
+            scrollBehavior = scrollBehavior,
+            colors = colors
+        )
+    }
 }
