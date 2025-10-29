@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.protobuf)
     kotlin("kapt")
@@ -58,6 +59,8 @@ protobuf {
 dependencies {
     implementation(project(":core:domain"))
 
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.paging)

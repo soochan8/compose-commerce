@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.protobuf)
@@ -37,9 +38,6 @@ android {
         compose = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
-    }
     lint {
         disable.add("NullSafeMutableLiveData")
     }
@@ -94,6 +92,7 @@ dependencies {
 
     implementation(libs.google.gson)
     implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
 
     implementation(libs.datastore)
     implementation(libs.datastore.proto)

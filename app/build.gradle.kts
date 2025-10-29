@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.kapt)
@@ -51,10 +52,6 @@ android {
         }
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
-    }
-
     sourceSets["main"].java.srcDirs("src/main/java", "src/main/kotlin")
 
 }
@@ -73,6 +70,7 @@ dependencies {
     implementation(project(":feature:mypage"))
     implementation(project(":feature:cart"))
 
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

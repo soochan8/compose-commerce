@@ -42,7 +42,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.chan.android.model.ProductCardOrientation
 import com.chan.android.model.ProductsModel
 import com.chan.android.ui.theme.Radius

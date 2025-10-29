@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.chan.android.ui.theme.Radius
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.dividerColor

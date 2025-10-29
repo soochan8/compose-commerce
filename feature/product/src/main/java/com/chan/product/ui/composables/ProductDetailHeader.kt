@@ -35,7 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.DefaultTagColor
 import com.chan.android.ui.theme.FontSize

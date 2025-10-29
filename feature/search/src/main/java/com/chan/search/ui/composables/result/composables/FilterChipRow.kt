@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.DarkGray
 import com.chan.android.ui.theme.LightGray
@@ -33,7 +33,6 @@ import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.search.ui.model.FilterChipType
 import com.chan.search.ui.model.SearchResultFilterChipModel
-import kotlin.collections.forEach
 
 @Composable
 fun FilterChipRow(

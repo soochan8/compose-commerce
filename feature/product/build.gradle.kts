@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -35,10 +36,6 @@ android {
     buildFeatures {
         compose = true
     }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompiler.get()
-    }
 }
 
 dependencies {
@@ -69,6 +66,7 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.hilt.core)
     implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
 
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.room.compiler)
