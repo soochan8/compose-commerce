@@ -6,15 +6,18 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -108,30 +111,34 @@ fun CommonProductsCard(
                 }
 
                 Review(product)
-                Spacer(modifier = Modifier.height(Spacing.spacing3))
+                Spacer(modifier = Modifier.height(Spacing.spacing1))
 
                 Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(Spacing.spacing5)
+                    modifier = Modifier
+                        .wrapContentWidth(Alignment.Start)
+                        .offset(x = (-12).dp), // IconButton 기본 내부 padding 상쇄
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "like",
-                        modifier = Modifier
-                            .size(Spacing.spacing4)
-                            .clickable {
-                                onLikeClick(product.productId)
-                            }
-                    )
-                    Icon(
-                        imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "cart",
-                        modifier = Modifier
-                            .size(Spacing.spacing4)
-                            .clickable {
-                                onCartClick(product.productId)
-                            }
-                    )
+                    if (showLikeButton) {
+                        IconButton(
+                            onClick = { onLikeClick(product.productId) },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.FavoriteBorder,
+                                contentDescription = "like",
+                                modifier = Modifier.size(Spacing.spacing4)
+                            )
+                        }
+                    }
+                    if (showCartButton) {
+                        IconButton(onClick = { onCartClick(product.productId) }) {
+                            Icon(
+                                imageVector = Icons.Default.ShoppingCart,
+                                contentDescription = "cart",
+                                modifier = Modifier.size(Spacing.spacing4)
+                            )
+                        }
+                    }
                 }
             }
         } else {

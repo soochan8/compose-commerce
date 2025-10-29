@@ -21,7 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.chan.android.NoRippleTheme
 import com.chan.android.ProductCard
-import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
+import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.Gray
 import com.chan.android.ui.theme.Spacing
@@ -60,7 +61,7 @@ fun CategoryDetailScreen(
 
 @Composable
 fun CategoryDetailProductGrid(
-    products: List<ProductModel>,
+    products: List<ProductsModel>,
     modifier: Modifier = Modifier,
     onEvent: (CategoryDetailContract.Event) -> Unit
 ) {
@@ -73,11 +74,13 @@ fun CategoryDetailProductGrid(
             items = products,
             key = { it.productId }
         ) { product ->
-            ProductCard(
+            CommonProductsCard (
                 product = product,
                 onClick = { onEvent(CategoryDetailContract.Event.OnProductClick(it)) },
                 onLikeClick = {},
-                onCartClick = {}
+                onCartClick = {
+                    onEvent(CategoryDetailContract.Event.OnAddToCartClick(it))
+                }
             )
         }
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.chan.android.BaseViewModel
 import com.chan.android.LoadingState
 import com.chan.category.domain.CategoryDetailRepository
+import com.chan.category.ui.CategoryDetailContract.Effect.Navigation.*
 import com.chan.category.ui.mapper.toProductsModel
 import com.chan.category.ui.mapper.toTabsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,8 +33,10 @@ class CategoryDetailViewModel @Inject constructor(
             }
 
             is CategoryDetailContract.Event.OnProductClick -> {
-                setEffect { CategoryDetailContract.Effect.Navigation.ToProductDetail(event.productId) }
+                setEffect { ToProductDetail(event.productId) }
             }
+
+            is CategoryDetailContract.Event.OnAddToCartClick ->  setEffect { ToCartPopupRoute(event.productId) }
         }
     }
 

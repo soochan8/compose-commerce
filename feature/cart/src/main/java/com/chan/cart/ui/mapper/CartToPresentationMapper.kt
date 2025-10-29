@@ -11,7 +11,7 @@ fun ProductsVO.toPopupProductInfoModel(): PopupProductInfoModel {
     return PopupProductInfoModel(
         productId = productId,
         productName = productName,
-        imageUrl = "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0014/A00000014950135ko.jpg?l=ko"
+        imageUrl = "https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/550/10/0000/0016/A00000016559829ko.jpg?l=ko"
     )
 }
 

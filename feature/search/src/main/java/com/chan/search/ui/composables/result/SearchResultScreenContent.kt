@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.dividerColor
@@ -79,7 +79,11 @@ fun SearchResultScreenContent(
             0 -> { // 상품
                 productTabContent(
                     products = state.searchResultProducts,
-                    onProductClick = onProductClick
+                    onProductClick = onProductClick,
+                    onLikeClick = {},
+                    onCartClick = {
+                        onEvent(SearchContract.Event.OnAddToCartClick(it))
+                    },
                 )
             }
 
@@ -90,15 +94,19 @@ fun SearchResultScreenContent(
 }
 
 private fun LazyListScope.productTabContent(
-    products: List<ProductModel>,
-    onProductClick: (String) -> Unit
+    products: List<ProductsModel>,
+    onProductClick: (String) -> Unit,
+    onLikeClick: (String) -> Unit,
+    onCartClick: (String) -> Unit
 ) {
     item {
         SearchResultListHeader(products)
     }
     productGrid(
         products = products,
-        onProductClick = onProductClick
+        onProductClick = onProductClick,
+        onLikeClick = onLikeClick,
+        onCartClick = onCartClick
     )
 }
 
@@ -111,6 +119,6 @@ private fun LazyListScope.contentTabContent() {
 }
 
 @Composable
-private fun SearchResultListHeader(products: List<ProductModel>) {
+private fun SearchResultListHeader(products: List<ProductsModel>) {
     Text(text = "총 ${products.size}개", modifier = Modifier.padding(Spacing.spacing4))
 }

@@ -1,6 +1,7 @@
 package com.chan.search.ui.mappers
 
 import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
 import com.chan.domain.ProductVO
 import com.chan.domain.ProductsVO
 import com.chan.search.domain.model.SearchHistoryVO
@@ -47,8 +48,8 @@ fun ProductVO.toProductsModel(): ProductModel {
     )
 }
 
-fun ProductsVO.toProductsModel(): ProductModel {
-    return ProductModel(
+fun ProductsVO.toProductsModel(): ProductsModel {
+    return ProductsModel(
         productId = productId,
         productName = productName,
         brandName = brandName,
@@ -58,6 +59,7 @@ fun ProductsVO.toProductsModel(): ProductModel {
         discountPercent = "${discountPercent}%",
         tags = tags,
         reviewRating = reviewRating,
-        reviewCount = "(${NumberFormat.getNumberInstance(Locale.KOREA).format(reviewCount)})"
+        reviewCount = "(${NumberFormat.getNumberInstance(Locale.KOREA).format(reviewCount)})",
+        categoryIds = categoryIds,
     )
 }

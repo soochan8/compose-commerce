@@ -32,6 +32,11 @@ fun HomePage(
                     product = state.popularProducts,
                     onProductClick = { productId ->
                         onEvent(HomeContract.Event.OnProductClicked(productId = productId))
+                    },
+                    onLikeClick = {
+
+                    }, onCartClick = { productId ->
+                        onEvent(HomeContract.Event.OnAddToCartClick(productId = productId))
                     }
                 )
                 SectionSpacer()

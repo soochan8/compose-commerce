@@ -8,6 +8,7 @@ import com.chan.search.domain.model.TrendingSearchVO
 import com.chan.search.domain.repository.SearchRepository
 import com.chan.search.ui.contract.SearchContract
 import com.chan.search.ui.contract.SearchContract.Effect.Navigation.ToBackStack
+import com.chan.search.ui.contract.SearchContract.Effect.Navigation.ToCartPopupRoute
 import com.chan.search.ui.contract.SearchContract.Effect.Navigation.ToCartRoute
 import com.chan.search.ui.contract.SearchContract.Effect.Navigation.ToProductDetail
 import com.chan.search.ui.mappers.toFilterCategoryModel
@@ -143,6 +144,7 @@ class SearchViewModel @Inject constructor(
             SearchContract.Event.OnCartClick -> setEffect { ToCartRoute }
             is SearchContract.Event.OnProductClick -> setEffect { ToProductDetail(event.productId) }
             SearchContract.Event.OnBackStackClick -> setEffect { ToBackStack }
+            is SearchContract.Event.OnAddToCartClick -> setEffect { ToCartPopupRoute(event.productId) }
         }
     }
 

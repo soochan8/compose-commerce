@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.chan.android.ProductCard
 import com.chan.android.model.ProductsModel
 import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Spacing
@@ -24,7 +23,9 @@ import com.chan.home.R
 @Composable
 fun HomePopularItemList(
     product: List<ProductsModel>,
-    onProductClick: (productId: String) -> Unit
+    onProductClick: (productId: String) -> Unit,
+    onLikeClick: (productId: String) -> Unit,
+    onCartClick: (productId: String) -> Unit
 ) {
     val nestedScrollConnection = horizontalNestedScrollConnection()
     val productCardSize = 170.dp
@@ -50,8 +51,12 @@ fun HomePopularItemList(
                 onClick = {
                     onProductClick(item.productId)
                 },
-                onLikeClick = {},
-                onCartClick = {},
+                onLikeClick = {
+
+                },
+                onCartClick = { productId ->
+                    onCartClick(productId)
+                },
             )
         }
     }

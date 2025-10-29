@@ -14,6 +14,7 @@ class CategoryDetailContract {
         data class CategoryDetailLoad(val categoryId: String) : Event()
         data class CategoryTabSelected(val categoryId: String) : Event()
         data class OnProductClick(val productId: String) : Event()
+        data class OnAddToCartClick(val productId: String) : Event()
     }
 
     data class State(
@@ -22,7 +23,7 @@ class CategoryDetailContract {
         val selectedCategoryTabIndex: Int = 0,
         val categoryNames: List<CategoryDetailTabsModel> = emptyList(),
         val categoryDetailList: List<ProductModel> = emptyList(),
-        val productListByCategory: List<ProductModel> = emptyList()
+        val productListByCategory: List<ProductsModel> = emptyList()
     ) : ViewState
 
     sealed class Effect : ViewEffect {
@@ -30,6 +31,7 @@ class CategoryDetailContract {
 
         sealed class Navigation : Effect() {
             data class ToProductDetail(val productId: String) : Navigation()
+            data class ToCartPopupRoute(val productId: String) : Navigation()
         }
     }
 }

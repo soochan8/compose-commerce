@@ -32,8 +32,8 @@ fun ProductVO.toProductsModel(): ProductModel {
     )
 }
 
-fun ProductsVO.toProductsModel(): ProductModel {
-    return ProductModel(
+fun ProductsVO.toProductsModel(): ProductsModel {
+    return ProductsModel(
         productId = productId,
         productName = productName,
         brandName = brandName,
@@ -44,6 +44,7 @@ fun ProductsVO.toProductsModel(): ProductModel {
         tags = tags,
         reviewRating = reviewRating,
         reviewCount = "(${NumberFormat.getNumberInstance(Locale.KOREA).format(reviewCount)})",
+        categoryIds = categoryIds,
     )
 }
 

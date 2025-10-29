@@ -60,6 +60,9 @@ fun SearchRoute(navController: NavHostController) {
 
                 SearchContract.Effect.Navigation.ToBackStack -> navController.popBackStack()
                 SearchContract.Effect.ClearSearchFocus -> focusManager.clearFocus()
+                is SearchContract.Effect.Navigation.ToCartPopupRoute ->  navController.navigate(
+                    Routes.CART_POPUP.cartPopUpRoute(effect.productId)
+                )
             }
         }
     }

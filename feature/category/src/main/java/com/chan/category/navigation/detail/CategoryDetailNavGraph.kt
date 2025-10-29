@@ -51,6 +51,8 @@ fun CategoryDetailRoute(categoryId: String, navController: NavHostController) {
                 is CategoryDetailContract.Effect.ShowError -> {
                     Log.e("CategoryDetailError", "${effect.errorMessage}")
                 }
+
+                is CategoryDetailContract.Effect.Navigation.ToCartPopupRoute -> navController.navigate(Routes.CART_POPUP.cartPopUpRoute(effect.productId))
             }
         }
     }

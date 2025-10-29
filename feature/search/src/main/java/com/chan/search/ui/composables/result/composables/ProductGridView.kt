@@ -8,13 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.Modifier
-import com.chan.android.ProductCard
-import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
+import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Spacing
 
 fun LazyListScope.productGrid(
-    products: List<ProductModel>,
-    onProductClick: (String) -> Unit
+    products: List<ProductsModel>,
+    onProductClick: (String) -> Unit,
+    onLikeClick: (String) -> Unit,
+    onCartClick: (String) -> Unit
 ) {
     val chunkedProducts = products.chunked(2)
     items(
@@ -27,11 +29,11 @@ fun LazyListScope.productGrid(
         ) {
             productRow.forEach { product ->
                 Box(modifier = Modifier.weight(1f)) {
-                    ProductCard(
+                    CommonProductsCard(
                         product = product,
                         onClick = { onProductClick(product.productId) },
-                        onLikeClick = {},
-                        onCartClick = {}
+                        onLikeClick = { onLikeClick(it) },
+                        onCartClick = { onCartClick(it) }
                     )
                 }
             }

@@ -4,7 +4,7 @@ import com.chan.android.LoadingState
 import com.chan.android.ViewEffect
 import com.chan.android.ViewEvent
 import com.chan.android.ViewState
-import com.chan.android.model.ProductModel
+import com.chan.android.model.ProductsModel
 import com.chan.search.ui.model.SearchHistoryModel
 import com.chan.search.ui.model.SearchResultFilterChipModel
 import com.chan.search.ui.model.SearchResultModel
@@ -27,6 +27,7 @@ class SearchContract {
         object OnCartClick : Event()
         object OnBackStackClick : Event()
         data class OnProductClick(val productId: String) : Event()
+        data class OnAddToCartClick(val productId: String) : Event()
 
         sealed class Filter : Event() {
             data class OnDeliveryOptionChanged(val option: DeliveryOption) : Filter()
@@ -53,7 +54,7 @@ class SearchContract {
         val recommendedKeywords: List<String> = emptyList(),
         val trendingSearches: List<TrendingSearchModel> = emptyList(),
 
-        val searchResultProducts: List<ProductModel> = emptyList(),
+        val searchResultProducts: List<ProductsModel> = emptyList(),
         val currentTime: String = "",
         val showSearchResult: Boolean = false,
 
@@ -86,6 +87,7 @@ class SearchContract {
             object ToCartRoute : Navigation()
             object ToBackStack : Navigation()
             data class ToProductDetail(val productId: String) : Navigation()
+            data class ToCartPopupRoute(val productId: String) : Navigation()
         }
     }
 } 
