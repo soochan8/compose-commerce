@@ -36,21 +36,18 @@ class CartRepositoryImpl @Inject constructor(
             ?: throw NoSuchElementException("Product not found with id: $productId")
     }
 
-//    override fun getCartItems(): Flow<List<CartItem>> {
-//        return getCartStore().data.map { it.itemsList }
-//    }
-//
-    override fun getCartItems(): Flow<List<CartItem>> {
+    override fun getCartItems(deliveryType: Int): Flow<List<CartItem>> {
         return flowCurrentUserIdUseCase()
             .map { it ?: "guest" }
             .flatMapLatest { userId ->
                 CartDataStoreManager
                     .getDataStore(context, userId)
                     .data
-                    .map { it.itemsList }
+                    .map { cart ->
+                        cart.itemsList.filter { it.deliveryType == deliveryType }
+                    }
             }
     }
-
 
 
     override suspend fun addProductToCart(productId: String) {
@@ -77,6 +74,7 @@ class CartRepositoryImpl @Inject constructor(
                         .setDiscountedPrice(productInfo.discountPrice)
                         .setQuantity(1)
                         .setIsSelected(true)
+                        .setDeliveryType(0)
                         .build()
                     cart.toBuilder().addItems(newItem).build()
                 } else {

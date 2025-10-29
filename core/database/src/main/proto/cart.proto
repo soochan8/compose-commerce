@@ -15,4 +15,5 @@ message CartItem {
   int32 discounted_price = 5;
   int32 quantity = 6;
   bool is_selected = 7;
+  int32 delivery_type = 8;
 }
