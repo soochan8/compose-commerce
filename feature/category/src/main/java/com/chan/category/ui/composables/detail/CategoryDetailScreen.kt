@@ -20,7 +20,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.chan.android.NoRippleTheme
-import com.chan.android.ProductCard
 import com.chan.android.model.ProductsModel
 import com.chan.android.ui.CommonProductsCard
 import com.chan.android.ui.theme.Black
