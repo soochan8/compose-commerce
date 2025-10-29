@@ -20,8 +20,12 @@ import com.chan.android.ui.theme.dividerColor
 import com.chan.cart.CartContract
 import com.chan.cart.R
 import com.chan.cart.ui.composable.CartBottomBar
+import com.chan.cart.ui.composable.PickUpScreen
+import com.chan.cart.ui.composable.TodayDeliveryScreen
 import com.chan.cart.ui.composable.commonCartScreen
+import androidx.compose.foundation.ExperimentalFoundationApi
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CartScreen(
     state: CartContract.State,
@@ -61,6 +65,8 @@ fun CartScreen(
 
                 when (state.selectedTabIndex) {
                     0 -> commonCartScreen(state = state, onEvent = onEvent)
+                    1 -> item { TodayDeliveryScreen(modifier = Modifier.fillParentMaxSize()) }
+                    2 -> item { PickUpScreen(modifier = Modifier.fillParentMaxSize()) }
                 }
             }
         }
