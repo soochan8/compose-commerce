@@ -82,7 +82,7 @@ fun CommonProductsCard(
                     model = product.imageUrl,
                     contentDescription = product.productName,
                     modifier = Modifier
-                        .wrapContentHeight()
+                        .height(150.dp)
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(Radius.radius2)),
                     contentScale = ContentScale.Crop
