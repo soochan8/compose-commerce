@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
+import com.chan.android.ui.theme.Black
 import com.chan.android.ui.theme.White
 import com.chan.android.ui.theme.appTypography
 
@@ -16,19 +17,20 @@ fun MainTopBar(
     actions: @Composable RowScope.() -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior? = null,
     titleStyle: TextStyle = MaterialTheme.appTypography.title,
-    centerAligned: Boolean = false
-) {
-    val colors = TopAppBarDefaults.topAppBarColors(
+    centerAligned: Boolean = false,
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(
         containerColor = White,
         scrolledContainerColor = White
     )
+) {
+    val currentColors = colors
     if (centerAligned) {
         CenterAlignedTopAppBar(
             navigationIcon = { navigationIcon?.invoke() },
             title = { ProvideTextStyle(titleStyle) { titleContent() } },
             actions = { actions() },
             scrollBehavior = scrollBehavior,
-            colors = colors
+            colors = currentColors
         )
     } else {
         TopAppBar(
@@ -36,7 +38,7 @@ fun MainTopBar(
             title = { ProvideTextStyle(titleStyle) { titleContent() } },
             actions = { actions() },
             scrollBehavior = scrollBehavior,
-            colors = colors
+            colors = currentColors
         )
     }
 }
