@@ -24,6 +24,10 @@ import com.chan.cart.ui.composable.PickUpScreen
 import com.chan.cart.ui.composable.TodayDeliveryScreen
 import com.chan.cart.ui.composable.commonCartScreen
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Alignment
+import com.chan.android.ui.theme.White
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -41,32 +45,37 @@ fun CartScreen(
             }
         }
     ) { padding ->
-        if (state.cartInProducts.isEmpty()) {
-            Text(text = stringResource(R.string.empty_cart_in))
-        } else {
-            LazyColumn(modifier = Modifier.padding(padding)) {
-                item {
-                    Column(modifier = Modifier.background(Color.White)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            state.tobBars.forEachIndexed { index, bar ->
-                                CommonTopBar(
-                                    title = bar.title,
-                                    isSelected = index == state.selectedTabIndex,
-                                    onClick = { onEvent(CartContract.Event.SelectedTab(index)) },
-                                    modifier = Modifier.weight(1f)
-                                )
-                            }
-                        }
-                        HorizontalDivider(color = dividerColor, thickness = 1.dp)
+        Column(modifier = Modifier.padding(padding).fillMaxSize()) {
+            Column(modifier = Modifier.background(Color.White)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    state.tobBars.forEachIndexed { index, bar ->
+                        CommonTopBar(
+                            title = bar.title,
+                            isSelected = index == state.selectedTabIndex,
+                            onClick = { onEvent(CartContract.Event.SelectedTab(index)) },
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                 }
+                HorizontalDivider(color = dividerColor, thickness = 1.dp)
+            }
 
-                when (state.selectedTabIndex) {
-                    0 -> commonCartScreen(state = state, onEvent = onEvent)
-                    1 -> item { TodayDeliveryScreen(modifier = Modifier.fillParentMaxSize()) }
-                    2 -> item { PickUpScreen(modifier = Modifier.fillParentMaxSize()) }
+            if (state.cartInProducts.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize().background(White),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = stringResource(R.string.empty_cart_in))
+                }
+            } else {
+                LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                    when (state.selectedTabIndex) {
+                        0 -> commonCartScreen(state = state, onEvent = onEvent)
+                        1 -> item { TodayDeliveryScreen(modifier = Modifier.fillParentMaxSize()) }
+                        2 -> item { PickUpScreen(modifier = Modifier.fillParentMaxSize()) }
+                    }
                 }
             }
         }

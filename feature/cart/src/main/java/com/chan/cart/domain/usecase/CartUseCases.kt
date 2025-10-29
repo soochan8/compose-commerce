@@ -23,7 +23,7 @@ class ProductInfoUseCase @Inject constructor(
 class CartItemUseCase @Inject constructor(
     private val cartRepository: CartRepository
 ) {
-    operator fun invoke() = cartRepository.getCartItems()
+    operator fun invoke(deliveryType: Int) = cartRepository.getCartItems(deliveryType)
 }
 
 class AddProductUseCase @Inject constructor(

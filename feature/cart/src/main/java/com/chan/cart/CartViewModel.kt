@@ -7,6 +7,7 @@ import com.chan.auth.domain.usecase.CheckSessionUseCase
 import com.chan.cart.CartContract.Effect.Navigation.ToLogin
 import com.chan.cart.domain.usecase.CartUseCases
 import com.chan.cart.model.CartInTobBarModel
+import com.chan.cart.model.DeliveryType
 import com.chan.cart.ui.mapper.toDataStoreCartInProductsModel
 import com.chan.cart.ui.mapper.toPopupProductInfoModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +31,7 @@ class CartViewModel @Inject constructor(
     override fun handleEvent(event: CartContract.Event) {
         when (event) {
             is CartContract.Event.SelectedTab -> selectedTab(event.index)
-            is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo1(event.productId)
+            is CartContract.Event.LoadPopupProductInfo -> loadPopupProductInfo(event.productId)
             is CartContract.Event.LoadCartProducts -> loadCartInProducts()
             is CartContract.Event.AddToProduct -> addToCart(event.productId)
             is CartContract.Event.UpdateProductSelected -> updateProductSelected(
@@ -64,6 +65,8 @@ class CartViewModel @Inject constructor(
 
     private fun selectedTab(index: Int) {
         setState { copy(selectedTabIndex = index) }
+
+        loadCartInProducts(index)
     }
 
     private fun loadCartInTobBar() {
@@ -130,10 +133,10 @@ class CartViewModel @Inject constructor(
         )
     }
 
-    private fun loadCartInProducts() {
+    private fun loadCartInProducts(deliveryType: Int = 0) {
         viewModelScope.launch {
 
-            cartUseCases.cartItemUseCase()
+            cartUseCases.cartItemUseCase(deliveryType)
                 .map { cartItems -> cartItems.map { it.toDataStoreCartInProductsModel() } }
                 .collect { products ->
                     val isAllSelected = products.isNotEmpty() && products.all { it.isSelected }
@@ -149,7 +152,7 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    private fun loadPopupProductInfo1(productId: String) {
+    private fun loadPopupProductInfo(productId: String) {
         handleRepositoryCall(
             call = { cartUseCases.productInfoUseCase(productId = productId) },
             onSuccess = { productInfo ->

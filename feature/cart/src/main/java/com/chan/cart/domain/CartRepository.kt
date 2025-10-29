@@ -13,7 +13,7 @@ interface CartRepository {
     /**
      * 장바구니 상품 목록
      */
-    fun getCartItems(): Flow<List<CartItem>>
+    fun getCartItems(deliveryType: Int): Flow<List<CartItem>>
 
     /**
      * 장바구니 상품 추가
