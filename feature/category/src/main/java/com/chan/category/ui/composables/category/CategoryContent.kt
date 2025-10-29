@@ -2,6 +2,7 @@ package com.chan.category.ui.composables.category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.chan.android.ui.theme.Spacing
 import com.chan.android.ui.theme.appTypography
@@ -31,6 +33,7 @@ fun CategoryContent(
 ) {
     LazyColumn(
         state = state,
+        contentPadding = PaddingValues(bottom = 700.dp),
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
