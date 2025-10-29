@@ -16,6 +16,10 @@ class CategoryViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) : BaseViewModel<CategoryContract.Event, CategoryContract.State, CategoryContract.Effect>() {
 
+    private var oliveYoungCategoriesCache: List<CategoriesModel>? = null
+    private var oliveYoungHeaderPositionsCache: List<Pair<Int, String>>? = null
+
+
     override fun setInitialState() = CategoryContract.State()
 
     override fun handleEvent(event: CategoryContract.Event) {
@@ -28,22 +32,46 @@ class CategoryViewModel @Inject constructor(
 
             is CategoryContract.Event.OnCategoryClick -> setEffect { ToCategoryDetail(event.categoryId) }
             is CategoryContract.Event.OnContentScroll -> handleContentScroll(event.firstVisibleIndex)
+            is CategoryContract.Event.OnTabSelected -> {
+                setState { copy(selectedTabIndex = event.index) }
+                fetchCategoriesForTab(event.index)
+            }
+
             CategoryContract.Event.OnSearchClick -> setEffect { ToSearchRoute }
         }
     }
 
     init {
-        getAllCategories()
+        fetchCategoriesForTab(0)
+    }
+
+    private fun fetchCategoriesForTab(index: Int) {
+        when (index) {
+            0 -> getAllCategories()
+            1 -> getHealthPlusCategories()
+            2 -> getLuxeEditCategories()
+        }
     }
 
     fun getAllCategories() {
-        if (viewState.value.categories.isNotEmpty()) return
+        oliveYoungCategoriesCache?.let { cachedCategories ->
+            setState {
+                copy(
+                    categories = cachedCategories,
+                    headerPositions = oliveYoungHeaderPositionsCache ?: emptyList(),
+                    selectedCategoryId = cachedCategories.firstOrNull()?.id
+                )
+            }
+            return
+        }
         handleRepositoryCall(
             call = {
                 categoryRepository.getAllCategories().toCategoryUIModels()
             },
             onSuccess = { categories ->
                 val headerPositions = categoryHeaderMapping(categories)
+                oliveYoungCategoriesCache = categories
+                oliveYoungHeaderPositionsCache = headerPositions
                 copy(
                     categories = categories,
                     selectedCategoryId = categories.firstOrNull()?.id,
@@ -52,6 +80,46 @@ class CategoryViewModel @Inject constructor(
             }
         )
     }
+
+    private fun getHealthPlusCategories() {
+        viewModelScope.launch {
+            setState { copy(loadingState = LoadingState.Loading) }
+            val dummyCategories = listOf(
+                CategoriesModel(id = "health_food", name = "건강식품", subCategories = emptyList()),
+                CategoriesModel(id = "food", name = "푸드", subCategories = emptyList()),
+                CategoriesModel(id = "oral_health_supplies", name = "구강/건강용품", subCategories = emptyList()),
+                CategoriesModel(id = "women_s_products", name = "여성/위생용품", subCategories = emptyList()),
+                CategoriesModel(id = "fashion", name = "패션", subCategories = emptyList()),
+            )
+            setState {
+                copy(
+                    categories = dummyCategories,
+                    selectedCategoryId = dummyCategories.firstOrNull()?.id,
+                    headerPositions = emptyList(), // Recalculate if needed
+                    loadingState = LoadingState.Idle
+                )
+            }
+        }
+    }
+
+    private fun getLuxeEditCategories() {
+        viewModelScope.launch {
+            setState { copy(loadingState = LoadingState.Loading) }
+            val dummyCategories = listOf(
+                CategoriesModel(id = "luxe_category", name = "카테고리", subCategories = emptyList()),
+                CategoriesModel(id = "luxe_brand", name = "브랜드", subCategories = emptyList()),
+            )
+            setState {
+                copy(
+                    categories = dummyCategories,
+                    selectedCategoryId = dummyCategories.firstOrNull()?.id,
+                    headerPositions = emptyList(),
+                    loadingState = LoadingState.Idle
+                )
+            }
+        }
+    }
+
 
     private fun <T> handleRepositoryCall(
         call: suspend () -> T,

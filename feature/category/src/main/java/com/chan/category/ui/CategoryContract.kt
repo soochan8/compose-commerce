@@ -11,6 +11,7 @@ class CategoryContract {
         data class OnCategorySidebarClick(val categoryId: String) : Event()
         data class OnCategoryClick(val categoryId: String) : Event()
         data class OnContentScroll(val firstVisibleIndex: Int) : Event()
+        data class OnTabSelected(val index: Int) : Event()
 
         object OnSearchClick : Event()
     }
@@ -19,7 +20,8 @@ class CategoryContract {
         val categories: List<CategoriesModel> = emptyList(),
         val selectedCategoryId: String? = null,
         val headerPositions: List<Pair<Int, String>> = emptyList(),
-        val loadingState: LoadingState = LoadingState.Idle
+        val loadingState: LoadingState = LoadingState.Idle,
+        val selectedTabIndex: Int = 0
     ) : ViewState
 
     sealed class Effect : ViewEffect {
