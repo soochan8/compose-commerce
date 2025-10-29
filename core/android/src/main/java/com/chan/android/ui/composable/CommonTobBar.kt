@@ -20,13 +20,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import com.chan.android.ui.theme.Black
 
 @Composable
 fun CommonTopBar(
     title: String,
     isSelected: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    selectedTextColor: Color = Color.Black,
+    unselectedTextColor: Color = Color.Gray,
+    indicatorColor: Color = Color.Black
 ) {
     var textWidth by remember { mutableStateOf(0.dp) }
     val density = LocalDensity.current
@@ -42,7 +46,7 @@ fun CommonTopBar(
     ) {
         Text(
             text = title,
-            color = if (isSelected) Color.Black else Color.Gray,
+            color = if (isSelected) selectedTextColor else unselectedTextColor,
             onTextLayout = { textLayoutResult ->
                 textWidth = with(density) { textLayoutResult.size.width.toDp() }
             },
@@ -55,7 +59,47 @@ fun CommonTopBar(
             modifier = Modifier
                 .width(textWidth)
                 .height(2.dp)
-                .background(if (isSelected) Color.Black else Color.Transparent)
+                .background(if (isSelected) indicatorColor else Color.Transparent)
         )
     }
 }
+
+
+//@Composable
+//fun CommonTopBar(
+//    title: String,
+//    isSelected: Boolean,
+//    onClick: () -> Unit,
+//    modifier: Modifier = Modifier
+//) {
+//    var textWidth by remember { mutableStateOf(0.dp) }
+//    val density = LocalDensity.current
+//
+//    Column(
+//        modifier = modifier
+//            .clickable(
+//                interactionSource = remember { MutableInteractionSource() },
+//                indication = null,
+//                onClick = onClick
+//            ),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Text(
+//            text = title,
+//            color = if (isSelected) Color.Black else Color.Gray,
+//            onTextLayout = { textLayoutResult ->
+//                textWidth = with(density) { textLayoutResult.size.width.toDp() }
+//            },
+//            modifier = Modifier.padding(top = 10.dp)
+//        )
+//
+//        Spacer(modifier = Modifier.height(8.dp))
+//
+//        Box(
+//            modifier = Modifier
+//                .width(textWidth)
+//                .height(2.dp)
+//                .background(if (isSelected) Color.Black else Color.Transparent)
+//        )
+//    }
+//}
