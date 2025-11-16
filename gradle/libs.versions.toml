@@ -4,6 +4,8 @@ kotlin = "2.0.0"
 kapt = "2.0.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
+mock = "1.13.5"
+turbine = "1.1.0"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.0"
@@ -28,13 +30,18 @@ gson = "2.10.1"
 kakao = "2.19.0"
 security = "1.1.0-alpha06"
 paging = "3.3.6"
-firebaseBom= "33.3.0"
+firebaseBom = "33.3.0"
 googleServices = "4.4.1"
+arch-core-testing = "2.2.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mock" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutine" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "arch-core-testing" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -80,8 +87,8 @@ google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gs
 kakao-sdk-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
 androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version = "33.3.0" }
-firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging"}
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics"}
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

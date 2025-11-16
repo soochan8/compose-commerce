@@ -57,6 +57,10 @@ protobuf {
     }
 }
 
+//tasks.withType<Test>().configureEach {
+//    useJUnitPlatform()  // JUnit 5 테스트 플랫폼 활성화
+//}
+
 dependencies {
     implementation(project(":core:android"))
     implementation(project(":core:database"))
@@ -67,7 +71,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
@@ -97,4 +100,10 @@ dependencies {
     implementation(libs.datastore)
     implementation(libs.datastore.proto)
     implementation(libs.protobuf.javalite)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.arch.core.testing)
 }
