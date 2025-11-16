@@ -10,7 +10,7 @@ E-Commerce 핵심 기술들을 구현하였으며, **실제 서비스 아키텍�
 - `상품 상세(Product)`: 상품 상세 화면, WebView 적용
 - `장바구니 관리(Cart)`: DataStore(Proto) 적용, 사용자별 DataStore 관리	
 - `카테고리/상품 상세(Caregory)`:  카테고리별 상품 조회
-- `카테고리/상품 상세(Mypage)`:  사용자 정보	
+- `마이페이지(Mypage)`:  사용자 정보	
 
 ## 🧱 Architecture
 **Multi-Module Clean Arch**기반으로 설계하여, 모듈 간 결합도를 낮추고 기능 확장성과 유지보수성을 극대화했습니다.  
